@@ -2,14 +2,18 @@
   "name": "rss-feed",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "contributors" : [
+  "contributors": [
     "Xavier Stouder <xavier@stouder.io>",
     "Luca Laissue <luca.laissue@divtec.ch>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/electron": "^1.4.24",
+    "@types/node": "^6.0.45"
+  }
 }
