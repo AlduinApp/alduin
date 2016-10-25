@@ -1,0 +1,15 @@
+{
+  "name": "rss-feed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "contributors" : [
+    "Xavier Stouder <xavier@stouder.io>",
+    "Luca Laissue <luca.laissue@divtec.ch>"
+  ],
+  "license": "MIT"
+}
