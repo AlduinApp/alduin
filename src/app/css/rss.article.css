@@ -1,0 +1,9 @@
+.rss.article {
+    padding: 20px;
+    color: #FFFFFF;
+    width: calc(100% - 35em);
+    height: calc(100% - 1.5em);
+    display: inline-block;
+    vertical-align: top;
+    overflow: auto;
+}

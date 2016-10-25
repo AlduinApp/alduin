@@ -1,0 +1,37 @@
+@media screen and (max-width: 70em) {
+    body.pinned .rss.article {
+        display: none;
+    }
+
+    body.pinned .rss.articles {
+        width: 100%;
+    }
+
+    body.pinned.show-article .rss.article {
+        display: block;
+        width: 100%;
+    }
+
+    body.pinned.show-article .rss.articles {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 65em) {
+    .rss.article {
+        display: none;
+    }
+
+    .rss.articles {
+        width: 100%;
+    }
+
+    body.show-article .rss.article {
+        width: 100%;
+        display: block;
+    }
+
+    body.show-article .rss.articles {
+        display: none;
+    }
+}

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+html {
+    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    min-width: 600px;
+    overflow: hidden;
+}
+
+body {
+    min-width: 600px;
+    padding: 0;
+    margin: 0;
+    background: #454441;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
