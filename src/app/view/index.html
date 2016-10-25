@@ -1,14 +1,85 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
-</html>
+    <head>
+        <title>RSS Feeds</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="icon" type="image/png" href="favicon.png">
+        <link rel="stylesheet" type="text/css" href="http://necolas.github.io/normalize.css/5.0.0/normalize.css">
+        <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/main.css">
+        <link rel="stylesheet" type="text/css" href="../css/rss.menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/rss.articles.css">
+        <link rel="stylesheet" type="text/css" href="../css/rss.article.css">
+        <link rel="stylesheet" type="text/css" href="../css/alert.label.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/scroll.bar.css">
+        <link rel="stylesheet" type="text/css" href="../css/responsive.css">
+    </head>
+    <body>
+        <div class="rss menu">
+            <ul class="rss list">
+                <li class="selected">
+                    <i class="fa fa-font-awesome" aria-hidden="true"></i>
+                    <span class="title">Korben</span>
+                    <span class="notif">2</span>
+                </li>
+                <li>
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                    <span class="title">Trash</span>
+                </li>
+                <li>
+                    <i class="fa fa-sign-language fa-square-o" aria-hidden="true"></i>
+                    <span class="title">Basta</span>
+                    <span class="notif">+99</span>
+                </li>
+            </ul>
+            <!-- MAX 5 ICONS -->
+            <ul class="rss settings">
+                <li>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </li><li>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </li><li class="active">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </li><li class="selected" onclick="if(document.querySelector('body').classList.contains('pinned')) { document.querySelector('body').classList.remove('pinned') } else {document.querySelector('body').classList.add('pinned')}">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="rss articles">
+            <ul>
+                <li class="unread">
+                    <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
+                    <p>Découverte d'une technologie révolutionnaire</p>
+                </li>
+                <li class="selected">
+                    <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
+                    <p>Découverte d'une technologie révolutionnaire</p>
+                </li>
+                <li class="unread">
+                    <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
+                    <p>Découverte d'une technologie révolutionnaire</p>
+                </li>
+                <li>
+                    <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
+                    <p>Découverte d'une technologie révolutionnaire</p>
+                </li>
+                <li>
+                    <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
+                    <p>Découverte d'une technologie révolutionnaire</p>
+                </li>
+            </ul>
+        </div><div class="rss article">
+            <h1>Hello world</h1>
+            <p>sdasykdbjasjdbacasdfa usdha ahs as fk jsf asibfh iasi asj fas foai fhais ofia sifobasiho ia sifbas f asof ai foas fiajb fash fao fhias foa sfhi asofb  has fh ashf asf ahs fhi fiah fas fas hkfas fafja sf as fas fakf as</p>
+            <h2>Yop Swag</h2>
+            <p>kjdvj sdbvj ssv jdvd</p>
+        </div>
+        <ul class="alert label">
+            <li class="warning">Vos informations ont été modifiées</li>
+        </ul>
+        <footer>
 
+        </footer>
+    </body>
+</html>

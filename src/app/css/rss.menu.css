@@ -1,0 +1,157 @@
+body {
+    padding-left: 4.5em;
+    transition: padding-left .5s;
+}
+
+
+
+.rss.menu {
+    width: 4.5em;
+    height: calc(100% - 1.5em); /*FOOTER HEIGHT*/
+    background: #575652;
+    color: #ABAAA1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all .2s;
+}
+.rss.menu:hover,
+body.pinned .rss.menu {
+    width: 15em;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+}
+body.pinned {
+    padding-left: 15em;
+}
+
+
+
+/* RSS LIST */
+.rss.menu .rss.list {
+    height: calc(100% - 4em);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all .2s;
+}
+.rss.menu .rss.list li:hover,
+.rss.menu .rss.list li.selected {
+    color: #FFFFFF;
+    background: #41413A;
+}
+.rss.menu .rss.list li {
+    padding: 10px 1.125em;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative;
+}
+.rss.menu .rss.list li i {
+    font-size: 2.25em;
+}
+.rss.menu .rss.list::-webkit-scrollbar {
+    display: none;
+    transition: all .3s;
+}
+.rss.menu .rss.list:hover::-webkit-scrollbar {
+    display: block;
+}
+
+
+
+
+.rss.menu .rss.list li .title {
+    display: inline;
+    opacity: 0;
+    transform: scaleX(0);
+    top: 1.25em;
+    left: 3.75em;
+    position: absolute;
+}
+.rss.menu:hover .rss.list li .title,
+body.pinned .rss.menu .rss.list li .title {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+
+
+.rss.menu .rss.list li .notif {
+    background: #E89F26;
+    color: #FFFFFF;
+    padding: .3em .6em;
+    font-size: .75em;
+    border-radius: 1.25em;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: .3em;
+    transition: all .2s;
+}
+.rss.menu:hover .rss.list li .notif,
+body.pinned .rss.menu .rss.list li .notif {
+    bottom: 1.5em;
+}
+
+
+
+
+
+
+
+
+
+/* RSS SETTINGS */
+.rss.menu .rss.settings {
+    margin: 0;
+    padding: 0.5em 0.5em;
+    list-style-type: none;
+    font-size: 2em;
+    height: 2em;
+    text-align: right;
+    border-top: 2px solid #41413A;
+}
+.rss.menu .rss.settings li {
+    padding: 3px;
+    width: 0;
+    display: inline-block;
+    opacity: 0;
+    transition: all .2s;
+    height: 0;
+}
+
+.rss.menu:hover .rss.settings li,
+.rss.menu:hover .rss.settings li.active,
+body.pinned .rss.menu .rss.settings li,
+body.pinned .rss.menu .rss.settings li.active {
+    opacity: 1;
+    width: 20%;
+    height: 100%;
+    transform: translate(0, 0);
+}
+.rss.menu .rss.settings li.active {
+    width: 100%;
+    opacity: 1;
+    height: 100%;
+    position: relative;
+    transform: translate(-0.15em, -0.25em); /*RECENTRER L'ENGRENAGE*/
+}
+.rss.menu .rss.settings li:hover,
+body.pinned .rss.menu .rss.settings li .fa-thumb-tack {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+
+
+.rss.menu .rss.settings li * {
+    transition: transform .5s;
+}
+.rss.menu .rss.settings li:hover .fa-cog {
+    transform: rotate(180deg);
+}
+body.pinned .rss.menu .rss.settings li .fa-thumb-tack {
+    transform: rotate(-270deg);
+}
