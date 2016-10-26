@@ -8,8 +8,8 @@ body {
 .rss.menu {
     width: 4.5em;
     height: ~"calc(100% - 1.5em)"; /*FOOTER HEIGHT*/
-    background: #575652;
-    color: #ABAAA1;
+    background: @rss-menu-background-color;
+    color: @global-secondary-text-color;
     position: fixed;
     top: 0;
     left: 0;
@@ -39,8 +39,8 @@ body.pinned {
 }
 .rss.menu .rss.list li:hover,
 .rss.menu .rss.list li.selected {
-    color: #FFFFFF;
-    background: #41413A;
+    color: @global-primary-text-color;
+    background: @rss-menu-focus-color;
 }
 .rss.menu .rss.list li {
     padding: 10px 1.125em;
@@ -79,8 +79,8 @@ body.pinned .rss.menu .rss.list li .title {
 
 
 .rss.menu .rss.list li .notif {
-    background: #E89F26;
-    color: #FFFFFF;
+    background: @global-accent-color;
+    color: @global-primary-text-color;
     padding: .3em .6em;
     font-size: .75em;
     border-radius: 1.25em;
@@ -111,7 +111,7 @@ body.pinned .rss.menu .rss.list li .notif {
     font-size: 2em;
     height: 2em;
     text-align: right;
-    border-top: 2px solid #41413A;
+    border-top: 2px solid @global-background-color;
 }
 .rss.menu .rss.settings li {
     padding: 3px;
@@ -140,7 +140,7 @@ body.pinned .rss.menu .rss.settings li.active {
 }
 .rss.menu .rss.settings li:hover,
 body.pinned .rss.menu .rss.settings li .fa-thumb-tack {
-    color: #ffffff;
+    color: @global-primary-text-color;
     cursor: pointer;
 }
 
