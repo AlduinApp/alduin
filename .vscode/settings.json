@@ -6,6 +6,6 @@
     "**/.hg": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
-    "**/src/*.js": true
+    "**/src/**/*.js": true
   }
 }
