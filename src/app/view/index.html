@@ -28,16 +28,13 @@
             </ul>
             <!-- MAX 5 ICONS -->
             <ul class="rss settings">
-                <li>
+                <li id="add-feed-button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                </li>
-                <li>
+                </li><li>
                     <i class="fa fa-trash" aria-hidden="true"></i>
-                </li>
-                <li class="active">
+                </li><li class="active">
                     <i class="fa fa-cog" aria-hidden="true"></i>
-                </li>
-                <li class="selected" onclick="if(document.querySelector('body').classList.contains('pinned')) { document.querySelector('body').classList.remove('pinned') } else {document.querySelector('body').classList.add('pinned')}">
+                </li><li class="selected" onclick="if(document.querySelector('body').classList.contains('pinned')) { document.querySelector('body').classList.remove('pinned') } else {document.querySelector('body').classList.add('pinned')}">
                     <i class="fa fa-thumb-tack" aria-hidden="true"></i>
                 </li>
             </ul>
@@ -76,6 +73,19 @@
         </ul>
         <footer>
         </footer>
-        <div class="modal"><div class="content"></div></div>
+        <div id="add-feed-modal" class="modal">
+            <div class="content">
+                <h1>Add Feed</h1>
+                <form>
+                    <input type="text" placeholder="Feed name" />
+                    <input type="text" placeholder="Feed link"/>
+                    <button>Add feed</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="../js/modal-manager.js"></script>
+        <script src="../js/ui-event.js"></script>
+        <script src="../js/main.js"></script>
     </body>
 </html>
