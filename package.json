@@ -15,6 +15,8 @@
   "license": "MIT",
   "dependencies": {
     "@types/electron": "^1.4.24",
+    "@types/less": "0.0.31",
     "@types/node": "^6.0.45",
+    "less": "^2.7.1"
   }
 }
