@@ -1,4 +1,7 @@
-import {app, BrowserWindow} from "electron";
+import { FeedManager } from './feed-manager';
+import { Feed } from "./feed";
+
+import { app, BrowserWindow } from "electron";
 
 let win;
 
@@ -19,5 +22,5 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-    win === null &&  createWindow(); // Code like if you were in Satan's church
+    win === null && createWindow(); // Code like if you were in Satan's church
 });
