@@ -1,0 +1,32 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+    top: 0;
+    left: 0;
+}
+
+.modal .content {
+    animation: modal-show .3s;
+    width: ~"calc(100% - 10em)";
+    height: ~"calc(100% - 8em)";
+    position: absolute;
+    top: 2.5em;
+    left: 5em;
+    background-color: @global-background-color;
+    border: 1px solid @global-secondary-text-color;
+    border-radius: 10px;
+}
+
+@keyframes modal-show {
+    from {
+        transform: scale(0, 0);
+    } 60% {
+        transform: scale(1.12, 1.12);
+    } to {
+        transform: scale(1, 1);
+    }
+}

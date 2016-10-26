@@ -1,5 +1,5 @@
 .rss.articles {
-    color: #BDBDBD;
+    color: @global-secondary-text-color;
     width: 35em;
     display: inline-block;
     height: ~"calc(100% - 1.5em)"; /* FOOTER HEIGHT */
@@ -7,7 +7,7 @@
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
 }
 .rss.articles h3 {
-    color: #FFFFFF;
+    color: @global-primary-text-color;
 }
 .rss.articles ul {
     padding: 0;
@@ -23,7 +23,7 @@
 }
 .rss.articles ul li:hover,
 .rss.articles ul li.selected {
-    background: #757575;
+    background: @rss-articles-focus-color;
     padding-left: 30px;
     padding-right: 10px;
 }
@@ -36,10 +36,10 @@
     text-align: left;
 }
 .rss.articles ul li h3 span + span {
-    color: #E89F26;
+    color: @global-accent-color;
     width: 8em;
     text-align: right;
 }
 .rss.articles ul li.unread {
-    border-left: 3px solid #E89F26;
+    border-left: 3px solid @global-accent-color;
 }
