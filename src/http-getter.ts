@@ -1,8 +1,6 @@
 import * as http from "http";
 import * as url from "url";
 
-import { Promise } from "es6-promise";
-
 export namespace HttpGetter {
     export function get(urlToGet: string) {
         return new Promise<string>((resolve, reject) => {

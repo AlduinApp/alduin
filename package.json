@@ -15,8 +15,6 @@
   "license": "MIT",
   "dependencies": {
     "@types/electron": "^1.4.24",
-    "@types/es6-promise": "0.0.32",
     "@types/node": "^6.0.45",
-    "es6-promise": "^4.0.5"
   }
 }
