@@ -10,8 +10,7 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "install": "npm run build",
-    "build": "tsc && lessc src/app/style/main.less src/app/view/index.min.css --clean-css",
+    "build": "npm install && tsc && lessc src/app/style/main.less src/app/view/index.min.css --clean-css",
     "start": "npm run build && electron ."
   },
   "keywords": [],

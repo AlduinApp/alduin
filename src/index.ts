@@ -6,7 +6,7 @@ import { app, BrowserWindow } from "electron";
 let win;
 
 function createWindow() {
-    win = new BrowserWindow({ width: 800, height: 600 });
+    win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500});
 
     win.loadURL(`file://${__dirname}/app/view/index.html`);
 

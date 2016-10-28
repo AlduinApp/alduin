@@ -28,13 +28,13 @@
             </ul>
             <!-- MAX 5 ICONS -->
             <ul class="rss settings">
-                <li>
+                <li id="add-feed-button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </li><li>
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </li><li class="active">
                     <i class="fa fa-cog" aria-hidden="true"></i>
-                </li><li class="selected" onclick="if(document.querySelector('body').classList.contains('pinned')) { document.querySelector('body').classList.remove('pinned') } else {document.querySelector('body').classList.add('pinned')}">
+                </li><li id="pin-button">
                     <i class="fa fa-thumb-tack" aria-hidden="true"></i>
                 </li>
             </ul>
@@ -73,6 +73,42 @@
         </ul>
         <footer>
         </footer>
-        <div class="modal"><div class="content"></div></div>
+        <div id="add-feed-modal" class="modal">
+            <div class="content">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <h3>Add Feed</h3>
+                <div class="scroll view">
+                    <div class="input group">
+                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
+                    </div>
+                    <div class="input group">
+                        <label>Link</label><input type="text" placeholder="Feed link"/>
+                    </div>
+                    <div class="input group">
+                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
+                    </div>
+                    <div class="input group">
+                        <label>Link</label><input type="text" placeholder="Feed link"/>
+                    </div>
+                    <div class="input group">
+                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
+                    </div>
+                    <div class="input group">
+                        <label>Link</label><input type="text" placeholder="Feed link"/>
+                    </div>
+                    <div class="input group">
+                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
+                    </div>
+                    <div class="input group">
+                        <label>Link</label><input type="text" placeholder="Feed link"/>
+                    </div>
+                </div>
+                <button class="main success button">Confirm</button>
+            </div>
+        </div>
+
+        <script src="../js/modal-manager.js"></script>
+        <script src="../js/ui-event.js"></script>
+        <script src="../js/main.js"></script>
     </body>
 </html>
