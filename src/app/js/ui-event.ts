@@ -1,19 +1,13 @@
 class UiEvent {
+    private body = document.querySelector("body");
+
     private addFeedButton = document.querySelector("#add-feed-button");
     private pinButton = document.querySelector("#pin-button");
 
-    constructor(){
+    constructor() {
         this.addFeedButton.addEventListener("click", e => ModalManager.displayModal("#add-feed-modal"));
 
-        // Pin button
-        this.pinButton.addEventListener("click", e => {
-            const body = document.querySelector("body");
-            const classToCheck = "pinned";
-            if(body.classList.contains(classToCheck)) {
-                body.classList.remove(classToCheck);
-            } else {
-                body.classList.add(classToCheck);
-            }
-        });
+        this.pinButton.addEventListener("click", e => this.body.classList.toggle("pinned"));
+
     }
 }
