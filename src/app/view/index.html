@@ -75,38 +75,21 @@
         </footer>
         <div id="add-feed-modal" class="modal">
             <div class="content">
-                <i class="fa fa-times" aria-hidden="true"></i>
+                <i class="fa fa-times close-modal-button" aria-hidden="true"></i>
                 <h3>Add Feed</h3>
                 <div class="scroll view">
                     <div class="input group">
-                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
+                        <label>Display name</label><input id="feed-title-input" type="text" placeholder="Feed title" />
                     </div>
                     <div class="input group">
-                        <label>Link</label><input type="text" placeholder="Feed link"/>
+                        <label>Link</label><input id="feed-link-input" type="text" placeholder="Feed link"/>
                     </div>
-                    <div class="input group">
-                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
-                    </div>
-                    <div class="input group">
-                        <label>Link</label><input type="text" placeholder="Feed link"/>
-                    </div>
-                    <div class="input group">
-                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
-                    </div>
-                    <div class="input group">
-                        <label>Link</label><input type="text" placeholder="Feed link"/>
-                    </div>
-                    <div class="input group">
-                        <label>Display Name asjhvbasjd jh dasdv asjh dash ds</label><input type="text" placeholder="Feed name" />
-                    </div>
-                    <div class="input group">
-                        <label>Link</label><input type="text" placeholder="Feed link"/>
-                    </div>
-                </div>
-                <button class="main success button">Confirm</button>
+                <button class="main success button" id="add-feed-confirm" >Confirm</button>
             </div>
         </div>
 
+        <script src="../js/communicator.js"></script>
+        <script src="../js/modal/add-feed-modal.js"></script>
         <script src="../js/modal-manager.js"></script>
         <script src="../js/ui-event.js"></script>
         <script src="../js/main.js"></script>

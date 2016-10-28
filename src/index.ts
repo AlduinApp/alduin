@@ -2,10 +2,14 @@ import { FeedManager } from './feed-manager';
 import { Feed } from "./feed";
 
 import { app, BrowserWindow } from "electron";
+import { Dispatcher } from './dispatcher';
 
 let win;
 
 function createWindow() {
+
+    new Dispatcher();
+
     win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500});
 
     win.loadURL(`file://${__dirname}/app/view/index.html`);

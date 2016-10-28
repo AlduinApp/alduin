@@ -1,4 +1,6 @@
+const communicator = new Communicator();
 (() => {
-    ModalManager.registerModal("#add-feed-modal");
-    const uiEvent = new UiEvent();
+    new UiEvent();
+    ModalManager.registerEvents();
+    ModalManager.registerModal("add-feed-modal");
 })();

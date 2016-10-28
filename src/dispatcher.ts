@@ -6,7 +6,7 @@ import { ipcMain } from "electron";
 export class Dispatcher {
 
     constructor() {
-        ipcMain.on("add-feed-req", this.onAddFeedReq);
+        ipcMain.on("add-feed-request", this.onAddFeedReq);
     }
 
     private onAddFeedReq(event: Electron.IpcMainEvent, feedStr: string) {
