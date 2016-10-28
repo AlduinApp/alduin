@@ -11,14 +11,110 @@
 
 .modal .content {
     animation: modal-show .3s;
+    color: @global-secondary-text-color;
     width: ~"calc(100% - 10em)";
     height: ~"calc(100% - 8em)";
-    position: absolute;
+    max-width: 55em;
     top: 2.5em;
-    left: 5em;
+    margin: 0 auto;
     background-color: @global-background-color;
     border: 1px solid @global-secondary-text-color;
     border-radius: 10px;
+    padding: 0.5em 0 4em 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    min-width: 30em;
+    position: relative;
+}
+
+.modal .content h3 {
+    text-align: center;
+    color: @global-primary-text-color;
+    padding: 0 0 1em 0;
+    margin-bottom: 1em;
+    border-bottom: 2px dashed @global-secondary-text-color;
+}
+
+.modal .content .fa-times {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    font-size: 1.5em;
+}
+
+.modal .content .fa-times:hover {
+    color: @global-primary-text-color;
+    cursor: pointer;
+}
+
+.modal .content button.main.button {
+    width: 100%;
+    outline: none;
+    color: @global-primary-text-color;
+    background: @global-accent-color;
+    padding: 0.5em;
+    margin: 0 auto;
+    height: 3em;
+    border: none;
+    position: absolute;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.modal .content button.main.success.button {
+    background-color: @global-success-background-color;
+}
+.modal .content button.main.success.button:hover {
+    background-color: @global-success-hover-background-color;
+}
+
+.modal .content button.main.error.button {
+    background-color: @global-error-background-color;
+}
+.modal .content button.main.error.button:hover {
+    background-color: @global-error-hover-background-color;
+}
+
+.modal .content button.main.warning.button {
+    background-color: @global-warning-background-color;
+}
+.modal .content button.main.warning.button:hover {
+    background-color: @global-warning-hover-background-color;
+}
+
+.modal .content .input.group {
+    padding: 0.5em 2em;
+    width: 100%;
+}
+
+.modal .content .input.group label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 8em;
+    color: @global-primary-text-color;
+}
+
+.modal .content .input.group input[type="text"] {
+    display: inline-block;
+    color: @global-primary-text-color;
+    width: ~"calc(100% - 8em)";
+    background: rgba(0, 0, 0, .2);
+    padding: .3em .7em;
+    border-radius: 5px;
+    border: 2px solid @global-secondary-text-color;
+    vertical-align: middle;
+    outline: none;
+    transition: all .3s;
+}
+
+.modal .content .input.group input[type="text"]:focus {
+    border-color: rgba(0, 0, 0, .1);
+    box-shadow: 0 0 8px @global-accent-color;
 }
 
 @keyframes modal-show {
