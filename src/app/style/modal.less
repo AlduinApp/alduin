@@ -20,12 +20,15 @@
     background-color: @global-background-color;
     border: 1px solid @global-secondary-text-color;
     border-radius: 10px;
-    padding: 0.5em 0 4em 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: relative;
+    padding: 0.5em 0 0 0;
     min-width: 30em;
+    overflow: hidden;
     position: relative;
+}
+
+.modal .content .scroll.view {
+    overflow-y: scroll;
+    height: ~"calc(100% - 8em)";
 }
 
 .modal .content h3 {
@@ -50,20 +53,20 @@
 
 .modal .content button.main.button {
     width: 100%;
+    margin: 0 auto;
+    display: block;
     outline: none;
     color: @global-primary-text-color;
     background: @global-accent-color;
     padding: 0.5em;
-    margin: 0 auto;
     height: 3em;
     border: none;
-    position: absolute;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    left: 0;
-    bottom: 0;
     cursor: pointer;
     transition: all .3s;
+    position: absolute;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    bottom: 0;
 }
 
 .modal .content button.main.success.button {
@@ -102,7 +105,7 @@
 .modal .content .input.group input[type="text"] {
     display: inline-block;
     color: @global-primary-text-color;
-    width: ~"calc(100% - 8em)";
+    width: ~"calc(100% - 8.5em)";
     background: rgba(0, 0, 0, .2);
     padding: .3em .7em;
     border-radius: 5px;
