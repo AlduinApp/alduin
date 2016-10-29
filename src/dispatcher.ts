@@ -12,6 +12,8 @@ export class Dispatcher {
     private onAddFeedReq(event: Electron.IpcMainEvent, feedStr: string) {
         const feedCom: ICom.AddFeedReq = JSON.parse(feedStr);
         FeedManager.registerFeed(new Feed(feedCom.title, feedCom.link));
+
+        event.sender.send("add-feed-response");
     }
 }
 

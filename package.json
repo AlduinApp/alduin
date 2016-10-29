@@ -23,7 +23,10 @@
     "@types/electron": "^1.4.24",
     "@types/less": "0.0.31",
     "@types/node": "^6.0.45",
+    "@types/react": "^0.14.43",
+    "@types/react-dom": "^0.14.18",
     "@types/riot": "^2.6.1",
+    "browserify": "^13.1.1",
     "less": "^2.7.1",
     "less-plugin-clean-css": "^1.5.1",
     "riot": "^2.6.4"

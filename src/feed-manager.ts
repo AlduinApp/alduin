@@ -21,7 +21,6 @@ export class FeedManager {
     }
 
     public static registerFeed(feed: Feed): string {
-        console.log("Register feed ! " + feed);
         const uuid = crypto.randomBytes(16).toString("hex");
         feed.defineUUID(uuid);
         FeedManager.feeds[FeedManager.feeds.length] = feed;
