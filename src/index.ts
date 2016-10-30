@@ -1,8 +1,6 @@
-import { FeedManager } from './feed-manager';
-import { Feed } from "./feed";
+import { Dispatcher } from "./dispatcher";
 
 import { app, BrowserWindow } from "electron";
-import { Dispatcher } from './dispatcher';
 
 let win;
 

@@ -10,7 +10,7 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "build": "npm install && tsc && lessc src/app/style/main.less src/app/view/index.min.css --clean-css",
+    "build": "npm install && tsc && lessc src/app/style/main.less src/app/view/index.min.css --clean-css && webpack --display-error-details",
     "start": "npm run build && electron ."
   },
   "keywords": [],
@@ -26,6 +26,8 @@
     "@types/react": "^0.14.43",
     "@types/react-dom": "^0.14.18",
     "less": "^2.7.1",
-    "less-plugin-clean-css": "^1.5.1"
+    "less-plugin-clean-css": "^1.5.1",
+    "webpack": "^1.13.3",
+    "xmldoc": "^0.5.1"
   }
 }
