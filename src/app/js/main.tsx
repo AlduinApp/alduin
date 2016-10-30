@@ -4,10 +4,12 @@ import * as React from "react";
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { CustomComponent } from "./custom-component";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
+import { PinSidebarButton } from "./component/button/pin-sidebar-button";
+import { Sidebar } from "./component/sidebar";
 
-class App extends CustomComponent<{}, {}>{
+import { ComponentsRefs } from "./components-refs";
 
-    private addFeedOpenModalButton: AddFeedOpenModalButton;
+export class App extends CustomComponent<{}, {}>{
 
     constructor() {
         super();
@@ -16,33 +18,7 @@ class App extends CustomComponent<{}, {}>{
     render() {
         return (
             <div>
-                <div className="rss menu">
-                    <ul className="rss list">
-                        <li className="selected">
-                            <i className="fa fa-font-awesome" aria-hidden="true"></i>
-                            <span className="title">Korben</span>
-                            <span className="notif">2</span>
-                        </li>
-                        <li>
-                            <i className="fa fa-archive" aria-hidden="true"></i>
-                            <span className="title">Trash</span>
-                        </li>
-                        <li>
-                            <i className="fa fa-sign-language fa-square-o" aria-hidden="true"></i>
-                            <span className="title">Basta</span>
-                            <span className="notif">+99</span>
-                        </li>
-                    </ul>
-                    <ul className="rss settings">
-                        <AddFeedOpenModalButton ref={button => this.addFeedOpenModalButton = button} /><li>
-                            <i className="fa fa-trash" aria-hidden="true"></i>
-                        </li><li className="active">
-                            <i className="fa fa-cog" aria-hidden="true"></i>
-                        </li><li id="pin-button">
-                            <i className="fa fa-thumb-tack" aria-hidden="true"></i>
-                        </li>
-                    </ul>
-                </div>
+                <Sidebar ref={sidebar => ComponentsRefs.sidebar = sidebar} />
                 <div className="rss articles">
                     <ul>
                         <li className="unread">
@@ -76,7 +52,7 @@ class App extends CustomComponent<{}, {}>{
                     <li className="warning">Vos informations ont été modifiées</li>
                 </ul>
                 <footer></footer>
-                <AddFeedModal ref={modal => this.addFeedOpenModalButton.modal = modal} />
+                <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
             </div>
         );
     }

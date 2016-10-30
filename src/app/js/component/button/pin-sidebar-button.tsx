@@ -4,9 +4,8 @@ import * as React from "react";
 import { ComponentsRefs } from "./../../components-refs";
 import { CustomComponent } from "./../../custom-component";
 import { Button } from "./button";
-import { AddFeedModal } from "./../modal/add-feed-modal";
 
-export class AddFeedOpenModalButton extends Button<{}, {}> {
+export class PinSidebarButton extends Button<{}, {}> {
 
     constructor() {
         super();
@@ -15,12 +14,12 @@ export class AddFeedOpenModalButton extends Button<{}, {}> {
 
     render() {
         return (
-            <li id="add-feed-button" onClick={this.onClick}>
-                <i className="fa fa-plus" aria-hidden="true"></i>
+            <li id="pin-button" onClick={this.onClick}>
+                <i className="fa fa-thumb-tack" aria-hidden="true"></i>
             </li>
         );
     }
     onClick(event: React.MouseEvent<HTMLElement>) {
-        ComponentsRefs.addFeedModal.display();
+        ComponentsRefs.sidebar.togglePin();
     }
 }
