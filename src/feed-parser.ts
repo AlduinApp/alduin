@@ -1,3 +1,5 @@
+import { Article } from "./feed";
+
 import * as fs from "fs";
 // import * as xmldoc from "xmldoc";
 const xmldoc = require("xmldoc");
@@ -8,7 +10,7 @@ export namespace FeedParser {
         return (/<(rss|rdf)\b/i.test(xmlString) ? "rss" : (/<feed\b/i.test(xmlString) ? "atom" : false))
     }
 
-    export function parse(xmlString: string) {
+    export function parse(xmlString: string): Article[] {
         const identified = identify(xmlString);
         return identified ? FeedParser[identified as string](xmlString) : null;
     }
@@ -16,14 +18,13 @@ export namespace FeedParser {
     export function rss(xmlString: string): Article[] {
         const articles: Article[] = [];
         new xmldoc.XmlDocument(xmlString).childNamed("channel").childrenNamed("item").forEach(item => {
-            const article: Article = {
+            articles[articles.length] = {
                 id: item.valueWithPath("guid") || item.valueWithPath("link"),
                 title: item.valueWithPath("title"),
                 content: item.valueWithPath("description"),
                 link: item.valueWithPath("link"),
-                date: item.valueWithPath("pubDate") || item.valueWithPath("lastBuildDate") || new Date().toString()
+                date: Date.parse(item.valueWithPath("pubDate")) || Date.parse(item.valueWithPath("lastBuildDate")) || new Date().getTime()
             };
-            articles[articles.length] = article;
         });
 
         return articles;
@@ -38,20 +39,10 @@ export namespace FeedParser {
                 title: item.valueWithPath("title"),
                 content: item.valueWithPath("summary") || item.valueWithPath("content") || item.valueWithPath("subtitle"),
                 link: /href="(.+)"/.exec(item.childWithAttribute("href").toString())[1],
-                date: item.valueWithPath("published") || item.valueWithPath("updated") || new Date().toString()
+                date: item.valueWithPath("published") || item.valueWithPath("updated") || new Date().getTime()
             };
         });
 
         return articles;
     }
-
-    interface Article {
-        id: string;
-        title: string;
-        content: string;
-        link: string;
-        date: string;
-    }
 }
-
-console.log(FeedParser.parse(fs.readFileSync("atom.xml").toString("utf-8")));
