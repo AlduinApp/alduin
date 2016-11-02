@@ -28,7 +28,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
     render() {
         return (
-            <li className="selected">
+            <li>
                 <i className="fa fa-rss" aria-hidden="true"></i>
                 <span className="title">{this.state.title}</span>
                 <span className="notif">2</span>
