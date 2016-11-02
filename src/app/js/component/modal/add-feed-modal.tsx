@@ -79,7 +79,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.keyCode === 13) this.handleConfirm(event);
+        event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church
     }
 
     reset() {
