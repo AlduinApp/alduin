@@ -1,9 +1,18 @@
 .rss.article {
     padding: 20px;
     color: @global-primary-text-color;
-    width: ~"calc(100% - 35em)";
+    width: ~"calc(100% - 39.5em)";
     height: ~"calc(100% - 1.5em)";
-    display: inline-block;
-    vertical-align: top;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 39.5em;
     overflow: auto;
+    z-index: 1;
+    transition: all .3s;
+}
+
+body.pinned .rss.article {
+    width: ~"calc(100% - 50em)";
+    left: 50em;
 }

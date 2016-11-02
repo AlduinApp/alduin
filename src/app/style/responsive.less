@@ -1,19 +1,17 @@
 @media screen and (max-width: 65em) {
     .rss.article {
         width: ~"calc(100% - 4.5em)";
-        position: absolute;
+        position: fixed;
         top: 0;
-        right: 0;
+        left: 4.5em;
         transform: translateX(100%);
-        transition: all .3s;
     }
 
     .rss.articles {
         width: ~"calc(100% - 4.5em)";
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
-        transition: all .3s;
     }
 
     .rss.articles ul li.selected {
@@ -26,12 +24,10 @@
         padding-right: 10px;
     }
 
-    body.pinned .rss.article {
-        width: ~"calc(100% - 15em)";
-    }
-
+    body.pinned .rss.article,
     body.pinned .rss.articles {
         width: ~"calc(100% - 15em)";
+        left: 15em;
     }
 
     body.show-article .rss.article {
