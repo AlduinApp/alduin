@@ -8,6 +8,7 @@ import { ComponentsRefs } from "./../../components-refs";
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
     private feedTitleInput: HTMLInputElement;
+    private feedLinkInput: HTMLInputElement;
 
     constructor() {
         super();
@@ -43,7 +44,9 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
                                 />
                         </div>
                         <div className="input group">
-                            <label>Link</label><input id="feed-link-input"
+                            <label>Link</label><input
+                                ref={input => this.feedLinkInput = input}
+                                id="feed-link-input"
                                 type="text"
                                 placeholder="Feed link"
                                 value={this.state.link}
@@ -88,7 +91,6 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
     reset() {
         this.editState({ title: "", link: "" });
     }
-
     display() {
         this.editState({ open: true });
         setTimeout(() => (document.querySelector("#feed-title-input") as HTMLInputElement).focus(), 1); // Chromium needs a 1ms timeout
