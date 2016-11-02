@@ -7,6 +7,8 @@ import { ComponentsRefs } from "./../../components-refs";
 
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
+    private feedTitleInput: HTMLInputElement;
+
     constructor() {
         super();
 
@@ -32,6 +34,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
                     <div className="scroll view">
                         <div className="input group">
                             <label>Display name</label><input
+                                ref={input => this.feedTitleInput = input}
                                 id="feed-title-input"
                                 type="text"
                                 placeholder="Feed title"
@@ -88,6 +91,8 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
     display() {
         this.editState({ open: true });
+        setTimeout(() => (document.querySelector("#feed-title-input") as HTMLInputElement).focus(), 1); // Chromium needs a 1ms timeout
+
     }
     hide() {
         this.reset();
