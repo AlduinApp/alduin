@@ -36,17 +36,17 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
                                 type="text"
                                 placeholder="Feed title"
                                 value={this.state.title}
-                                onChange={this.handleChangeTitle} 
-                            />
+                                onChange={this.handleChangeTitle}
+                                />
                         </div>
                         <div className="input group">
-                            <label>Link</label><input id="feed-link-input" 
-                                type="text" 
+                            <label>Link</label><input id="feed-link-input"
+                                type="text"
                                 placeholder="Feed link"
                                 value={this.state.link}
                                 onChange={this.handleChangeLink}
                                 onKeyDown={this.handleLinkKeyDown}
-                            />
+                                />
                         </div>
                         <button className="main success button" id="add-feed-confirm" onClick={this.handleConfirm}>Confirm</button>
                     </div>
@@ -65,8 +65,14 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
+        let uuid;
+        do {
+            uuid = crypto.randomBytes(16).toString("hex");
+        } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
+
+        console.log(uuid);
         ComponentsRefs.feedList.addFeed({
-            uuid: crypto.randomBytes(16).toString("hex"),
+            uuid: uuid,
             title: this.state.title,
             link: this.state.link
         });
@@ -74,7 +80,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.keyCode === 13) this.handleConfirm(event);  
+        if (event.keyCode === 13) this.handleConfirm(event);
     }
 
     reset() {
