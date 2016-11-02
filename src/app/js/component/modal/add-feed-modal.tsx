@@ -39,10 +39,10 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
     }
 
     handleChangeTitle(event: React.FormEvent<HTMLInputElement>) {
-        this.editState({ title: event.target.value });
+        this.editState({ title: event.currentTarget.value });
     }
     handleChangeLink(event: React.FormEvent<HTMLInputElement>) {
-        this.editState({ link: event.target.value });
+        this.editState({ link: event.currentTarget.value });
     }
     handleHide(event: React.MouseEvent<HTMLElement>){
         this.hide();
