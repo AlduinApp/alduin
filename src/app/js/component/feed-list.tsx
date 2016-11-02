@@ -3,9 +3,11 @@ import * as React from "react";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../components-refs";
-import { Feed, FeedProp } from "./../component/feed";
+import { Feed, FeedProp } from "./feed";
 
 export class FeedList extends CustomComponent<{}, FeedListState> {
+
+    feedComponents: Feed[] = [];
 
     constructor() {
         super();
@@ -22,7 +24,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
             <ul className="rss list">
                 {
                     this.state.feeds.map(feed => {
-                        return <Feed key={feed.uuid} uuid={feed.uuid} title={feed.title} link={feed.link} />
+                        return <Feed ref={feed => this.feedComponents[this.feedComponents.length] = feed} key={feed.uuid} uuid={feed.uuid} title={feed.title} link={feed.link} />
                     })
                 }
             </ul>
