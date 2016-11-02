@@ -10,9 +10,9 @@ function createWindow() {
 
     new Dispatcher();
 
-    win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500});
+    win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/dragon.ico`});
 
-    win.loadURL(`file://${__dirname}/app/view/index.html`);
+    win.loadURL(`${__dirname}/app/view/index.html`);
 
     win.on("closed", () => {
         win = null;
