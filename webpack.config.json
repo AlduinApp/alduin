@@ -1,0 +1,11 @@
+{
+  "entry": "./src/app/js/main.js",
+  "output": {
+    "path": "./src/app/js",
+    "filename": "dist.js"
+  },
+  "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+  }
+}
