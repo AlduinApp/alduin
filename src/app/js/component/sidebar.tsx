@@ -5,6 +5,7 @@ import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../components-refs";
 import { AddFeedOpenModalButton } from "./../component/button/add-feed-open-modal-button";
 import { PinSidebarButton } from "./../component/button/pin-sidebar-button";
+import { FeedList } from './feed-list';
 
 export class Sidebar extends CustomComponent<{}, {}> {
 
@@ -15,22 +16,7 @@ export class Sidebar extends CustomComponent<{}, {}> {
     render() {
         return (
             <div className="rss menu pinned">
-                <ul className="rss list">
-                    <li className="selected">
-                        <i className="fa fa-font-awesome" aria-hidden="true"></i>
-                        <span className="title">Korben</span>
-                        <span className="notif">2</span>
-                    </li>
-                    <li>
-                        <i className="fa fa-archive" aria-hidden="true"></i>
-                        <span className="title">Trash</span>
-                    </li>
-                    <li>
-                        <i className="fa fa-sign-language fa-square-o" aria-hidden="true"></i>
-                        <span className="title">Basta</span>
-                        <span className="notif">+99</span>
-                    </li>
-                </ul>
+                <FeedList />
                 <ul className="rss settings">
                     <AddFeedOpenModalButton ref={button => ComponentsRefs.addFeedOpenModalButton = button} /><li>
                         <i className="fa fa-trash" aria-hidden="true"></i>

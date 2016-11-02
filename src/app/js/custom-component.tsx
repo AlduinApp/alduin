@@ -6,7 +6,7 @@ export class CustomComponent<P, S> extends React.Component<P, S> {
         super();
     }
 
-    editState(obj: any) {
+    editState(obj: S | any) {
         this.setState((prevState, props) => {
             for (const prop in obj) prevState[prop] = obj[prop];
             return prevState;
