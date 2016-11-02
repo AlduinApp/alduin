@@ -70,7 +70,6 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
             uuid = crypto.randomBytes(16).toString("hex");
         } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
 
-        console.log(uuid);
         ComponentsRefs.feedList.addFeed({
             uuid: uuid,
             title: this.state.title,
