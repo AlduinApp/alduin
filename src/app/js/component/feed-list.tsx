@@ -31,6 +31,12 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         );
     }
 
+    isIdAlreadyUsed(uuid: string) {
+        return !!this.state.feeds.find(feed => {
+            return feed.uuid === uuid;
+        });
+    }
+
     addFeed(newFeed: FeedProp) {
         const newFeeds = this.state.feeds.slice(0);
         newFeeds[newFeeds.length] = newFeed;
