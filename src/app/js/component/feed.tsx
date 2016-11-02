@@ -27,7 +27,6 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     render() {
-        console.log("Render feed");
         return (
             <li className="selected">
                 <i className="fa fa-rss" aria-hidden="true"></i>
