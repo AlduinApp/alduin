@@ -5,6 +5,9 @@ import * as crypto from "crypto";
 import { CustomComponent } from "./../../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 
+import { Http } from "./../../http";
+import { FeedParser } from "./../../feed-parser";
+
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
     private feedTitleInput: HTMLInputElement;
@@ -71,18 +74,28 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
-        let uuid;
-        do {
-            uuid = crypto.randomBytes(16).toString("hex");
-        } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
 
-        ComponentsRefs.feedList.addFeed({
-            uuid: uuid,
-            title: this.state.title,
-            link: this.state.link
+        Http.get(this.state.link).then(content => {
+            if(!FeedParser.identify(content)) return ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
+
+            let uuid;
+            do {
+                uuid = crypto.randomBytes(16).toString("hex");
+            } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
+
+            ComponentsRefs.feedList.addFeed({
+                uuid: uuid,
+                title: this.state.title,
+                link: this.state.link
+            });
+
+            ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
+            
+            this.hide();
+
+        }).catch(err => {
+            ComponentsRefs.alertList.alert(err, "error");
         });
-
-        this.hide();
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
         event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church
@@ -94,7 +107,6 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
     display() {
         this.editState({ open: true });
         setTimeout(() => (document.querySelector("#feed-title-input") as HTMLInputElement).focus(), 1); // Chromium needs a 1ms timeout
-
     }
     hide() {
         this.reset();

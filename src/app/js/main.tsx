@@ -6,6 +6,7 @@ import { CustomComponent } from "./custom-component";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";
 import { Sidebar } from "./component/sidebar";
+import { AlertList } from "./component/alert-list";
 
 import { ComponentsRefs } from "./components-refs";
 
@@ -48,9 +49,7 @@ export class App extends CustomComponent<{}, {}>{
                     <h2>Yop Swag</h2>
                     <p>kjdvj sdbvj ssv jdvd</p>
                 </div>
-                <ul className="alert label">
-                    <li className="warning">Vos informations ont été modifiées</li>
-                </ul>
+                <AlertList />
                 <footer></footer>
                 <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
             </div>

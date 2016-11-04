@@ -2,8 +2,8 @@ import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { CustomComponent } from './../custom-component';
-import { HttpGetter } from "./../../../http-getter";
-import { FeedParser } from "./../../../feed-parser";
+import { Http } from "./../http";
+import { FeedParser } from "./../feed-parser";
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
 
@@ -19,7 +19,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     fetch() {
-        HttpGetter.get(this.props.link).then(xmlContent => {
+        Http.get(this.props.link).then(xmlContent => {
             //this.mergeArticles(FeedParser.parse(xmlContent));
         }, error => {
             alert(`Error while fetching feed: ${error}`);

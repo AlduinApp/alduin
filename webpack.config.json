@@ -4,6 +4,7 @@
     "path": "./src/app/js",
     "filename": "dist.js"
   },
+  "target": "electron",
   "externals": {
       "react": "React",
       "react-dom": "ReactDOM"

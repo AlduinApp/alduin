@@ -1,4 +1,4 @@
-import { Article } from "./app/js/component/feed";
+import { Article } from "./component/feed";
 
 import * as fs from "fs";
 // import * as xmldoc from "xmldoc";
