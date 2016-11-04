@@ -7,6 +7,9 @@ import { ComponentsRefs } from "./../../components-refs";
 
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
+    private feedTitleInput: HTMLInputElement;
+    private feedLinkInput: HTMLInputElement;
+
     constructor() {
         super();
 
@@ -32,6 +35,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
                     <div className="scroll view">
                         <div className="input group">
                             <label>Display name</label><input
+                                ref={input => this.feedTitleInput = input}
                                 id="feed-title-input"
                                 type="text"
                                 placeholder="Feed title"
@@ -40,7 +44,9 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
                                 />
                         </div>
                         <div className="input group">
-                            <label>Link</label><input id="feed-link-input"
+                            <label>Link</label><input
+                                ref={input => this.feedLinkInput = input}
+                                id="feed-link-input"
                                 type="text"
                                 placeholder="Feed link"
                                 value={this.state.link}
@@ -79,15 +85,16 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.keyCode === 13) this.handleConfirm(event);
+        event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church
     }
 
     reset() {
         this.editState({ title: "", link: "" });
     }
-
     display() {
         this.editState({ open: true });
+        setTimeout(() => (document.querySelector("#feed-title-input") as HTMLInputElement).focus(), 1); // Chromium needs a 1ms timeout
+
     }
     hide() {
         this.reset();

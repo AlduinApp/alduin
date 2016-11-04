@@ -2,9 +2,15 @@
     color: @global-secondary-text-color;
     width: 35em;
     display: inline-block;
+    position: fixed;
     height: ~"calc(100% - 1.5em)"; /* FOOTER HEIGHT */
+    top: 0;
+    left: 4.5em;
     overflow-y: auto;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
+    z-index: 2;
+    background: @global-background-color;
+    transition: all .3s;
 }
 .rss.articles h3 {
     color: @global-primary-text-color;
@@ -42,4 +48,8 @@
 }
 .rss.articles ul li.unread {
     border-left: 3px solid @global-accent-color;
+}
+
+body.pinned .rss.articles {
+    left: 15em;
 }

@@ -3,3 +3,4 @@ node_modules/**
 *.log
 *.js
 src/app/view/*.css
+**/*.min.css
