@@ -10,10 +10,10 @@ export class Alert extends CustomComponent<AlertProps, {}> {
 
         this.props = props;
     }
-    
+
     render() {
         return (
-            <li className={this.props.alertType}>{this.props.message}</li>
+            <li className={this.props.alertType} >{this.props.message}</li>
         );
     }
 }

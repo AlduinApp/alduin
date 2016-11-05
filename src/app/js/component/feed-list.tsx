@@ -7,7 +7,7 @@ import { Feed, FeedProp } from "./feed";
 
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
-    feedComponents: Feed[] = [];
+    feedComponents: Feed[];
 
     constructor() {
         super();
@@ -20,11 +20,20 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     }
 
     render() {
+        this.feedComponents = [];
         return (
             <ul className="rss list">
                 {
                     this.state.feeds.map(feed => {
-                        return <Feed ref={feed => this.feedComponents[this.feedComponents.length] = feed} key={feed.uuid} uuid={feed.uuid} title={feed.title} link={feed.link} />
+                        return <Feed
+                            ref={feedComponent => {
+                                if (feedComponent) this.feedComponents[this.feedComponents.length] = feedComponent
+                            } }
+                            key={feed.uuid}
+                            uuid={feed.uuid}
+                            title={feed.title}
+                            link={feed.link}
+                            />
                     })
                 }
             </ul>

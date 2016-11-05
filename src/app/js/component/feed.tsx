@@ -1,6 +1,7 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 
+import { ComponentsRefs } from "./../components-refs";
 import { CustomComponent } from './../custom-component';
 import { Http } from "./../http";
 import { FeedParser } from "./../feed-parser";
@@ -14,8 +15,11 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
         this.state = {
             title: this.props.title,
-            articles: []
-        }
+            articles: [],
+            selected: false
+        };
+
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     fetch() {
@@ -28,12 +32,17 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
     render() {
         return (
-            <li>
+            <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
                 <i className="fa fa-rss" aria-hidden="true"></i>
                 <span className="title">{this.state.title}</span>
                 <span className="notif">2</span>
             </li>
         );
+    }
+
+    handleSelect(event: React.MouseEvent<HTMLLIElement>) {
+        ComponentsRefs.feedList.feedComponents.forEach(feedComponent => {feedComponent.editState({ selected: false })});
+        this.editState({ selected: true });
     }
 }
 
@@ -45,6 +54,7 @@ export interface FeedProp {
 interface FeedState {
     title: string;
     articles: Article[];
+    selected: boolean;
 }
 
 export interface Article {
