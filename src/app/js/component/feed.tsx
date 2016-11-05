@@ -14,7 +14,6 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         this.props = props;
 
         this.state = {
-            title: this.props.title,
             articles: [],
             selected: false
         };
@@ -34,15 +33,20 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         return (
             <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
                 <i className="fa fa-rss" aria-hidden="true"></i>
-                <span className="title">{this.state.title}</span>
+                <span className="title">{this.props.title}</span>
                 <span className="notif">2</span>
             </li>
         );
     }
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
-        ComponentsRefs.feedList.feedComponents.forEach(feedComponent => {feedComponent.editState({ selected: false })});
+        ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
         this.editState({ selected: true });
+    }
+
+    getStoreValue() {
+
+        
     }
 }
 
@@ -52,7 +56,6 @@ export interface FeedProp {
     link: string;
 }
 interface FeedState {
-    title: string;
     articles: Article[];
     selected: boolean;
 }
