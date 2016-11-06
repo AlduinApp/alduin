@@ -4,6 +4,7 @@ import * as crypto from "crypto";
 
 import { CustomComponent } from "./../../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
+import { FeedStorage } from "./../../storage";
 
 import { Http } from "./../../http";
 import { FeedParser } from "./../../feed-parser";
@@ -86,13 +87,15 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
             ComponentsRefs.feedList.addFeed({
                 uuid: uuid,
                 title: this.state.title,
-                link: this.state.link
+                link: this.state.link,
+                articles: []
             });
+
+            FeedStorage.store();
 
             ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
             
             this.hide();
-
         }).catch(err => {
             ComponentsRefs.alertList.alert(err, "error");
         });

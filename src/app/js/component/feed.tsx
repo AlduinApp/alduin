@@ -5,6 +5,7 @@ import { ComponentsRefs } from "./../components-refs";
 import { CustomComponent } from './../custom-component';
 import { Http } from "./../http";
 import { FeedParser } from "./../feed-parser";
+import { StoredFeed } from "./../storage";
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
 
@@ -14,7 +15,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         this.props = props;
 
         this.state = {
-            articles: [],
+            articles: this.props.articles,
             selected: false
         };
 
@@ -42,11 +43,17 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
         ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
         this.editState({ selected: true });
+
+        ComponentsRefs.articleList.updateArticles(this.state.articles);
     }
 
-    getStoreValue() {
-
-        
+    getStoreValue(): StoredFeed {
+        return {
+            uuid: this.props.uuid,
+            title: this.props.title,
+            link: this.props.link,
+            articles: this.state.articles
+        }
     }
 }
 
@@ -54,13 +61,14 @@ export interface FeedProp {
     uuid: string;
     title: string;
     link: string;
+    articles: IArticle[];
 }
 interface FeedState {
-    articles: Article[];
+    articles: IArticle[];
     selected: boolean;
 }
 
-export interface Article {
+export interface IArticle {
     id: string;
     title: string;
     content: string;

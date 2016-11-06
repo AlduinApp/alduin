@@ -1,4 +1,4 @@
-import { Article } from "./component/feed";
+import { IArticle } from "./component/feed";
 
 import * as fs from "fs";
 // import * as xmldoc from "xmldoc";
@@ -10,13 +10,13 @@ export namespace FeedParser {
         return (/<(rss|rdf)\b/i.test(xmlString) ? "rss" : (/<feed\b/i.test(xmlString) ? "atom" : false))
     }
 
-    export function parse(xmlString: string): Article[] {
+    export function parse(xmlString: string): IArticle[] {
         const identified = identify(xmlString);
         return identified ? FeedParser[identified as string](xmlString) : null;
     }
 
-    export function rss(xmlString: string): Article[] {
-        const articles: Article[] = [];
+    export function rss(xmlString: string): IArticle[] {
+        const articles: IArticle[] = [];
         new xmldoc.XmlDocument(xmlString).childNamed("channel").childrenNamed("item").forEach(item => {
             articles[articles.length] = {
                 id: item.valueWithPath("guid") || item.valueWithPath("link"),
@@ -30,8 +30,8 @@ export namespace FeedParser {
         return articles;
     }
 
-    export function atom(xmlString: string): Article[] {
-        const articles: Article[] = [];
+    export function atom(xmlString: string): IArticle[] {
+        const articles: IArticle[] = [];
 
         new xmldoc.XmlDocument(xmlString).childrenNamed("entry").forEach(item => {
             articles[articles.length] = {

@@ -16,7 +16,12 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     }
 
     render() {
-        return null;
+        return (
+            <li className={(!this.props.read  && "unread")}>
+                <h3><span>{this.props.title}</span><span>30.5.2015</span></h3>
+                <p>{this.props.content}</p>
+            </li>
+        );
     }
 }
 
@@ -25,7 +30,8 @@ interface ArticleProps {
     title: string;
     content: string;
     link: string;
+    read: boolean;
 }
 interface ArticleState {
-    read: false;
+    read: boolean;
 }

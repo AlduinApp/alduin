@@ -7,43 +7,24 @@ import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-b
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";
 import { Sidebar } from "./component/sidebar";
 import { AlertList } from "./component/alert-list";
+import { ArticleList} from "./component/article-list";
 
 import { ComponentsRefs } from "./components-refs";
+import { FeedStorage } from "./storage";
 
 export class App extends CustomComponent<{}, {}>{
 
     constructor() {
         super();
+
+        FeedStorage.load();
     }
 
     render() {
         return (
             <div>
                 <Sidebar ref={sidebar => ComponentsRefs.sidebar = sidebar} />
-                <div className="rss articles">
-                    <ul>
-                        <li className="unread">
-                            <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
-                            <p>Découverte d'une technologie révolutionnaire</p>
-                        </li>
-                        <li className="selected">
-                            <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
-                            <p>Découverte d'une technologie révolutionnaire</p>
-                        </li>
-                        <li className="unread">
-                            <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
-                            <p>Découverte d'une technologie révolutionnaire</p>
-                        </li>
-                        <li>
-                            <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
-                            <p>Découverte d'une technologie révolutionnaire</p>
-                        </li>
-                        <li>
-                            <h3><span>20Minutes | Hightech</span><span>30.5.2015</span></h3>
-                            <p>Découverte d'une technologie révolutionnaire</p>
-                        </li>
-                    </ul>
-                </div><div className="rss article">
+                <ArticleList /><div className="rss article">
                     <h1>Hello world</h1>
                     <p>sdasykdbjasjdbacasdfa usdha ahs as fk jsf asibfh iasi asj fas foai fhais ofia sifobasiho ia sifbas f asof ai foas fiajb fash fao fhias foa sfhi asofb  has fh ashf asf ahs fhi fiah fas fas hkfas fafja sf as fas fakf as</p>
                     <h2>Yop Swag</h2>

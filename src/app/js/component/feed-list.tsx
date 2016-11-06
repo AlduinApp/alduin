@@ -4,6 +4,7 @@ import * as React from "react";
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../components-refs";
 import { Feed, FeedProp } from "./feed";
+import { FeedStorage, StoredFeed } from "./../storage";
 
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
@@ -13,7 +14,14 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         super();
 
         this.state = {
-            feeds: []
+            feeds: FeedStorage.storedContent.feeds.map(storedFeed => {
+                return {
+                    uuid: storedFeed.uuid,
+                    title: storedFeed.title,
+                    link: storedFeed.link,
+                    articles: storedFeed.articles
+                };
+            })
         };
 
         ComponentsRefs.feedList = this;
@@ -33,6 +41,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                             uuid={feed.uuid}
                             title={feed.title}
                             link={feed.link}
+                            articles={feed.articles || []}
                             />
                     })
                 }
@@ -50,6 +59,14 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         const newFeeds = this.state.feeds.slice(0);
         newFeeds[newFeeds.length] = newFeed;
         this.editState({ feeds: newFeeds })
+    }
+
+    getStoreValue(): StoredFeed[] {
+        const storeValue = [];
+        this.feedComponents.forEach(feedComponent => {
+            storeValue[storeValue.length] = feedComponent.getStoreValue();
+        });
+        return storeValue;
     }
 }
 
