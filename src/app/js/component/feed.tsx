@@ -5,7 +5,7 @@ import { ComponentsRefs } from "./../components-refs";
 import { CustomComponent } from './../custom-component';
 import { Http } from "./../http";
 import { FeedParser } from "./../feed-parser";
-import { StoredFeed } from "./../storage";
+import { FeedStorage, StoredFeed } from "./../storage";
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
 
@@ -20,11 +20,14 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         };
 
         this.handleSelect = this.handleSelect.bind(this);
+
+        this.fetch();
     }
 
     fetch() {
         Http.get(this.props.link).then(xmlContent => {
-            //this.mergeArticles(FeedParser.parse(xmlContent));
+            this.mergeArticles(FeedParser.parse(xmlContent));
+            FeedStorage.store();  
         }, error => {
             alert(`Error while fetching feed: ${error}`);
         });
@@ -54,6 +57,23 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             link: this.props.link,
             articles: this.state.articles
         }
+    }
+
+    mergeArticles(newArticles: IArticle[]) {
+        const newArticlesList = this.state.articles.splice(0);
+        newArticles.forEach(newArticle => {
+            if (this.getArticleByID(newArticle.id)) return;
+            newArticle.read = false;
+            newArticlesList[newArticlesList.length] = newArticle;
+        });
+        this.editState({ articles: newArticlesList });
+    }
+
+    getArticleByID(id: string) {
+        const article = this.state.articles.find(article => { 
+            return article.id == id;
+        });
+        return article;
     }
 }
 

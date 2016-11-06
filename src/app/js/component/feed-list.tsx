@@ -29,6 +29,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
 
     render() {
         this.feedComponents = [];
+
         return (
             <ul className="rss list">
                 {

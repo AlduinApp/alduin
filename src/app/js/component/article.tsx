@@ -17,11 +17,16 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
 
     render() {
         return (
-            <li className={(!this.props.read  && "unread")}>
+            <li className={(!this.props.read && "unread")}>
                 <h3><span>{this.props.title}</span><span>30.5.2015</span></h3>
-                <p>{this.props.content}</p>
+                <p dangerouslySetInnerHTML={{ "__html": `${this.props.content.substring(0, 197)}...` }} >
+                </p>
             </li>
         );
+    }
+
+    handleSelect(event: React.MouseEvent<HTMLLIElement>) {
+        this.editState({read: true});
     }
 }
 

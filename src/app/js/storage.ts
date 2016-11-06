@@ -23,7 +23,9 @@ export namespace FeedStorage {
 
     export function load() {
         if (!fs.existsSync("store.json")) fs.writeFileSync("store.json", JSON.stringify(defaultStoredContent), "utf-8");
-        storedContent = JSON.parse(fs.readFileSync("store.json", "utf-8"));
+        const content = fs.readFileSync("store.json", "utf-8");
+        storedContent = JSON.parse(content);
+        console.log(storedContent);
     }
 
 }
