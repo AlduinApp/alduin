@@ -21,7 +21,9 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
     }
 
     updateArticles(articles: IArticle[]) {
+        console.log(this.state.articles.length);
         this.editState({ articles: articles });
+        console.log(this.state.articles.length)
     }
 
     render() {

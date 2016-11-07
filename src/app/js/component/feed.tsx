@@ -20,14 +20,12 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         };
 
         this.handleSelect = this.handleSelect.bind(this);
-
-        this.fetch();
     }
 
     fetch() {
         Http.get(this.props.link).then(xmlContent => {
             this.mergeArticles(FeedParser.parse(xmlContent));
-            FeedStorage.store();  
+            FeedStorage.store();
         }, error => {
             alert(`Error while fetching feed: ${error}`);
         });
@@ -46,7 +44,6 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
         ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
         this.editState({ selected: true });
-
         ComponentsRefs.articleList.updateArticles(this.state.articles);
     }
 
@@ -60,20 +57,20 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     mergeArticles(newArticles: IArticle[]) {
-        const newArticlesList = this.state.articles.splice(0);
-        newArticles.forEach(newArticle => {
-            if (this.getArticleByID(newArticle.id)) return;
-            newArticle.read = false;
-            newArticlesList[newArticlesList.length] = newArticle;
-        });
-        this.editState({ articles: newArticlesList });
+        const newArticlesList = this.state.articles.slice(0);
+        for (let i = 0; i < newArticles.length; i++) {
+            if (this.getArticleByID(newArticles[i].id)) continue;
+
+            newArticles[i].read = false;
+            newArticlesList[newArticlesList.length] = newArticles[i];
+        }
+        ComponentsRefs.articleList.updateArticles(newArticlesList);
     }
 
     getArticleByID(id: string) {
-        const article = this.state.articles.find(article => { 
+        return this.state.articles.find(article => {
             return article.id == id;
         });
-        return article;
     }
 }
 

@@ -42,7 +42,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                             uuid={feed.uuid}
                             title={feed.title}
                             link={feed.link}
-                            articles={feed.articles || []}
+                            articles={feed.articles}
                             />
                     })
                 }
@@ -60,6 +60,12 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         const newFeeds = this.state.feeds.slice(0);
         newFeeds[newFeeds.length] = newFeed;
         this.editState({ feeds: newFeeds })
+    }
+
+    fetchAll(){
+        this.feedComponents.forEach(feedComponent => {
+            feedComponent.fetch()
+        });
     }
 
     getStoreValue(): StoredFeed[] {
