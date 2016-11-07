@@ -1,12 +1,15 @@
 /* Animation by @tobiasahlin with ❤ */
 
+.loading.modal {
+    z-index: 100000;
+}
+
 .loading.modal:after {
     content: "";
     display: block;
     width: 2em;
     height: 2em;
     position: absolute;
-    z-index: 100000;
     background-color: @global-primary-text-color;
     top: ~"calc(50% - 2.5em)";
     left: ~"calc(50% - 1em)";
