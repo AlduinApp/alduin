@@ -32,6 +32,7 @@ export class App extends CustomComponent<{}, {}>{
                 </div>
                 <AlertList />
                 <footer></footer>
+                <div className="loading modal"></div>
                 <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
             </div>
         );
