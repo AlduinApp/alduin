@@ -17,15 +17,13 @@ export namespace FeedStorage {
         const newStoredContent = {
             feeds: ComponentsRefs.feedList.getStoreValue()
         };
-
         fs.writeFileSync("store.json", JSON.stringify(newStoredContent, null, 4));
     }
 
-    export function load() {
+    export function load(): StoredContent {
         if (!fs.existsSync("store.json")) fs.writeFileSync("store.json", JSON.stringify(defaultStoredContent), "utf-8");
         const content = fs.readFileSync("store.json", "utf-8");
-        storedContent = JSON.parse(content);
-        console.log(storedContent);
+        return JSON.parse(content);
     }
 
 }
