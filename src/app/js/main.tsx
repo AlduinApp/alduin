@@ -34,6 +34,7 @@ export class App extends CustomComponent<{}, {}>{
                 <footer>
                     <span onClick={() => ComponentsRefs.feedList.feedComponents[0].fetch()}>Fetch</span>
                 </footer>
+                <div className="loading modal"></div>
                 <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
             </div>
         );
