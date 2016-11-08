@@ -42,10 +42,13 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
-        ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
-        this.editState({ selected: true });
-        ComponentsRefs.articleList.updateArticles(this.state.articles);
+        if (!this.state.selected) {
+            ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
+            this.editState({ selected: true });
+            ComponentsRefs.articleList.updateArticles(this.state.articles);
+        }
     }
+
 
     getStoreValue(): StoredFeed {
         return {
@@ -64,7 +67,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             newArticles[i].read = false;
             newArticlesList[newArticlesList.length] = newArticles[i];
         }
-        ComponentsRefs.articleList.updateArticles(newArticlesList);
+        this.editState({articles: newArticlesList});
     }
 
     getArticleByID(id: string) {

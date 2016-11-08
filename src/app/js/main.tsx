@@ -8,6 +8,7 @@ import { PinSidebarButton } from "./component/button/pin-sidebar-button";
 import { Sidebar } from "./component/sidebar";
 import { AlertList } from "./component/alert-list";
 import { ArticleList } from "./component/article-list";
+import { Loading } from "./component/loading";
 
 import { ComponentsRefs } from "./components-refs";
 import { FeedStorage } from "./storage";
@@ -32,9 +33,9 @@ export class App extends CustomComponent<{}, {}>{
                 </div>
                 <AlertList />
                 <footer>
-                    <span className="fetch button" onClick={() => ComponentsRefs.feedList.feedComponents[0].fetch()}><i className="fa fa-refresh fa-spin" aria-hidden="true"></i></span>
+                    <span onClick={() => ComponentsRefs.feedList.feedComponents[0].fetch()}>Fetch</span>
                 </footer>
-                <div className="loading modal"></div>
+                <Loading />
                 <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
             </div>
         );
