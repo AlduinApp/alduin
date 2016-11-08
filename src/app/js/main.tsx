@@ -19,6 +19,7 @@ export class App extends CustomComponent<{}, {}>{
         super();
 
         FeedStorage.storedContent = FeedStorage.load();
+        console.log(FeedStorage.storedContent);
     }
 
     render() {

@@ -22,6 +22,8 @@ export class Sidebar extends CustomComponent<{}, {}> {
                         <i className="fa fa-trash" aria-hidden="true"></i>
                     </li><li className="active">
                         <i className="fa fa-cog" aria-hidden="true"></i>
+                    </li><li>
+                        <i className="fa fa-download" aria-hidden="true"></i>
                     </li><PinSidebarButton ref={button => ComponentsRefs.pinSidebarButton = button} />
                 </ul>
             </div>

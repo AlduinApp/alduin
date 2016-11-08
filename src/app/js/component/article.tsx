@@ -1,5 +1,6 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
+import * as electron from "electron";
 
 import { ComponentsRefs } from "./../components-refs";
 import { CustomComponent } from "./../custom-component";
@@ -13,7 +14,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
         this.props = props;
 
         this.state = {
-            read: false
+            read: this.props.read
         };
 
         this.handleSelect = this.handleSelect.bind(this);
@@ -22,7 +23,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     render() {
         return (
             <li onClick={this.handleSelect} className={(!this.state.read && "unread")}>
-                <h3><span>{this.props.title}</span><span>30.5.2015</span></h3>
+                <h3><span>{this.props.title}</span><span>{new Date(this.props.date).toLocaleDateString(electron.remote.app.getLocale())}</span></h3>
                 <p dangerouslySetInnerHTML={{ "__html": `${this.props.content.substring(0, 197)}...` }} >
                 </p>
             </li>
@@ -30,16 +31,15 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     }
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
-        this.editState({read: true});
+        this.editState({ read: true });
         this.markAsRead();
         FeedStorage.store();
     }
 
-    markAsRead(){
-        const articleFound = ComponentsRefs.feedList.selectFeed.state.articles.find(article =>  {
+    markAsRead() {
+        const articleFound = ComponentsRefs.feedList.selectFeed.state.articles.find(article => {
             return article.id === this.props.id;
         });
-        console.log(articleFound);
         articleFound.read = true;
     }
 }
@@ -49,6 +49,7 @@ interface ArticleProps {
     title: string;
     content: string;
     link: string;
+    date: number;
     read: boolean;
 }
 interface ArticleState {
