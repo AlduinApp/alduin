@@ -32,7 +32,7 @@ export class App extends CustomComponent<{}, {}>{
                 </div>
                 <AlertList />
                 <footer>
-                    <span onClick={() => ComponentsRefs.feedList.feedComponents[0].fetch()}>Fetch</span>
+                    <span className="fetch button" onClick={() => ComponentsRefs.feedList.feedComponents[0].fetch()}><i className="fa fa-refresh fa-spin" aria-hidden="true"></i></span>
                 </footer>
                 <div className="loading modal"></div>
                 <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
