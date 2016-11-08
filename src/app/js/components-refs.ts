@@ -6,6 +6,7 @@ import { Sidebar } from "./component/sidebar";
 import { FeedList } from "./component/feed-list";
 import { AlertList } from "./component/alert-list";
 import { ArticleList } from "./component/article-list";
+import { Loading } from "./component/loading";
 
 export namespace ComponentsRefs {
     export let main: App;
@@ -16,4 +17,5 @@ export namespace ComponentsRefs {
     export let feedList: FeedList;
     export let alertList: AlertList;
     export let articleList: ArticleList;
+    export let loading: Loading;
 }

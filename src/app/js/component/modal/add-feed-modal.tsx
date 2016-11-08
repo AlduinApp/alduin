@@ -5,9 +5,10 @@ import * as crypto from "crypto";
 import { CustomComponent } from "./../../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
-
 import { Http } from "./../../http";
 import { FeedParser } from "./../../feed-parser";
+
+import { Loading } from "./../loading";
 
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
@@ -75,30 +76,37 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
-
+        ComponentsRefs.loading.toggle();
         Http.get(this.state.link).then(content => {
-            if(!FeedParser.identify(content)) return ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
+            if (!FeedParser.identify(content)) {
+                ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
 
-            let uuid;
-            do {
-                uuid = crypto.randomBytes(16).toString("hex");
-            } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
+            } else {
+                let uuid;
+                do {
+                    uuid = crypto.randomBytes(16).toString("hex");
+                } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
 
-            ComponentsRefs.feedList.addFeed({
-                uuid: uuid,
-                title: this.state.title,
-                link: this.state.link,
-                articles: []
-            });
+                ComponentsRefs.feedList.addFeed({
+                    uuid: uuid,
+                    title: this.state.title,
+                    link: this.state.link,
+                    articles: []
+                });
 
-            FeedStorage.store();
+                FeedStorage.store().then(() => {
+                    ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
+                }).catch(err => {
+                    ComponentsRefs.alertList.alert(err, "error");
+                });
 
-            ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
-            
-            this.hide();
+                this.hide();
+            }
+            ComponentsRefs.loading.toggle();
         }).catch(err => {
             ComponentsRefs.alertList.alert(err, "error");
-        });
+            ComponentsRefs.loading.toggle();
+        })
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
         event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church

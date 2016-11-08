@@ -11,6 +11,8 @@ export class Loading extends CustomComponent<{}, LoadingState> {
         this.state = {
             displayed: false
         };
+
+        ComponentsRefs.loading = this;
     }
 
     render() {

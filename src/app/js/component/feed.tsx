@@ -45,6 +45,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         if (!this.state.selected) {
             ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
             this.editState({ selected: true });
+            ComponentsRefs.feedList.selectFeed = this;
             ComponentsRefs.articleList.updateArticles(this.state.articles);
         }
     }
@@ -67,7 +68,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             newArticles[i].read = false;
             newArticlesList[newArticlesList.length] = newArticles[i];
         }
-        this.editState({articles: newArticlesList});
+        this.editState({ articles: newArticlesList });
     }
 
     getArticleByID(id: string) {

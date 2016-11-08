@@ -14,10 +14,14 @@ export namespace FeedStorage {
     };
 
     export function store() {
-        const newStoredContent = {
-            feeds: ComponentsRefs.feedList.getStoreValue()
-        };
-        fs.writeFileSync("store.json", JSON.stringify(newStoredContent, null, 4));
+        return new Promise((resolve, reject) => {
+            const newStoredContent = {
+                feeds: ComponentsRefs.feedList.getStoreValue()
+            };
+            fs.writeFile("store.json", JSON.stringify(newStoredContent, null, 4), err => {
+                err ? reject("Failed to save feeds") : resolve();
+            });
+        });
     }
 
     export function load(): StoredContent {
