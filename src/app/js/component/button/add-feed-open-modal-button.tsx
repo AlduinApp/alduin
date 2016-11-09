@@ -7,7 +7,10 @@ export class AddFeedOpenModalButton extends Button<{}, {}> {
 
     constructor() {
         super();
+
         this.onClick = this.onClick.bind(this);
+
+        ComponentsRefs.addFeedOpenModalButton = this;
     }
 
     render() {

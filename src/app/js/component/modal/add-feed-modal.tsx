@@ -26,6 +26,8 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.handleHide = this.handleHide.bind(this);
         this.handleConfirm = this.handleConfirm.bind(this);
         this.handleLinkKeyDown = this.handleLinkKeyDown.bind(this);
+
+        ComponentsRefs.addFeedModal = this;
     }
 
     render() {

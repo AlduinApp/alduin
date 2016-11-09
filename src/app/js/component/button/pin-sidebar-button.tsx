@@ -7,7 +7,10 @@ export class PinSidebarButton extends Button<{}, {}> {
 
     constructor() {
         super();
+
         this.onClick = this.onClick.bind(this);
+
+        ComponentsRefs.pinSidebarButton = this;
     }
 
     render() {

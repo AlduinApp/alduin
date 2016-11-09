@@ -12,6 +12,8 @@ export class Sidebar extends CustomComponent<{}, {}> {
 
     constructor() {
         super();
+
+        ComponentsRefs.sidebar = this;
     }
 
     render() {
@@ -19,11 +21,11 @@ export class Sidebar extends CustomComponent<{}, {}> {
             <div className="rss menu pinned">
                 <FeedList />
                 <ul className="rss settings">
-                    <AddFeedOpenModalButton ref={button => ComponentsRefs.addFeedOpenModalButton = button} /><FetchButton /><li>
+                    <AddFeedOpenModalButton /><FetchButton /><li>
                         <i className="fa fa-trash" aria-hidden="true"></i>
                     </li><li className="active">
                         <i className="fa fa-cog" aria-hidden="true"></i>
-                    </li><PinSidebarButton ref={button => ComponentsRefs.pinSidebarButton = button} />
+                    </li><PinSidebarButton />
                 </ul>
             </div>
         );
