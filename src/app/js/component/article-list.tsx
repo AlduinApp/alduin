@@ -10,6 +10,8 @@ import { Feed } from "./feed";
 
 export class ArticleList extends CustomComponent<{}, ArticleListState> {
 
+    articleComponents: Article[];
+
     constructor() {
         super();
 
@@ -25,6 +27,7 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
     }
 
     render() {
+        this.articleComponents = [];
         return (
             <div className="rss articles">
                 <ul>
@@ -38,6 +41,9 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
                                 read={article.read}
                                 date={article.date}
                                 key={article.id}
+                                ref={articleComponent => {
+                                    if (articleComponent) this.articleComponents[this.articleComponents.length] = articleComponent;
+                                } }
                                 />;
                         })
                     }

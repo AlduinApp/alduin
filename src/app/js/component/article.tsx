@@ -14,7 +14,8 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
         this.props = props;
 
         this.state = {
-            read: this.props.read
+            read: this.props.read,
+            selected: false
         };
 
         this.handleSelect = this.handleSelect.bind(this);
@@ -22,7 +23,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
 
     render() {
         return (
-            <li onClick={this.handleSelect} className={(!this.state.read && "unread")}>
+            <li onClick={this.handleSelect} className={(!this.state.read ? "unread" : "") + (this.state.selected ? "selected" : "")}>
                 <h3><span>{this.props.title}</span><span>{new Date(this.props.date).toLocaleDateString(electron.remote.app.getLocale())}</span></h3>
                 <p dangerouslySetInnerHTML={{ "__html": `${this.props.content.substring(0, 197).replace("\n", " ")}...` }} >
                 </p>
@@ -37,7 +38,10 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
             FeedStorage.store();
         }
 
-        ComponentsRefs.content.editState({content: this.props.content});
+        ComponentsRefs.articleList.articleComponents.forEach(articleComponent => articleComponent.editState({ selected: false }));
+        this.editState({ selected: true });
+
+        ComponentsRefs.content.editState({ content: this.props.content });
     }
 
     markAsRead() {
@@ -59,4 +63,5 @@ interface ArticleProps {
 }
 interface ArticleState {
     read: boolean;
+    selected: boolean;
 }
