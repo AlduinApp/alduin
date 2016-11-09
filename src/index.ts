@@ -15,9 +15,13 @@ function createWindow() {
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
-    process.platform !== "darwin" && app.quit(); // Code like if you were in Satan's church
+   if ( process.platform !== "darwin") {
+        app.quit();
+   }
 });
 
 app.on("activate", () => {
-    win === null && createWindow(); // Code like if you were in Satan's church
+    if(win === null) {
+        createWindow();
+    }
 });

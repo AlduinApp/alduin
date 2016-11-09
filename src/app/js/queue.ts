@@ -36,7 +36,7 @@ export class Queue<T> {
      */
     map(callback: (value: T) => any) {
         const toReturn = [];
-        this.forEach(value => { toReturn[toReturn.length] = callback(value) });
+        this.forEach(value => { toReturn[toReturn.length] = callback(value); });
         return toReturn;
     }
 
