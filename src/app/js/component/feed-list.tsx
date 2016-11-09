@@ -78,7 +78,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                     if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feeds`, "error");
                     resolve();
                 })
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         });
     }
 
