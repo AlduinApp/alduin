@@ -10,7 +10,7 @@ import { Loading } from "./component/loading";
 
 export namespace ComponentsRefs {
     export let main: App;
-    export let addFeedModal: AddFeedModal
+    export let addFeedModal: AddFeedModal;
     export let addFeedOpenModalButton: AddFeedOpenModalButton;
     export let pinSidebarButton: PinSidebarButton;
     export let sidebar: Sidebar;

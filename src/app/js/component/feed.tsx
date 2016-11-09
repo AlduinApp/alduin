@@ -2,7 +2,7 @@ import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { ComponentsRefs } from "./../components-refs";
-import { CustomComponent } from './../custom-component';
+import { CustomComponent } from "./../custom-component";
 import { Http } from "./../http";
 import { FeedParser } from "./../feed-parser";
 import { FeedStorage, StoredFeed } from "./../storage";
@@ -44,7 +44,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
         if (!this.state.selected) {
-            ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
+            ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }); });
             this.editState({ selected: true });
             ComponentsRefs.feedList.selectFeed = this;
             ComponentsRefs.articleList.updateArticles(this.state.articles);
@@ -58,7 +58,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             title: this.props.title,
             link: this.props.link,
             articles: this.state.articles
-        }
+        };
     }
 
     mergeArticles(newArticles: IArticle[]) {

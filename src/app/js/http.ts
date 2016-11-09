@@ -27,7 +27,7 @@ export namespace Http {
         });
     }
     export function isValidUrl(url: string) {
-        var regexp = new RegExp(
+        let regexp = new RegExp(
             "^" +
             // protocol identifier
             "(?:(?:https?|ftp)://)" +
