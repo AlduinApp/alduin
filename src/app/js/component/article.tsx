@@ -41,7 +41,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
         ComponentsRefs.articleList.articleComponents.forEach(articleComponent => articleComponent.editState({ selected: false }));
         this.editState({ selected: true });
 
-        ComponentsRefs.content.editState({ content: this.props.content });
+        ComponentsRefs.content.editState({ content: `<h3>${this.props.title}</h3> ${this.props.content}` });
     }
 
     markAsRead() {
