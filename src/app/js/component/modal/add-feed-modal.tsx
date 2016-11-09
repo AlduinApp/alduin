@@ -73,8 +73,8 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
-        if (ComponentsRefs.feedList.state.feeds.find(feed => { return feed.link == this.state.link })) return ComponentsRefs.alertList.alert("Feed already in list", "error");
-        
+        if (ComponentsRefs.feedList.state.feeds.find(feed => { return feed.link == this.state.link; })) return ComponentsRefs.alertList.alert("Feed already in list", "error");
+
         ComponentsRefs.loading.toggle();
 
         Http.get(this.state.link).then(content => {
