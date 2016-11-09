@@ -37,6 +37,7 @@ export class FetchButton extends Button<{}, {}> {
         target.classList.toggle("fa-download");
         target.classList.toggle("fa-refresh");
         target.classList.toggle("fa-spin");
+        target.classList.toggle("white-icon");
     }
 }
 
