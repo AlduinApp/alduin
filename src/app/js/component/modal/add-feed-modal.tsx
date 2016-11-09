@@ -96,11 +96,11 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
                 FeedStorage.store().then(() => {
                     ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
+                    this.hide();
                 }).catch(err => {
                     ComponentsRefs.alertList.alert(err, "error");
+                    this.hide();
                 });
-
-                this.hide();
             }
             ComponentsRefs.loading.toggle();
         }).catch(err => {
