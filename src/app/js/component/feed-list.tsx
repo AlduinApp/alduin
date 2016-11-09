@@ -37,14 +37,14 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                     this.state.feeds.map(feed => {
                         return <Feed
                             ref={feedComponent => {
-                                if (feedComponent) this.feedComponents[this.feedComponents.length] = feedComponent
+                                if (feedComponent) this.feedComponents[this.feedComponents.length] = feedComponent;
                             } }
                             key={feed.uuid}
                             uuid={feed.uuid}
                             title={feed.title}
                             link={feed.link}
                             articles={feed.articles}
-                            />
+                            />;
                     })
                 }
             </ul>
@@ -60,12 +60,12 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     addFeed(newFeed: FeedProp) {
         const newFeeds = this.state.feeds.slice(0);
         newFeeds[newFeeds.length] = newFeed;
-        this.editState({ feeds: newFeeds })
+        this.editState({ feeds: newFeeds });
     }
 
     fetchAll(){
         this.feedComponents.forEach(feedComponent => {
-            feedComponent.fetch()
+            feedComponent.fetch();
         });
     }
 

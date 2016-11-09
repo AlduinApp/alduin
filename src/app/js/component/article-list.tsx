@@ -38,7 +38,7 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
                                 read={article.read}
                                 date={article.date}
                                 key={article.id}
-                                />
+                                />;
                         })
                     }
                 </ul>

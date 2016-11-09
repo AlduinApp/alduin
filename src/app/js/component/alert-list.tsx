@@ -6,7 +6,7 @@ import * as crypto from "crypto";
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../components-refs";
 import { Feed, FeedProp } from "./feed";
-import { Queue } from './../queue';
+import { Queue } from "./../queue";
 import { Alert, AlertProps } from "./alert";
 
 export class AlertList extends CustomComponent<{}, FeedListState> {
@@ -26,7 +26,7 @@ export class AlertList extends CustomComponent<{}, FeedListState> {
             <ul className="alert label">
                 {
                     this.state.alerts.map(alert => {
-                        return <Alert key={alert.uuid} uuid={alert.uuid} message={alert.message} alertType={alert.alertType} />
+                        return <Alert key={alert.uuid} uuid={alert.uuid} message={alert.message} alertType={alert.alertType} />;
                     })
                 }
             </ul>
@@ -39,7 +39,7 @@ export class AlertList extends CustomComponent<{}, FeedListState> {
             uuid: crypto.randomBytes(16).toString("hex"),
             message: message,
             alertType: alertType
-        })
+        });
         this.editState({
             alerts: newAlerts
         });

@@ -5,7 +5,7 @@ import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../components-refs";
 import { AddFeedOpenModalButton } from "./../component/button/add-feed-open-modal-button";
 import { PinSidebarButton } from "./../component/button/pin-sidebar-button";
-import { FeedList } from './feed-list';
+import { FeedList } from "./feed-list";
 
 export class Sidebar extends CustomComponent<{}, {}> {
 
