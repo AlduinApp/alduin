@@ -4,6 +4,7 @@ import * as fs from "fs";
 // import * as xmldoc from "xmldoc";
 const xmldoc = require("xmldoc");
 import * as http from "http";
+import * as url from "url";
 
 export namespace FeedParser {
     export function identify(xmlString: string) {
@@ -18,7 +19,6 @@ export namespace FeedParser {
     export function rss(xmlString: string): IArticle[] {
         const articles: IArticle[] = [];
         new xmldoc.XmlDocument(xmlString).childNamed("channel").childrenNamed("item").forEach(item => {
-            console.log(item.valueWithPath("content:encoded"));
             articles[articles.length] = {
                 id: item.valueWithPath("guid") || item.valueWithPath("link"),
                 title: item.valueWithPath("title"),
@@ -38,7 +38,7 @@ export namespace FeedParser {
             articles[articles.length] = {
                 id: item.valueWithPath("id"),
                 title: item.valueWithPath("title"),
-                content: fixSrcset(item.valueWithPath("summary") || item.valueWithPath("content") || item.valueWithPath("subtitle")),
+                content: item.fixSrcset(item.valueWithPath("summary") || item.valueWithPath("content") || item.valueWithPath("subtitle")),
                 link: /href="(.+)"/.exec(item.childWithAttribute("href").toString())[1],
                 date: item.valueWithPath("published") || item.valueWithPath("updated") || new Date().getTime()
             };
@@ -47,7 +47,10 @@ export namespace FeedParser {
         return articles;
     }
 
-    function fixSrcset(url: string){
-        return url.replace(/[^:](\/\/[\S]*)/g, "http://$1");
+    function fixSrcset(content: string) {
+        console.log(content);
+        const replaced = content.replace(/([^:])(\/\/[\S]*)/g, "$1http:$2");
+        console.log(replaced);
+        return replaced;
     }
 }

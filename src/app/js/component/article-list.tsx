@@ -30,7 +30,6 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
                 <ul>
                     {
                         this.state.articles.map(article => {
-                            console.log(article);
                             return <Article
                                 id={article.id}
                                 title={article.title}
