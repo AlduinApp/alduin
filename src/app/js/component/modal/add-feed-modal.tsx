@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as electron from "electron";
 import * as crypto from "crypto";
 
 import { CustomComponent } from "./../../custom-component";
@@ -7,8 +6,6 @@ import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
 import { Http } from "./../../http";
 import { FeedParser } from "./../../feed-parser";
-
-import { Loading } from "./../loading";
 
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
@@ -22,7 +19,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
             open: false,
             title: "",
             link: ""
-        }
+        };
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeLink = this.handleChangeLink.bind(this);
@@ -111,7 +108,9 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         });
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-        event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church
+        if(event.keyCode === 13) {
+            this.handleConfirm(event);
+        }
     }
 
     reset() {

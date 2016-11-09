@@ -1,4 +1,6 @@
 import * as fs from "fs";
+import * as path from "path";
+import * as electron from "electron";
 
 import { ComponentsRefs } from "./components-refs";
 import { IArticle } from "./component/feed";
@@ -13,20 +15,23 @@ export namespace FeedStorage {
         feeds: []
     };
 
+    export const storePath = path.join(electron.remote.app.getPath("userData"), "store.json");
+
     export function store() {
         return new Promise((resolve, reject) => {
             const newStoredContent = {
                 feeds: ComponentsRefs.feedList.getStoreValue()
             };
-            fs.writeFile("store.json", JSON.stringify(newStoredContent, null, 4), err => {
+            fs.writeFile(storePath, JSON.stringify(newStoredContent, null, 4), err => {
                 err ? reject("Failed to save feeds") : resolve();
             });
         });
     }
 
     export function load(): StoredContent {
-        if (!fs.existsSync("store.json")) fs.writeFileSync("store.json", JSON.stringify(defaultStoredContent), "utf-8");
-        const content = fs.readFileSync("store.json", "utf-8");
+        console.log(storePath);
+        if (!fs.existsSync(storePath)) fs.writeFileSync(storePath, JSON.stringify(defaultStoredContent), "utf-8");
+        const content = fs.readFileSync(storePath, "utf-8");
         return JSON.parse(content);
     }
 

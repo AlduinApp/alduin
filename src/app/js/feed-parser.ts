@@ -7,7 +7,7 @@ import * as http from "http";
 
 export namespace FeedParser {
     export function identify(xmlString: string) {
-        return (/<(rss|rdf)\b/i.test(xmlString) ? "rss" : (/<feed\b/i.test(xmlString) ? "atom" : false))
+        return (/<(rss|rdf)\b/i.test(xmlString) ? "rss" : (/<feed\b/i.test(xmlString) ? "atom" : false));
     }
 
     export function parse(xmlString: string): IArticle[] {

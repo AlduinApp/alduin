@@ -2,7 +2,7 @@ import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { ComponentsRefs } from "./../components-refs";
-import { CustomComponent } from './../custom-component';
+import { CustomComponent } from "./../custom-component";
 import { Http } from "./../http";
 import { FeedParser } from "./../feed-parser";
 import { FeedStorage, StoredFeed } from "./../storage";
@@ -33,22 +33,26 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     render() {
+        const unreadNb = this.state.articles.filter(article => {
+            return !article.read;
+        }).length;
+
         return (
             <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
                 <i className="fa fa-rss" aria-hidden="true"></i>
                 <span className="title">{this.props.title}</span>
-                <span className="notif">{this.state.articles.filter(article => {
-                    return !article.read;
-                }).length}</span>
+                <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
             </li>
         );
     }
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
-        ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
-        this.editState({ selected: true });
-        ComponentsRefs.feedList.selectedFeed = this;
-        ComponentsRefs.articleList.updateArticles(this.state.articles);
+        if (!this.state.selected) {
+            ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }); });
+            this.editState({ selected: true });
+            ComponentsRefs.feedList.selectedFeed = this;
+            ComponentsRefs.articleList.updateArticles(this.state.articles);
+        }
     }
 
 
@@ -58,7 +62,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             title: this.props.title,
             link: this.props.link,
             articles: this.state.articles
-        }
+        };
     }
 
     mergeArticles(newArticles: IArticle[]) {
