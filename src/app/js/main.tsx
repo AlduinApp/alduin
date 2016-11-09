@@ -19,7 +19,6 @@ export class App extends CustomComponent<{}, {}>{
         super();
 
         FeedStorage.storedContent = FeedStorage.load();
-        console.log(FeedStorage.storedContent);
     }
 
     render() {
@@ -33,9 +32,7 @@ export class App extends CustomComponent<{}, {}>{
                     <p>kjdvj sdbvj ssv jdvd</p>
                 </div>
                 <AlertList />
-                <footer>
-                    <span onClick={() => ComponentsRefs.feedList.feedComponents[0].fetch()}>Fetch</span>
-                </footer>
+                <footer></footer>
                 <Loading />
                 <AddFeedModal ref={modal => ComponentsRefs.addFeedModal = modal} />
             </div>

@@ -63,9 +63,22 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         this.editState({ feeds: newFeeds })
     }
 
-    fetchAll(){
-        this.feedComponents.forEach(feedComponent => {
-            feedComponent.fetch()
+    fetchAll() {
+        return new Promise((resolve, reject) => {
+            const fetchToExecute = [];
+            let nbErrors = 0;
+
+            this.feedComponents.forEach(feedComponent => {
+                fetchToExecute[fetchToExecute.length] = feedComponent.fetch().catch(e => { nbErrors++; return e; });
+            });
+            Promise.all(fetchToExecute)
+                .then(() => {
+                    let nbSuccess = fetchToExecute.length - nbErrors;
+                    if (nbSuccess) ComponentsRefs.alertList.alert(`Successfully fetch ${nbSuccess} feeds`, "success");
+                    if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feeds`, "error");
+                    resolve();
+                })
+                .catch(err => console.log(err))
         });
     }
 

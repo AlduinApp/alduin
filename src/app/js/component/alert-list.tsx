@@ -44,7 +44,7 @@ export class AlertList extends CustomComponent<{}, FeedListState> {
             alerts: newAlerts
         });
 
-        setTimeout(() => this.removeAlert(), 3000);
+        setTimeout(() => this.removeAlert(), 5000);
     }
 
     removeAlert() {

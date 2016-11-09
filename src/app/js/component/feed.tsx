@@ -23,11 +23,12 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     fetch() {
-        Http.get(this.props.link).then(xmlContent => {
-            this.mergeArticles(FeedParser.parse(xmlContent));
-            FeedStorage.store();
-        }, error => {
-            alert(`Error while fetching feed: ${error}`);
+        return new Promise((resolve, reject) => {
+            Http.get(this.props.link).then(xmlContent => {
+                this.mergeArticles(FeedParser.parse(xmlContent));
+                FeedStorage.store();
+                resolve();
+            }).catch(reject);
         });
     }
 
