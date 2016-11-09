@@ -43,6 +43,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
             return article.id === this.props.id;
         });
         articleFound.read = true;
+        ComponentsRefs.feedList.forceUpdate();
     }
 }
 

@@ -45,12 +45,10 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
-        if (!this.state.selected) {
-            ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
-            this.editState({ selected: true });
-            ComponentsRefs.feedList.selectedFeed = this;
-            ComponentsRefs.articleList.updateArticles(this.state.articles);
-        }
+        ComponentsRefs.feedList.feedComponents.forEach(feedComponent => { feedComponent.editState({ selected: false }) });
+        this.editState({ selected: true });
+        ComponentsRefs.feedList.selectedFeed = this;
+        ComponentsRefs.articleList.updateArticles(this.state.articles);
     }
 
 

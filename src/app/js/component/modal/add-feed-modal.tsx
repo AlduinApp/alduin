@@ -76,11 +76,13 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
+        if (ComponentsRefs.feedList.state.feeds.find(feed => { return feed.link == this.state.link })) return ComponentsRefs.alertList.alert("Feed already in list", "error");
+        
         ComponentsRefs.loading.toggle();
+
         Http.get(this.state.link).then(content => {
             if (!FeedParser.identify(content)) {
                 ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
-
             } else {
                 let uuid;
                 do {
@@ -106,7 +108,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         }).catch(err => {
             ComponentsRefs.alertList.alert(err, "error");
             ComponentsRefs.loading.toggle();
-        })
+        });
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
         event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church
