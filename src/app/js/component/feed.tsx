@@ -37,7 +37,9 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
                 <i className="fa fa-rss" aria-hidden="true"></i>
                 <span className="title">{this.props.title}</span>
-                <span className="notif">2</span>
+                <span className="notif">{this.state.articles.filter(article => {
+                    return !article.read;
+                }).length}</span>
             </li>
         );
     }
