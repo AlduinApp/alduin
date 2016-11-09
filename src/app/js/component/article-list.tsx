@@ -21,9 +21,7 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
     }
 
     updateArticles(articles: IArticle[]) {
-        console.log(this.state.articles.length);
         this.editState({ articles: articles });
-        console.log(this.state.articles.length)
     }
 
     render() {
@@ -38,8 +36,9 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
                                 content={article.content}
                                 link={article.link}
                                 read={article.read}
+                                date={article.date}
                                 key={article.id}
-                                />
+                                />;
                         })
                     }
                 </ul>

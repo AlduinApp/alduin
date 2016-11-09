@@ -1,10 +1,7 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { ComponentsRefs } from "./../../components-refs";
-import { CustomComponent } from "./../../custom-component";
 import { Button } from "./button";
-import { AddFeedModal } from "./../modal/add-feed-modal";
 
 export class AddFeedOpenModalButton extends Button<{}, {}> {
 

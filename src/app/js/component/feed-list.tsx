@@ -9,6 +9,7 @@ import { FeedStorage, StoredFeed } from "./../storage";
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
     feedComponents: Feed[];
+    selectFeed: Feed;
 
     constructor() {
         super();
@@ -36,14 +37,14 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                     this.state.feeds.map(feed => {
                         return <Feed
                             ref={feedComponent => {
-                                if (feedComponent) this.feedComponents[this.feedComponents.length] = feedComponent
+                                if (feedComponent) this.feedComponents[this.feedComponents.length] = feedComponent;
                             } }
                             key={feed.uuid}
                             uuid={feed.uuid}
                             title={feed.title}
                             link={feed.link}
                             articles={feed.articles}
-                            />
+                            />;
                     })
                 }
             </ul>
@@ -59,12 +60,25 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     addFeed(newFeed: FeedProp) {
         const newFeeds = this.state.feeds.slice(0);
         newFeeds[newFeeds.length] = newFeed;
-        this.editState({ feeds: newFeeds })
+        this.editState({ feeds: newFeeds });
     }
 
-    fetchAll(){
-        this.feedComponents.forEach(feedComponent => {
-            feedComponent.fetch()
+    fetchAll() {
+        return new Promise((resolve, reject) => {
+            const fetchToExecute = [];
+            let nbErrors = 0;
+
+            this.feedComponents.forEach(feedComponent => {
+                fetchToExecute[fetchToExecute.length] = feedComponent.fetch().catch(e => { nbErrors++; return e; });
+            });
+            Promise.all(fetchToExecute)
+                .then(() => {
+                    let nbSuccess = fetchToExecute.length - nbErrors;
+                    if (nbSuccess) ComponentsRefs.alertList.alert(`Successfully fetch ${nbSuccess} feeds`, "success");
+                    if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feeds`, "error");
+                    resolve();
+                })
+                .catch(err => console.log(err))
         });
     }
 

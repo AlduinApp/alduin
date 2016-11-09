@@ -1,11 +1,9 @@
 import * as React from "react";
-import * as electron from "electron";
 import * as crypto from "crypto";
 
 import { CustomComponent } from "./../../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
-
 import { Http } from "./../../http";
 import { FeedParser } from "./../../feed-parser";
 
@@ -21,7 +19,7 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
             open: false,
             title: "",
             link: ""
-        }
+        };
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeLink = this.handleChangeLink.bind(this);
@@ -75,33 +73,42 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
         this.hide();
     }
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
-
+        ComponentsRefs.loading.toggle();
         Http.get(this.state.link).then(content => {
-            if(!FeedParser.identify(content)) return ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
+            if (!FeedParser.identify(content)) {
+                ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
 
-            let uuid;
-            do {
-                uuid = crypto.randomBytes(16).toString("hex");
-            } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
+            } else {
+                let uuid;
+                do {
+                    uuid = crypto.randomBytes(16).toString("hex");
+                } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
 
-            ComponentsRefs.feedList.addFeed({
-                uuid: uuid,
-                title: this.state.title,
-                link: this.state.link,
-                articles: []
-            });
+                ComponentsRefs.feedList.addFeed({
+                    uuid: uuid,
+                    title: this.state.title,
+                    link: this.state.link,
+                    articles: []
+                });
 
-            FeedStorage.store();
-
-            ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
-            
-            this.hide();
+                FeedStorage.store().then(() => {
+                    ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
+                    this.hide();
+                }).catch(err => {
+                    ComponentsRefs.alertList.alert(err, "error");
+                    this.hide();
+                });
+            }
+            ComponentsRefs.loading.toggle();
         }).catch(err => {
             ComponentsRefs.alertList.alert(err, "error");
+            ComponentsRefs.loading.toggle();
         });
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-        event.keyCode === 13 && this.handleConfirm(event); // Code like if you were in Satan's church
+        if(event.keyCode === 13) {
+            this.handleConfirm(event);
+        }
     }
 
     reset() {
