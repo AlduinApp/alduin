@@ -31,9 +31,11 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     }
 
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
-        this.editState({ read: true });
-        this.markAsRead();
-        FeedStorage.store();
+        if (!this.state.read) {
+            this.editState({ read: true });
+            this.markAsRead();
+            FeedStorage.store();
+        }
     }
 
     markAsRead() {
