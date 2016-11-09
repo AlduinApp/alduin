@@ -33,13 +33,15 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     render() {
+        const unreadNb = this.state.articles.filter(article => {
+            return !article.read;
+        }).length;
+
         return (
             <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
                 <i className="fa fa-rss" aria-hidden="true"></i>
                 <span className="title">{this.props.title}</span>
-                <span className="notif">{this.state.articles.filter(article => {
-                    return !article.read;
-                }).length}</span>
+                <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
             </li>
         );
     }
