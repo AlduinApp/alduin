@@ -39,7 +39,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     }
 
     markAsRead() {
-        const articleFound = ComponentsRefs.feedList.selectFeed.state.articles.find(article => {
+        const articleFound = ComponentsRefs.feedList.selectedFeed.state.articles.find(article => {
             return article.id === this.props.id;
         });
         articleFound.read = true;

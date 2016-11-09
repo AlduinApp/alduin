@@ -9,7 +9,7 @@ import { FeedStorage, StoredFeed } from "./../storage";
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
     feedComponents: Feed[];
-    selectFeed: Feed;
+    selectedFeed: Feed;
 
     constructor() {
         super();
