@@ -74,8 +74,8 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
             Promise.all(fetchToExecute)
                 .then(() => {
                     let nbSuccess = fetchToExecute.length - nbErrors;
-                    if (nbSuccess) ComponentsRefs.alertList.alert(`Successfully fetch ${nbSuccess} feeds`, "success");
-                    if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feeds`, "error");
+                    if (nbSuccess) ComponentsRefs.alertList.alert(`Successfully fetch ${nbSuccess} feed${nbSuccess > 1 ? "s" : ""}`, "success");
+                    if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feed${nbSuccess > 1 ? "s" : ""}`, "error");
                     resolve();
                 })
                 .catch(err => console.log(err))
