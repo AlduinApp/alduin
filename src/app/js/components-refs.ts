@@ -7,6 +7,7 @@ import { FeedList } from "./component/feed-list";
 import { AlertList } from "./component/alert-list";
 import { ArticleList } from "./component/article-list";
 import { Loading } from "./component/loading";
+import { Content } from "./component/content";
 
 export namespace ComponentsRefs {
     export let main: App;
@@ -18,4 +19,5 @@ export namespace ComponentsRefs {
     export let alertList: AlertList;
     export let articleList: ArticleList;
     export let loading: Loading;
+    export let content: Content;
 }
