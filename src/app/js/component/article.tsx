@@ -42,6 +42,8 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
         this.editState({ selected: true });
 
         ComponentsRefs.content.editState({ content: `<h3>${this.props.title}</h3> ${this.props.content}` });
+
+        ComponentsRefs.content.resetScrollbar();
     }
 
     markAsRead() {
