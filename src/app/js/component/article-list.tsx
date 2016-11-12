@@ -12,6 +12,8 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
 
     articleComponents: Article[];
 
+    mainDiv: HTMLDivElement;
+
     constructor() {
         super();
 
@@ -29,7 +31,7 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
     render() {
         this.articleComponents = [];
         return (
-            <div className="rss articles">
+            <div className="rss articles" ref={main => this.mainDiv = main}>
                 <ul>
                     {
                         this.state.articles.map(article => {
@@ -50,6 +52,11 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
                 </ul>
             </div>
         );
+    }
+
+    resetScrollbar() {
+        console.log("PONEY")
+        this.mainDiv.scrollTop = 0;
     }
 }
 
