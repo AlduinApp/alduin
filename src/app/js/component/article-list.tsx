@@ -55,7 +55,6 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
     }
 
     resetScrollbar() {
-        console.log("PONEY")
         this.mainDiv.scrollTop = 0;
     }
 }
