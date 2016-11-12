@@ -4,6 +4,7 @@ import * as React from "react";
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../components-refs";
 import { AddFeedOpenModalButton } from "./button/add-feed-open-modal-button";
+import { ConfigOpenModalButton } from "./button/config-open-modal-button";
 import { PinSidebarButton } from "./button/pin-sidebar-button";
 import { FeedList } from "./feed-list";
 import { FetchButton } from "./button/fetch-button";
@@ -23,9 +24,7 @@ export class Sidebar extends CustomComponent<{}, {}> {
                 <ul className="rss settings">
                     <AddFeedOpenModalButton /><FetchButton /><li>
                         <i className="fa fa-trash" aria-hidden="true"></i>
-                    </li><li className="active">
-                        <i className="fa fa-cog" aria-hidden="true"></i>
-                    </li><PinSidebarButton />
+                    </li><ConfigOpenModalButton /><PinSidebarButton />
                 </ul>
             </div>
         );
