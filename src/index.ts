@@ -1,16 +1,23 @@
 import { app, BrowserWindow, webContents, shell } from "electron";
 
+import { ThemeManager } from "./theme-manager";
+
 let win;
 
 function createWindow() {
-    win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500 });
+    ThemeManager.loadThemes()
+        .then(ThemeManager.compileThemes)
+        .then(() => {
+            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500 });
 
-    win.loadURL(`${__dirname}/app/view/index.html`);
+            win.loadURL(`${__dirname}/app/view/index.html`);
 
-    win.on("closed", () => {
-        win = null;
-    });
-    webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
+            win.on("closed", () => {
+                win = null;
+            });
+            webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
+        })
+        .catch(err => console.error("Error while compiling themes.", err));
 
 }
 

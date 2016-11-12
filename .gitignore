@@ -5,3 +5,4 @@ node_modules/**
 src/app/view/*.css
 **/*.min.css
 store.json
+*.css

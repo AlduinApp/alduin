@@ -11,7 +11,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "npm run build && tslint --project tsconfig.json",
-    "build": "npm install && tsc && lessc src/app/style/main.less src/app/style/index.min.css --clean-css && webpack --display-error-details",
+    "build": "npm install && tsc && webpack --display-error-details",
     "start": "npm run build && electron ."
   },
   "keywords": [],
