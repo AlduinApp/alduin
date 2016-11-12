@@ -8,11 +8,13 @@ import { IArticle } from "./component/feed";
 export namespace FeedStorage {
 
     const defaultStoredContent: StoredContent = {
-        feeds: []
+        feeds: [],
+        theme: "default"
     };
 
     export let storedContent: StoredContent = {
-        feeds: []
+        feeds: [],
+        theme: "default"
     };
 
     export const storePath = path.join(electron.remote.app.getPath("userData"), "store.json");
@@ -38,6 +40,7 @@ export namespace FeedStorage {
 
 export interface StoredContent {
     feeds: StoredFeed[];
+    theme: string;
 }
 
 export interface StoredFeed {
