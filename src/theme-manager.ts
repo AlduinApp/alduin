@@ -17,13 +17,11 @@ export namespace ThemeManager {
             }).forEach(elemName => {
                 themesFilenames[themesFilenames.length] = elemName;
             });
-            console.log(`${themesFilenames.length} themes found`);
             resolve();
         });        
     }
 
     function compileTheme(filename: string) {
-        console.log(__dirname)
         return new Promise((resolve, reject) => {
             (less.render(fs.readFileSync(path.join(themeRoot, filename)).toString("utf-8"), {
                 plugins: [new lessPluginCleanCSS({ advanced: true })],
