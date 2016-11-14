@@ -79,7 +79,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         }
 
         newArticlesList.sort((articleA, articleB) => {
-            return articleA.date < articleB.date ? -1 : 1;
+            return articleA.date > articleB.date ? -1 : 1;
         });
 
         this.editState({ articles: newArticlesList });
