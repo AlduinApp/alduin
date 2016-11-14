@@ -5,9 +5,9 @@ import * as path from "path";
 
 const lessPluginCleanCSS = require("less-plugin-clean-css");
 
-export namespace ThemeManager {
+export namespace ThemeCompiler {
     const themeRoot: string = path.join(__dirname, "app", "style", "theme");
-    const compiledThemeRoot: string = path.join(__dirname, "app", "style", "compiled");;
+    const compiledThemeRoot: string = path.join(__dirname, "app", "style", "css");;
     const themesFilenames = [];
 
     export function loadThemes() {

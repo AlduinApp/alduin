@@ -1,12 +1,12 @@
 import { app, BrowserWindow, webContents, shell } from "electron";
 
-import { ThemeManager } from "./theme-manager";
+import { ThemeCompiler } from "./theme-compiler";
 
 let win;
 
 function createWindow() {
-    ThemeManager.loadThemes()
-        .then(ThemeManager.compileThemes)
+    ThemeCompiler.loadThemes()
+        .then(ThemeCompiler.compileThemes)
         .then(() => {
             win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500 });
 
