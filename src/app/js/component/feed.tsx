@@ -83,6 +83,8 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         });
 
         this.editState({ articles: newArticlesList });
+        
+        ComponentsRefs.articleList.updateArticles(newArticlesList);
     }
 
     getArticleByID(id: string) {
