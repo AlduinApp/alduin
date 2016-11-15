@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "Atom and RSS feed agregator",
   "repository": {
-    "repository": {
-      "type": "git",
-      "url": "git://github.com/Xstoudi/rss-feed.git"
-    }
+    "type": "git",
+    "url": "git://github.com/Xstoudi/rss-feed.git"
   },
   "main": "src/index.js",
   "scripts": {
