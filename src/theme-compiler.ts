@@ -7,7 +7,7 @@ const lessPluginCleanCSS = require("less-plugin-clean-css");
 
 export namespace ThemeCompiler {
     const themeRoot: string = path.join(__dirname, "app", "style", "theme");
-    const compiledThemeRoot: string = path.join(__dirname, "app", "style", "css");;
+    const compiledThemeRoot: string = path.join(__dirname, "app", "style", "css");
     const themesFilenames = [];
 
     export function loadThemes() {
@@ -18,7 +18,7 @@ export namespace ThemeCompiler {
                 themesFilenames[themesFilenames.length] = elemName;
             });
             resolve();
-        });        
+        });
     }
 
     function compileTheme(filename: string) {
