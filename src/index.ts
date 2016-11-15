@@ -9,7 +9,7 @@ function createWindow() {
         .then(ThemeCompiler.loadThemes)
         .then(ThemeCompiler.compileThemes)
         .then(() => {
-            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500 });
+            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/icon.png` });
 
             win.loadURL(`${__dirname}/app/view/index.html`);
 
