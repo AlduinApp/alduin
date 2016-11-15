@@ -1,5 +1,6 @@
 # Alduin-RSS
 [![Twitter](https://img.shields.io/twitter/follow/Xstoudi.svg?style=social&label=Follow%20@Xstoudi)](https://twitter.com/Xstoudi)
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Xstoudi/alduin-rss/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/Xstoudi/rss-feed.svg?style=flat-square)](https://github.com/Xstoudi/rss-feed/release) [![Travis](https://img.shields.io/travis/Xstoudi/alduin-rss.svg?style=flat-square)](https://travis-ci.org/Xstoudi/alduin-rss)
 
 ## Overview
