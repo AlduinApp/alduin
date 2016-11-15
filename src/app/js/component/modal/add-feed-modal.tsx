@@ -4,8 +4,8 @@ import * as crypto from "crypto";
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
-import { Http } from "./../../http";
-import { FeedParser } from "./../../feed-parser";
+import { Http } from "./../../util/http";
+import { FeedParser } from "./../../util/feed-parser";
 
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
