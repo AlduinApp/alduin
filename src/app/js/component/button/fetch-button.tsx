@@ -2,7 +2,6 @@ import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { ComponentsRefs } from "./../../components-refs";
-import { CustomComponent } from "./../../custom-component";
 import { Button } from "./button";
 
 export class FetchButton extends Button<{}, {}> {

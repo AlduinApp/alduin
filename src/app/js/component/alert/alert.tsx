@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { CustomComponent } from "./../../custom-component";
+import { CustomComponent } from "./../custom-component";
 import { AlertType } from "./alert-list";
 
 export class Alert extends CustomComponent<AlertProps, {}> {

@@ -2,7 +2,7 @@ import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { ComponentsRefs } from "./../../components-refs";
-import { CustomComponent } from "./../../custom-component";
+import { CustomComponent } from "./../custom-component";
 import { Http } from "./../../http";
 import { FeedParser } from "./../../feed-parser";
 import { FeedStorage, StoredFeed } from "./../../storage";

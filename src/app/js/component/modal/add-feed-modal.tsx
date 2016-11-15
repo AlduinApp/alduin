@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as crypto from "crypto";
 
-import { CustomComponent } from "./../../custom-component";
+import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
 import { Http } from "./../../http";

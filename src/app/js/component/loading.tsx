@@ -1,7 +1,7 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 
-import { CustomComponent } from "./../custom-component";
+import { CustomComponent } from "./custom-component";
 import { ComponentsRefs } from "./../components-refs";
 
 export class Loading extends CustomComponent<{}, LoadingState> {

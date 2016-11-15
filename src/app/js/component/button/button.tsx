@@ -1,4 +1,4 @@
-import {CustomComponent} from "./../../custom-component";
+import {CustomComponent} from "./../custom-component";
 
 import * as React from "react";
 

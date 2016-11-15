@@ -2,7 +2,7 @@ import * as React from "react";
 import * as fs from "fs";
 import * as path from "path";
 
-import { CustomComponent } from "./../../custom-component";
+import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
 import { Theme } from "./../theme";

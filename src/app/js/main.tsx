@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { ConfigModal } from "./component/modal/config-modal";
-import { CustomComponent } from "./custom-component";
+import { CustomComponent } from "./component/custom-component";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";
 import { Sidebar } from "./component/sidebar";

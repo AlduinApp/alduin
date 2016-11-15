@@ -1,7 +1,7 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 
-import { CustomComponent } from "./../custom-component";
+import { CustomComponent } from "./custom-component";
 import { ComponentsRefs } from "./../components-refs";
 import { AddFeedOpenModalButton } from "./button/add-feed-open-modal-button";
 import { ConfigOpenModalButton } from "./button/config-open-modal-button";
