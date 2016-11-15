@@ -33,7 +33,12 @@ export class App extends CustomComponent<{}, {}>{
                 <Sidebar />
                 <ArticleList /><Content />
                 <AlertList />
-                <footer></footer>
+                <footer>
+                    <a href="#">About</a>
+                    <a href="https://github.com/Xstoudi/rss-feed">Fork me !</a>
+                    <a href="https://paypal.com">Donate</a>
+                    <a href="https://github.com/Xstoudi/rss-feed/issues">Issue</a>
+                </footer>
                 <Loading />
                 <AddFeedModal />
                 <ConfigModal />
