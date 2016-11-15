@@ -48,7 +48,6 @@ export namespace FeedParser {
     }
 
     function fixSrcset(content: string) {
-        const replaced = content.replace(/([^:])(\/\/[\S]*)/g, "$1http:$2");
-        return replaced;
+        return content.replace(/([^:])(\/\/[\S]*)/g, "$1http:$2");
     }
 }

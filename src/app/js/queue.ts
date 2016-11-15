@@ -26,9 +26,7 @@ export class Queue<T> {
      * Iterate over the array from head to end
      */
     forEach(callback: (value: T) => void) {
-        for (let i = this.list.length - 1; i >= 0; i--) {
-            callback(this.list[i]);
-        }
+        for (let i = this.list.length - 1; i >= 0; i--) callback(this.list[i]);
     }
 
     /**

@@ -12,9 +12,7 @@ export namespace ThemeCompiler {
 
     export function loadThemes() {
         return new Promise((resolve, reject) => {
-            console.log("THEME ROOT : ", themeRoot);
             fs.readdirSync(themeRoot).filter(elemName => {
-                console.log("WARN DIR : ", path.join(themeRoot, elemName));
                 return !fs.lstatSync(path.join(themeRoot, elemName)).isDirectory();
             }).forEach(elemName => {
                 themesFilenames[themesFilenames.length] = elemName;
@@ -25,16 +23,16 @@ export namespace ThemeCompiler {
 
     function compileTheme(filename: string) {
         return new Promise((resolve, reject) => {
-            console.log("READ TO COMPILE : ", path.join(themeRoot, filename));
-            console.log("LESS ROOT : ", path.join(__dirname, "app", "style"));
             (less.render(fs.readFileSync(path.join(themeRoot, filename)).toString("utf-8"), {
                 plugins: [new lessPluginCleanCSS({ advanced: true })],
-                paths:  [path.join(__dirname, "app", "style")]
+                paths: [path.join(__dirname, "app", "style")]
             } as any) as any).then(output => {
-                console.log("WRITE LESS : ", path.join(compiledThemeRoot, filename.replace("less", "css")));
-                fs.writeFile(path.join(compiledThemeRoot, filename.replace("less", "css")), output.css, err => {
-                    if (err) return reject(err);
-                    resolve();
+                fs.mkdir(compiledThemeRoot, err => {
+                    if (err && err.code !== "EEXIST") return reject(`Erreur lors de la création du dossier "css"`);
+                    fs.writeFile(path.join(compiledThemeRoot, filename.replace("less", "css")), output.css, err => {
+                        if (err) return reject("Can't write compiled theme...");
+                        resolve();
+                    });
                 });
             }).catch(reject);
         });
@@ -45,6 +43,14 @@ export namespace ThemeCompiler {
             Promise.all(themesFilenames.map(filename => compileTheme(filename)))
                 .then(resolve)
                 .catch(reject);
+        });
+    }
+    export function existsDefaultTheme() {
+        return new Promise((resolve, reject) => {
+            fs.stat(path.join(themeRoot, "default.theme.less"), err => {
+                if (err) return reject("Missing default theme !");
+                resolve();
+            });
         });
     }
 }

@@ -5,7 +5,8 @@ import { ThemeCompiler } from "./theme-compiler";
 let win;
 
 function createWindow() {
-    ThemeCompiler.loadThemes()
+    ThemeCompiler.existsDefaultTheme()
+        .then(ThemeCompiler.loadThemes)
         .then(ThemeCompiler.compileThemes)
         .then(() => {
             win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500 });
@@ -17,22 +18,21 @@ function createWindow() {
             });
             webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
         })
-        .catch(err => console.error("Error while compiling themes.", err));
+        .catch(err => {
+            console.error("Error while compiling themes.", err);
+            process.exit(1);
+        });
 
 }
 
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
+    process.platform !== "darwin" && app.quit(); // Code like if you were in Satan's church
 });
 
 app.on("activate", () => {
-    if (win === null) {
-        createWindow();
-    }
+    win === null && createWindow(); // Code like if you were in Satan's church
 });
 
 function handleRedirect(e, url) {
