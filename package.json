@@ -1,10 +1,10 @@
 {
-  "name": "rss-feed",
+  "name": "alduin-rss",
   "version": "1.0.0",
   "description": "Atom and RSS feed agregator",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Xstoudi/rss-feed.git"
+    "url": "git://github.com/Xstoudi/alduin-rss.git"
   },
   "main": "src/index.js",
   "scripts": {

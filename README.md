@@ -1,18 +1,18 @@
-# RSS Feed
+# Alduin-RSS
 [![Twitter](https://img.shields.io/twitter/follow/Xstoudi.svg?style=social&label=Follow%20@Xstoudi)](https://twitter.com/Xstoudi)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Xstoudi/rss-feed/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/Xstoudi/rss-feed.svg?style=flat-square)](https://github.com/Xstoudi/rss-feed/release)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Xstoudi/alduin-rss/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/Xstoudi/rss-feed.svg?style=flat-square)](https://github.com/Xstoudi/rss-feed/release)
 
 ## Overview
-RSS-Feed is an RSS and Atom feed agregator available on Windows, Mac and Linux.
-Open source and free, RSS-Feed has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
+Alduin-RSS is an RSS and Atom feed agregator available on Windows, Mac and Linux.
+Open source and free, Alduin-RSS has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
 A theme system is already created so you can create your own.
 
 ## Current state
-RSS-Feed is currently not stable and is still evolving day by day, but you can already use it to follow your feeds !
+Alduin-RSS is currently not stable and is still evolving day by day, but you can already use it to follow your feeds !
 Made with :heart: by [Xavier Stouder](https://github.com/Xstoudi) and [Luca Laissue](https://github.com/lucalaissue).
 
 ## Technical specifications
-RSS-Feed is built on powefull and modern technologies like:
+Alduin-RSS is built on powefull and modern technologies like:
 * [Electron](http://electron.atom.io/)
 * [React](https://facebook.github.io/react/)
 * [TypeScript](https://www.typescriptlang.org/)
