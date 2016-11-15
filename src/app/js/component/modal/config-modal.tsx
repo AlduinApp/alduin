@@ -4,6 +4,8 @@ import * as path from "path";
 
 import { CustomComponent } from "./../../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
+import { FeedStorage } from "./../../storage";
+import { Theme } from "./../theme";
 
 export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
 
@@ -12,7 +14,7 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
 
         this.state = {
             open: false,
-            actualTheme: "default.theme.css"
+            themeInput: ComponentsRefs.theme.state.actualTheme
         };
 
         this.handleHide = this.handleHide.bind(this);
@@ -29,10 +31,10 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
                     <h3>Configuration</h3>
                     <div className="scroll view">
                         <div className="input group">
-                            <label>Theme</label><select value={this.state.actualTheme} onChange={this.handleChange}>
+                            <label>Theme</label><select value={this.state.themeInput} onChange={this.handleChange}>
                                 {
                                     fs.readdirSync(path.join("src", "app", "style", "css")).map(filename => {
-                                        return <option value={filename} key={filename}>{filename}</option>
+                                        return <option value={filename} key={filename}>{filename}</option>;
                                     })
                                 }
                             </select>
@@ -47,8 +49,8 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
         this.hide();
     }
     handleChange(event: React.KeyboardEvent<HTMLSelectElement>) {
-        this.editState({ actualTheme: event.currentTarget.value });
-        (document.querySelector("#theme-css") as HTMLLinkElement).href = `../style/css/${event.currentTarget.value}`;
+        ComponentsRefs.theme.switchTheme(event.currentTarget.value);
+        this.editState({ themeInput: event.currentTarget.value }, () => FeedStorage.store());
     }
 
     display() {
@@ -61,5 +63,5 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
 
 interface ConfigModalState {
     open: boolean;
-    actualTheme: string;
+    themeInput: string;
 }

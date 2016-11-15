@@ -10,6 +10,7 @@ import { AlertList } from "./component/alert-list";
 import { ArticleList } from "./component/article-list";
 import { Loading } from "./component/loading";
 import { Content } from "./component/content";
+import { Theme } from "./component/theme";
 
 export namespace ComponentsRefs {
     export let main: App;
@@ -23,4 +24,5 @@ export namespace ComponentsRefs {
     export let loading: Loading;
     export let content: Content;
     export let configModal: ConfigModal;
+    export let theme: Theme;
 }

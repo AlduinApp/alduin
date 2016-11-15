@@ -11,6 +11,7 @@ import { AlertList } from "./component/alert-list";
 import { ArticleList } from "./component/article-list";
 import { Loading } from "./component/loading";
 import { Content } from "./component/content";
+import { Theme } from "./component/theme";
 
 import { ComponentsRefs } from "./components-refs";
 import { FeedStorage } from "./storage";
@@ -21,11 +22,14 @@ export class App extends CustomComponent<{}, {}>{
         super();
 
         FeedStorage.storedContent = FeedStorage.load();
+
+        ComponentsRefs.main = this;
     }
 
     render() {
         return (
             <div>
+                <Theme />
                 <Sidebar />
                 <ArticleList /><Content />
                 <AlertList />

@@ -9,12 +9,12 @@ export namespace FeedStorage {
 
     const defaultStoredContent: StoredContent = {
         feeds: [],
-        theme: "default"
+        theme: "default.theme.css"
     };
 
     export let storedContent: StoredContent = {
         feeds: [],
-        theme: "default"
+        theme: "default.theme.css"
     };
 
     export const storePath = path.join(electron.remote.app.getPath("userData"), "store.json");
@@ -22,7 +22,8 @@ export namespace FeedStorage {
     export function store() {
         return new Promise((resolve, reject) => {
             const newStoredContent = {
-                feeds: ComponentsRefs.feedList.getStoreValue()
+                feeds: ComponentsRefs.feedList.getStoreValue(),
+                theme: ComponentsRefs.theme.state.actualTheme
             };
             fs.writeFile(storePath, JSON.stringify(newStoredContent, null, 4), err => {
                 err ? reject("Failed to save feeds") : resolve();
