@@ -1,7 +1,7 @@
 {
   "name": "rss-feed",
   "version": "1.0.0",
-  "description": "the best rss app you can have",
+  "description": "Atom and RSS feed agregator",
   "repository": {
     "repository": {
       "type": "git",
