@@ -1,10 +1,10 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 
-import { CustomComponent } from "./../custom-component";
-import { ComponentsRefs } from "./../components-refs";
+import { CustomComponent } from "./../../custom-component";
+import { ComponentsRefs } from "./../../components-refs";
 import { Feed, FeedProp } from "./feed";
-import { FeedStorage, StoredFeed } from "./../storage";
+import { FeedStorage, StoredFeed } from "./../../storage";
 
 export class FeedList extends CustomComponent<{}, FeedListState> {
 

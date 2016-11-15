@@ -1,4 +1,4 @@
-import { IArticle } from "./component/feed";
+import { IArticle } from "./component/feed/feed";
 
 import * as fs from "fs";
 // import * as xmldoc from "xmldoc";

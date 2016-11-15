@@ -3,7 +3,7 @@ import * as path from "path";
 import * as electron from "electron";
 
 import { ComponentsRefs } from "./components-refs";
-import { IArticle } from "./component/feed";
+import { IArticle } from "./component/feed/feed";
 
 export namespace FeedStorage {
 

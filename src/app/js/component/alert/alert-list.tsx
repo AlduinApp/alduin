@@ -3,10 +3,10 @@ import * as React from "react";
 
 import * as crypto from "crypto";
 
-import { CustomComponent } from "./../custom-component";
-import { ComponentsRefs } from "./../components-refs";
-import { Feed, FeedProp } from "./feed";
-import { Queue } from "./../queue";
+import { CustomComponent } from "./../../custom-component";
+import { ComponentsRefs } from "./../../components-refs";
+import { Feed, FeedProp } from "./../feed/feed";
+import { Queue } from "./../../queue";
 import { Alert, AlertProps } from "./alert";
 
 export class AlertList extends CustomComponent<{}, FeedListState> {
