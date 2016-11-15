@@ -6,6 +6,7 @@ import { ConfigModal } from "./component/modal/config-modal";
 import { CustomComponent } from "./component/custom-component";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";
+import { SwitchButton} from "./component/button/switch-button";
 import { Sidebar } from "./component/sidebar";
 import { AlertList } from "./component/alert/alert-list";
 import { ArticleList } from "./component/article/article-list";
@@ -42,6 +43,7 @@ export class App extends CustomComponent<{}, {}>{
                 <Loading />
                 <AddFeedModal />
                 <ConfigModal />
+                <SwitchButton />
             </div>
         );
     }
