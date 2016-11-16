@@ -72,10 +72,13 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                 fetchToExecute[fetchToExecute.length] = feedComponent.fetch().catch(e => { nbErrors++; return e; });
             });
             Promise.all(fetchToExecute)
-                .then(() =>  resolve({
-                    success: fetchToExecute.length - nbErrors, 
-                    fail: nbErrors
-                }))
+                .then(() =>  {
+                    FeedStorage.store();
+                    resolve({
+                        success: fetchToExecute.length - nbErrors, 
+                        fail: nbErrors
+                    });
+                })
                 .catch(err => console.log(err));
         });
     }
