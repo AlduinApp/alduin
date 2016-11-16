@@ -64,7 +64,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     }
 
     fetchAll() {
-        return new Promise((resolve, reject) => {
+        return new Promise<FetchResult>((resolve, reject) => {
             const fetchToExecute = [];
             let nbErrors = 0;
 
@@ -72,12 +72,10 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                 fetchToExecute[fetchToExecute.length] = feedComponent.fetch().catch(e => { nbErrors++; return e; });
             });
             Promise.all(fetchToExecute)
-                .then(() => {
-                    let nbSuccess = fetchToExecute.length - nbErrors;
-                    if (nbSuccess) ComponentsRefs.alertList.alert(`Successfully fetch ${nbSuccess} feed${nbSuccess > 1 ? "s" : ""}`, "success");
-                    if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feed${nbSuccess > 1 ? "s" : ""}`, "error");
-                    resolve();
-                })
+                .then(() =>  resolve({
+                    success: fetchToExecute.length - nbErrors, 
+                    fail: nbErrors
+                }))
                 .catch(err => console.log(err));
         });
     }
@@ -93,4 +91,9 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
 
 interface FeedListState {
     feeds: FeedProp[];
+}
+
+interface FetchResult {
+    success: number;
+    fail: number;
 }
