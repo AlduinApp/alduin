@@ -16,7 +16,7 @@ export class AddFeedOpenModalButton extends Button<{}, {}> {
     render() {
         return (
             <li id="add-feed-button" onClick={this.onClick}>
-                <i className="fa fa-plus" aria-hidden="true"></i>
+                <i className="fa fa-plus"></i>
             </li>
         );
     }

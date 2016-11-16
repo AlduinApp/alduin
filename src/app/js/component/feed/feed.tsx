@@ -39,7 +39,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
         return (
             <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
-                <i className="fa fa-rss" aria-hidden="true"></i>
+                <i className="fa fa-rss"></i>
                 <span className="title">{this.props.title}</span>
                 <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
             </li>

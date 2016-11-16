@@ -14,7 +14,7 @@ export class ConfigOpenModalButton extends Button<{}, {}> {
     render() {
         return (
             <li id="configuration-button" className="active" onClick={this.onClick}>
-                <i className="fa fa-cog" aria-hidden="true"></i>
+                <i className="fa fa-cog"></i>
             </li>
         );
     }

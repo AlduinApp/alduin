@@ -19,7 +19,7 @@ export class FetchButton extends Button<{}, {}> {
     render() {
         return (
             <li>
-                <i onClick={this.onClick} className="fa fa-download" aria-hidden="true"></i>
+                <i onClick={this.onClick} className="fa fa-download"></i>
             </li>
         );
     }

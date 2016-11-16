@@ -35,10 +35,18 @@ export class App extends CustomComponent<{}, {}>{
                 <ArticleList /><Content />
                 <AlertList />
                 <footer>
-                    <a href="#">About</a>
-                    <a href="https://github.com/Xstoudi/rss-feed">Fork me !</a>
-                    <a href="https://paypal.com">Donate</a>
-                    <a href="https://github.com/Xstoudi/rss-feed/issues">Issue</a>
+                    <a href="#" title="Help">
+                        <i className="fa fa-question-circle"></i>
+                    </a>
+                    <a href="https://github.com/Xstoudi/rss-feed" title="Fork me !">
+                        <i className="fa fa-github"></i>
+                    </a>
+                    <a href="https://paypal.com" title="Donate">
+                        <i className="fa fa-credit-card"></i>
+                    </a>
+                    <a href="https://github.com/Xstoudi/rss-feed/issues"title="Issues">
+                        <i className="fa fa-exclamation-triangle"></i>
+                    </a>
                 </footer>
                 <Loading />
                 <AddFeedModal />

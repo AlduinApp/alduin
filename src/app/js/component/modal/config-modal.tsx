@@ -27,7 +27,7 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
         return (
             <div id="add-feed-modal" className="modal" style={{ display: this.state.open ? "" : "none" }}>
                 <div className="content">
-                    <i className="fa fa-times close-modal-button" aria-hidden="true" onClick={this.handleHide}></i>
+                    <i className="fa fa-times close-modal-button" onClick={this.handleHide}></i>
                     <h3>Configuration</h3>
                     <div className="scroll view">
                         <div className="input group">
