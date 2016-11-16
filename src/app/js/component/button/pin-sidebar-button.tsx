@@ -16,7 +16,7 @@ export class PinSidebarButton extends Button<{}, {}> {
     render() {
         return (
             <li id="pin-button" onClick={this.onClick}>
-                <i className="fa fa-thumb-tack" aria-hidden="true"></i>
+                <i className="fa fa-thumb-tack"></i>
             </li>
         );
     }

@@ -16,7 +16,7 @@ export class SwitchButton extends Button<{}, {}> {
     render() {
         return (
             <div className="switch button" onClick={this.onClick}>
-                <i className="fa fa-arrow-left" aria-hidden="true"></i>
+                <i className="fa fa-arrow-left"></i>
             </div>
         );
     }
