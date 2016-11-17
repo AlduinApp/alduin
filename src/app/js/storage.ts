@@ -46,7 +46,7 @@ export namespace FeedStorage {
 export interface StoredContent {
     feeds: StoredFeed[];
     theme: string;
-    automaticFetchInterval: number
+    automaticFetchInterval: number;
 }
 
 export interface StoredFeed {
