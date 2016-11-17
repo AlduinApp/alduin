@@ -9,12 +9,14 @@ export namespace FeedStorage {
 
     const defaultStoredContent: StoredContent = {
         feeds: [],
-        theme: "default.theme.css"
+        theme: "default.theme.css",
+        automaticFetchInterval: 5
     };
 
     export let storedContent: StoredContent = {
         feeds: [],
-        theme: "default.theme.css"
+        theme: "default.theme.css",
+        automaticFetchInterval: 5
     };
 
     export const storePath = path.join(electron.remote.app.getPath("userData"), "store.json");
@@ -23,11 +25,13 @@ export namespace FeedStorage {
         return new Promise((resolve, reject) => {
             const newStoredContent = {
                 feeds: ComponentsRefs.feedList.getStoreValue(),
-                theme: ComponentsRefs.theme.state.actualTheme
+                theme: ComponentsRefs.theme.state.actualTheme,
+                automaticFetchInterval: ComponentsRefs.feedList.state.automaticFetchInterval
             };
             fs.writeFile(storePath, JSON.stringify(newStoredContent, null, 4), err => {
                 err ? reject("Failed to save feeds") : resolve();
             });
+            this.storedContent = newStoredContent;
         });
     }
 
@@ -42,6 +46,7 @@ export namespace FeedStorage {
 export interface StoredContent {
     feeds: StoredFeed[];
     theme: string;
+    automaticFetchInterval: number
 }
 
 export interface StoredFeed {

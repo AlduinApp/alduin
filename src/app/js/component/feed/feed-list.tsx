@@ -25,7 +25,8 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                     link: storedFeed.link,
                     articles: storedFeed.articles
                 };
-            })
+            }),
+            automaticFetchInterval: FeedStorage.storedContent.automaticFetchInterval
         };
 
         ComponentsRefs.feedList = this;
@@ -101,7 +102,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                         body: `Got ${results.newArticlesNb} new articles!`,
                         icon: path.join("..", "img", "icon.png")
                     });
-                setTimeout(() => this.autoFetch(), 10 * 1000);
+                setTimeout(() => this.autoFetch(), this.state.automaticFetchInterval * 60000);
             });
     }
 
@@ -112,10 +113,15 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         });
         return storeValue;
     }
+
+    changeAutomaticFetchInterval(minutes: number) {
+        this.editState({ automaticFetchInterval: minutes }, () => FeedStorage.store());
+    }
 }
 
 interface FeedListState {
     feeds: FeedProp[];
+    automaticFetchInterval: number;
 }
 
 interface FetchResult {
