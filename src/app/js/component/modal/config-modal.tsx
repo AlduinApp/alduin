@@ -58,8 +58,8 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
         this.editState({ themeInput: event.currentTarget.value }, () => FeedStorage.store());
     }
     handleChangeAFI(event: React.FormEvent<HTMLInputElement>) {
-        ComponentsRefs.feedList.changeAutomaticFetchInterval(parseInt(event.currentTarget.value));
-        this.editState({ automaticFetchInterval: parseInt(event.currentTarget.value) });
+        ComponentsRefs.feedList.changeAutomaticFetchInterval(parseInt(event.currentTarget.value, 10));
+        this.editState({ automaticFetchInterval: parseInt(event.currentTarget.value, 10) });
     }
 
     display() {
