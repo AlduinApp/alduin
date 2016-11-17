@@ -5,7 +5,7 @@
 
 ## Overview
 Alduin is an RSS and Atom feed agregator available on Windows, Mac and Linux.
-Open source and free, Alduin-RSS has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
+Open source and free, Alduin has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
 A theme system is already created so you can create your own.
 
 ## Current state
