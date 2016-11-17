@@ -64,7 +64,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     }
 
     fetchAll() {
-        return new Promise<FetchResult>((resolve, reject) => {
+        return new Promise<FetchResult>(resolve => {
             const fetchToExecute = [];
             let nbErrors = 0;
 
