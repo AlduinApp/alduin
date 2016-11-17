@@ -75,7 +75,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
 
             this.feedComponents.forEach(feedComponent => {
                 fetchToExecute[fetchToExecute.length] = feedComponent.fetch()
-                    .then(nb => newArticlesNb += nb)
+                    .then(nb => { newArticlesNb += nb })
                     .catch(e => { nbErrors++; return e; });
             });
             Promise.all(fetchToExecute)
@@ -91,10 +91,10 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         });
     }
 
-    autoFetch(){
+    autoFetch() {
         ComponentsRefs.feedList.fetchAll()
             .then((results) => {
-                if(results.newArticlesNb)
+                if (results.newArticlesNb)
                     new Notification("Automatic fetch!", {
                         body: `Got ${results.newArticlesNb} new articles!`,
                         icon: path.join("..", "img", "icon.png")
