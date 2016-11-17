@@ -7,6 +7,8 @@ import { ComponentsRefs } from "./../../components-refs";
 import { Feed, FeedProp } from "./feed";
 import { FeedStorage, StoredFeed } from "./../../storage";
 
+declare var Notification: any;
+
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
     feedComponents: Feed[] = [];
@@ -75,7 +77,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
 
             this.feedComponents.forEach(feedComponent => {
                 fetchToExecute[fetchToExecute.length] = feedComponent.fetch()
-                    .then(nb => { newArticlesNb += nb })
+                    .then(nb => { newArticlesNb += nb; })
                     .catch(e => { nbErrors++; return e; });
             });
             Promise.all(fetchToExecute)
@@ -121,5 +123,3 @@ interface FetchResult {
     fail: number;
     newArticlesNb: number;
 }
-
-declare var Notification: any;
