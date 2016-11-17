@@ -1,5 +1,8 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
+import * as electron from "electron";
+import * as fs from "fs";
+import * as path from "path";
 
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { ConfigModal } from "./component/modal/config-modal";
@@ -19,12 +22,16 @@ import { FeedStorage } from "./storage";
 
 export class App extends CustomComponent<{}, {}>{
 
+    tray: Electron.Tray;
+
     constructor() {
         super();
 
         FeedStorage.storedContent = FeedStorage.load();
 
         ComponentsRefs.main = this;
+
+        this.tray = new electron.remote.Tray(path.join("src", "app", "img", "icon.png"));
     }
 
     render() {
