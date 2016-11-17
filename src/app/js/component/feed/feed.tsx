@@ -23,10 +23,9 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     fetch() {
-        return new Promise((resolve, reject) => {
+        return new Promise<number>((resolve, reject) => {
             Http.get(this.props.link).then(xmlContent => {
-                this.mergeArticles(FeedParser.parse(xmlContent));
-                resolve();
+                resolve(this.mergeArticles(FeedParser.parse(xmlContent)));
             }).catch(reject);
         });
     }
@@ -69,12 +68,14 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     mergeArticles(newArticles: IArticle[]) {
+        let newArticleNb = 0;
         const newArticlesList = this.state.articles.slice(0);
         for (let i = 0; i < newArticles.length; i++) {
             if (this.getArticleByID(newArticles[i].id)) continue;
 
             newArticles[i].read = false;
             newArticlesList[newArticlesList.length] = newArticles[i];
+            newArticleNb++;
         }
 
         newArticlesList.sort((articleA, articleB) => {
@@ -84,6 +85,8 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         this.editState({ articles: newArticlesList });
 
         ComponentsRefs.feedList.selectedFeed === this && ComponentsRefs.articleList.updateArticles(newArticlesList); // Code like if you were in Satan's church
+
+        return newArticleNb;
     }
 
     getArticleByID(id: string) {

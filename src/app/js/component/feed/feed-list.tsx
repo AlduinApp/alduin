@@ -1,5 +1,6 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
+import * as path from "path";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
@@ -8,7 +9,7 @@ import { FeedStorage, StoredFeed } from "./../../storage";
 
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
-    feedComponents: Feed[];
+    feedComponents: Feed[] = [];
     selectedFeed: Feed;
 
     constructor() {
@@ -26,6 +27,8 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         };
 
         ComponentsRefs.feedList = this;
+
+        this.autoFetch();
     }
 
     render() {
@@ -68,19 +71,36 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
             const fetchToExecute = [];
             let nbErrors = 0;
 
+            let newArticlesNb = 0;
+
             this.feedComponents.forEach(feedComponent => {
-                fetchToExecute[fetchToExecute.length] = feedComponent.fetch().catch(e => { nbErrors++; return e; });
+                fetchToExecute[fetchToExecute.length] = feedComponent.fetch()
+                    .then(nb => newArticlesNb += nb)
+                    .catch(e => { nbErrors++; return e; });
             });
             Promise.all(fetchToExecute)
                 .then(() => {
                     FeedStorage.store();
                     resolve({
                         success: fetchToExecute.length - nbErrors,
-                        fail: nbErrors
+                        fail: nbErrors,
+                        newArticlesNb: newArticlesNb
                     });
                 })
                 .catch(err => console.log(err));
         });
+    }
+
+    autoFetch(){
+        ComponentsRefs.feedList.fetchAll()
+            .then((results) => {
+                if(results.newArticlesNb)
+                    new Notification("Automatic fetch!", {
+                        body: `Got ${results.newArticlesNb} new articles!`,
+                        icon: path.join("..", "img", "icon.png")
+                    });
+                setTimeout(() => this.autoFetch(), 10 * 1000);
+            });
     }
 
     getStoreValue(): StoredFeed[] {
@@ -99,4 +119,7 @@ interface FeedListState {
 interface FetchResult {
     success: number;
     fail: number;
+    newArticlesNb: number;
 }
+
+declare var Notification: any;
