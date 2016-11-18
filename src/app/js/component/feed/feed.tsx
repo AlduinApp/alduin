@@ -23,11 +23,9 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     fetch() {
-        return new Promise((resolve, reject) => {
+        return new Promise<number>((resolve, reject) => {
             Http.get(this.props.link).then(xmlContent => {
-                this.mergeArticles(FeedParser.parse(xmlContent));
-                FeedStorage.store();
-                resolve();
+                resolve(this.mergeArticles(FeedParser.parse(xmlContent)));
             }).catch(reject);
         });
     }
@@ -39,7 +37,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
         return (
             <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
-                <i className="fa fa-rss" aria-hidden="true"></i>
+                <i className="fa fa-rss"></i>
                 <span className="title">{this.props.title}</span>
                 <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
             </li>
@@ -70,12 +68,14 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
     }
 
     mergeArticles(newArticles: IArticle[]) {
+        let newArticleNb = 0;
         const newArticlesList = this.state.articles.slice(0);
         for (let i = 0; i < newArticles.length; i++) {
             if (this.getArticleByID(newArticles[i].id)) continue;
 
             newArticles[i].read = false;
             newArticlesList[newArticlesList.length] = newArticles[i];
+            newArticleNb++;
         }
 
         newArticlesList.sort((articleA, articleB) => {
@@ -84,7 +84,9 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
 
         this.editState({ articles: newArticlesList });
 
-        ComponentsRefs.articleList.updateArticles(newArticlesList);
+        ComponentsRefs.feedList.selectedFeed === this && ComponentsRefs.articleList.updateArticles(newArticlesList); // Code like if you were in Satan's church
+
+        return newArticleNb;
     }
 
     getArticleByID(id: string) {

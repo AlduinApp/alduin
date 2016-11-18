@@ -3,24 +3,24 @@ import * as React from "react";
 import { ComponentsRefs } from "./../../components-refs";
 import { Button } from "./button";
 
-export class AddFeedOpenModalButton extends Button<{}, {}> {
+export class SwitchButton extends Button<{}, {}> {
 
     constructor() {
         super();
 
         this.onClick = this.onClick.bind(this);
 
-        ComponentsRefs.addFeedOpenModalButton = this;
+        ComponentsRefs.switchButton = this;
     }
 
     render() {
         return (
-            <li id="add-feed-button" onClick={this.onClick}>
-                <i className="fa fa-plus"></i>
-            </li>
+            <div className="switch button" onClick={this.onClick}>
+                <i className="fa fa-arrow-left"></i>
+            </div>
         );
     }
     onClick(event: React.MouseEvent<HTMLElement>) {
-        ComponentsRefs.addFeedModal.display();
+        document.querySelector("body").classList.remove("show-article");
     }
 }

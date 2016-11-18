@@ -1,14 +1,17 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
+import * as path from "path";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { Feed, FeedProp } from "./feed";
 import { FeedStorage, StoredFeed } from "./../../storage";
 
+declare var Notification: any;
+
 export class FeedList extends CustomComponent<{}, FeedListState> {
 
-    feedComponents: Feed[];
+    feedComponents: Feed[] = [];
     selectedFeed: Feed;
 
     constructor() {
@@ -22,10 +25,13 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                     link: storedFeed.link,
                     articles: storedFeed.articles
                 };
-            })
+            }),
+            automaticFetchInterval: FeedStorage.storedContent.automaticFetchInterval
         };
 
         ComponentsRefs.feedList = this;
+
+        this.autoFetch();
     }
 
     render() {
@@ -64,22 +70,40 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     }
 
     fetchAll() {
-        return new Promise((resolve, reject) => {
+        return new Promise<FetchResult>(resolve => {
             const fetchToExecute = [];
             let nbErrors = 0;
 
+            let newArticlesNb = 0;
+
             this.feedComponents.forEach(feedComponent => {
-                fetchToExecute[fetchToExecute.length] = feedComponent.fetch().catch(e => { nbErrors++; return e; });
+                fetchToExecute[fetchToExecute.length] = feedComponent.fetch()
+                    .then(nb => { newArticlesNb += nb; })
+                    .catch(e => { nbErrors++; return e; });
             });
             Promise.all(fetchToExecute)
                 .then(() => {
-                    let nbSuccess = fetchToExecute.length - nbErrors;
-                    if (nbSuccess) ComponentsRefs.alertList.alert(`Successfully fetch ${nbSuccess} feed${nbSuccess > 1 ? "s" : ""}`, "success");
-                    if (nbErrors) ComponentsRefs.alertList.alert(`Fail to fetch ${nbErrors} feed${nbSuccess > 1 ? "s" : ""}`, "error");
-                    resolve();
+                    FeedStorage.store();
+                    resolve({
+                        success: fetchToExecute.length - nbErrors,
+                        fail: nbErrors,
+                        newArticlesNb: newArticlesNb
+                    });
                 })
                 .catch(err => console.log(err));
         });
+    }
+
+    autoFetch() {
+        ComponentsRefs.feedList.fetchAll()
+            .then((results) => {
+                if (results.newArticlesNb)
+                    new Notification("Automatic fetch!", {
+                        body: `Got ${results.newArticlesNb} new articles!`,
+                        icon: path.join("..", "img", "icon.png")
+                    });
+                setTimeout(() => this.autoFetch(), this.state.automaticFetchInterval * 60000);
+            });
     }
 
     getStoreValue(): StoredFeed[] {
@@ -89,8 +113,19 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         });
         return storeValue;
     }
+
+    changeAutomaticFetchInterval(minutes: number) {
+        this.editState({ automaticFetchInterval: minutes }, () => FeedStorage.store());
+    }
 }
 
 interface FeedListState {
     feeds: FeedProp[];
+    automaticFetchInterval: number;
+}
+
+interface FetchResult {
+    success: number;
+    fail: number;
+    newArticlesNb: number;
 }

@@ -1,11 +1,15 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
+import * as electron from "electron";
+import * as fs from "fs";
+import * as path from "path";
 
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { ConfigModal } from "./component/modal/config-modal";
 import { CustomComponent } from "./component/custom-component";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";
+import { SwitchButton} from "./component/button/switch-button";
 import { Sidebar } from "./component/sidebar";
 import { AlertList } from "./component/alert/alert-list";
 import { ArticleList } from "./component/article/article-list";
@@ -18,12 +22,16 @@ import { FeedStorage } from "./storage";
 
 export class App extends CustomComponent<{}, {}>{
 
+    tray: Electron.Tray;
+
     constructor() {
         super();
 
         FeedStorage.storedContent = FeedStorage.load();
 
         ComponentsRefs.main = this;
+
+        this.tray = new electron.remote.Tray(path.join("src", "app", "img", "icon.png"));
     }
 
     render() {
@@ -34,14 +42,23 @@ export class App extends CustomComponent<{}, {}>{
                 <ArticleList /><Content />
                 <AlertList />
                 <footer>
-                    <a href="#">About</a>
-                    <a href="https://github.com/Xstoudi/rss-feed">Fork me !</a>
-                    <a href="https://paypal.com">Donate</a>
-                    <a href="https://github.com/Xstoudi/rss-feed/issues">Issue</a>
+                    <a href="#">
+                        <i className="fa fa-question-circle"></i> About
+                    </a>
+                    <a href="https://github.com/Xstoudi/rss-feed">
+                        <i className="fa fa-github"></i> Fork me
+                    </a>
+                    <a href="https://paypal.com">
+                        <i className="fa fa-credit-card"></i> Donate
+                    </a>
+                    <a href="https://github.com/Xstoudi/rss-feed/issues">
+                        <i className="fa fa-exclamation-triangle"></i> Any issue ?
+                    </a>
                 </footer>
                 <Loading />
                 <AddFeedModal />
                 <ConfigModal />
+                <SwitchButton />
             </div>
         );
     }
