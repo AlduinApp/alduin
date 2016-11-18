@@ -45,6 +45,7 @@ export namespace ThemeCompiler {
                 .catch(reject);
         });
     }
+
     export function existsDefaultTheme() {
         return new Promise((resolve, reject) => {
             fs.stat(path.join(themeRoot, "default.theme.less"), err => {

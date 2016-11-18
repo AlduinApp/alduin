@@ -34,7 +34,7 @@ export namespace FeedStorage {
             this.storedContent = newStoredContent;
         });
     }
-
+    
     export function load(): StoredContent {
         if (!fs.existsSync(storePath)) fs.writeFileSync(storePath, JSON.stringify(defaultStoredContent), "utf-8");
         const content = fs.readFileSync(storePath, "utf-8");
