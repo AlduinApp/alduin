@@ -4,13 +4,13 @@ import * as React from "react";
 import { ComponentsRefs } from "./../../components-refs";
 import { Button } from "./button";
 
-export class FetchButton extends Button<{}, {}> {
+export class FetchButton extends Button<{}, FetchButtonState> {
 
     constructor() {
         super();
 
         this.state = {
-            isFetching: true
+            isFetching: false
         };
 
         this.onClick = this.onClick.bind(this);
@@ -25,14 +25,16 @@ export class FetchButton extends Button<{}, {}> {
     }
 
     onClick(event: React.MouseEvent<HTMLElement>) {
-        const target = event.currentTarget;
-        this.switchDisplay(target);
-        ComponentsRefs.feedList.fetchAll().then((result) => {
-            if (result.success) ComponentsRefs.alertList.alert(`Successfully fetch ${result.success} feed${result.success > 1 ? "s" : ""}`, "success");
-            if (result.fail) ComponentsRefs.alertList.alert(`Fail to fetch ${result.fail} feed${result.fail > 1 ? "s" : ""}`, "error");
-
+        if (!this.state.isFetching) {
+            const target = event.currentTarget;
             this.switchDisplay(target);
-        });
+            ComponentsRefs.feedList.fetchAll().then((result) => {
+                if (result.success) ComponentsRefs.alertList.alert(`Successfully fetch ${result.success} feed${result.success > 1 ? "s" : ""}`, "success");
+                if (result.fail) ComponentsRefs.alertList.alert(`Fail to fetch ${result.fail} feed${result.fail > 1 ? "s" : ""}`, "error");
+
+                this.switchDisplay(target);
+            });
+        }
     }
 
     switchDisplay(target: EventTarget & HTMLElement) {
@@ -40,6 +42,7 @@ export class FetchButton extends Button<{}, {}> {
         target.classList.toggle("fa-refresh");
         target.classList.toggle("fa-spin");
         target.classList.toggle("white-icon");
+        this.editState({ isFetching: !this.state.isFetching });
     }
 }
 
