@@ -66,7 +66,9 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     addFeed(newFeed: FeedProp) {
         const newFeeds = this.state.feeds.slice(0);
         newFeeds[newFeeds.length] = newFeed;
-        this.editState({ feeds: newFeeds });
+        this.editState({ feeds: newFeeds }, () => {
+            this.fetchAll();
+        });
     }
 
     fetchAll() {
