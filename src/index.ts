@@ -35,9 +35,9 @@ app.on("activate", () => {
     win === null && createWindow(); // Code like if you were in Satan's church
 });
 
-function handleRedirect(e, url) {
-    if (url != webContents.getFocusedWebContents().getURL()) {
-        e.preventDefault();
-        shell.openExternal(url);
-    }
+function handleRedirect(event: Event, url: string) {
+    if (url === webContents.getFocusedWebContents().getURL()) return;
+
+    event.preventDefault();
+    shell.openExternal(url);
 }
