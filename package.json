@@ -1,7 +1,7 @@
 {
   "name": "alduin",
   "version": "1.0.0",
-  "description": "An Atom and RSS feed agregator",
+  "description": "An Atom and RSS feed aggregator",
   "repository": {
     "type": "git",
     "url": "git://github.com/Xstoudi/alduin.git"

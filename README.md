@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Xstoudi/alduin/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/Xstoudi/rss-feed.svg?style=flat-square)](https://github.com/Xstoudi/rss-feed/release) [![Travis](https://img.shields.io/travis/Xstoudi/alduin.svg?style=flat-square)](https://travis-ci.org/Xstoudi/alduin)
 
 ## Overview
-Alduin is an RSS and Atom feed agregator available on Windows, Mac and Linux.
+Alduin is an RSS and Atom feed aggregator available on Windows, Mac and Linux.
 Open source and free, Alduin has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
 A theme system is already created so you can create your own.
 
