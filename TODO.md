@@ -5,7 +5,6 @@
 
 ## TypeScript
 * Delete feed / article system
-* Comment code
 * Stay open in tray when close Alduin
 * Implement auto-update system from Github releases
 
