@@ -7,7 +7,6 @@
 * Delete feed / article system
 * Comment code
 * Stay open in tray when close Alduin
-* Fix fetch icon error
 * Implement auto-update system from Github releases
 
 ## UI
