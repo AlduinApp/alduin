@@ -31,6 +31,7 @@ export namespace FeedStorage {
             fs.writeFile(storePath, JSON.stringify(newStoredContent, null, 4), err => {
                 err ? reject("Failed to save feeds") : resolve();
             });
+            // Update the Alduin's memory store too
             this.storedContent = newStoredContent;
         });
     }

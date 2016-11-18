@@ -5,10 +5,12 @@ import { ThemeCompiler } from "./theme-compiler";
 let win;
 
 function createWindow() {
+    // Theme loading
     ThemeCompiler.existsDefaultTheme()
         .then(ThemeCompiler.loadThemes)
         .then(ThemeCompiler.compileThemes)
         .then(() => {
+            // Create electron window
             win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/icon.png` });
 
             win.loadURL(`${__dirname}/app/view/index.html`);
@@ -16,6 +18,8 @@ function createWindow() {
             win.on("closed", () => {
                 win = null;
             });
+
+            // Open links in the user's default browser
             webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
         })
         .catch(err => {
@@ -35,6 +39,11 @@ app.on("activate", () => {
     win === null && createWindow(); // Code like if you were in Satan's church
 });
 
+/**
+ * Handle the navigation event from electron
+ * @param {Event} event
+ * @param {string} url 
+ */
 function handleRedirect(event: Event, url: string) {
     if (url === webContents.getFocusedWebContents().getURL()) return;
 
