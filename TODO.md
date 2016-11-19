@@ -1,6 +1,5 @@
 # Todo list
 ## General
-* Get remote dependencies and make them become a local dependency
 * Try to package the app in an installer for Windows, Mac and Linux
 
 ## TypeScript
