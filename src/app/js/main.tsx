@@ -48,9 +48,6 @@ export class App extends CustomComponent<{}, {}>{
                     <a href="https://github.com/Xstoudi/rss-feed">
                         <i className="fa fa-github"></i> Fork me
                     </a>
-                    <a href="https://paypal.com">
-                        <i className="fa fa-credit-card"></i> Donate
-                    </a>
                     <a href="https://github.com/Xstoudi/rss-feed/issues">
                         <i className="fa fa-exclamation-triangle"></i> Any issue ?
                     </a>
