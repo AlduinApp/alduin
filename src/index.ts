@@ -2,7 +2,7 @@ import { app, BrowserWindow, webContents, shell } from "electron";
 
 import { ThemeCompiler } from "./theme-compiler";
 
-let win;
+let win: Electron.BrowserWindow;
 
 function createWindow() {
     // Theme loading
