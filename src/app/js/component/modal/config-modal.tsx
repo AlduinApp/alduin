@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as fs from "fs";
 import * as path from "path";
+import { remote } from "electron";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
@@ -35,7 +36,7 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
                         <div className="input group">
                             <label>Theme</label><select value={this.state.themeInput} onChange={this.handleChangeTheme}>
                                 {
-                                    fs.readdirSync(path.join("src", "app", "style", "css")).map(filename => {
+                                    fs.readdirSync(path.join(remote.app.getAppPath(), "src", "app", "style", "css")).map(filename => {
                                         return <option value={filename} key={filename}>{filename}</option>;
                                     })
                                 }
