@@ -11,8 +11,12 @@ A theme system is already created so you can create your own.
 ![Screenshot](http://i.imgur.com/bdkyxA7.png)
 
 ## Current state
-Alduin is currently not stable and is still evolving day by day, but you can already use it to follow your feeds ! 
+Alduin isn't actually stable and is still evolving day by day, but you can already use it to follow your feeds ! 
 Made with :heart: by [Xavier Stouder](https://github.com/Xstoudi) and [Luca Laissue](https://github.com/lucalaissue).
+
+## Download
+To download Alduin, just go [on the release page](https://github.com/Xstoudi/alduin/releases) and download the zip archive corresponding to your OS.
+The OSX version isn't available yet because of a packaging issue.
 
 ## Technical specifications
 Alduin is built on powefull and modern technologies like:
