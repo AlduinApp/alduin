@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const gulp = require("gulp");
-const gulpZip = require("gulp-zip");
+const gulpZip = require("gulp-archiver");
 const packager = require("electron-packager");
 
 const config = JSON.parse(fs.readFileSync("package.json"));
@@ -20,18 +20,8 @@ const options = {
 function createPackage(opts, done){
     packager(options, (err, paths) => {
         if(err) console.log(err);
-        else zipPackages();
         done();
     });
-}
-
-function zipPackages(){
-    const rootPaths = fs.readdirSync("dist");
-    for(let i = 0; i < rootPaths.length; ++i){
-        gulp.src(path.join("dist", rootPaths[i], "**"))
-            .pipe(gulpZip(rootPaths[i] + ".zip"))
-            .pipe(gulp.dest("dist"));
-    }
 }
 
 gulp.task("dist:win", done => {
