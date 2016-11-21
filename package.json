@@ -37,10 +37,10 @@
     "@types/node": "6.0.48",
     "@types/react": "0.14.49",
     "@types/react-dom": "0.14.18",
-    "electron": "^1.4.7",
-    "electron-packager": "^8.3.0",
+    "electron": "1.4.7",
+    "electron-packager": "8.3.0",
     "gulp": "^3.9.1",
-    "gulp-zip": "^3.2.0",
+    "gulp-zip": "3.2.0",
     "tslint": "3.15.1",
     "typescript": "2.0.8",
     "webpack": "1.13.3"
