@@ -11,7 +11,9 @@
     "test": "npm run build && tslint --project tsconfig.json",
     "build": "npm install && tsc && webpack --display-error-details",
     "start": "npm run build && electron .",
-    "dist:windows": "npm run build && electron-packager . Alduin -w --overwrite --asar"
+    "dist:win": "npm run test && gulp dist:win",
+    "dist:osx": "npm run test && gulp dist:osx",
+    "dist:linux": "npm run test && gulp dist:linux"
   },
   "keywords": [],
   "author": "Xavier Stouder <xavier@stouder.io>",
@@ -37,6 +39,8 @@
     "@types/react-dom": "0.14.18",
     "electron": "^1.4.7",
     "electron-packager": "^8.3.0",
+    "gulp": "^3.9.1",
+    "gulp-zip": "^3.2.0",
     "tslint": "3.15.1",
     "typescript": "2.0.8",
     "webpack": "1.13.3"
