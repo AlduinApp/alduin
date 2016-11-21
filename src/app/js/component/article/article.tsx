@@ -21,9 +21,24 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
 
     render() {
         const summary = this.props.content.replace(/<a( href=".*"){0,1}>/, "").replace(/<\/a>/, "").substring(0, 197).replace("\n", " ");
+
+        const toUseDate = new Date(this.props.date);
+        const articleDate = new Date(this.props.date);
+        const actualDate = new Date();
+        articleDate.setHours(0, 0, 0, 0);
+        actualDate.setHours(0, 0, 0, 0);
+
+        let dateArticle: string = "";
+
+        if(articleDate.getTime() == actualDate.getTime()){
+            dateArticle = toUseDate.toLocaleTimeString(electron.remote.app.getLocale());
+        }else{
+            dateArticle = toUseDate.toLocaleDateString(electron.remote.app.getLocale());
+        }
+
         return (
             <li onClick={this.handleSelect} className={(!this.state.read ? "unread" : "") + (this.state.selected ? "selected" : "")}>
-                <h3><span>{this.props.title}</span><span>{new Date(this.props.date).toLocaleDateString(electron.remote.app.getLocale())}</span></h3>
+                <h3><span>{this.props.title}</span><span>{dateArticle}</span></h3>
                 <p dangerouslySetInnerHTML={{ "__html": `${summary}...` }} >
                 </p>
             </li>
