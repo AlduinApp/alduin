@@ -1,11 +1,9 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import * as crypto from "crypto";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
-import { Feed, FeedProp } from "./../feed/feed";
 import { Queue } from "./../../util/queue";
 import { Alert, AlertProps } from "./alert";
 

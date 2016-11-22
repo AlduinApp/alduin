@@ -5,6 +5,7 @@
         "noImplicitAny": false,
         "sourceMap": false,
         "jsx": "react",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "noUnusedLocals": true
     }
 }

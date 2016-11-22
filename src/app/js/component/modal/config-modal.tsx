@@ -6,7 +6,6 @@ import { remote } from "electron";
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
-import { Theme } from "./../theme";
 
 export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
 

@@ -1,10 +1,8 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
 import * as electron from "electron";
 
 import { ComponentsRefs } from "./../../components-refs";
 import { CustomComponent } from "./../custom-component";
-import { AlertType } from "./../alert/alert-list";
 import { FeedStorage } from "./../../storage";
 
 export class Article extends CustomComponent<ArticleProps, ArticleState> {

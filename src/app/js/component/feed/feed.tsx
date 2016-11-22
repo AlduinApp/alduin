@@ -1,11 +1,10 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { ComponentsRefs } from "./../../components-refs";
 import { CustomComponent } from "./../custom-component";
 import { Http } from "./../../util/http";
 import { FeedParser } from "./../../util/feed-parser";
-import { FeedStorage, StoredFeed } from "./../../storage";
+import { StoredFeed } from "./../../storage";
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
 
