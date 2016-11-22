@@ -9,7 +9,6 @@
     "comment-format": [ true, "check-space" ],
     "no-trailing-whitespace": true,
     "no-unreachable": true,
-    "no-unused-variable": false,
     "no-use-before-declare": true,
     "quotemark": [ true, "double" ],
     "radix": true,
