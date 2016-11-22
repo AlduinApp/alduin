@@ -32,11 +32,8 @@ gulp.task("dist:win", done => {
 });
 
 gulp.task("dist:osx", done => {
-    options.arch = "x64";
-    options.platform = "darwin";
-    options.icon = "./build/icon.icns";
-
-    createPackage(options, done);
+    console.log("Actually failing");
+    done();
 });
 
 gulp.task("dist:linux", done => {
