@@ -3,7 +3,6 @@
 const fs = require("fs");
 const path = require("path");
 const gulp = require("gulp");
-const gulpZip = require("gulp-archiver");
 const packager = require("electron-packager");
 
 const config = JSON.parse(fs.readFileSync("package.json"));
