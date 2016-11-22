@@ -1,6 +1,6 @@
 # Todo list
 ## General
-* Try to package the app in an installer for Windows, Mac and Linux
+* Fix app packaging for OSX
 
 ## TypeScript
 * Delete feed / article system
