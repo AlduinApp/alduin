@@ -1,7 +1,6 @@
 import { IArticle } from "./../component/feed/feed";
 
-// import * as xmldoc from "xmldoc";
-const xmldoc = require("xmldoc");
+import * as xmldoc from "xmldoc";
 
 export namespace FeedParser {
     export function identify(xmlString: string) {
