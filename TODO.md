@@ -7,11 +7,10 @@
 * Stay open in tray when close Alduin
 * Implement auto-update system from Github releases
 * Add search functionnality
-* Remove line feed and links in the summary
 * Pour les news du jour, mettre l'heure à la place de la date
-* 
 
 ## UI
+* Create style for <table> content
 * Header bar (with minimize, resize and close icons)
 * Make the config modal form beautiful
 * Delete feed / article UI

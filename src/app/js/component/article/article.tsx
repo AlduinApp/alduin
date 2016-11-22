@@ -20,10 +20,11 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     }
 
     render() {
+        const summary = this.props.content.replace(/<a( href=".*"){0,1}>/, "").replace(/<\/a>/, "").substring(0, 197).replace("\n", " ");
         return (
             <li onClick={this.handleSelect} className={(!this.state.read ? "unread" : "") + (this.state.selected ? "selected" : "")}>
                 <h3><span>{this.props.title}</span><span>{new Date(this.props.date).toLocaleDateString(electron.remote.app.getLocale())}</span></h3>
-                <p dangerouslySetInnerHTML={{ "__html": `${this.props.content.substring(0, 197).replace("\n", " ")}...` }} >
+                <p dangerouslySetInnerHTML={{ "__html": `${summary}...` }} >
                 </p>
             </li>
         );
