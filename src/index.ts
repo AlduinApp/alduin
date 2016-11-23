@@ -1,10 +1,13 @@
-import { app, BrowserWindow, webContents, shell } from "electron";
+import { app, BrowserWindow, webContents, shell, Tray, Menu } from "electron";
 
 import { ThemeCompiler } from "./theme-compiler";
 
 let win: Electron.BrowserWindow;
+let tryToQuit: boolean = false;
+let tray: Electron.Tray;
 
 function createWindow() {
+    buildTray();
     // Theme loading
     ThemeCompiler.existsDefaultTheme()
         .then(ThemeCompiler.loadThemes)
@@ -18,6 +21,12 @@ function createWindow() {
             win.on("closed", () => {
                 win = null;
             });
+            win.on("close", event => {
+                if(!tryToQuit){
+                    event.preventDefault();
+                    win.hide();
+                }
+            });
 
             // Open links in the user's default browser
             webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
@@ -27,6 +36,25 @@ function createWindow() {
             process.exit(1);
         });
 
+}
+
+function buildTray(){
+    tray = new Tray(`${__dirname}/app/img/icon.png`);
+    const menu = Menu.buildFromTemplate([
+        {
+            label: "Quit Alduin",
+            click: () => {
+                tryToQuit = true;
+                app.quit();
+            }
+        }
+    ]);
+
+    tray.on("double-click", event => {
+        win.show();
+    });
+
+    tray.setContextMenu(menu);
 }
 
 app.on("ready", createWindow);

@@ -4,9 +4,7 @@
 
 ## TypeScript
 * Delete feed / article system
-* Stay open in tray when close Alduin
 * Implement auto-update system from Github releases
-* Add search functionnality
 
 ## UI
 * Create style for <table> content
