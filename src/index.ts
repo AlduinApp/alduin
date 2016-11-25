@@ -29,7 +29,7 @@ function createWindow() {
             });
 
             // Open links in the user's default browser
-            webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
+            win.webContents.on("will-navigate", handleRedirect);
         })
         .catch(err => {
             console.error("Error while compiling themes.", err);
