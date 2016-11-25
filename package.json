@@ -27,14 +27,14 @@
     "less": "2.7.1",
     "less-plugin-clean-css": "1.5.1",
     "normalize.css": "5.0.0",
-    "react": "15.4.0",
+    "react": "15.4.1",
     "react-dom": "15.4.0",
     "xmldoc": "0.5.1"
   },
   "devDependencies": {
     "@types/electron": "1.4.27",
     "@types/less": "0.0.31",
-    "@types/node": "6.0.50",
+    "@types/node": "6.0.51",
     "@types/react": "0.14.50",
     "@types/react-dom": "0.14.19",
     "@types/xmldoc": "^0.5.0",
