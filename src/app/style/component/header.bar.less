@@ -1,0 +1,31 @@
+header.header.bar {
+    width: 100%;
+    height: 2.4em;
+    background: @rss-menu-background-color;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
+    padding: .2em 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    line-height: 2em;
+    text-align: right;
+
+    -webkit-app-region: drag
+}
+
+header i.fa {
+    display: inline-block;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 0 .3em;
+    color: @global-secondary-text-color;
+    transition: all .5s;
+
+    -webkit-app-region: no-drag
+}
+
+header i.fa:hover {
+    color: @global-primary-text-color;
+    cursor: pointer;
+}

@@ -38,6 +38,11 @@ export class App extends CustomComponent<{}, {}>{
         return (
             <div>
                 <Theme />
+                <header className="header bar">
+                    <i className="fa fa-window-minimize"></i>
+                    <i className="fa fa-clone"></i>
+                    <i className="fa fa-times"></i>
+                </header>
                 <Sidebar />
                 <ArticleList /><Content />
                 <AlertList />
