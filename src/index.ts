@@ -22,7 +22,7 @@ function createWindow() {
                 win = null;
             });
             win.on("close", event => {
-                if(!tryToQuit){
+                if (!tryToQuit) {
                     event.preventDefault();
                     win.hide();
                 }
@@ -38,7 +38,7 @@ function createWindow() {
 
 }
 
-function buildTray(){
+function buildTray() {
     tray = new Tray(`${__dirname}/app/img/icon.png`);
     const menu = Menu.buildFromTemplate([
         {
