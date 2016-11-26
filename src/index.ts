@@ -14,7 +14,7 @@ function createWindow() {
         .then(ThemeCompiler.compileThemes)
         .then(() => {
             // Create electron window
-            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/icon.png` });
+            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/icon.png`, frame: false });
 
             win.loadURL(`${__dirname}/app/view/index.html`);
 
@@ -29,7 +29,7 @@ function createWindow() {
             });
 
             // Open links in the user's default browser
-            webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
+            win.webContents.on("will-navigate", handleRedirect);
         })
         .catch(err => {
             console.error("Error while compiling themes.", err);
