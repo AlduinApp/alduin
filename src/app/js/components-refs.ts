@@ -1,6 +1,5 @@
 import { App } from "./main";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
-import { ConfigOpenModalButton } from "./component/button/config-open-modal-button";
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { ConfigModal } from "./component/modal/config-modal";
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";

@@ -1,32 +1,70 @@
-import { app, BrowserWindow, webContents, shell } from "electron";
+import { app, BrowserWindow, webContents, shell, Tray, Menu, remote } from "electron";
 
 import { ThemeCompiler } from "./theme-compiler";
 
 let win: Electron.BrowserWindow;
+let tryToQuit: boolean = false;
+let tray: Electron.Tray;
 
 function createWindow() {
+    buildTray();
     // Theme loading
     ThemeCompiler.existsDefaultTheme()
         .then(ThemeCompiler.loadThemes)
         .then(ThemeCompiler.compileThemes)
         .then(() => {
             // Create electron window
-            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/icon.png` });
+            win = new BrowserWindow({
+                width: 800,
+                height: 600,
+                minWidth: 650,
+                minHeight: 500,
+                icon: `${__dirname}/app/img/icon.png`,
+                frame: false,
+                backgroundColor: "#000000"
+            });
 
             win.loadURL(`${__dirname}/app/view/index.html`);
 
             win.on("closed", () => {
                 win = null;
             });
+            win.on("close", event => {
+                if (!tryToQuit) {
+                    event.preventDefault();
+                    win.hide();
+                }
+            });
 
             // Open links in the user's default browser
-            webContents.getFocusedWebContents().on("will-navigate", handleRedirect);
+            win.webContents.on("will-navigate", handleRedirect);
+
+            (global as any).mainWinId = win.id;
         })
         .catch(err => {
             console.error("Error while compiling themes.", err);
             process.exit(1);
         });
 
+}
+
+function buildTray() {
+    tray = new Tray(`${__dirname}/app/img/icon.png`);
+    const menu = Menu.buildFromTemplate([
+        {
+            label: "Quit Alduin",
+            click: () => {
+                tryToQuit = true;
+                app.quit();
+            }
+        }
+    ]);
+
+    tray.on("double-click", event => {
+        win.show();
+    });
+
+    tray.setContextMenu(menu);
 }
 
 app.on("ready", createWindow);

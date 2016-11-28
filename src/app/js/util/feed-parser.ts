@@ -1,10 +1,6 @@
 import { IArticle } from "./../component/feed/feed";
 
-import * as fs from "fs";
-// import * as xmldoc from "xmldoc";
-const xmldoc = require("xmldoc");
-import * as http from "http";
-import * as url from "url";
+import * as xmldoc from "xmldoc";
 
 export namespace FeedParser {
     export function identify(xmlString: string) {
@@ -38,9 +34,9 @@ export namespace FeedParser {
             articles[articles.length] = {
                 id: item.valueWithPath("id"),
                 title: item.valueWithPath("title"),
-                content: item.fixSrcset(item.valueWithPath("summary") || item.valueWithPath("content") || item.valueWithPath("subtitle")),
+                content: fixSrcset(item.valueWithPath("summary") || item.valueWithPath("content") || item.valueWithPath("subtitle")),
                 link: /href="(.+)"/.exec(item.childWithAttribute("href").toString())[1],
-                date: item.valueWithPath("published") || item.valueWithPath("updated") || new Date().getTime()
+                date: Date.parse(item.valueWithPath("published")) || Date.parse(item.valueWithPath("updated")) || new Date().getTime()
             };
         });
 
