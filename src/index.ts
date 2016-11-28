@@ -21,7 +21,7 @@ function createWindow() {
                 minHeight: 500,
                 icon: `${__dirname}/app/img/icon.png`,
                 frame: false,
-                transparent: true
+                backgroundColor: "#000000"
             });
 
             win.loadURL(`${__dirname}/app/view/index.html`);
@@ -35,8 +35,6 @@ function createWindow() {
                     win.hide();
                 }
             });
-
-            win.webContents.openDevTools();
 
             // Open links in the user's default browser
             win.webContents.on("will-navigate", handleRedirect);
