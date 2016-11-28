@@ -1,4 +1,4 @@
-import { app, BrowserWindow, webContents, shell, Tray, Menu } from "electron";
+import { app, BrowserWindow, webContents, shell, Tray, Menu, remote } from "electron";
 
 import { ThemeCompiler } from "./theme-compiler";
 
@@ -14,7 +14,15 @@ function createWindow() {
         .then(ThemeCompiler.compileThemes)
         .then(() => {
             // Create electron window
-            win = new BrowserWindow({ width: 800, height: 600, minWidth: 650, minHeight: 500, icon: `${__dirname}/app/img/icon.png`, frame: false });
+            win = new BrowserWindow({
+                width: 800,
+                height: 600,
+                minWidth: 650,
+                minHeight: 500,
+                icon: `${__dirname}/app/img/icon.png`,
+                frame: false,
+                backgroundColor: "#000000"
+            });
 
             win.loadURL(`${__dirname}/app/view/index.html`);
 
@@ -30,6 +38,8 @@ function createWindow() {
 
             // Open links in the user's default browser
             win.webContents.on("will-navigate", handleRedirect);
+
+            (global as any).mainWinId = win.id;
         })
         .catch(err => {
             console.error("Error while compiling themes.", err);

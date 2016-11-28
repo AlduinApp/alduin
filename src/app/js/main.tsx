@@ -11,6 +11,7 @@ import { ArticleList } from "./component/article/article-list";
 import { Loading } from "./component/loading";
 import { Content } from "./component/content";
 import { Theme } from "./component/theme";
+import { Header } from "./component/header";
 
 import { ComponentsRefs } from "./components-refs";
 import { FeedStorage } from "./storage";
@@ -30,11 +31,7 @@ export class App extends CustomComponent<{}, {}>{
         return (
             <div>
                 <Theme />
-                <header className="header bar">
-                    <i className="fa fa-window-minimize"></i>
-                    <i className="fa fa-clone"></i>
-                    <i className="fa fa-times"></i>
-                </header>
+                <Header />
                 <Sidebar />
                 <ArticleList /><Content />
                 <AlertList />
