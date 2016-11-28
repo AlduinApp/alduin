@@ -24,7 +24,7 @@ function createWindow() {
                 backgroundColor: "#000000"
             });
 
-            win.loadURL(`${__dirname}/app/view/index.html`);
+            win.loadURL(`file://${__dirname}/app/view/index.html`);
 
             win.on("closed", () => {
                 win = null;
@@ -83,7 +83,8 @@ app.on("activate", () => {
  * @param {string} url 
  */
 function handleRedirect(event: Event, url: string) {
-    if (url === webContents.getFocusedWebContents().getURL()) return;
+    const focused = webContents.getFocusedWebContents();
+    if (!focused || url === focused.getURL()) return;
 
     event.preventDefault();
     shell.openExternal(url);
