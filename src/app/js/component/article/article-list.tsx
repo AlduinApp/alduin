@@ -1,11 +1,10 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 
 import { Article } from "./article";
-import { IArticle, Feed } from "./../feed/feed";
+import { IArticle } from "./../feed/feed";
 
 export class ArticleList extends CustomComponent<{}, ArticleListState> {
 

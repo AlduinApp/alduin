@@ -13,6 +13,7 @@ html {
     margin: 0;
     min-width: 600px;
     overflow: hidden;
+    background: @global-background-color;
 }
 
 body {
@@ -34,6 +35,7 @@ a:hover {
     text-decoration: underline;
 }
 
+@import "component/header.bar.less";
 @import "component/rss.menu.less";
 @import "component/rss.articles.less";
 @import "component/rss.article.less";

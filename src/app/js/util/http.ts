@@ -53,7 +53,7 @@ export namespace Http {
             // domain name
             "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*" +
             // TLD identifier
-            "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
+            "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))?" +
             // TLD may end with dot
             "\\.?" +
             ")" +
