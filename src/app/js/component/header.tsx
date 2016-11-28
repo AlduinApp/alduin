@@ -1,5 +1,5 @@
 import * as React from "react";
-import {remote } from "electron";
+import { remote } from "electron";
 
 import { CustomComponent } from "./custom-component";
 
@@ -14,6 +14,10 @@ export class Header extends CustomComponent<{}, HeaderState> {
         this.onMinimize = this.onMinimize.bind(this);
         this.switchSize = this.switchSize.bind(this);
         this.onClose = this.onClose.bind(this);
+
+        this.getWindow().on("resize", () => {
+            this.editState({ isMaximized: this.getWindow().isMaximized() });
+        });
     }
 
     render() {
@@ -30,22 +34,19 @@ export class Header extends CustomComponent<{}, HeaderState> {
         this.getWindow().minimize();
     }
 
-    switchSize(){
-        console.log(this.getWindow().isMaximized())
+    switchSize() {
         this.getWindow().isMaximized() ? this.getWindow().unmaximize() : this.getWindow().maximize();
-
-        this.editState({isMaximized })
     }
 
-    onClose(){
+    onClose() {
         this.getWindow().close();
     }
 
-    private getWindow(){
+    private getWindow() {
         return remote.BrowserWindow.fromId(remote.getGlobal("mainWinId"));
     }
 }
 
-interface HeaderState{
+interface HeaderState {
     isMaximized: boolean;
 }
