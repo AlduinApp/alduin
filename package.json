@@ -32,7 +32,7 @@
     "xmldoc": "0.5.1"
   },
   "devDependencies": {
-    "@types/electron": "1.4.28",
+    "@types/electron": "1.4.29",
     "@types/less": "0.0.31",
     "@types/node": "6.0.51",
     "@types/react": "0.14.51",
