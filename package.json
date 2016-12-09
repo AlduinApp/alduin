@@ -39,7 +39,7 @@
     "@types/react-dom": "0.14.19",
     "@types/xmldoc": "^0.5.0",
     "electron": "1.4.10",
-    "electron-packager": "8.3.0",
+    "electron-packager": "8.4.0",
     "gulp": "^3.9.1",
     "tslint": "4.0.1",
     "typescript": "2.0.10",
