@@ -7,6 +7,7 @@ import { ConfigOpenModalButton } from "./button/config-open-modal-button";
 import { PinSidebarButton } from "./button/pin-sidebar-button";
 import { FeedList } from "./feed/feed-list";
 import { FetchButton } from "./button/fetch-button";
+import { TrashButton } from "./button/trash-button";
 
 export class Sidebar extends CustomComponent<{}, {}> {
 
@@ -21,9 +22,7 @@ export class Sidebar extends CustomComponent<{}, {}> {
             <div className="rss menu pinned">
                 <FeedList />
                 <ul className="rss settings">
-                    <AddFeedOpenModalButton /><FetchButton /><li>
-                        <i className="fa fa-trash"></i>
-                    </li><ConfigOpenModalButton /><PinSidebarButton />
+                    <AddFeedOpenModalButton /><FetchButton /><TrashButton /><ConfigOpenModalButton /><PinSidebarButton />
                 </ul>
             </div>
         );

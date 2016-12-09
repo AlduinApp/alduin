@@ -19,6 +19,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         };
 
         this.handleSelect = this.handleSelect.bind(this);
+        this.onDragStart = this.onDragStart.bind(this);
     }
 
     fetch() {
@@ -35,7 +36,12 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         }).length;
 
         return (
-            <li className={this.state.selected && "selected"} onClick={this.handleSelect} >
+            <li
+                className={this.state.selected && "selected"}
+                onClick={this.handleSelect}
+                draggable={true}
+                onDragStart={this.onDragStart}
+                >
                 <i className="fa fa-rss"></i>
                 <span className="title">{this.props.title}</span>
                 <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
@@ -92,6 +98,13 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         return this.state.articles.find(article => {
             return article.id == id;
         });
+    }
+
+    onDragStart(event: React.DragEvent<HTMLElement>) {
+        event.dataTransfer.setData("text/plain", JSON.stringify({
+            uuid: this.props.uuid,
+            wasSelected: this.state.selected
+        }));
     }
 }
 

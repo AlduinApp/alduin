@@ -118,6 +118,19 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
     changeAutomaticFetchInterval(minutes: number) {
         this.editState({ automaticFetchInterval: minutes }, () => FeedStorage.store());
     }
+
+    removeFeedByUUID(uuid: string): boolean {
+        const newFeeds = this.state.feeds.slice(0);
+        for (let i = 0; i < newFeeds.length; i++) {
+            if (newFeeds[i].uuid !== uuid) continue;
+            newFeeds.splice(i, 1);
+            this.editState({ feeds: newFeeds }, () => {
+                FeedStorage.store();
+            });
+            return true;
+        }
+        return false;
+    }
 }
 
 interface FeedListState {
