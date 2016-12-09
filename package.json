@@ -43,6 +43,6 @@
     "gulp": "^3.9.1",
     "tslint": "4.0.1",
     "typescript": "2.0.10",
-    "webpack": "1.13.3"
+    "webpack": "1.14.0"
   }
 }
