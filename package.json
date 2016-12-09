@@ -1,5 +1,6 @@
 {
   "name": "alduin",
+  "productName": "Alduin",
   "version": "1.1.1",
   "description": "An Atom and RSS feed aggregator",
   "repository": {
@@ -11,9 +12,8 @@
     "test": "npm run build && tslint --project tsconfig.json",
     "build": "npm install && tsc && webpack --display-error-details",
     "start": "npm run build && electron .",
-    "dist:win": "npm run test && gulp dist:win",
-    "dist:osx": "npm run test && gulp dist:osx",
-    "dist:linux": "npm run test && gulp dist:linux"
+    "dist:win": "npm run test && build -w",
+    "dist:linux": "npm run test && build -l"
   },
   "keywords": [],
   "author": "Xavier Stouder <xavier@stouder.io>",
@@ -37,12 +37,32 @@
     "@types/node": "6.0.51",
     "@types/react": "0.14.53",
     "@types/react-dom": "0.14.19",
-    "@types/xmldoc": "^0.5.0",
+    "@types/xmldoc": "0.5.0",
     "electron": "1.4.10",
-    "electron-packager": "8.4.0",
-    "gulp": "^3.9.1",
+    "electron-builder": "10.6.1",
+    "gulp": "3.9.1",
     "tslint": "4.0.1",
     "typescript": "2.0.10",
     "webpack": "1.14.0"
+  },
+  "build": {
+    "appId": "ch.xstoudi.alduin",
+    "asar": false,
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "zip"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "warningsAsErrors": true
+    }
   }
 }
