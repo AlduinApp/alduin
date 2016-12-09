@@ -101,7 +101,9 @@
     color: @global-primary-text-color;
 }
 
-.modal .content .input.group input[type="text"] {
+.modal .content .input.group input[type="text"],
+.modal .content .input.group input[type="number"], 
+.modal .content .input.group select {
     display: inline-block;
     color: @global-primary-text-color;
     width: ~"calc(100% - 8.5em)";
@@ -114,9 +116,25 @@
     transition: all .3s;
 }
 
-.modal .content .input.group input[type="text"]:focus {
+.modal .content .input.group select option {
+    background: @global-background-color;
+}
+
+.modal .content .input.group select option:hover {
+    background: @global-accent-color;
+    color: @global-primary-text-color;
+}
+
+.modal .content .input.group input[type="text"]:focus,
+.modal .content .input.group input[type="number"]:focus {
     border-color: rgba(0, 0, 0, .1);
     box-shadow: 0 0 8px @global-accent-color;
+}
+
+.modal .content .input.group input[type=number]::-webkit-inner-spin-button, 
+.modal .content .input.group input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 @keyframes modal-show {
