@@ -1,4 +1,6 @@
 import * as React from "react";
+import * as electron from "electron";
+import * as path from "path";
 
 import { CustomComponent } from "./custom-component";
 import { ComponentsRefs } from "./../components-refs";
@@ -18,7 +20,7 @@ export class Theme extends CustomComponent<{}, ThemeState> {
 
     render() {
         return (
-            <link rel="stylesheet" type="text/css" href={`../style/css/${this.state.actualTheme}`} />
+            <link rel="stylesheet" type="text/css" href={path.join(electron.remote.app.getPath("userData"), "themes", this.state.actualTheme)} />
         );
     }
 
