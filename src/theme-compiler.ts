@@ -1,5 +1,5 @@
 import * as less from "less";
-
+import * as electron from "electron";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -7,7 +7,7 @@ const lessPluginCleanCSS = require("less-plugin-clean-css");
 
 export namespace ThemeCompiler {
     const themeRoot: string = path.join(__dirname, "app", "style", "theme");
-    const compiledThemeRoot: string = path.join(__dirname, "app", "style", "css");
+    const compiledThemeRoot: string = path.join(electron.app.getPath("userData"), "themes");
     const themesFilenames = [];
 
     export function loadThemes() {
@@ -28,7 +28,7 @@ export namespace ThemeCompiler {
                 paths: [path.join(__dirname, "app", "style")]
             } as any) as any).then(output => {
                 fs.mkdir(compiledThemeRoot, err => {
-                    if (err && err.code !== "EEXIST") return reject(`Erreur lors de la création du dossier "css"`);
+                    if (err && err.code !== "EEXIST") return reject(`Can't create themes folder.`);
                     fs.writeFile(path.join(compiledThemeRoot, filename.replace("less", "css")), output.css, err => {
                         if (err) return reject("Can't write compiled theme...");
                         resolve();

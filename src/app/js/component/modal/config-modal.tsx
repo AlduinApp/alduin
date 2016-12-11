@@ -35,7 +35,7 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
                         <div className="input group">
                             <label>Theme</label><select value={this.state.themeInput} onChange={this.handleChangeTheme}>
                                 {
-                                    fs.readdirSync(path.join(remote.app.getAppPath(), "src", "app", "style", "css")).map(filename => {
+                                    fs.readdirSync(path.join(remote.app.getPath("userData"), "themes")).map(filename => {
                                         return <option value={filename} key={filename}>{filename}</option>;
                                     })
                                 }

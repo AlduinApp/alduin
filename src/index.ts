@@ -21,10 +21,15 @@ function createWindow() {
                 minHeight: 500,
                 icon: `${__dirname}/app/img/icon.png`,
                 frame: false,
-                backgroundColor: "#000000"
+                backgroundColor: "#000000",
+                show: false
             });
 
             win.loadURL(`file://${__dirname}/app/view/index.html`);
+
+            win.webContents.on("did-finish-load", () => {
+                win.show();
+            });
 
             win.on("closed", () => {
                 win = null;
