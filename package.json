@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/electron": "1.4.29",
-    "@types/less": "0.0.31",
+    "@types/less": "0.0.32",
     "@types/node": "6.0.51",
     "@types/react": "0.14.53",
     "@types/react-dom": "0.14.19",
