@@ -1,4 +1,5 @@
 import * as http from "http";
+import * as https from "https";
 import * as url from "url";
 
 export namespace Http {
@@ -8,22 +9,42 @@ export namespace Http {
 
             if (!isValidUrl(urlToGet)) return reject("Invalid url");
 
-            http.get({
+            const options = {
                 host: parsedUrl.host,
                 path: parsedUrl.path
-            }, response => {
+            };
+            const responseHandler = response => {
                 let body = "";
+                console.log(response.statusCode);
+                console.log(response.headers);
+
                 response
                     .on("data", d => {
                         body += d;
                     })
                     .on("end", () => {
-                        resolve(body);
+                        if (
+                            (response.statusCode == 300 ||
+                                response.statusCode == 302) &&
+                            "location" in response.headers
+                        ) {
+                            Http.get(response.headers.location).then(resolve).catch(reject);
+                        } else {
+
+                            resolve(body);
+                        }
                     })
                     .on("error", error => {
                         reject("Can't get links content");
                     });
-            });
+            };
+
+            if (parsedUrl.protocol == "https:") {
+                https.get(options, responseHandler);
+            } else {
+                http.get(options, responseHandler);
+            }
+
         });
     }
     export function isValidUrl(url: string) {

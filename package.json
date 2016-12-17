@@ -1,7 +1,7 @@
 {
   "name": "alduin",
   "productName": "Alduin",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "An Atom and RSS feed aggregator",
   "repository": {
     "type": "git",
@@ -33,15 +33,15 @@
   },
   "devDependencies": {
     "@types/electron": "1.4.29",
-    "@types/less": "0.0.31",
+    "@types/less": "0.0.32",
     "@types/node": "6.0.51",
     "@types/react": "0.14.53",
     "@types/react-dom": "0.14.19",
     "@types/xmldoc": "0.5.0",
     "electron": "1.4.12",
-    "electron-builder": "10.6.1",
+    "electron-builder": "10.8.1",
     "gulp": "3.9.1",
-    "tslint": "4.0.1",
+    "tslint": "4.1.1",
     "typescript": "2.0.10",
     "webpack": "1.14.0"
   },
