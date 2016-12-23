@@ -3,6 +3,7 @@ import * as React from "react";
 
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { ConfigModal } from "./component/modal/config-modal";
+import { ExportModal } from "./component/modal/export-modal";
 import { CustomComponent } from "./component/custom-component";
 import { SwitchButton } from "./component/button/switch-button";
 import { Sidebar } from "./component/sidebar";
@@ -53,6 +54,7 @@ export class App extends CustomComponent<{}, {}>{
                 </footer>
                 <Loading />
                 <AddFeedModal />
+                <ExportModal />
                 <ConfigModal />
                 <SwitchButton />
             </div>

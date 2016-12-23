@@ -1,0 +1,36 @@
+{
+    "title": "Sample OPML file",
+    "children": [
+        {
+            "title": "UserJS.org news",
+            "text": "UserJS.org news",
+            "type": "rss",
+            "version": "RSS",
+            "xmlurl": "http://userjs.org/subscribe/news",
+            "htmlurl": "http://userjs.org/",
+            "#type": "feed",
+            "folder": ""
+        },
+        {
+            "title": "Olli's blog",
+            "text": "Olli's blog",
+            "type": "rss",
+            "version": "RSS",
+            "xmlurl": "http://my.opera.com/olli/xml/atom/blog/",
+            "htmlurl": "http://my.opera.com/olli/",
+            "#type": "feed",
+            "folder": ""
+        },
+        {
+            "title": "Astronomy Picture of the Day",
+            "text": "Astronomy Picture of the Day",
+            "type": "rss",
+            "version": "RSS",
+            "fix091": "yes",
+            "xmlurl": "http://www.jwz.org/cheesegrater/RSS/apod.rss",
+            "htmlurl": "http://antwrp.gsfc.nasa.gov/apod/",
+            "#type": "feed",
+            "folder": ""
+        }
+    ]
+}

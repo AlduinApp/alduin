@@ -2,6 +2,7 @@ import { App } from "./main";
 import { AddFeedOpenModalButton } from "./component/button/add-feed-open-modal-button";
 import { AddFeedModal } from "./component/modal/add-feed-modal";
 import { ConfigModal } from "./component/modal/config-modal";
+import { ExportModal } from "./component/modal/export-modal";
 import { PinSidebarButton } from "./component/button/pin-sidebar-button";
 import { SwitchButton } from "./component/button/switch-button";
 import { Sidebar } from "./component/sidebar";
@@ -25,5 +26,6 @@ export namespace ComponentsRefs {
     export let loading: Loading;
     export let content: Content;
     export let configModal: ConfigModal;
+    export let exportModal: ExportModal;
     export let theme: Theme;
 }
