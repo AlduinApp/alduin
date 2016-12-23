@@ -5,7 +5,7 @@ import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
 import { Http } from "./../../util/http";
-import { FeedParser } from "./../../util/feed-parser";
+import { FeedImporter } from "./../../util/feed-importer";
 
 export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
 
@@ -77,40 +77,12 @@ export class AddFeedModal extends CustomComponent<{}, AddFeedModalState> {
     handleConfirm(event: React.SyntheticEvent<HTMLButtonElement>) {
         if (ComponentsRefs.feedList.state.feeds.find(feed => { return feed.link == this.state.link; })) return ComponentsRefs.alertList.alert("Feed already in list", "error");
 
-        ComponentsRefs.loading.toggle();
-
-        Http.get(this.state.link).then(content => {
-            if (!FeedParser.identify(content)) {
-                ComponentsRefs.alertList.alert("Can't identifiy feed type", "error");
-            } else {
-                let uuid;
-                do {
-                    uuid = crypto.randomBytes(16).toString("hex");
-                } while (ComponentsRefs.feedList.isIdAlreadyUsed(uuid));
-
-                ComponentsRefs.feedList.addFeed({
-                    uuid: uuid,
-                    title: this.state.title,
-                    link: this.state.link,
-                    articles: []
-                });
-
-                FeedStorage.store().then(() => {
-                    ComponentsRefs.alertList.alert(`Feed "${this.state.title}" successfully added`, "success");
-                    this.hide();
-                }).catch(err => {
-                    ComponentsRefs.alertList.alert(err, "error");
-                    this.hide();
-                });
-            }
-            ComponentsRefs.loading.toggle();
-        }).catch(err => {
-            ComponentsRefs.alertList.alert(err, "error");
-            ComponentsRefs.loading.toggle();
+        FeedImporter.add(this.state.title, this.state.link, () => {
+            this.hide();
         });
     }
     handleLinkKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-        if(event.keyCode === 13) {
+        if (event.keyCode === 13) {
             this.handleConfirm(event);
         }
     }

@@ -16,6 +16,9 @@ import { Header } from "./component/header";
 import { ComponentsRefs } from "./components-refs";
 import { FeedStorage } from "./storage";
 
+import { OpmlParser } from "./util/opml-parser";
+import { FeedImporter } from "./util/feed-importer";
+
 export class App extends CustomComponent<{}, {}>{
 
     constructor() {
@@ -25,11 +28,13 @@ export class App extends CustomComponent<{}, {}>{
 
         ComponentsRefs.main = this;
 
+        this.handleDragOver = this.handleDragOver.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
     }
 
     render() {
         return (
-            <div>
+            <div onDragOver={this.handleDragOver} onDrop={this.handleDrop}>
                 <Theme />
                 <Header />
                 <Sidebar />
@@ -52,6 +57,20 @@ export class App extends CustomComponent<{}, {}>{
                 <SwitchButton />
             </div>
         );
+    }
+
+    handleDragOver(event: React.DragEvent<HTMLDivElement>) {
+        event.preventDefault();
+    }
+    handleDrop(event: React.DragEvent<HTMLDivElement>) {
+        event.preventDefault();
+        if (!event.dataTransfer.files) return;
+
+        OpmlParser.getLinksFromOpml(event.dataTransfer.files.item(0).path).then(infos => {
+            FeedImporter.addMany(infos);
+        }).catch(err => {
+            console.log(err);
+        });
     }
 }
 
