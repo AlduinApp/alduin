@@ -30,7 +30,7 @@
     "opml-to-json": "0.0.3",
     "react": "15.4.1",
     "react-dom": "15.4.0",
-    "xmldoc": "0.5.1"
+    "xmldoc": "1.0.0"
   },
   "devDependencies": {
     "@types/electron": "1.4.30",
