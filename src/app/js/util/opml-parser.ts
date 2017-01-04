@@ -20,7 +20,7 @@ export namespace OpmlParser {
                             return {
                                 title: content.text,
                                 url: content.xmlurl
-                            }
+                            };
                         }));
                     })
                     .catch(reject);
