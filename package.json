@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "font-awesome": "4.7.0",
-    "less": "2.7.1",
+    "less": "2.7.2",
     "less-plugin-clean-css": "1.5.1",
     "normalize.css": "5.0.0",
     "opml-to-json": "0.0.3",
