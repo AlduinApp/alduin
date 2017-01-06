@@ -42,7 +42,7 @@
     "electron": "1.4.13",
     "electron-builder": "10.11.0",
     "gulp": "3.9.1",
-    "tslint": "4.2.0",
+    "tslint": "4.3.0",
     "typescript": "2.0.10",
     "webpack": "1.14.0"
   },
