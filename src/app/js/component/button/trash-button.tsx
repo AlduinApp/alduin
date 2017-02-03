@@ -25,6 +25,7 @@ export class TrashButton extends CustomComponent<{}, {}> {
     }
 
     onDrop(event: React.DragEvent<HTMLElement>) {
+        event.stopPropagation();
         const toDelete = JSON.parse(event.dataTransfer.getData("text/plain"));
         const removeResult = ComponentsRefs.feedList.removeFeedByUUID(toDelete.uuid);
         if (toDelete.wasSelected) {
