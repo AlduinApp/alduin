@@ -27,7 +27,7 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
 
     render() {
         return (
-            <div id="add-feed-modal" className="modal" style={{ display: this.state.open ? "" : "none" }}>
+            <div id="export-opml-modal" className="modal" style={{ display: this.state.open ? "" : "none" }}>
                 <div className="content">
                     <i className="fa fa-times close-modal-button" onClick={this.handleHide}></i>
                     <h3>OPML</h3>
