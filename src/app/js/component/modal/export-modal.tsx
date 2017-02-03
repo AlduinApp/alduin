@@ -7,6 +7,8 @@ import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
 import { FeedStorage } from "./../../storage";
 
+import { OpmlExporter } from "./../../util/opml-exporter";
+
 export class ExportModal extends CustomComponent<{}, ExportModalState> {
 
     constructor() {
@@ -20,6 +22,7 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
 
         this.display = this.display.bind(this);
         this.handleHide = this.handleHide.bind(this);
+        this.triggerExport = this.triggerExport.bind(this);
     }
 
     render() {
@@ -31,13 +34,16 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
                     <div className="scroll view">
                         <div className="input group">
                             <label>Feeds to export</label>
-                            <select multiple>
+                            <select id="to-export-selector" multiple>
                                 {
-                                    ComponentsRefs.feedList.feedComponents.forEach(feedComponent => {
-                                        <option value={feedComponent.props.uuid}>{feedComponent.props.title}</option>;
+                                    ComponentsRefs.feedList.feedComponents.map(feedComponent => {
+                                        return <option value={feedComponent.props.uuid}>{feedComponent.props.title}</option>;
                                     })
                                 }
                             </select>
+                        </div>
+                        <div className="input group">
+                            <button onClick={this.triggerExport}>Export</button>
                         </div>
                     </div>
                 </div>
@@ -48,12 +54,35 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
     handleHide(event: React.MouseEvent<HTMLElement>) {
         this.hide();
     }
-
     display() {
         this.editState({ open: true });
     }
     hide() {
         this.editState({ open: false });
+    }
+    triggerExport() {
+        remote.dialog.showSaveDialog({
+            title: "OPML Feed Export",
+            filters: [
+                {
+                    name: "OPML File",
+                    extensions: ["opml"]
+                }
+            ]
+        }, filename => {
+            const opmlSelector = (document.querySelector("#to-export-selector") as HTMLSelectElement);
+            const selecteds = [];
+            for (let i = 0; i < opmlSelector.selectedOptions.length; i++)
+                selecteds[i] = opmlSelector.selectedOptions.item(i).value;
+
+            OpmlExporter.exportFeeds(filename, selecteds)
+                .then(() => {
+                    ComponentsRefs.alertList.alert("Successfully exported as OPML.");
+                })
+                .catch(err => {
+                    ComponentsRefs.alertList.alert("Failed to export as OPML.");
+                });
+        });
     }
 }
 
