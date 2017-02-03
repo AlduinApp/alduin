@@ -42,9 +42,7 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
                                 }
                             </select>
                         </div>
-                        <div className="input group">
-                            <button onClick={this.triggerExport}>Export</button>
-                        </div>
+                        <button className="main success button" id="export-opml" onClick={this.triggerExport}>Export</button>
                     </div>
                 </div>
             </div>
