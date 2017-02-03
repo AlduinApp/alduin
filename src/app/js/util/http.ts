@@ -25,6 +25,7 @@ export namespace Http {
                     .on("end", () => {
                         if (
                             (response.statusCode == 300 ||
+                                response.statusCode == 301 ||
                                 response.statusCode == 302) &&
                             "location" in response.headers
                         ) {
