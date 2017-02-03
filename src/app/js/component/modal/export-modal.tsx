@@ -17,7 +17,7 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
         };
 
         ComponentsRefs.exportModal = this;
-        
+
         this.display = this.display.bind(this);
         this.handleHide = this.handleHide.bind(this);
     }
@@ -34,7 +34,7 @@ export class ExportModal extends CustomComponent<{}, ExportModalState> {
                             <select multiple>
                                 {
                                     ComponentsRefs.feedList.feedComponents.forEach(feedComponent => {
-                                        <option value={feedComponent.props.uuid}>{feedComponent.props.title}</option>
+                                        <option value={feedComponent.props.uuid}>{feedComponent.props.title}</option>;
                                     })
                                 }
                             </select>
