@@ -1,7 +1,7 @@
 {
   "name": "alduin",
   "productName": "Alduin",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "An Atom and RSS feed aggregator",
   "repository": {
     "type": "git",
