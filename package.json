@@ -37,7 +37,7 @@
     "@types/less": "0.0.32",
     "@types/node": "7.0.5",
     "@types/react": "0.14.56",
-    "@types/react-dom": "0.14.22",
+    "@types/react-dom": "0.14.23",
     "@types/xmldoc": "0.5.0",
     "electron": "1.4.14",
     "electron-builder": "13.0.0",
