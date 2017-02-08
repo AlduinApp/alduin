@@ -43,7 +43,7 @@
     "electron-builder": "13.0.0",
     "gulp": "3.9.1",
     "tslint": "4.3.0",
-    "typescript": "2.1.5",
+    "typescript": "2.1.6",
     "webpack": "1.14.0"
   },
   "build": {
