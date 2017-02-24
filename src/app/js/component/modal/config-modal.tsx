@@ -56,7 +56,7 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
     handleHide(event: React.MouseEvent<HTMLElement>) {
         this.hide();
     }
-    handleChangeTheme(event: React.KeyboardEvent<HTMLSelectElement>) {
+    handleChangeTheme(event: React.ChangeEvent<HTMLSelectElement>) {
         ComponentsRefs.theme.switchTheme(event.currentTarget.value);
         this.editState({ themeInput: event.currentTarget.value }, () => FeedStorage.store());
     }
