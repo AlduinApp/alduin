@@ -40,7 +40,7 @@
     "@types/react-dom": "0.14.23",
     "@types/xmldoc": "0.5.0",
     "electron": "1.4.14",
-    "electron-builder": "13.8.1",
+    "electron-builder": "14.1.1",
     "gulp": "3.9.1",
     "tslint": "4.3.0",
     "typescript": "2.2.1",
