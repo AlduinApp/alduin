@@ -33,17 +33,17 @@
     "xmldoc": "1.0.0"
   },
   "devDependencies": {
-    "@types/electron": "1.4.31",
+    "@types/electron": "1.4.32",
     "@types/less": "0.0.32",
     "@types/node": "7.0.5",
     "@types/react": "15.0.7",
-    "@types/react-dom": "0.14.22",
+    "@types/react-dom": "0.14.23",
     "@types/xmldoc": "0.5.0",
     "electron": "1.4.14",
-    "electron-builder": "13.0.0",
+    "electron-builder": "14.1.1",
     "gulp": "3.9.1",
     "tslint": "4.3.0",
-    "typescript": "2.1.5",
+    "typescript": "2.2.1",
     "webpack": "1.14.0"
   },
   "build": {
