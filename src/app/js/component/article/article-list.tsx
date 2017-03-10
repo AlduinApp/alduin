@@ -23,16 +23,19 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
     }
 
     updateArticles(articles: IArticle[]) {
+        console.log("EDIT");
         this.editState({ articles: articles });
     }
 
     render() {
         this.articleComponents = [];
+        console.log("TRIGGER RERENDER")
         return (
             <div className="rss articles" ref={main => this.mainDiv = main}>
                 <ul>
                     {
                         this.state.articles.map(article => {
+                            console.log("ARTICLE TRIGGER", article.read)
                             return <Article
                                 id={article.id}
                                 title={article.title}
