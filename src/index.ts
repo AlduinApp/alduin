@@ -59,6 +59,12 @@ function buildTray() {
     tray = new Tray(`${__dirname}/app/img/icon.png`);
     const menu = Menu.buildFromTemplate([
         {
+            label: "Open Alduin",
+            click: () => {
+                win.show();
+            }
+        },
+        {
             label: "Quit Alduin",
             click: () => {
                 tryToQuit = true;
