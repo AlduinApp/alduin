@@ -25,7 +25,7 @@ function createWindow() {
                 show: false
             });
 
-            //win.webContents.openDevTools();
+            // win.webContents.openDevTools();
 
             win.loadURL(`file://${__dirname}/app/view/index.html`);
 
@@ -97,7 +97,7 @@ app.on("activate", () => {
 /**
  * Handle the navigation event from electron
  * @param {Event} event
- * @param {string} url 
+ * @param {string} url
  */
 function handleRedirect(event: Event, url: string) {
     const focused = webContents.getFocusedWebContents();

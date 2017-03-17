@@ -30,9 +30,9 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
 
         let dateArticle: string = "";
 
-        if(articleDate.getTime() == actualDate.getTime()){
+        if (articleDate.getTime() == actualDate.getTime()) {
             dateArticle = toUseDate.toLocaleTimeString(electron.remote.app.getLocale());
-        }else{
+        } else {
             dateArticle = toUseDate.toLocaleDateString(electron.remote.app.getLocale());
         }
 
@@ -70,7 +70,7 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
         document.querySelector("body").classList.add("show-article");
     }
 
-    markAsRead(callback: () => any = () => {}) {
+    markAsRead(callback: () => any = () => { return null; }) {
         const articleFound = ComponentsRefs.feedList.selectedFeed.state.articles.find(article => {
             return article.id === this.props.id;
         });

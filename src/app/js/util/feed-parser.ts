@@ -18,7 +18,7 @@ export namespace FeedParser {
 
             let podcast = undefined;
             if(item.childWithAttribute("url"))
-                podcast = /url="(.[^"]+)"/.exec(item.childWithAttribute("url").toString())[1]
+                podcast = /url="(.[^"]+)"/.exec(item.childWithAttribute("url").toString())[1];
 
             articles[articles.length] = {
                 id: item.valueWithPath("guid") || item.valueWithPath("link"),
@@ -40,7 +40,7 @@ export namespace FeedParser {
 
             let podcast = undefined;
             if(item.childWithAttribute("url"))
-                podcast = /url="(.[^"]+)"/.exec(item.childWithAttribute("url").toString())[1]
+                podcast = /url="(.[^"]+)"/.exec(item.childWithAttribute("url").toString())[1];
 
             articles[articles.length] = {
                 id: item.valueWithPath("id"),

@@ -45,7 +45,7 @@ export class ConfigModal extends CustomComponent<{}, ConfigModalState> {
                             <label>Automatic fetch interval (minutes)</label><input type="number" min="1" value={this.state.automaticFetchInterval} onChange={this.handleChangeAFI} />
                         </div>
                         <div className="input group">
-                            <label>Export</label><button onClick={() => { ComponentsRefs.exportModal.display(); this.hide();}}>OPML export</button>
+                            <label>Export</label><button onClick={() => { ComponentsRefs.exportModal.display(); this.hide(); }}>OPML export</button>
                         </div>
                     </div>
                 </div>

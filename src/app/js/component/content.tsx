@@ -20,7 +20,7 @@ export class Content extends CustomComponent<{}, ContentState> {
 
     render() {
         let html = this.state.content;
-        if(this.state.podcast) html += `<br/><audio controls preload="metadata" src="${this.state.podcast}"></audio>`
+        if(this.state.podcast) html += `<br/><audio controls preload="metadata" src="${this.state.podcast}"></audio>`;
         return (
             <div
                 ref={main => this.mainDiv = main}
