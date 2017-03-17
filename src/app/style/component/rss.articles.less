@@ -15,38 +15,38 @@
 .rss.articles h3 {
     color: @global-primary-text-color;
 }
-.rss.articles ul {
+.rss.articles > ul {
     padding: 0;
     margin: 0;
 }
-.rss.articles ul li {
+.rss.articles > ul > li {
     padding: 5px 20px;
     transition: all .2s;
     cursor: pointer;
 }
-.rss.articles ul li:last-of-type {
+.rss.articles > ul > li:last-of-type {
     border: none;
 }
-.rss.articles ul li:hover,
-.rss.articles ul li.selected {
+.rss.articles > ul > li:hover,
+.rss.articles > ul > li.selected {
     background: @rss-articles-focus-color;
     padding-left: 30px;
     padding-right: 10px;
 }
-.rss.articles ul li h3 {
+.rss.articles > ul > li h3 {
     transition: all .2s;
 }
-.rss.articles ul li h3 span {
+.rss.articles > ul > li h3 span {
     display: inline-block;
     width: ~"calc(100% - 8em)";
     text-align: left;
 }
-.rss.articles ul li h3 span + span {
+.rss.articles > ul > li h3 span + span {
     color: @global-accent-color;
     width: 8em;
     text-align: right;
 }
-.rss.articles ul li.unread {
+.rss.articles > ul > li.unread {
     border-left: 3px solid @global-accent-color;
 }
 
