@@ -48,26 +48,34 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
     handleSelect(event: React.MouseEvent<HTMLLIElement>) {
         if (!this.state.read) {
             this.editState({ read: true });
-            this.markAsRead();
-            FeedStorage.store();
+            this.markAsRead(() => {
+                FeedStorage.store();
+                ComponentsRefs.feedList.updateTrayIcon();
+            });
         }
 
         ComponentsRefs.articleList.articleComponents.forEach(articleComponent => articleComponent.editState({ selected: false }));
         this.editState({ selected: true });
 
-        ComponentsRefs.content.editState({ content: `<h3>${this.props.title}</h3> ${this.props.content}` });
+        ComponentsRefs.content.editState({
+            content: `
+                <h3>${this.props.title}</h3>
+                <div>${this.props.content}</div>
+            `,
+            podcast: this.props.podcast
+        });
 
         ComponentsRefs.content.resetScrollbar();
 
         document.querySelector("body").classList.add("show-article");
     }
 
-    markAsRead() {
+    markAsRead(callback: () => any = () => {}) {
         const articleFound = ComponentsRefs.feedList.selectedFeed.state.articles.find(article => {
             return article.id === this.props.id;
         });
         articleFound.read = true;
-        ComponentsRefs.feedList.forceUpdate();
+        ComponentsRefs.feedList.forceUpdate(callback);
     }
 }
 
@@ -78,6 +86,7 @@ interface ArticleProps {
     link: string;
     date: number;
     read: boolean;
+    podcast: string;
 }
 interface ArticleState {
     read: boolean;

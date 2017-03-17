@@ -4,9 +4,14 @@ import { ComponentsRefs } from "./../../components-refs";
 import { CustomComponent } from "./../custom-component";
 import { Http } from "./../../util/http";
 import { FeedParser } from "./../../util/feed-parser";
-import { StoredFeed } from "./../../storage";
+import { StoredFeed, FeedStorage } from "./../../storage";
+
+import { remote } from "electron";
+const { Menu, MenuItem } = remote;
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
+
+    unreadNb: number = 0;
 
     constructor(props: FeedProp) {
         super();
@@ -19,6 +24,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         };
 
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleRightClick = this.handleRightClick.bind(this);
         this.onDragStart = this.onDragStart.bind(this);
     }
 
@@ -26,12 +32,13 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         return new Promise<number>((resolve, reject) => {
             Http.get(this.props.link).then(xmlContent => {
                 resolve(this.mergeArticles(FeedParser.parse(xmlContent)));
+                ComponentsRefs.feedList.updateTrayIcon();
             }).catch(reject);
         });
     }
 
     render() {
-        const unreadNb = this.state.articles.filter(article => {
+        this.unreadNb = this.state.articles.filter(article => {
             return !article.read;
         }).length;
 
@@ -39,12 +46,13 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             <li
                 className={this.state.selected && "selected"}
                 onClick={this.handleSelect}
+                onContextMenu={this.handleRightClick}
                 draggable={true}
                 onDragStart={this.onDragStart}
-                >
+            >
                 <i className="fa fa-rss"></i>
                 <span className="title">{this.props.title}</span>
-                <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
+                <span className="notif" style={{ display: !this.unreadNb && "none" }}>{this.unreadNb}</span>
             </li>
         );
     }
@@ -61,7 +69,25 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             ComponentsRefs.articleList.resetScrollbar();
         }
     }
-
+    handleRightClick(event: React.MouseEvent<HTMLLIElement>) {
+        const menu = new Menu();
+        menu.append(new MenuItem({
+            label: "Mark as read",
+            click: () => {
+                this.editState(
+                    {
+                        articles: this.state.articles.map(article => {
+                            article.read = true;
+                            return article;
+                        })
+                    }
+                );
+                ComponentsRefs.articleList.updateArticles(this.state.articles);
+                FeedStorage.store();
+            }
+        }));
+        menu.popup();
+    }
 
     getStoreValue(): StoredFeed {
         return {
@@ -126,4 +152,5 @@ export interface IArticle {
     link: string;
     date: number;
     read?: boolean;
+    podcast?: string;
 }

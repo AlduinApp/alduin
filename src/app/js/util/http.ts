@@ -11,7 +11,10 @@ export namespace Http {
 
             const options = {
                 host: parsedUrl.host,
-                path: parsedUrl.path
+                path: parsedUrl.path,
+                headers: {
+                    "User-Agent": "Alduin RSS Reader"
+                }
             };
             const responseHandler = response => {
                 let body = "";

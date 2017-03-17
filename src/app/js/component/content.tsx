@@ -11,18 +11,21 @@ export class Content extends CustomComponent<{}, ContentState> {
         super();
 
         this.state = {
-            content: "Select an article..."
+            content: "Select an article...",
+            podcast: undefined
         };
 
         ComponentsRefs.content = this;
     }
 
     render() {
+        let html = this.state.content;
+        if(this.state.podcast) html += `<br/><audio controls preload="metadata" src="${this.state.podcast}"></audio>`
         return (
             <div
                 ref={main => this.mainDiv = main}
                 className="rss article"
-                dangerouslySetInnerHTML={{ __html: this.state.content }}>
+                dangerouslySetInnerHTML={{ __html: html }}>
             </div>
         );
     }
@@ -34,4 +37,5 @@ export class Content extends CustomComponent<{}, ContentState> {
 
 interface ContentState {
     content: string;
+    podcast: string;
 }

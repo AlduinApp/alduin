@@ -1,4 +1,4 @@
-import { app, BrowserWindow, webContents, shell, Tray, Menu, remote } from "electron";
+import { app, BrowserWindow, webContents, shell, Tray, Menu, remote, ipcMain } from "electron";
 
 import { ThemeCompiler } from "./theme-compiler";
 
@@ -25,9 +25,9 @@ function createWindow() {
                 show: false
             });
 
-            win.loadURL(`file://${__dirname}/app/view/index.html`);
+            //win.webContents.openDevTools();
 
-            win.webContents.openDevTools();
+            win.loadURL(`file://${__dirname}/app/view/index.html`);
 
             win.webContents.on("did-finish-load", () => {
                 win.show();
@@ -59,6 +59,12 @@ function buildTray() {
     tray = new Tray(`${__dirname}/app/img/icon.png`);
     const menu = Menu.buildFromTemplate([
         {
+            label: "Open Alduin",
+            click: () => {
+                win.show();
+            }
+        },
+        {
             label: "Quit Alduin",
             click: () => {
                 tryToQuit = true;
@@ -72,6 +78,10 @@ function buildTray() {
     });
 
     tray.setContextMenu(menu);
+
+    ipcMain.on("tray-state", (event, args) => {
+        tray.setImage(`${__dirname}/app/img/icon${args == "read" ? "" : "-unread"}.png`);
+    });
 }
 
 app.on("ready", createWindow);
