@@ -4,10 +4,10 @@ import { ComponentsRefs } from "./../../components-refs";
 import { CustomComponent } from "./../custom-component";
 import { Http } from "./../../util/http";
 import { FeedParser } from "./../../util/feed-parser";
-import { StoredFeed } from "./../../storage";
+import { StoredFeed, FeedStorage } from "./../../storage";
 
-import { remote } from "electron"
-const { Menu, MenuItem } = remote
+import { remote } from "electron";
+const { Menu, MenuItem } = remote;
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
 
@@ -74,14 +74,15 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
                 this.editState(
                     {
                         articles: this.state.articles.map(article => {
-                            article.read = true
+                            article.read = true;
                             return article;
                         })
                     }
                 );
                 ComponentsRefs.articleList.updateArticles(this.state.articles);
+                FeedStorage.store();
             }
-        }))
+        }));
         menu.popup();
     }
 
