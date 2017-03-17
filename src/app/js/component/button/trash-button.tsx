@@ -31,6 +31,7 @@ export class TrashButton extends CustomComponent<{}, {}> {
         if (toDelete.wasSelected) {
             ComponentsRefs.articleList.updateArticles([]);
             ComponentsRefs.content.editState({ content: "" });
+            ComponentsRefs.feedList.updateTrayIcon();
         }
         removeResult && ComponentsRefs.alertList.alert("Successfully deleted feed", "success");
     }

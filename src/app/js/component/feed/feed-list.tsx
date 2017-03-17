@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as path from "path";
+import { ipcRenderer } from "electron";
 
 import { CustomComponent } from "./../custom-component";
 import { ComponentsRefs } from "./../../components-refs";
@@ -43,17 +44,30 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
                         return <Feed
                             ref={feedComponent => {
                                 if (feedComponent) this.feedComponents[this.feedComponents.length] = feedComponent;
-                            } }
+                            }}
                             key={feed.uuid}
                             uuid={feed.uuid}
                             title={feed.title}
                             link={feed.link}
                             articles={feed.articles}
-                            />;
+                        />;
                     })
                 }
             </ul>
         );
+    }
+
+    getUnreadNb() {
+        let unreadNb = 0;
+        this.feedComponents.forEach(feedComponent => {
+            unreadNb += feedComponent.unreadNb;
+        });
+
+        return unreadNb;
+    }
+
+    updateTrayIcon() {
+        ipcRenderer.send("tray-state", this.getUnreadNb() <= 0 ? "read" : "unread");
     }
 
     isIdAlreadyUsed(uuid: string) {
@@ -84,6 +98,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
             });
             Promise.all(fetchToExecute)
                 .then(() => {
+                    this.updateTrayIcon();
                     FeedStorage.store();
                     resolve({
                         success: fetchToExecute.length - nbErrors,
@@ -112,6 +127,7 @@ export class FeedList extends CustomComponent<{}, FeedListState> {
         this.feedComponents.forEach(feedComponent => {
             storeValue[storeValue.length] = feedComponent.getStoreValue();
         });
+        ComponentsRefs.feedList.updateTrayIcon();
         return storeValue;
     }
 

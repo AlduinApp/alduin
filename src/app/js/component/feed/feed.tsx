@@ -11,6 +11,8 @@ const { Menu, MenuItem } = remote;
 
 export class Feed extends CustomComponent<FeedProp, FeedState>{
 
+    unreadNb: number = 0;
+
     constructor(props: FeedProp) {
         super();
 
@@ -30,12 +32,13 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
         return new Promise<number>((resolve, reject) => {
             Http.get(this.props.link).then(xmlContent => {
                 resolve(this.mergeArticles(FeedParser.parse(xmlContent)));
+                ComponentsRefs.feedList.updateTrayIcon();
             }).catch(reject);
         });
     }
 
     render() {
-        const unreadNb = this.state.articles.filter(article => {
+        this.unreadNb = this.state.articles.filter(article => {
             return !article.read;
         }).length;
 
@@ -49,7 +52,7 @@ export class Feed extends CustomComponent<FeedProp, FeedState>{
             >
                 <i className="fa fa-rss"></i>
                 <span className="title">{this.props.title}</span>
-                <span className="notif" style={{ display: !unreadNb && "none" }}>{unreadNb}</span>
+                <span className="notif" style={{ display: !this.unreadNb && "none" }}>{this.unreadNb}</span>
             </li>
         );
     }

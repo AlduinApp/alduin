@@ -1,4 +1,4 @@
-import { app, BrowserWindow, webContents, shell, Tray, Menu, remote } from "electron";
+import { app, BrowserWindow, webContents, shell, Tray, Menu, remote, ipcMain } from "electron";
 
 import { ThemeCompiler } from "./theme-compiler";
 
@@ -78,6 +78,10 @@ function buildTray() {
     });
 
     tray.setContextMenu(menu);
+
+    ipcMain.on("tray-state", (event, args) => {
+        tray.setImage(`${__dirname}/app/img/icon${args == "read" ? "" : "-unread"}.png`);
+    });
 }
 
 app.on("ready", createWindow);
