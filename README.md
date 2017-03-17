@@ -8,11 +8,12 @@
 Alduin is an RSS and Atom feed aggregator available on Windows and Linux.
 Open source and free, Alduin has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
 A theme system is already created so you can create your own.
+Alduin supports podcast feeds too!
 
 ![Screenshot](http://i.imgur.com/bdkyxA7.png)
 
 ## Current state
-Alduin isn't actually stable and is still evolving day by day, but you can already use it to follow your feeds ! 
+Alduin isn't actually stable and is still evolving day by day, but you can already use it to follow your feeds! 
 Made with :heart: by [Xavier Stouder](https://github.com/Xstoudi) and [Luca Laissue](https://github.com/lucalaissue).
 
 ## Download
@@ -30,4 +31,4 @@ Alduin is built on powefull and modern technologies like:
 You can contribute in many ways. Submit pull requests, create themes, report bugs, make a donation or simply use the software.
 
 ## Contact
-For help, enquiries and commercial contact, please send an email to [xavier@stouder.io](mailto://xavier@stouder.io).
+For help, enquiries and commercial contact, please send an email to [xavier+alduin@stouder.io](mailto://xavier+alduin@stouder.io).
