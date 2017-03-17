@@ -10,11 +10,7 @@ export namespace OpmlExporter {
 
             ComponentsRefs.feedList.feedComponents.forEach(feed => {
                 if (!~feedUuids.indexOf(feed.props.uuid)) return;
-
-                outlines += `<outline
-                    title="${feed.props.title}"
-                    text="${feed.props.title}"
-                    xmlUrl="${feed.props.link}" />`;
+                outlines += `<outline title="${feed.props.title}" text="${feed.props.title}" xmlUrl="${feed.props.link}" />`;
             });
 
             const toW = `
