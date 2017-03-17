@@ -15,12 +15,18 @@ export namespace FeedParser {
     export function rss(xmlString: string): IArticle[] {
         const articles: IArticle[] = [];
         new xmldoc.XmlDocument(xmlString).childNamed("channel").childrenNamed("item").forEach(item => {
+
+            let podcast = undefined;
+            if(item.childWithAttribute("url"))
+                podcast = /url="(.[^"]+)"/.exec(item.childWithAttribute("url").toString())[1]
+
             articles[articles.length] = {
                 id: item.valueWithPath("guid") || item.valueWithPath("link"),
                 title: item.valueWithPath("title"),
                 content: fixSrcset(item.valueWithPath("content:encoded") || item.valueWithPath("description") || "Can't find content"),
                 link: item.valueWithPath("link"),
-                date: Date.parse(item.valueWithPath("pubDate")) || Date.parse(item.valueWithPath("lastBuildDate")) || new Date().getTime()
+                date: Date.parse(item.valueWithPath("pubDate")) || Date.parse(item.valueWithPath("lastBuildDate")) || new Date().getTime(),
+                podcast: podcast
             };
         });
 
@@ -31,12 +37,18 @@ export namespace FeedParser {
         const articles: IArticle[] = [];
 
         new xmldoc.XmlDocument(xmlString).childrenNamed("entry").forEach(item => {
+
+            let podcast = undefined;
+            if(item.childWithAttribute("url"))
+                podcast = /url="(.[^"]+)"/.exec(item.childWithAttribute("url").toString())[1]
+
             articles[articles.length] = {
                 id: item.valueWithPath("id"),
                 title: item.valueWithPath("title"),
                 content: fixSrcset(item.valueWithPath("summary") || item.valueWithPath("content") || item.valueWithPath("subtitle")),
-                link: /href="(.+)"/.exec(item.childWithAttribute("href").toString())[1],
-                date: Date.parse(item.valueWithPath("published")) || Date.parse(item.valueWithPath("updated")) || new Date().getTime()
+                link: /href="(.[^"]+)"/.exec(item.childWithAttribute("href").toString())[1],
+                date: Date.parse(item.valueWithPath("published")) || Date.parse(item.valueWithPath("updated")) || new Date().getTime(),
+                podcast: podcast
             };
         });
 

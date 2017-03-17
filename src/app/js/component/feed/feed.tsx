@@ -152,4 +152,5 @@ export interface IArticle {
     link: string;
     date: number;
     read?: boolean;
+    podcast?: string;
 }

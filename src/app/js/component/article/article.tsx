@@ -52,13 +52,18 @@ export class Article extends CustomComponent<ArticleProps, ArticleState> {
                 FeedStorage.store();
                 ComponentsRefs.feedList.updateTrayIcon();
             });
-            console.log("HANDLESELECT")
         }
 
         ComponentsRefs.articleList.articleComponents.forEach(articleComponent => articleComponent.editState({ selected: false }));
         this.editState({ selected: true });
 
-        ComponentsRefs.content.editState({ content: `<h3>${this.props.title}</h3> ${this.props.content}` });
+        ComponentsRefs.content.editState({
+            content: `
+                <h3>${this.props.title}</h3>
+                <div>${this.props.content}</div>
+            `,
+            podcast: this.props.podcast
+        });
 
         ComponentsRefs.content.resetScrollbar();
 
@@ -81,6 +86,7 @@ interface ArticleProps {
     link: string;
     date: number;
     read: boolean;
+    podcast: string;
 }
 interface ArticleState {
     read: boolean;

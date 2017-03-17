@@ -25,6 +25,8 @@ function createWindow() {
                 show: false
             });
 
+            //win.webContents.openDevTools();
+
             win.loadURL(`file://${__dirname}/app/view/index.html`);
 
             win.webContents.on("did-finish-load", () => {

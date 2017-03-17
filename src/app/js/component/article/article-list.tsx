@@ -40,6 +40,7 @@ export class ArticleList extends CustomComponent<{}, ArticleListState> {
                                 link={article.link}
                                 read={article.read}
                                 date={article.date}
+                                podcast={article.podcast}
                                 key={article.id}
                                 ref={articleComponent => {
                                     if (articleComponent) {
