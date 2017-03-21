@@ -13,7 +13,7 @@ Alduin supports podcast feeds too!
 ![Screenshot](http://i.imgur.com/bdkyxA7.png)
 
 ## Current state
-Alduin isn't actually stable and is still evolving day by day, but you can already use it to follow your feeds! 
+Alduin will continue to evolve lead by users recommendations.
 Made with :heart: by [Xavier Stouder](https://github.com/Xstoudi) and [Luca Laissue](https://github.com/lucalaissue).
 
 ## Download
