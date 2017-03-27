@@ -44,7 +44,7 @@
     "electron-builder": "16.1.0",
     "gulp": "3.9.1",
     "tslint": "4.5.0",
-    "typescript": "2.2.1",
+    "typescript": "2.2.2",
     "webpack": "1.14.0"
   },
   "build": {
