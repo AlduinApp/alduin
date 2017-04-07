@@ -29,7 +29,7 @@
     "normalize.css": "5.0.0",
     "opml-to-json": "0.0.3",
     "react": "15.4.1",
-    "react-dom": "15.4.0",
+    "react-dom": "15.5.0",
     "react-ga": "^2.1.2",
     "xmldoc": "1.0.0"
   },
