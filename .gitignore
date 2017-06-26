@@ -1,10 +1,4 @@
 .vscode/
 node_modules/**
 *.log
-*.js
-src/app/view/*.css
-**/*.min.css
-store.json
-*.css
 dist/**
-!gulpfile.js
