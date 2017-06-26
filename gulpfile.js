@@ -1,44 +1,15 @@
-"use strict"
+const gulp = require('gulp')
+const fs = require('fs')
+const babel = require('gulp-babel')
+const del = require('del')
 
-const fs = require("fs");
-const path = require("path");
-const gulp = require("gulp");
-const packager = require("electron-packager");
+gulp.task('clean', async () => {
+    await del('dist')
+})
 
-const config = JSON.parse(fs.readFileSync("package.json"));
-
-const options = {
-    dir: ".",
-    name: "Alduin",
-    out: "dist",
-    overwrite: true,
-    prune: true,
-    "app-version": config.version
-};
-
-function createPackage(opts, done){
-    packager(options, (err, paths) => {
-        if(err) console.log(err);
-        done();
-    });
-}
-
-gulp.task("dist:win", done => {
-    options.arch = "x64";
-    options.platform = "win32";
-    options.icon = "./build/icon.ico";
-
-    createPackage(options, done);
-});
-
-gulp.task("dist:osx", done => {
-    console.log("Actually failing");
-    done();
-});
-
-gulp.task("dist:linux", done => {
-    options.arch = "x64";
-    options.platform = "linux";
-
-    createPackage(options, done);
-});
+gulp.task('build', ['clean'],() => {
+    return gulp
+        .src(['src/**/*.js', 'src/**/*.jsx'])
+        .pipe(babel({ presets: ['react', 'latest'] }))
+        .pipe(gulp.dest('dist'))
+})

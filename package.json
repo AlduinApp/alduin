@@ -1,69 +1,29 @@
 {
-  "name": "alduin",
-  "productName": "Alduin",
-  "version": "1.4.0",
+  "name": "alduin2",
+  "version": "2.0.0",
   "description": "An Atom and RSS feed aggregator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/Xstoudi/alduin.git"
   },
-  "main": "src/index.js",
-  "scripts": {
-    "test": "npm run build && tslint --project tsconfig.json",
-    "build": "npm install && tsc && webpack --display-error-details",
-    "start": "npm run build && electron .",
-    "dist:win": "npm run test && build -w",
-    "dist:linux": "npm run test && build -l"
-  },
-  "keywords": [],
   "author": "Xavier Stouder <xavier@stouder.io>",
-  "contributors": [
-    "Xavier Stouder <xavier@stouder.io>",
-    "Luca Laissue <luca@laissue.ch>"
-  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xstoudi/alduin/issues"
+  },
+  "homepage": "https://github.com/Xstoudi/alduin#readme",
   "dependencies": {
-    "font-awesome": "4.7.0",
-    "less": "2.7.2",
-    "less-plugin-clean-css": "1.5.1",
-    "normalize.css": "5.0.0",
-    "opml-to-json": "0.0.3",
-    "react": "15.4.1",
-    "react-dom": "15.4.0",
-    "xmldoc": "1.0.0"
+
   },
   "devDependencies": {
-    "@types/electron": "1.4.34",
-    "@types/less": "0.0.32",
-    "@types/node": "7.0.8",
-    "@types/react": "15.0.16",
-    "@types/react-dom": "0.14.23",
-    "@types/xmldoc": "0.5.0",
-    "electron": "1.6.1",
-    "electron-builder": "15.6.2",
-    "gulp": "3.9.1",
-    "tslint": "4.5.0",
-    "typescript": "2.2.1",
-    "webpack": "1.14.0"
-  },
-  "build": {
-    "appId": "ch.xstoudi.alduin",
-    "asar": false,
-    "win": {
-      "target": [
-        "nsis",
-        "zip"
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "zip"
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "warningsAsErrors": true
-    }
+    "del": "^3.0.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2"
   }
 }
