@@ -1,10 +1,14 @@
 {
-  "name": "alduin2",
+  "name": "alduin",
   "version": "2.0.0",
   "description": "An Atom and RSS feed aggregator",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "start": "npm run build && electron ."
   },
   "repository": {
     "type": "git",
@@ -17,13 +21,21 @@
   },
   "homepage": "https://github.com/Xstoudi/alduin#readme",
   "dependencies": {
-
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1"
   },
   "devDependencies": {
-    "del": "^3.0.0",
+    "electron": "^1.6.1",
+    "babel-loader": "^7.1.1",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2"
+    "del": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-less": "^3.3.2",
+    "mkpath": "^1.0.0",
+    "webpack": "^3.0.0"
   }
 }
