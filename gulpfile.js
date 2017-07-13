@@ -44,7 +44,7 @@ function html() {
 
 function script(callback) {
     webpack({
-        entry: './src/script/index.js',
+        entry: ['whatwg-fetch', './src/script/index.js'],
         output: {
             path: path.join(__dirname, 'dist/script'),
             filename: 'bundle.js'
@@ -52,11 +52,11 @@ function script(callback) {
         module: {
             loaders: [
                 {
-                    test: /\.jsx$/,
+                    test: /\.jsx{0,1}$/,
                     loader: 'babel-loader',
                     include: path.resolve('src'),
                     query: {
-                        presets: ['latest', 'react']
+                        presets: ['latest', 'react', 'stage-2']
                     }
                 }
             ]
