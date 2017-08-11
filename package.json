@@ -4,7 +4,6 @@
   "description": "An Atom and RSS feed aggregator",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "gulp clean",
     "build": "gulp build",
     "watch": "gulp watch",
@@ -21,16 +20,21 @@
   },
   "homepage": "https://github.com/Xstoudi/alduin#readme",
   "dependencies": {
+    "loaders.css": "^0.1.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-loaders": "^2.5.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
     "whatwg-fetch": "^2.0.3",
     "xmldoc": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",

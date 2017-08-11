@@ -1,3 +1,4 @@
+@import "vars";
 @import "colors";
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
@@ -233,6 +234,10 @@ footer {
     justify-content: center;
     align-items: center;
 
+    visibility: visible;
+    opacity: 1;
+    transition: opacity @modal-ease-time ease-in;
+
     .modal {
         color: @primary-text-color;
         background: @dark-background-color;
@@ -258,6 +263,17 @@ footer {
             color: @primary-text-color;
 
             font-size: 1.3em;
+
+            .modal-error {
+                color: @error-color;
+
+                margin-bottom: .8em;
+                
+                font-size: .8em;
+                font-weight: bold;
+
+                text-align: center;
+            }
 
             .modal-group-input {
                 display: flex;
@@ -383,8 +399,23 @@ footer {
     }
 
     &.hidden {
+        opacity: 0;
         visibility: hidden;
+        transition: visibility @modal-ease-time linear, opacity @modal-ease-time ease-out;
     }
+}
+
+// LOADER
+.mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    cursor: wait;
 }
 
 // ELECTRON

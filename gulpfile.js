@@ -1,5 +1,4 @@
 const gulp = require('gulp')
-const fs = require('fs')
 const { promisify } = require('util')
 const del = require('del')
 const htmlmin = require('gulp-htmlmin')
@@ -11,73 +10,68 @@ const webpack = require('webpack')
 /**
  * CREATE FOLDERS
  */
-async function createFolders() {
-    const promiseMkpath = promisify(mkpath)
+async function createFolders () {
+  const promiseMkpath = promisify(mkpath)
 
-    return await Promise.all([promiseMkpath('dist/style'), promiseMkpath('dist/script')])
+  return Promise.all([promiseMkpath('dist/style'), promiseMkpath('dist/script')])
 }
 
 /**
  * CLEAN FUNCTIONS
  */
-async function clean() {
-    await Promise.all([await cleanDist(), await cleanTmp()])
+async function cleanDist () {
+  return del('dist')
 }
 
-async function cleanDist() {
-    return del('dist')
-}
-
-async function cleanTmp() {
-    return del('tmp')
+async function cleanTmp () {
+  return del('tmp')
 }
 
 /**
  * BUILD FUNCTIONS
  */
-function html() {
-    return gulp
+function html () {
+  return gulp
         .src('src/index.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('dist'))
 }
 
-function script(callback) {
-    webpack({
-        entry: ['whatwg-fetch', './src/script/index.js'],
-        output: {
-            path: path.join(__dirname, 'dist/script'),
-            filename: 'bundle.js'
-        },
-        module: {
-            loaders: [
-                {
-                    test: /\.jsx{0,1}$/,
-                    loader: 'babel-loader',
-                    include: path.resolve('src'),
-                    query: {
-                        presets: ['latest', 'react', 'stage-2']
-                    }
-                }
-            ]
-        },
-        target: "electron",
-        resolve: {
-            extensions: ['.js', '.jsx'],
-            modules: ['src', 'node_modules']
+function script (callback) {
+  webpack({
+    entry: ['babel-polyfill', 'whatwg-fetch', './src/script/index.js'],
+    output: {
+      path: path.join(__dirname, 'dist/script'),
+      filename: 'bundle.js'
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.jsx{0,1}$/,
+          loader: 'babel-loader',
+          include: path.resolve('src'),
+          query: {
+            presets: ['latest', 'react', 'stage-2']
+          }
         }
-    }, (err, stats) => callback())
+      ]
+    },
+    target: 'electron',
+    resolve: {
+      extensions: ['.js', '.jsx'],
+      modules: ['src', 'node_modules']
+    }
+  }, (err, stats) => callback(err))
 }
 
-function style() {
-    return gulp
+function style () {
+  return gulp
         .src(['src/style/style.less'])
         .pipe(less({
-            paths: ['src/style']
+          paths: ['src/style']
         }))
         .pipe(gulp.dest('dist/style'))
 }
-
 
 /**
  * CREATE TASKS

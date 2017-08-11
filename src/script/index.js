@@ -1,1 +1,1 @@
-import App from './containers/app'
+require('./components/app')

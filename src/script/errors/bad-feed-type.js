@@ -1,1 +1,3 @@
-export default class BadFeedType extends Error {}
+import ExtendableError from './extendable-error'
+
+export default class BadFeedType extends ExtendableError { }
