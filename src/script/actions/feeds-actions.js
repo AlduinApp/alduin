@@ -10,3 +10,9 @@ export function updateArticles(title, articles) {
     payload: { title, articles }
   }
 }
+export function selectFeed(title){
+  return {
+    type: 'SELECT_FEED',
+    payload: title
+  }
+}

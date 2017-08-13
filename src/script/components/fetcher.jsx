@@ -15,7 +15,6 @@ class Fetch extends React.Component {
   }
 
   render() {
-
     const fetcherIconClasses = ['fa']
     fetcherIconClasses.push(`fa-${this.props.isFetching ? 'refresh fa-spin' : 'download'}`)
 
@@ -27,8 +26,6 @@ class Fetch extends React.Component {
   }
 
   async _fetchFeeds() {
-    console.log(this.props.feeds)
-
     if (this.props.feeds.length === 0) return
 
     this.props.startFetch()
@@ -51,8 +48,6 @@ class Fetch extends React.Component {
           this.props.updateArticles(feed.title, mergedArticles)
 
           endedRequests++
-
-          console.log(endedRequests)
 
           if (endedRequests === this.props.feeds.length)
             this.props.endFetch()

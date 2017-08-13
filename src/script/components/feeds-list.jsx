@@ -6,7 +6,10 @@ import Feed from './feed'
 
 class FeedsList extends React.Component {
   render() {
-    const feeds = this.props.feeds.map(feed => <Feed key={feed.title} feedInfos={feed} />)
+    const feeds = this.props.feeds.map(feed => <Feed
+      key={feed.title}
+      feedInfos={feed}
+    />)
 
     return (
       <div className='feed-list'>
@@ -15,6 +18,7 @@ class FeedsList extends React.Component {
     )
   }
 }
+
 export default connect(
   (state) => ({
     feeds: state.FeedsReducer.feeds

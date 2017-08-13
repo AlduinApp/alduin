@@ -1,13 +1,18 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-class Feed extends React.Component{
+import { selectFeed } from '../actions/feeds-actions'
+
+class Feed extends React.Component {
   render() {
-    console.log(this.props.feedInfos)
-
     const unread = this.props.feedInfos.articles.filter(article => !article.read).length
 
     return (
-      <div className='feed'>
+      <div
+        className={`feed ${this.props.selectedFeed === this.props.feedInfos.title ? 'active' : ''}`} 
+        onClick={() => this.props.selectFeed(this.props.feedInfos.title)}
+      >
         <div className='feed-icon'>
           <i className='fa fa-rss' aria-hidden='true' />
         </div>
@@ -20,4 +25,9 @@ class Feed extends React.Component{
   }
 }
 
-export default Feed
+export default connect(
+  (state) => ({
+    selectedFeed: state.FeedsReducer.selectedFeed
+  }),
+  (dispatch) => bindActionCreators({ selectFeed }, dispatch)
+)(Feed)
