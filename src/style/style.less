@@ -144,16 +144,26 @@ header {
         box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
         z-index: 8;
 
+        color: @primary-text-color;
         background: @dark-background-color;
 
         overflow-y: scroll;
+
+        .no-feed {
+            margin-left: 16px;
+        }
 
         .article {
             padding: 1em;
             transition: all .3s;
 
             &:hover {
+                cursor: pointer;
                 background: @rss-focus-background;
+            }
+            &.unread {
+                border-left: 3px solid @accent-color;
+                z-index: 9;
             }
 
             .article-header {

@@ -10,7 +10,7 @@ class Feed extends React.Component {
 
     return (
       <div
-        className={`feed ${this.props.selectedFeed === this.props.feedInfos.title ? 'active' : ''}`} 
+        className={`feed ${this.props.selectedFeed === this.props.feedInfos.title ? 'active' : ''}`}
         onClick={() => this.props.selectFeed(this.props.feedInfos.title)}
       >
         <div className='feed-icon'>
