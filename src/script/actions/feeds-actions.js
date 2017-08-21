@@ -16,9 +16,15 @@ export function selectFeed(title) {
     payload: title
   }
 }
-export function selectArticle(id) {
+export function selectArticle(article) {
   return {
     type: 'SELECT_ARTICLE',
-    payload: id
+    payload: article
+  }
+}
+export function markArticleAsRead(feedId, articleId) {
+  return {
+    type: 'READ_ARTICLE',
+    payload: { feedId, articleId }
   }
 }
