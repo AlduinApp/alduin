@@ -6,9 +6,6 @@ import { selectArticle, markArticleAsRead } from '../actions/feeds-actions'
 
 class Article extends React.Component {
   render() {
-
-    console.log('RENDER ARTICLE')
-
     return (
       <div
         className={`article ${this.props.articleInfos.read === true ? '' : 'unread'}`}
