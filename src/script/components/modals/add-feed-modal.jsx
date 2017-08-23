@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { closeCurrentModal } from '../../actions/modal-actions'
 import { addFeed } from '../../actions/feeds-actions'
 import { addAddFeedError, removeAddFeedError } from '../../actions/errors-actions'
-import { display, hide } from '../../actions/loader-actions'
-import { fetchRSSFeed, fetchAtomFeed } from '../../utils/feed-parser'
+import { displayLoader, hideLoader } from '../../actions/loader-actions'
+import { fetchRSSFeed, fetchAtomFeed, fetchJSONFeed } from '../../utils/feed-parser'
 import BadFeedType from '../../errors/bad-feed-type'
 
 class AddFeedModal extends React.Component {
@@ -19,11 +19,11 @@ class AddFeedModal extends React.Component {
     this._submit = this._submit.bind(this)
   }
 
-  componentDidUpdate(prevProps){
-    if(this.props.openModal === 'add-feed' && this.props.openModal !== prevProps.openModal)
+  componentDidUpdate(prevProps) {
+    if (this.props.openModal === 'add-feed' && this.props.openModal !== prevProps.openModal)
       this._inputs.title.focus()
   }
-  
+
   render() {
     return (
       <div className={'modal-background' + ' ' + (this.props.openModal === 'add-feed' ? '' : 'hidden')}>
@@ -38,29 +38,29 @@ class AddFeedModal extends React.Component {
             <div className='modal-group-input'>
               <div className='modal-label'>Display name</div>
               <div className='modal-input'>
-                <input type='text' id='feed-title' ref={ref => this._inputs.title = ref} />
+                <input type='text' id='add-feed-feed-title' ref={ref => this._inputs.title = ref} />
               </div>
             </div>
             <div className='modal-group-input'>
               <div className='modal-label'>Link</div>
               <div className='modal-input'>
-                <input type='text' id='feed-url' ref={ref => this._inputs.url = ref} />
+                <input type='text' id='add-feed-feed-url' ref={ref => this._inputs.url = ref} />
               </div>
             </div>
             <div className='modal-group-input'>
               <div className='modal-label'>Feed type</div>
               <div className='modal-input'>
                 <div className='modal-radio'>
-                  <input type='radio' name='feed-type' id='feed-type-rss' ref={ref => this._inputs.feed_rss = ref} />
-                  <label htmlFor='feed-type-rss'><span className='radio-border'><span /></span><span>RSS</span></label>
+                  <input type='radio' name='feed-type' id='add-feed-feed-type-rss' ref={ref => this._inputs.feed_rss = ref} />
+                  <label htmlFor='add-feed-feed-type-rss'><span className='radio-border'><span /></span><span>RSS</span></label>
                 </div>
                 <div className='modal-radio'>
-                  <input type='radio' name='feed-type' id='feed-type-atom' ref={ref => this._inputs.feed_atom = ref} />
-                  <label htmlFor='feed-type-atom'><span className='radio-border'><span /></span><span>Atom</span></label>
+                  <input type='radio' name='feed-type' id='add-feed-feed-type-atom' ref={ref => this._inputs.feed_atom = ref} />
+                  <label htmlFor='add-feed-feed-type-atom'><span className='radio-border'><span /></span><span>Atom</span></label>
                 </div>
                 <div className='modal-radio'>
-                  <input type='radio' name='feed-type' id='feed-type-json' ref={ref => this._inputs.feed_json = ref} />
-                  <label htmlFor='feed-type-json'><span className='radio-border'><span /></span><span>JSON</span></label>
+                  <input type='radio' name='feed-type' id='add-feed-feed-type-json' ref={ref => this._inputs.feed_json = ref} />
+                  <label htmlFor='add-feed-feed-type-json'><span className='radio-border'><span /></span><span>JSON</span></label>
                 </div>
               </div>
             </div>
@@ -76,12 +76,12 @@ class AddFeedModal extends React.Component {
 
   async _submit() {
     // Title checking
-    const title = document.getElementById('feed-title').value
+    const title = document.getElementById('add-feed-feed-title').value
     if (title.length === 0)
       return this.props.addAddFeedError('The feed need a display name')
 
     // Url cheking
-    const url = document.getElementById('feed-url').value
+    const url = document.getElementById('add-feed-feed-url').value
     if (url.length === 0)
       return this.props.addAddFeedError('Please give an url')
 
@@ -90,7 +90,7 @@ class AddFeedModal extends React.Component {
     let type = null
 
     types.forEach(typeCompare => {
-      if (document.getElementById(`feed-type-${typeCompare}`).checked === true)
+      if (document.getElementById(`add-feed-feed-type-${typeCompare}`).checked === true)
         type = typeCompare
     })
 
@@ -104,25 +104,29 @@ class AddFeedModal extends React.Component {
       return this.props.addAddFeedError('A feed with this url already exists')
 
     // Block UI
-    this.props.display()
+    this.props.displayLoader()
 
     // Fetch
     let articles = null
     let error = null
-    if (type === 'rss') {
+    if (type === 'rss')
       try {
         articles = await fetchRSSFeed(url)
       } catch (err) {
         error = err
       }
-    } else if (type === 'atom') {
+    else if (type === 'atom')
       try {
         articles = await fetchAtomFeed(url)
       } catch (err) {
         error = err
       }
-    } else
-      error = 'JSON feeds not supported for now'
+    else
+      try {
+        articles = await fetchJSONFeed(url)
+      } catch (err) {
+        error = err
+      }
 
     if (error == null) {
       this.props.addFeed(title, url, type, articles)
@@ -132,7 +136,7 @@ class AddFeedModal extends React.Component {
       this.props.addAddFeedError(error instanceof BadFeedType ? 'Unrecognized feed type' : 'Failed to fetch feed')
 
     // Unblock UI
-    this.props.hide()
+    this.props.hideLoader()
   }
 
   _reset() {
@@ -152,6 +156,6 @@ export default connect(
     closeCurrentModal,
     addFeed,
     addAddFeedError, removeAddFeedError,
-    display, hide
+    displayLoader, hideLoader
   }, dispatch)
 )(AddFeedModal)

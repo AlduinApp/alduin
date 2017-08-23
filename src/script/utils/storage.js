@@ -34,7 +34,11 @@ export default class Storage {
 
   _autoStore() {
     this.autoStoreId = setInterval(() => {
-      if (this.storeRequest === true) this._store()
+      console.log('Autostore')
+      if (this.storeRequest === true) {
+        this._store()
+        this.storeRequest = false
+      }
     }, 1000)
   }
 }

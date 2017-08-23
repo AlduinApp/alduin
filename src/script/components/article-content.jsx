@@ -6,7 +6,15 @@ class ArticleContent extends React.Component {
   render() {
     let content
     if(this.props.selectedArticle == null) content = 'Select an article'
-    else content = <div><h1>{this.props.selectedArticle.title}</h1> <div dangerouslySetInnerHTML={{__html: this.props.selectedArticle.content}}></div></div>
+    else content = (
+      <div>
+        <h1>{this.props.selectedArticle.title}</h1>
+        <div dangerouslySetInnerHTML={{__html: this.props.selectedArticle.content}}></div>
+        <div className='read-more'>
+          <a href={this.props.selectedArticle.link}>Read more...</a>
+        </div>
+      </div>
+    )
 
     return (
       <div className='article-content'>

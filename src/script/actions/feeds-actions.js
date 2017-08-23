@@ -4,6 +4,12 @@ export function addFeed(title, url, type, articles) {
     payload: { title, url, type, articles }
   }
 }
+export function editFeed(feedId, newTitle) {
+  return {
+    type: 'EDIT_FEED',
+    payload: { feedId, newTitle }
+  }
+}
 export function updateArticles(title, articles) {
   return {
     type: 'UPDATE_ARTICLES',
@@ -26,6 +32,12 @@ export function markArticleAsRead(feedId, articleId) {
   return {
     type: 'READ_ARTICLE',
     payload: { feedId, articleId }
+  }
+}
+export function markArticlesAsRead(feedId) {
+  return {
+    type: 'READ_ARTICLES',
+    payload: { feedId }
   }
 }
 export function deleteFeed(id) {

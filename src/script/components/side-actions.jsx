@@ -3,7 +3,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { openAddFeedModal } from '../actions/modal-actions'
+import { openAddFeedModal, openSettingsModal } from '../actions/modal-actions'
 import { setTooltip, resetTooltip } from '../actions/tooltip-actions'
 import Fetch from './fetcher'
 import Trash from './trash'
@@ -26,6 +26,7 @@ class SideActions extends React.Component {
           className='settings-button'
           onMouseEnter={() => this.props.setTooltip('Open Alduin\'s settings')}
           onMouseLeave={this.props.resetTooltip}
+          onClick={this.props.openSettingsModal}
         >
           <i className='fa fa-cog faa-spin faa-slow animated-hover' aria-hidden='true' />
         </div>
@@ -36,5 +37,5 @@ class SideActions extends React.Component {
 
 export default connect(
     (state) => ({ }),
-    (dispatch) => bindActionCreators({ openAddFeedModal, setTooltip, resetTooltip }, dispatch)
+    (dispatch) => bindActionCreators({ openAddFeedModal, openSettingsModal, setTooltip, resetTooltip }, dispatch)
 )(SideActions)

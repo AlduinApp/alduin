@@ -7,6 +7,7 @@ import ErrorsReducer from './errors-reducer'
 import LoaderReducer from './loader-reducer'
 import FetcherReducer from './fetcher-reducer'
 import TooltipReducer from './tooltip-reducer'
+import SettingsReducer from './settings-reducer'
 
 const allReducers = combineReducers({
   WindowReducer,
@@ -15,7 +16,8 @@ const allReducers = combineReducers({
   ErrorsReducer,
   LoaderReducer,
   FetcherReducer,
-  TooltipReducer
+  TooltipReducer,
+  SettingsReducer
 })
 
 export default allReducers

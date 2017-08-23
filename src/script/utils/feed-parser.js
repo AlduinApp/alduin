@@ -7,7 +7,7 @@ const feedRegexps = {
   atom: /<feed\b/i
 }
 
-export async function fetchRSSFeed (url) {
+export async function fetchRSSFeed(url) {
   const feedContent = await fetch(url).then(res => res.text())
   if (!feedRegexps.rss.test(feedContent)) throw new BadFeedType()
 
@@ -21,7 +21,7 @@ export async function fetchRSSFeed (url) {
   }))
 }
 
-export async function fetchAtomFeed (url) {
+export async function fetchAtomFeed(url) {
   const feedContent = await fetch(url).then(res => res.text())
   if (!feedRegexps.atom.test(feedContent)) throw new BadFeedType()
 
@@ -35,6 +35,18 @@ export async function fetchAtomFeed (url) {
   }))
 }
 
-function fixSrcset (content) {
+export async function fetchJSONFeed(url) {
+  const feedContent = await fetch(url).then(res => res.text())
+  return JSON.parse(feedContent).items.map(item => ({
+    id: item.id,
+    title: item.title,
+    content: item.content_html,
+    link: item.url,
+    date: Date.parse(item.date_published) || new Date().getTime(),
+    read: false
+  }))
+}
+
+function fixSrcset(content) {
   return content.replace(/([^:])(\/\/[\S]*)/g, '$1http:$2')
 }

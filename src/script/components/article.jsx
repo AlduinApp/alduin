@@ -22,10 +22,9 @@ class Article extends React.Component {
         <p
           className='article-intro'
           dangerouslySetInnerHTML={{
-            __html: `${this.props.articleInfos.content.replace(/<a( href=".*"){0,1}>/, "")
-              .replace(/<\/a>/, "")
+            __html: `${this.props.articleInfos.content.replace(/(<([^>]+)>)/ig,'')
               .substring(0, 360)
-              .replace("\n", " ")
+              .replace('\n', ' ')
               .trim()}...`
           }}>
         </p>
