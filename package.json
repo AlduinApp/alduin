@@ -26,6 +26,7 @@
     "react-loaders": "^2.5.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
+    "redux-watch": "^1.1.1",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "whatwg-fetch": "^2.0.3",
