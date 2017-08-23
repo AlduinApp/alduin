@@ -209,7 +209,7 @@ header {
 
 footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     height: 2em;
 
@@ -221,14 +221,22 @@ footer {
 
     z-index: 10;
 
-    .about, .fork-me, .report-issue {
-        padding: 0 .8em;
-        color: inherit;
-        text-decoration: none;
-        
-        &:hover {
-            cursor: pointer;
-            background: rgba(0, 0, 0, .2);
+    .tooltip {
+        margin-left: .8em;
+    }
+    .alduins-links {
+
+        display: flex;
+
+        .about, .fork-me, .report-issue {
+            padding: 0 .8em;
+            color: inherit;
+            text-decoration: none;
+            
+            &:hover {
+                cursor: pointer;
+                background: rgba(0, 0, 0, .2);
+            }
         }
     }
 }

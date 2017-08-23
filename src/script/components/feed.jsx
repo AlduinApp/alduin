@@ -5,6 +5,13 @@ import { connect } from 'react-redux'
 import { selectFeed } from '../actions/feeds-actions'
 
 class Feed extends React.Component {
+
+  constructor() {
+    super()
+
+    this._dragFeed = this._dragFeed.bind(this)
+  }
+
   render() {
     const unread = this.props.feedInfos.articles.filter(article => !article.read).length
 
@@ -12,6 +19,8 @@ class Feed extends React.Component {
       <div
         className={`feed ${this.props.selectedFeed === this.props.feedInfos.title ? 'active' : ''}`}
         onClick={() => this.props.selectFeed(this.props.feedInfos.title)}
+        draggable='true'
+        onDragStart={this._dragFeed}
       >
         <div className='feed-icon'>
           <i className='fa fa-rss' aria-hidden='true' />
@@ -22,6 +31,11 @@ class Feed extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _dragFeed(event) {
+    event.dataTransfer.setData('text/plain', this.props.feedIdx)
+    event.dataTransfer.dropEffect = 'move'
   }
 }
 

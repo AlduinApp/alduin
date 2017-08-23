@@ -9,6 +9,7 @@ export default function (state = defaultState, action) {
   switch (action.type) {
     case 'ADD_FEED': return { ...state, feeds: [...state.feeds, action.payload] }
     case 'SELECT_FEED': return { ...state, selectedFeed: action.payload }
+    case 'DELETE_FEED': return { ...state, feeds: state.feeds.filter((feed, idx) => idx != action.payload) }
     case 'SELECT_ARTICLE': return { ...state, selectedArticle: action.payload }
     case 'READ_ARTICLE':
       return {

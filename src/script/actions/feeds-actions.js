@@ -28,3 +28,9 @@ export function markArticleAsRead(feedId, articleId) {
     payload: { feedId, articleId }
   }
 }
+export function deleteFeed(id) {
+  return {
+    type: 'DELETE_FEED',
+    payload: id
+  }
+}

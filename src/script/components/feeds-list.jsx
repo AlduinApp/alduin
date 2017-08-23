@@ -6,9 +6,10 @@ import Feed from './feed'
 
 class FeedsList extends React.Component {
   render() {
-    const feeds = this.props.feeds.map(feed => <Feed
+    const feeds = this.props.feeds.map((feed, idx) => <Feed
       key={feed.title}
       feedInfos={feed}
+      feedIdx={idx}
     />)
 
     return (

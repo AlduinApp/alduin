@@ -6,6 +6,7 @@ import FeedsReducer from './feeds-reducer'
 import ErrorsReducer from './errors-reducer'
 import LoaderReducer from './loader-reducer'
 import FetcherReducer from './fetcher-reducer'
+import TooltipReducer from './tooltip-reducer'
 
 const allReducers = combineReducers({
   WindowReducer,
@@ -13,7 +14,8 @@ const allReducers = combineReducers({
   FeedsReducer,
   ErrorsReducer,
   LoaderReducer,
-  FetcherReducer
+  FetcherReducer,
+  TooltipReducer
 })
 
 export default allReducers

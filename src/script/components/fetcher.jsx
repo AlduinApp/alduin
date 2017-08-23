@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { startFetch, endFetch } from '../actions/fetcher-actions'
 import { fetchRSSFeed, fetchAtomFeed } from '../utils/feed-parser'
 import { updateArticles } from '../actions/feeds-actions'
+import { setTooltip, resetTooltip } from '../actions/tooltip-actions'
 
 class Fetch extends React.Component {
 
@@ -19,7 +20,12 @@ class Fetch extends React.Component {
     fetcherIconClasses.push(`fa-${this.props.isFetching ? 'refresh fa-spin' : 'download'}`)
 
     return (
-      <div className='fetch-feeds-button' onClick={this._fetchFeeds}>
+      <div 
+        className='fetch-feeds-button'
+        onMouseEnter={() => this.props.setTooltip('Click to fetch feeds')}
+        onMouseLeave={this.props.resetTooltip}
+        onClick={this._fetchFeeds}
+      >
         <i className={fetcherIconClasses.join(' ')} aria-hidden='true' />
       </div>
     )
@@ -61,5 +67,5 @@ export default connect(
     isFetching: state.FetcherReducer.isFetching,
     feeds: state.FeedsReducer.feeds
   }),
-  (dispatch) => bindActionCreators({ startFetch, endFetch, updateArticles }, dispatch)
+  (dispatch) => bindActionCreators({ startFetch, endFetch, updateArticles, setTooltip, resetTooltip }, dispatch)
 )(Fetch)
