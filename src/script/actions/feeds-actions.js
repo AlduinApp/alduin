@@ -1,7 +1,7 @@
-export function addFeed(title, url, type, articles) {
+export function addFeed(title, url, type, isRtl, articles) {
   return {
     type: 'ADD_FEED',
-    payload: { title, url, type, articles }
+    payload: { title, url, type, isRtl, articles }
   }
 }
 export function editFeed(feedId, newTitle) {

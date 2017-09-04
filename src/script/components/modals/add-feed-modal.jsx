@@ -1,6 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import IpcClient from 'electron-ipc-tunnel/client'
 
 import { closeCurrentModal } from '../../actions/modal-actions'
 import { addFeed } from '../../actions/feeds-actions'
@@ -127,9 +128,15 @@ class AddFeedModal extends React.Component {
       } catch (err) {
         error = err
       }
+    console.log(error)
+
+    let isRtl = false
+    if (articles.length > 0)
+      isRtl = await new IpcClient().send('is-rtl', [articles[0].content, url])
+    
 
     if (error == null) {
-      this.props.addFeed(title, url, type, articles)
+      this.props.addFeed(title, url, type, isRtl, articles)
       this.props.closeCurrentModal()
       this._reset()
     } else

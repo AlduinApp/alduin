@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore, bindActionCreators } from 'redux'
+import { Provider, connect } from 'react-redux'
 import watch from 'redux-watch'
 
 import allReducers from '../reducers'
+
+import { openUpdateModal } from '../actions/modal-actions'
 
 import Header from './header'
 import Footer from './footer'
@@ -12,12 +14,18 @@ import MainContainer from './main-container'
 import AddFeedModal from './modals/add-feed-modal'
 import SettingsModal from './modals/settings-modal'
 import EditFeedModal from './modals/edit-feed-modal'
+import UpdateModal from './modals/update-modal'
+
 import Loader from './loader'
 
 import Storage from '../utils/storage'
 
-class App extends React.Component {
+import { updateWaiter } from '../utils/update-waiter'
+
+class AppClass extends React.Component {
   render() {
+    updateWaiter.init(this.props.openUpdateModal)
+
     return (
       <div className='app'>
         <Header />
@@ -27,11 +35,18 @@ class App extends React.Component {
         <AddFeedModal />
         <SettingsModal />
         <EditFeedModal />
+        <UpdateModal />
         <Loader />
       </div>
     )
   }
 }
+const App = connect(
+  (state) => ({}),
+  (dispatch) => bindActionCreators({
+    openUpdateModal
+  }, dispatch)
+)(AppClass)
 
 const localStorage = new Storage()
 

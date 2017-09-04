@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 
 class ArticleContent extends React.Component {
   render() {
+    if(this.props.selectedArticle)
+      console.log(this.props.selectedArticle.isRtl)
     let content
     if(this.props.selectedArticle == null) content = 'Select an article'
     else content = (
-      <div>
+      <div dir={this.props.selectedArticle.isRtl ? 'rtl' : 'ltr'}>
         <h1>{this.props.selectedArticle.title}</h1>
         <div dangerouslySetInnerHTML={{__html: this.props.selectedArticle.content}}></div>
         <div className='read-more'>

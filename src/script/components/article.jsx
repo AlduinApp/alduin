@@ -10,10 +10,11 @@ class Article extends React.Component {
       <div
         className={`article ${this.props.articleInfos.read === true ? '' : 'unread'}`}
         onClick={() => {
-            this.props.selectArticle(this.props.articleInfos)
+            this.props.selectArticle({...this.props.articleInfos, isRtl: this.props.isRtl})
             this.props.markArticleAsRead(this.props.feedId, this.props.articleInfos.id)
           }
         }
+        dir={this.props.isRtl ? 'rtl' : 'ltr'}
       >
         <div className='article-header'>
           <span className='article-title'>{this.props.articleInfos.title}</span>

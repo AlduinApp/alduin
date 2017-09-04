@@ -8,7 +8,9 @@ const feedRegexps = {
 }
 
 export async function fetchRSSFeed(url) {
-  const feedContent = await fetch(url).then(res => res.text())
+  console.log('--------')
+  const feedContent = await get(url).then(res => res.text())
+  console.log('--------')
   if (!feedRegexps.rss.test(feedContent)) throw new BadFeedType()
 
   return new XmlDocument(feedContent).childNamed('channel').childrenNamed('item').map(item => ({
@@ -22,7 +24,7 @@ export async function fetchRSSFeed(url) {
 }
 
 export async function fetchAtomFeed(url) {
-  const feedContent = await fetch(url).then(res => res.text())
+  const feedContent = await get(url).then(res => res.text())
   if (!feedRegexps.atom.test(feedContent)) throw new BadFeedType()
 
   return new XmlDocument(feedContent).childNamed('channel').childrenNamed('item').map(item => ({
@@ -36,7 +38,7 @@ export async function fetchAtomFeed(url) {
 }
 
 export async function fetchJSONFeed(url) {
-  const feedContent = await fetch(url).then(res => res.text())
+  const feedContent = await get(url).then(res => res.text())
   return JSON.parse(feedContent).items.map(item => ({
     id: item.id,
     title: item.title,
@@ -49,4 +51,20 @@ export async function fetchJSONFeed(url) {
 
 function fixSrcset(content) {
   return content.replace(/([^:])(\/\/[\S]*)/g, '$1http:$2')
+}
+
+function get(url) {
+  console.log('get ' + url)
+  return fetch(url).then(followRedirections)
+}
+
+function followRedirections(response) {
+  return new Promise(async (resolve, reject) => {
+    console.log('status code ' + response.status)
+    if (response.status === 300 || response.status === 301 || response.status === 302 && 'location' in response.headers) {
+      console.log('redirect')
+      resolve(get(response.headers.location))
+    } else
+      resolve(response)
+  })
 }

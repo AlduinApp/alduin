@@ -10,9 +10,16 @@ export function openEditFeedModal (feedId)  {
     payload: feedId
   }
 }
+
 export function openSettingsModal () {
   return {
     type: 'OPEN_SETTINGS_MODAL'
+  }
+}
+
+export function openUpdateModal(){
+  return {
+    type: 'OPEN_UPDATE_MODAL'
   }
 }
 
