@@ -31,7 +31,7 @@
     "react": "15.4.1",
     "react-dom": "15.4.0",
     "react-ga": "^2.1.2",
-    "xmldoc": "1.0.0"
+    "xmldoc": "1.1.0"
   },
   "devDependencies": {
     "@types/electron": "1.4.34",
