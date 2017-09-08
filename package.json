@@ -34,7 +34,7 @@
     "xmldoc": "1.0.0"
   },
   "devDependencies": {
-    "@types/electron": "1.4.34",
+    "@types/electron": "1.4.35",
     "@types/less": "0.0.32",
     "@types/node": "7.0.9",
     "@types/react": "15.0.19",
