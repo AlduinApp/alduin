@@ -1,39 +1,65 @@
 {
   "name": "alduin",
-  "productName": "Alduin",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "An Atom and RSS feed aggregator",
+  "main": "main.js",
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "start": "npm run build && electron .",
+    "rebuild": "electron-rebuild",
+    "release": "electron-builder"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/Xstoudi/alduin.git"
   },
-  "main": "src/index.js",
-  "scripts": {
-    "test": "npm run build && tslint --project tsconfig.json",
-    "build": "npm install && tsc && webpack --display-error-details",
-    "start": "npm run build && electron .",
-    "dist:win": "npm run test && build -w",
-    "dist:linux": "npm run test && build -l"
-  },
-  "keywords": [],
   "author": "Xavier Stouder <xavier@stouder.io>",
-  "contributors": [
-    "Xavier Stouder <xavier@stouder.io>",
-    "Luca Laissue <luca@laissue.ch>"
-  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xstoudi/alduin/issues"
+  },
+  "homepage": "https://github.com/Xstoudi/alduin#readme",
   "dependencies": {
-    "font-awesome": "4.7.0",
-    "less": "2.7.2",
-    "less-plugin-clean-css": "1.5.1",
-    "normalize.css": "5.0.0",
-    "opml-to-json": "0.0.3",
-    "react": "15.4.1",
-    "react-dom": "15.4.0",
-    "react-ga": "^2.1.2",
-    "xmldoc": "1.0.0"
+    "cld": "2.4.7",
+    "electron-ipc-tunnel": "3.1.0",
+    "getos": "3.0.1",
+    "loaders.css": "0.1.2",
+    "os-name": "2.0.1",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "react-loaders": "2.5.0",
+    "react-redux": "5.0.5",
+    "react-sound": "0.8.0",
+    "redux": "3.7.1",
+    "redux-watch": "1.1.1",
+    "request": "2.81.0",
+    "request-promise-native": "1.0.4",
+    "rtl-detect": "1.0.0",
+    "tld-extract": "1.0.1",
+    "util.promisify": "1.0.0",
+    "xmldoc": "1.1.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
+    "babel-core": "6.25.0",
+    "babel-loader": "7.1.1",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-latest": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "del": "3.0.0",
+    "electron": "^1.6.1",
+    "electron-builder": "19.24.1",
+    "electron-rebuild": "1.6.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-copy": "1.0.1",
+    "gulp-htmlmin": "3.0.0",
+    "gulp-less": "3.3.2",
+    "mkpath": "1.0.0",
+    "webpack": "3.0.0"
+=======
     "@types/electron": "1.4.34",
     "@types/less": "0.0.32",
     "@types/node": "7.0.9",
@@ -46,10 +72,14 @@
     "tslint": "4.5.0",
     "typescript": "2.2.1",
     "webpack": "1.14.0"
+>>>>>>> master
   },
   "build": {
-    "appId": "ch.xstoudi.alduin",
-    "asar": false,
+    "appId": "io.stouder.alduin",
+    "productName": "Alduin",
+    "directories": {
+      "output": "bin"
+    },
     "win": {
       "target": [
         "nsis",
@@ -60,11 +90,8 @@
       "target": [
         "AppImage",
         "zip"
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "warningsAsErrors": true
+      ],
+      "category": "Utility"
     }
   }
 }

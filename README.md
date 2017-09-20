@@ -1,30 +1,27 @@
 # Alduin
 [![Twitter](https://img.shields.io/twitter/follow/Xstoudi.svg?style=social&label=Follow%20@Xstoudi)](https://twitter.com/Xstoudi)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Xstoudi/alduin/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/AlduinRSS/alduin.svg?style=flat-square)](https://github.com/AlduinRSS/alduin/release) [![Travis](https://img.shields.io/travis/AlduinRSS/alduin/release.svg?style=flat-square)](https://travis-ci.org/AlduinRSS/alduin)
-[![Github All Releases](https://img.shields.io/github/downloads/Xstoudi/alduin/total.svg?style=flat-square)](https://github.com/Xstoudi/alduin/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/AlduinApp/alduin/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/AlduinApp/alduin.svg?style=flat-square)](https://github.com/AlduinRSS/alduin/release) [![Travis](https://img.shields.io/travis/AlduinRSS/alduin/release.svg?style=flat-square)](https://travis-ci.org/AlduinRSS/alduin)
+[![Github All Releases](https://img.shields.io/github/downloads/AlduinApp/alduin/total.svg?style=flat-square)](https://github.com/AlduinApp/alduin/releases)
+
 
 ## Overview
-Alduin is an RSS and Atom feed aggregator available on Windows and Linux.
+Alduin is an RSS, Atom and JSON feed aggregator available on Windows and Linux.
 Open source and free, Alduin has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
-A theme system is already created so you can create your own.
-Alduin supports podcast feeds too!
 
 ![Screenshot](http://i.imgur.com/bdkyxA7.png)
 
 ## Current state
 Alduin will continue to evolve lead by users recommendations.
-Made with :heart: by [Xavier Stouder](https://github.com/Xstoudi) and [Luca Laissue](https://github.com/lucalaissue).
+Made with :heart: by [Xavier Stouder](https://github.com/Xstoudi).
 
 ## Download
-To download Alduin, just go [on the release page](https://github.com/Xstoudi/alduin/releases) and download the zip archive corresponding to your OS.
-The OSX packaged version isn't available yet because of a packaging issue but you can contribute to add it.
+To download Alduin, just go [on the release page](https://github.com/AlduinApp/alduin/releases) and download the archive or executable corresponding to your OS.
 
 ## Technical specifications
 Alduin is built on powefull and modern technologies like:
 * [Electron](http://electron.atom.io/)
 * [React](https://facebook.github.io/react/)
-* [TypeScript](https://www.typescriptlang.org/)
 * [Less](http://lesscss.org/)
 
 ## Contributing
