@@ -80,7 +80,7 @@ class TrackerModal extends React.Component {
       }
     }
 
-    const res = await fetch('http://localhost:4000/api/token', {
+    const res = await fetch('http://alduin.stouder.io:4000/api/token', {
       method: 'POST',
       mode: 'cors',
       headers: new Headers({

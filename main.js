@@ -52,8 +52,6 @@ function createWindow() {
     }
   })
 
-  win.webContents.openDevTools()
-
   win.webContents.on('will-navigate', (event, url) => {
     const focused = webContents.getFocusedWebContents()
     if (!focused || url === focused.getURL()) return

@@ -28,7 +28,7 @@ class Heartbeat extends React.Component {
 
   async _heartbeat() {
     if (this.props.token != null && this.props.dntm === false) {
-      const res = await fetch('http://localhost:4000/api/heartbeat', {
+      const res = await fetch('http://alduin.stouder.io:4000/api/heartbeat', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ class Heartbeat extends React.Component {
       this._badTokenHandler(res)
     }
     if(this.interval === -1)
-      this.interval = setInterval(this._heartbeat, 2000)
+      this.interval = setInterval(this._heartbeat, 60000)
   }
 
   _badTokenHandler(res) {
