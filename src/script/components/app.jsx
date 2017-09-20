@@ -15,6 +15,9 @@ import AddFeedModal from './modals/add-feed-modal'
 import SettingsModal from './modals/settings-modal'
 import EditFeedModal from './modals/edit-feed-modal'
 import UpdateModal from './modals/update-modal'
+import TrackerModal from './modals/tracker-modal'
+
+import Heartbeat from './heartbeat'
 
 import Loader from './loader'
 
@@ -36,7 +39,10 @@ class AppClass extends React.Component {
         <SettingsModal />
         <EditFeedModal />
         <UpdateModal />
+        <TrackerModal />
         <Loader />
+
+        <Heartbeat />
       </div>
     )
   }
@@ -54,6 +60,7 @@ const store = createStore(allReducers, localStorage.load())
 
 store.subscribe(watch(store.getState, 'FeedsReducer.feeds')(startStore))
 store.subscribe(watch(store.getState, 'SettingsReducer')(startStore))
+store.subscribe(watch(store.getState, 'TrackerReducer')(startStore))
 
 function startStore() {
   const fullState = store.getState()
@@ -62,7 +69,11 @@ function startStore() {
     FeedsReducer: {
       feeds: fullState.FeedsReducer.feeds
     },
-    SettingsReducer: fullState.SettingsReducer
+    SettingsReducer: fullState.SettingsReducer,
+    TrackerReducer: {
+      token: fullState.TrackerReducer.token,
+      dntm: fullState.TrackerReducer.dntm
+    }
   })
 }
 

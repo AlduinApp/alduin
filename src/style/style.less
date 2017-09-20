@@ -301,6 +301,10 @@ footer {
 
             font-size: 1.3em;
 
+            &.tracker {
+                font-size: 1em;
+            }
+
             .modal-error {
                 color: @error-color;
 
@@ -385,6 +389,50 @@ footer {
                             }
 
                             &:checked + label > .radio-border {
+                                border: 1px solid @accent-color;
+
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                span {
+                                    width: .4em;
+                                    height: .4em;
+
+                                    background: @accent-color;
+
+                                    border-radius: 50%;
+                                }
+                            }
+                        }
+                    }
+                    .modal-checkbox {
+                        font-size: .8em;
+
+                        input[type="checkbox"] {
+                            display: none;
+                            
+                            & + label {
+                                display: flex;
+                                align-items: center;
+
+                                & > span {
+                                    cursor: pointer;
+                                }
+
+                                & > .checkbox-border {
+                                    display: inline-block;
+
+                                    width: 1.2em;
+                                    height: 1.2em;
+
+                                    background: @light-background-color;
+
+                                    margin-right: 1em;
+                                }
+                            }
+
+                            &:checked + label > .checkbox-border {
                                 border: 1px solid @accent-color;
 
                                 display: flex;

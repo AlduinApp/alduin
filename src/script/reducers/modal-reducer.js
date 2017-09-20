@@ -6,7 +6,7 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case 'OPEN_ADD_FEED_MODAL': return { ...state, openModal: 'add-feed' }
-    case 'OPEN_EDIT_FEED_MODAL': return { ...state, openModal: 'edit-feed', datas: action.payload}
+    case 'OPEN_EDIT_FEED_MODAL': return { ...state, openModal: 'edit-feed', datas: action.payload }
     case 'OPEN_SETTINGS_MODAL': return { ...state, openModal: 'settings' }
     case 'OPEN_UPDATE_MODAL': return { ...state, openModal: 'update' }
 

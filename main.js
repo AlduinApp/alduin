@@ -1,21 +1,34 @@
-const { app, BrowserWindow, webContents, shell, autoUpdater, ipcMain } = require('electron')
+const {
+  app,
+  BrowserWindow,
+  webContents,
+  shell,
+  autoUpdater,
+  ipcMain,
+  Menu,
+  Tray
+} = require('electron')
 const path = require('path')
 const url = require('url')
 const cld = require('cld')
 const tldExtract = require('tld-extract')
-
 const registerIpc = require('electron-ipc-tunnel/server').default
 const rtlDetect = require('rtl-detect')
 
 let win
+let tryToQuit = false
+let tray
 
 function createWindow() {
+  buildTray()
   win = new BrowserWindow({
     width: 800,
     height: 600,
     minWidth: 800,
     minHeight: 600,
-    frame: false
+    frame: false,
+    show: false,
+    icon: `${__dirname}/dist/assets/image/icon.png`
   })
 
   win.loadURL(url.format({
@@ -23,6 +36,21 @@ function createWindow() {
     protocol: 'file:',
     slashes: true
   }))
+
+  win.webContents.on('did-finish-load', () => {
+    win.show();
+  });
+
+  win.on('closed', () => {
+    win = null
+  })
+
+  win.on('close', event => {
+    if (!tryToQuit) {
+      event.preventDefault()
+      win.hide()
+    }
+  })
 
   win.webContents.openDevTools()
 
@@ -60,12 +88,11 @@ registerIpc('is-rtl', async (reply, [content, url]) => {
 })
 
 // Autoupdate
-autoUpdater.setFeedURL(`http://alduin-update:3000/update/${process.platform}/${app.getVersion()}}`)
+autoUpdater.setFeedURL(`http://alduin-update.stouder.io:3000/update/${process.platform}/${app.getVersion()}}`)
 
 registerIpc('update-waiter', async reply => {
   return await new Promise(resolve => {
     autoUpdater.on('update-downloaded', async event => {
-      console.log('resolve lel')
       resolve()
     })
     setInterval(() => {
@@ -77,3 +104,26 @@ registerIpc('update-waiter', async reply => {
 registerIpc('update-start', async reply => {
   autoUpdater.quitAndInstall()
 })
+
+// Tray
+function buildTray() {
+  tray = new Tray(`${__dirname}/dist/assets/image/icon.png`)
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'Open Alduin',
+      click: () => {
+        win.show();
+      }
+    },
+    {
+      label: 'Quit Alduin',
+      click: () => (tryToQuit = true, app.quit())
+    }
+  ])
+
+  tray.on('double-click', event => win.show())
+
+  tray.setContextMenu(menu);
+
+  ipcMain.on('tray-state', (event, args) => tray.setImage(`${__dirname}/dist/assets/image/icon${args == 'read' ? '' : '-unread'}.png`))
+}

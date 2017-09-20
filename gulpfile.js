@@ -6,6 +6,7 @@ const less = require('gulp-less')
 const path = require('path')
 const mkpath = require('mkpath')
 const webpack = require('webpack')
+const gulpCopy = require('gulp-copy')
 
 /**
  * CREATE FOLDERS
@@ -39,7 +40,7 @@ function html () {
 
 function script (callback) {
   webpack({
-    entry: ['babel-polyfill', 'whatwg-fetch', './src/script/index.js'],
+    entry: ['babel-polyfill', './src/script/index.js'],
     output: {
       path: path.join(__dirname, 'dist/script'),
       filename: 'bundle.js'
@@ -73,6 +74,11 @@ function style () {
         .pipe(gulp.dest('dist/style'))
 }
 
+function assets (){
+  return gulp.src(['src/assets/**/**'])
+    .pipe(gulpCopy('dist/assets/', {prefix: 2}))
+}
+
 /**
  * CREATE TASKS
  */
@@ -83,8 +89,9 @@ gulp.task('clean', gulp.parallel('clean-tmp', 'clean-dist'))
 gulp.task('html', html)
 gulp.task('style', style)
 gulp.task('script', script)
+gulp.task('assets', assets)
 
-const build = gulp.series('clean', 'create-folders', 'script', gulp.parallel('html', 'style'), 'clean-tmp')
+const build = gulp.series('clean', 'create-folders', 'script', gulp.parallel('html', 'style'), 'assets', 'clean-tmp')
 
 gulp.task('watch', () => { return gulp.watch(['**', '!dist', '!tmp'], build) })
 gulp.task('build', build)

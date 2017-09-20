@@ -8,8 +8,15 @@ import LoaderReducer from './loader-reducer'
 import FetcherReducer from './fetcher-reducer'
 import TooltipReducer from './tooltip-reducer'
 import SettingsReducer from './settings-reducer'
+import TrackerReducer from './tracker-reducer'
+
+function logger(state = {}, action){
+  console.log(action)
+  return state
+}
 
 const allReducers = combineReducers({
+  logger,
   WindowReducer,
   ModalReducer,
   FeedsReducer,
@@ -17,7 +24,8 @@ const allReducers = combineReducers({
   LoaderReducer,
   FetcherReducer,
   TooltipReducer,
-  SettingsReducer
+  SettingsReducer,
+  TrackerReducer
 })
 
 export default allReducers

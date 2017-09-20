@@ -5,7 +5,6 @@ const defaultState = {
 }
 
 export default function (state = defaultState, action) {
-  console.log(action)
   switch (action.type) {
     case 'ADD_FEED': return { ...state, feeds: [...state.feeds, action.payload] }
     case 'EDIT_FEED': return {...state, feeds: state.feeds.map((feed, idx) => ({

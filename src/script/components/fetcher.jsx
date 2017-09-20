@@ -2,6 +2,7 @@ import React from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Sound from 'react-sound'
 
 import { startFetch, endFetch } from '../actions/fetcher-actions'
 import { fetchRSSFeed, fetchAtomFeed } from '../utils/feed-parser'
@@ -16,6 +17,14 @@ class Fetch extends React.Component {
     this._fetchFeeds = this._fetchFeeds.bind(this)
     this.autoFetcherId = -1
     this.actualInterval = -1
+
+    this.state = {
+      pop: false
+    }
+  }
+
+  componentDidMount () {
+    soundManager.setup({debugMode: false});
   }
 
   render() {
@@ -35,6 +44,13 @@ class Fetch extends React.Component {
         onClick={this._fetchFeeds}
       >
         <i className={fetcherIconClasses.join(' ')} aria-hidden='true' />
+        <Sound
+          url='assets/sound/pop.mp3'
+          playStatus={this.state.pop ? Sound.status.PLAYING : Sound.status.STOPPED}
+          volume={25}
+          autoLoad={true}
+          playFromPosition={500}
+        />
       </div>
     )
   }
@@ -73,10 +89,17 @@ class Fetch extends React.Component {
 
           if (endedRequests === this.props.feeds.length) {
             this.props.endFetch()
-            if (fetchedArticlesNbre > 0)
+            if (fetchedArticlesNbre > 0) {
               new Notification('New articles', {
                 body: `Alduin just fetch ${fetchedArticlesNbre} new articles !`
               })
+              if (this.props.popOnFetch === true)
+                this.setState({
+                  pop: true
+                }, () => setTimeout(
+                  () => this.setState({ pop: false }), 1500)
+                )
+            }
           }
         })
         .catch(err => {
@@ -93,7 +116,8 @@ export default connect(
   (state) => ({
     isFetching: state.FetcherReducer.isFetching,
     feeds: state.FeedsReducer.feeds,
-    fetchInterval: state.SettingsReducer.fetchInterval
+    fetchInterval: state.SettingsReducer.fetchInterval,
+    popOnFetch: state.SettingsReducer.popOnFetch
   }),
   (dispatch) => bindActionCreators({
     startFetch,

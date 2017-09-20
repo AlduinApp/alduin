@@ -41,6 +41,15 @@ class SettingsModal extends React.Component {
                 </div>
               </div>
             </div>
+            <div className='modal-group-input'>
+              <div className='modal-label'>Fetch sound</div>
+              <div className='modal-input'>
+                <div className='modal-checkbox'>
+                  <input type='checkbox' id='pop-sound' ref={ref => this._inputs.pop = ref} defaultValue={this.props.popOnFetch} />
+                  <label htmlFor='pop-sound'><span className='checkbox-border'><span /></span></label>
+                </div>
+              </div>
+            </div>
           </div>
           <div className='modal-footer'>
             <button className='cancel-button' onClick={this.props.closeCurrentModal}>Cancel</button>
@@ -52,14 +61,15 @@ class SettingsModal extends React.Component {
   }
 
   _saveSettings() {
-    this.props.saveSettings({ fetchInterval: Number(this._inputs.fetchInterval.value) })
+    this.props.saveSettings({ fetchInterval: Number(this._inputs.fetchInterval.value), popOnFetch: this._inputs.pop.checked })
   }
 }
 
 export default connect(
   (state) => ({
     openModal: state.ModalReducer.openModal,
-    fetchInterval: state.SettingsReducer.fetchInterval
+    fetchInterval: state.SettingsReducer.fetchInterval,
+    popOnFetch: state.SettingsReducer.popOnFetch
   }),
   (dispatch) => bindActionCreators({
     closeCurrentModal,

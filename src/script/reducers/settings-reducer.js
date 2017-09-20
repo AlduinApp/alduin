@@ -1,7 +1,8 @@
 import { remote } from 'electron'
 
 const defaultState = {
-  fetchInterval: 1
+  fetchInterval: 1,
+  popOnFetch: true
 }
 
 export default function (state = defaultState, action) {

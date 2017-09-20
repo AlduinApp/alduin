@@ -8,15 +8,13 @@ const feedRegexps = {
 }
 
 export async function fetchRSSFeed(url) {
-  console.log('--------')
   const feedContent = await get(url).then(res => res.text())
-  console.log('--------')
   if (!feedRegexps.rss.test(feedContent)) throw new BadFeedType()
 
   return new XmlDocument(feedContent).childNamed('channel').childrenNamed('item').map(item => ({
     id: (item.valueWithPath('guid') || item.valueWithPath('link')).trim(),
     title: item.valueWithPath('title').trim(),
-    content: (fixSrcset(item.valueWithPath('content:encoded') || item.valueWithPath('description')) || 'Can\'t find content').trim(),
+    content: (fixSrcset(item.valueWithPath('content:encoded') || item.valueWithPath('description') || '<i>Can\'t find content</i>')).trim(),
     link: item.valueWithPath('link').trim(),
     date: Date.parse(item.valueWithPath('pubDate')) || Date.parse(item.valueWithPath('lastBuildDate')) || new Date().getTime(),
     read: false
@@ -30,7 +28,7 @@ export async function fetchAtomFeed(url) {
   return new XmlDocument(feedContent).childNamed('channel').childrenNamed('item').map(item => ({
     id: item.valueWithPath('id').trim(),
     title: item.valueWithPath('title').trim(),
-    content: fixSrcset(item.valueWithPath('summary') || item.valueWithPath('content') || item.valueWithPath('subtitle')).trim(),
+    content: fixSrcset(item.valueWithPath('summary') || item.valueWithPath('content') || item.valueWithPath('subtitle') || '<i>Can\'t find content</i>').trim(),
     link: item.childWithAttribute('href').attr.href.trim(),
     date: Date.parse(item.valueWithPath('published')) || Date.parse(item.valueWithPath('updated')) || new Date().getTime(),
     read: false
@@ -54,15 +52,17 @@ function fixSrcset(content) {
 }
 
 function get(url) {
-  console.log('get ' + url)
-  return fetch(url).then(followRedirections)
+  return fetch(url, 
+  {
+    headers: {
+      "User-Agent": "Alduin RSS"
+    }
+  }).then(followRedirections)
 }
 
 function followRedirections(response) {
   return new Promise(async (resolve, reject) => {
-    console.log('status code ' + response.status)
     if (response.status === 300 || response.status === 301 || response.status === 302 && 'location' in response.headers) {
-      console.log('redirect')
       resolve(get(response.headers.location))
     } else
       resolve(response)

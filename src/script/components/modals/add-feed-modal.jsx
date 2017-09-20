@@ -108,7 +108,7 @@ class AddFeedModal extends React.Component {
     this.props.displayLoader()
 
     // Fetch
-    let articles = null
+    let articles = []
     let error = null
     if (type === 'rss')
       try {
@@ -128,7 +128,6 @@ class AddFeedModal extends React.Component {
       } catch (err) {
         error = err
       }
-    console.log(error)
 
     let isRtl = false
     if (articles.length > 0)
