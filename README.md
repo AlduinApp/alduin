@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/AlduinApp/alduin/blob/master/LICENSE) 
 [![Github Release Version](https://img.shields.io/github/release/AlduinApp/alduin.svg?style=flat-square)](https://github.com/AlduinRSS/alduin/release)
 [![Github All Releases](https://img.shields.io/github/downloads/AlduinApp/alduin/total.svg?style=flat-square)](https://github.com/AlduinApp/alduin/releases)
+[![Libraries.io for GitHub](https://img.shields.io/librariesio/github/AlduinApp/alduin.svg?style=flat-square)](https://alduinapp.github.io/releases)
 [![Website](https://img.shields.io/website-up-down-green-red/https/alduinapp.github.io.svg?label=Alduin%27s%20website&style=flat-square)](https://alduinapp.github.io)
 [![Donation](https://img.shields.io/badge/Donate-here-green.svg?style=flat-square)](https://alduinapp.github.io/)
 
