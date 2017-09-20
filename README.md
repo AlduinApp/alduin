@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/AlduinApp/alduin/blob/master/LICENSE) [![Github Release Version](https://img.shields.io/github/release/AlduinApp/alduin.svg?style=flat-square)](https://github.com/AlduinRSS/alduin/release) [![Travis](https://img.shields.io/travis/AlduinRSS/alduin/release.svg?style=flat-square)](https://travis-ci.org/AlduinRSS/alduin)
 [![Github All Releases](https://img.shields.io/github/downloads/AlduinApp/alduin/total.svg?style=flat-square)](https://github.com/AlduinApp/alduin/releases)
 
+
 ## Overview
 Alduin is an RSS, Atom and JSON feed aggregator available on Windows and Linux.
 Open source and free, Alduin has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
