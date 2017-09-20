@@ -9,7 +9,7 @@
     "watch": "gulp watch",
     "start": "npm run build && electron .",
     "rebuild": "electron-rebuild",
-    "release": "electron-builder"
+    "release": "npm install && npm run rebuild && electron-builder --publish=never"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "del": "3.0.0",
     "electron": "1.6.1",
     "electron-builder": "19.24.1",
+    "electron-builder-squirrel-windows": "19.28.3",
     "electron-rebuild": "1.6.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-copy": "1.0.1",
@@ -66,8 +67,9 @@
       "output": "bin"
     },
     "win": {
+      "icon": "build/icon.ico",
       "target": [
-        "nsis",
+        "squirrel",
         "zip"
       ]
     },

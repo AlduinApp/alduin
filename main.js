@@ -86,7 +86,7 @@ registerIpc('is-rtl', async (reply, [content, url]) => {
 })
 
 // Autoupdate
-autoUpdater.setFeedURL(`http://alduin-update.stouder.io:3000/update/${process.platform}/${app.getVersion()}}`)
+autoUpdater.setFeedURL(`http://alduin.stouder.io:3000/update/${process.platform}/${app.getVersion()}}`)
 
 registerIpc('update-waiter', async reply => {
   return await new Promise(resolve => {
@@ -94,8 +94,9 @@ registerIpc('update-waiter', async reply => {
       resolve()
     })
     setInterval(() => {
-      autoUpdater.checkForUpdates()
-    }, 1000)
+      if (process.argv[1] !== '--squirrel-firstrun')
+        autoUpdater.checkForUpdates();
+    }, 60000)
   })
 })
 
