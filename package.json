@@ -42,7 +42,6 @@
     "xmldoc": "1.1.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "babel-core": "6.25.0",
     "babel-loader": "7.1.1",
     "babel-polyfill": "6.23.0",
@@ -50,7 +49,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "del": "3.0.0",
-    "electron": "^1.6.1",
+    "electron": "1.6.1",
     "electron-builder": "19.24.1",
     "electron-rebuild": "1.6.0",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -59,20 +58,6 @@
     "gulp-less": "3.3.2",
     "mkpath": "1.0.0",
     "webpack": "3.0.0"
-=======
-    "@types/electron": "1.4.34",
-    "@types/less": "0.0.32",
-    "@types/node": "7.0.9",
-    "@types/react": "15.0.19",
-    "@types/react-dom": "0.14.23",
-    "@types/xmldoc": "0.5.0",
-    "electron": "1.6.1",
-    "electron-builder": "16.1.0",
-    "gulp": "3.9.1",
-    "tslint": "4.5.0",
-    "typescript": "2.2.1",
-    "webpack": "1.14.0"
->>>>>>> master
   },
   "build": {
     "appId": "io.stouder.alduin",
