@@ -8,6 +8,7 @@
     "build": "gulp build",
     "watch": "gulp watch",
     "start": "npm run build && electron .",
+    "rebuild": "electron-rebuild",
     "release": "electron-builder"
   },
   "repository": {
@@ -25,6 +26,7 @@
     "electron-ipc-tunnel": "3.1.0",
     "getos": "3.0.1",
     "loaders.css": "0.1.2",
+    "nan": "2.7.0",
     "os-name": "2.0.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
