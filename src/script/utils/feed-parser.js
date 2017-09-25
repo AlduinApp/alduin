@@ -25,7 +25,7 @@ export async function fetchAtomFeed(url) {
   const feedContent = await get(url).then(res => res.text())
   if (!feedRegexps.atom.test(feedContent)) throw new BadFeedType()
 
-  return new XmlDocument(feedContent).childNamed('channel').childrenNamed('item').map(item => ({
+  return new XmlDocument(feedContent).childrenNamed('entry').map(item => ({
     id: item.valueWithPath('id').trim(),
     title: item.valueWithPath('title').trim(),
     content: fixSrcset(item.valueWithPath('summary') || item.valueWithPath('content') || item.valueWithPath('subtitle') || '<i>Can\'t find content</i>').trim(),
