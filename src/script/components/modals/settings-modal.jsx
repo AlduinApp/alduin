@@ -15,6 +15,7 @@ class SettingsModal extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className={'modal-background' + ' ' + (this.props.openModal === 'settings' ? '' : 'hidden')}>
         <div className='modal'>
@@ -45,7 +46,7 @@ class SettingsModal extends React.Component {
               <div className='modal-label'>Fetch sound</div>
               <div className='modal-input'>
                 <div className='modal-checkbox'>
-                  <input type='checkbox' id='pop-sound' ref={ref => this._inputs.pop = ref} defaultValue={this.props.popOnFetch} />
+                  <input type='checkbox' id='pop-sound' ref={ref => this._inputs.pop = ref} defaultChecked={this.props.popOnFetch} />
                   <label htmlFor='pop-sound'><span className='checkbox-border'><span /></span></label>
                 </div>
               </div>
