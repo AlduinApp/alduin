@@ -7,6 +7,10 @@
 [![Website](https://img.shields.io/website-up-down-green-red/https/alduinapp.github.io.svg?label=Alduin%27s%20website&style=flat-square)](https://alduinapp.github.io)
 [![Donation](https://img.shields.io/badge/Donate-here-green.svg?style=flat-square)](https://alduinapp.github.io/)
 
+## Sponsor
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/RFZm26J558vLyi6jH9gt7X9F/AlduinApp/alduin'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/RFZm26J558vLyi6jH9gt7X9F/AlduinApp/alduin.svg' />
+</a>
 
 ## Overview
 Alduin is an RSS, Atom and JSON feed aggregator available on Windows and Linux.
