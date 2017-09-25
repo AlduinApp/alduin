@@ -8,6 +8,7 @@
 [![Donation](https://img.shields.io/badge/Donate-here-green.svg?style=flat-square)](https://alduinapp.github.io/)
 
 ## Sponsor
+If you like Alduin and the product that is shown in the box, don't hesitate to click on it!
 <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/RFZm26J558vLyi6jH9gt7X9F/AlduinApp/alduin'>
   <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/RFZm26J558vLyi6jH9gt7X9F/AlduinApp/alduin.svg' />
 </a>
