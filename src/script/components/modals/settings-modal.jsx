@@ -15,7 +15,6 @@ class SettingsModal extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className={'modal-background' + ' ' + (this.props.openModal === 'settings' ? '' : 'hidden')}>
         <div className='modal'>

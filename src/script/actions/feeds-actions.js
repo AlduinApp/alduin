@@ -11,7 +11,6 @@ export function editFeed(feedId, newTitle) {
   }
 }
 export function updateArticles(feedTitle, articles) {
-  console.log('update articles action')
   return {
     type: 'UPDATE_ARTICLES',
     payload: { feedTitle, articles }

@@ -104,7 +104,6 @@ class TrackerModal extends React.Component {
   }
 
   _badTokenHandler(res) {
-    console.log(res)
     if (res.status === 400)
       remote.app.quit()
   }

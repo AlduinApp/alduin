@@ -140,7 +140,6 @@ class AddFeedModal extends React.Component {
       this._reset()
     } else
       this.props.addAddFeedError(error instanceof BadFeedType ? 'Unrecognized feed type' : 'Failed to fetch feed')
-    console.log(error)
 
     // Unblock UI
     this.props.hideLoader()

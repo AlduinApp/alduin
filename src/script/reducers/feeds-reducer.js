@@ -11,7 +11,7 @@ export default function (state = defaultState, action) {
       ...feed,
       title: action.payload.feedId === idx ? action.payload.newTitle : feed.title
     }))}
-    case 'UPDATE_ARTICLES': console.log('reducer articles update'); return {...state, feeds: state.feeds.map(feed => ({
+    case 'UPDATE_ARTICLES': return {...state, feeds: state.feeds.map(feed => ({
       ...feed,
       articles: action.payload.feedTitle === feed.title ? action.payload.articles : feed.articles
     }))}
