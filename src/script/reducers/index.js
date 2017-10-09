@@ -11,7 +11,7 @@ import SettingsReducer from './settings-reducer'
 import TrackerReducer from './tracker-reducer'
 
 function logger(state = {}, action){
-  console.log(action)
+  console.log('STORE CHANGE', action)
   return state
 }
 

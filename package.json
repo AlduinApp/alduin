@@ -1,6 +1,6 @@
 {
   "name": "alduin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An Atom and RSS feed aggregator",
   "main": "main.js",
   "scripts": {
@@ -42,7 +42,6 @@
     "xmldoc": "1.1.0"
   },
   "devDependencies": {
-    "7zip-bin-linux": "1.1.0",
     "babel-core": "6.25.0",
     "babel-loader": "7.1.1",
     "babel-polyfill": "6.23.0",
@@ -60,6 +59,9 @@
     "gulp-less": "3.3.2",
     "mkpath": "1.0.0",
     "webpack": "3.0.0"
+  },
+  "optionalDependencies": {
+    "7zip-bin-linux": "1.1.0"
   },
   "build": {
     "appId": "io.stouder.alduin",

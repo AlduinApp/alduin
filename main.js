@@ -38,8 +38,8 @@ function createWindow() {
   }))
 
   win.webContents.on('did-finish-load', () => {
-    win.show();
-  });
+    win.show()
+  })
 
   win.on('closed', () => {
     win = null

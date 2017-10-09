@@ -10,10 +10,11 @@ export function editFeed(feedId, newTitle) {
     payload: { feedId, newTitle }
   }
 }
-export function updateArticles(title, articles) {
+export function updateArticles(feedTitle, articles) {
+  console.log('update articles action')
   return {
     type: 'UPDATE_ARTICLES',
-    payload: { title, articles }
+    payload: { feedTitle, articles }
   }
 }
 export function selectFeed(title) {

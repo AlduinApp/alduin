@@ -75,7 +75,7 @@ class Fetch extends React.Component {
       (type === 'rss' ? fetchRSSFeed : fetchAtomFeed)(feed.url)
         .then(newArticles => {
 
-          const mergedArticles = feed.articles
+          const mergedArticles = [...feed.articles]
 
           for (const newArticle of newArticles) {
             if (mergedArticles.findIndex(article => article.id === newArticle.id) !== -1) continue
