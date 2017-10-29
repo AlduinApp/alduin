@@ -91,7 +91,7 @@ class Fetch extends React.Component {
             this.props.endFetch()
             if (fetchedArticlesNbre > 0) {
               new Notification('New articles', {
-                body: `Alduin just fetch ${fetchedArticlesNbre} new articles !`
+                body: `Alduin just fetched ${fetchedArticlesNbre} new articles !`
               })
               if (this.props.popOnFetch === true)
                 this.setState({
