@@ -53,7 +53,7 @@
     "electron-builder": "19.24.1",
     "electron-builder-squirrel-windows": "19.28.3",
     "electron-rebuild": "1.6.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "4.0.0",
     "gulp-copy": "1.0.1",
     "gulp-htmlmin": "3.0.0",
     "gulp-less": "3.3.2",
