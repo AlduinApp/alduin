@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { memo, useCallback, useMemo, MouseEvent } from 'react';
-import { FaAtom, FaEdit, FaRss } from 'react-icons/fa';
+import { FaAtom, FaEdit, FaQuestion, FaRss } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import useEditMode from '../hooks/useEditMode';
@@ -8,6 +8,7 @@ import useView from '../hooks/useView';
 import useViewDispatch from '../hooks/useViewDispatch';
 import { OPEN_MODAL, SET_ACTIVE_FEED } from '../state/view/ViewActionType';
 import IFeed from '../types/Feed';
+import FeedType from '../types/FeedType';
 
 import Button from './form/Button';
 
@@ -70,11 +71,11 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
             <FaEdit />
           </Button>
         )}
-        {type === 'rss' ? (
-          <FaRss className="w-6 h-6" />
-        ) : (
-          <FaAtom className="w-6 h-6" />
-        )}
+
+        {type === 'rss' && <FaRss className="w-6 h-6" />}
+        {type === 'atom' && <FaAtom className="w-6 h-6" />}
+        {type === null && <FaQuestion className="w-6 h-6" />}
+
         <div>{displayName}</div>
       </div>
       {unread > 0 && (
