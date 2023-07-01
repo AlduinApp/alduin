@@ -3,6 +3,7 @@
 
 pub mod commands;
 pub mod structs;
+pub mod enums;
 
 use commands::fetcher::sync;
 

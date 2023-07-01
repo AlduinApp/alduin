@@ -4,6 +4,7 @@ use atom_syndication::Feed;
 use crate::structs::article::Article;
 use reqwest::blocking::Client;
 use reqwest::redirect::Policy;
+use crate::enums::feed_type::FeedType;
 
 #[tauri::command]
 pub fn sync(feed_link: &str) -> Vec<Article> {
@@ -56,6 +57,7 @@ fn parse_rss(content: String) -> Result<Vec<Article>, Box<dyn std::error::Error>
             content: item.description().unwrap_or_default().to_string(),
             date: item.pub_date().unwrap().to_string(),
             link: item.link().unwrap_or_default().to_string(),
+            feed_type: FeedType::RSS,
             read: false,
         }
     }).collect::<Vec<_>>();
@@ -71,6 +73,7 @@ fn parse_atom(content: String) -> Result<Vec<Article>, Box<dyn std::error::Error
             content: entry.summary().unwrap().value.to_string(),
             date: entry.published().unwrap().to_rfc2822(),
             link: entry.links()[0].href().to_string(),
+            feed_type: FeedType::Atom,
             read: false,
         }
     }).collect::<Vec<Article>>();

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { memo, useCallback, useMemo, MouseEvent } from 'react';
-import { FaEdit, FaRss } from 'react-icons/fa';
+import { FaAtom, FaEdit, FaRss } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import useEditMode from '../hooks/useEditMode';
@@ -13,7 +13,7 @@ import Button from './form/Button';
 
 interface FeedProps extends FeedType {}
 
-function Feed({ identifier, displayName, link, articles }: FeedProps) {
+function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
   const view = useView();
   const viewDispatch = useViewDispatch();
   const navigate = useNavigate();
@@ -70,7 +70,11 @@ function Feed({ identifier, displayName, link, articles }: FeedProps) {
             <FaEdit />
           </Button>
         )}
-        <FaRss className="w-6 h-6" />
+        {type === 'rss' ? (
+          <FaRss className="w-6 h-6" />
+        ) : (
+          <FaAtom className="w-6 h-6" />
+        )}
         <div>{displayName}</div>
       </div>
       {unread > 0 && (

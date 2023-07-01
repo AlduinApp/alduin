@@ -4,5 +4,6 @@ export default interface Article {
   content: string;
   date: Date;
   link: string;
+  type: 'atom' | 'rss';
   read: boolean;
 }
