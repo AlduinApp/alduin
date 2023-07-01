@@ -46,8 +46,6 @@ export function AddFeedModal() {
     setForm(defaultForm);
   }, [defaultForm]);
 
-  const { syncByLink } = useSync();
-
   const handleOpenChange = useCallback(
     (newState: boolean) => {
       viewDispatch({
@@ -69,30 +67,25 @@ export function AddFeedModal() {
     (event: FormEvent) => {
       event.preventDefault();
 
-      syncByLink(form.feedLink)
-        .then((articles) => {
-          dataDispatch({
-            type: ADD_FEED,
-            payload: {
-              displayName: form.displayName,
-              link: form.feedLink,
-              articles,
-            },
-          });
+      dataDispatch({
+        type: ADD_FEED,
+        payload: {
+          displayName: form.displayName,
+          link: form.feedLink,
+        },
+      });
 
-          viewDispatch({
-            type: CLOSE_MODAL,
-            payload: { identifier: modalIdentifier },
-          });
+      viewDispatch({
+        type: CLOSE_MODAL,
+        payload: { identifier: modalIdentifier },
+      });
 
-          setForm({
-            displayName: '',
-            feedLink: '',
-          });
-        })
-        .catch((error) => console.log(error));
+      setForm({
+        displayName: '',
+        feedLink: '',
+      });
     },
-    [dataDispatch, form.displayName, form.feedLink, syncByLink, viewDispatch],
+    [dataDispatch, form.displayName, form.feedLink, viewDispatch],
   );
 
   return (

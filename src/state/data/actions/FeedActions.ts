@@ -2,6 +2,7 @@ import { v4 as uuid } from '@lukeed/uuid';
 import { Draft } from 'immer';
 
 import Article from '../../../types/Article';
+import FeedType from '../../../types/FeedType';
 import reconciliate from '../../../utils/reconciliate';
 import {
   ADD_FEED,
@@ -14,12 +15,17 @@ import { DataState } from '../DataReducer';
 
 export type AddFeedAction = DataActionType<
   typeof ADD_FEED,
-  { displayName: string; link: string; articles: Article[] }
+  { displayName: string; link: string }
 >;
 
 export type UpdateArticlesAction = DataActionType<
   typeof UPDATE_ARTICLES,
   { identifier: string; articles: Article[] }
+>;
+
+export type UpdateFeedTypeAction = DataActionType<
+  typeof UPDATE_ARTICLES,
+  { identifier: string; type: FeedType }
 >;
 
 export type ReadArticleAction = DataActionType<
@@ -34,13 +40,15 @@ export type RemoveFeedAction = DataActionType<
 
 export function addFeed(
   draft: Draft<DataState>,
-  {
+  { displayName, link }: { displayName: string; link: string },
+) {
+  draft.feeds.push({
+    identifier: uuid(),
     displayName,
     link,
-    articles,
-  }: { displayName: string; link: string; articles: Article[] },
-) {
-  draft.feeds.push({ identifier: uuid(), displayName, link, articles });
+    articles: [],
+    type: null,
+  });
 }
 
 export function updateArticles(
@@ -64,6 +72,16 @@ export function updateArticles(
       );
     }
   }
+}
+
+export function updateFeedType(
+  draft: Draft<DataState>,
+  { identifier, type }: { identifier: string; type: Exclude<FeedType, null> },
+) {
+  const feed = draft.feeds.find((feed) => feed.identifier === identifier);
+  if (!feed) return;
+
+  feed.type = type;
 }
 
 export function readArticle(

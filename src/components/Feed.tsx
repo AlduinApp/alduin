@@ -7,11 +7,11 @@ import useEditMode from '../hooks/useEditMode';
 import useView from '../hooks/useView';
 import useViewDispatch from '../hooks/useViewDispatch';
 import { OPEN_MODAL, SET_ACTIVE_FEED } from '../state/view/ViewActionType';
-import FeedType from '../types/Feed';
+import IFeed from '../types/Feed';
 
 import Button from './form/Button';
 
-interface FeedProps extends FeedType {}
+interface FeedProps extends IFeed {}
 
 function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
   const view = useView();
