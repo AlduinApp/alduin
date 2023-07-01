@@ -5,33 +5,35 @@ use crate::structs::article::Article;
 use reqwest::blocking::Client;
 use reqwest::redirect::Policy;
 use crate::enums::feed_type::FeedType;
+use crate::structs::sync_response::SyncResponse;
 
 #[tauri::command]
-pub fn sync(feed_link: &str) -> Vec<Article> {
-
+pub fn sync(feed_identifier: &str, feed_link: &str) -> Result<SyncResponse, String> {
     let (content, content_type) = match fetch_feed(feed_link) {
         Ok((content, content_type)) => (content, content_type),
-        Err(_) => return vec![],
+        Err(_) => return Err("Error fetching feed".to_string()),
     };
 
     return if content_type.contains("application/rss+xml") || content_type.contains("text/xml") {
         match parse_rss(content) {
-            Ok(articles) => articles,
-            Err(e) => {
-                eprintln!("Error parsing atom feed: {}", e);
-                vec![]
-            },
+            Ok(articles) => Ok(SyncResponse {
+                identifier: feed_identifier.to_string(),
+                feed_type: FeedType::RSS,
+                articles,
+            }),
+            Err(e) => Err(format!("Error parsing rss feed: {}", e)),
         }
     } else if content_type.contains("application/atom+xml") {
         match parse_atom(content) {
-            Ok(articles) => articles,
-            Err(e) => {
-                eprintln!("Error parsing atom feed: {}", e);
-                vec![]
-            },
+            Ok(articles) => Ok(SyncResponse {
+                identifier: feed_identifier.to_string(),
+                feed_type: FeedType::Atom,
+                articles,
+            }),
+            Err(e) => Err(format!("Error parsing atom feed: {}", e)),
         }
     } else {
-        vec![]
+        Err("Unsupported feed type".to_string())
     }
 }
 
@@ -57,7 +59,6 @@ fn parse_rss(content: String) -> Result<Vec<Article>, Box<dyn std::error::Error>
             content: item.description().unwrap_or_default().to_string(),
             date: item.pub_date().unwrap().to_string(),
             link: item.link().unwrap_or_default().to_string(),
-            feed_type: FeedType::RSS,
             read: false,
         }
     }).collect::<Vec<_>>();
@@ -73,7 +74,6 @@ fn parse_atom(content: String) -> Result<Vec<Article>, Box<dyn std::error::Error
             content: entry.summary().unwrap().value.to_string(),
             date: entry.published().unwrap().to_rfc2822(),
             link: entry.links()[0].href().to_string(),
-            feed_type: FeedType::Atom,
             read: false,
         }
     }).collect::<Vec<Article>>();

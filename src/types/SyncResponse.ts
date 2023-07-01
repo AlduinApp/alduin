@@ -1,3 +1,5 @@
+import FeedType from './FeedType';
+
 interface ArticleResponse {
   id: string;
   title: string;
@@ -6,6 +8,8 @@ interface ArticleResponse {
   link: string;
 }
 
-type SyncResponse = ArticleResponse[];
-
-export default SyncResponse;
+export default interface SyncResponse {
+  identifier: string;
+  type: FeedType;
+  articles: ArticleResponse[];
+}

@@ -15,7 +15,7 @@ export default function useSync() {
       feedLink: link,
     });
 
-    return response.map(({ id, title, content, link, date }) => ({
+    return response.articles.map(({ id, title, content, link, date }) => ({
       identifier: xxHash32(id).toString(16),
       title,
       content,
