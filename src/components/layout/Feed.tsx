@@ -24,7 +24,7 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
       payload: { identifier },
     });
   }, [identifier, navigate, viewDispatch]);
-  const { editing } = useEditMode();
+  const { isEditing } = useEditMode();
 
   const editFeed = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -61,7 +61,7 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
       onClick={selectFeed}
     >
       <div className="flex flex-row gap-4 items-center text-xl leading-8">
-        {editing && (
+        {isEditing && (
           <Button
             variant="primary"
             className="text-white text-base leading-6"

@@ -13,5 +13,5 @@ export default function useEditMode() {
     viewDispatch({ type: TOGGLE_EDIT_MODE });
   }, [viewDispatch]);
 
-  return { editing: editMode, toggleEditMode };
+  return { isEditing: editMode, toggleEditMode };
 }
