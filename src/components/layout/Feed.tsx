@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { memo, useCallback, useMemo, MouseEvent } from 'react';
 import { FaAtom, FaEdit, FaQuestion, FaRss } from 'react-icons/fa';
+import { VscJson } from 'react-icons/vsc';
 import { useNavigate } from 'react-router-dom';
 
 import useEditMode from '../../hooks/useEditMode';
@@ -71,6 +72,7 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
 
         {type === 'rss' && <FaRss className="w-6 h-6" />}
         {type === 'atom' && <FaAtom className="w-6 h-6" />}
+        {type === 'atom' && <VscJson className="w-6 h-6" />}
         {type === null && <FaQuestion className="w-6 h-6" />}
 
         <div>{displayName}</div>

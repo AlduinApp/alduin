@@ -1,4 +1,3 @@
-
 use crate::enums::feed_type::FeedType;
 use crate::structs::article::Article;
 
@@ -7,5 +6,5 @@ pub struct SyncResponse {
     pub identifier: String,
     #[serde(rename = "type")]
     pub feed_type: FeedType,
-    pub articles: Vec<Article>,
+    pub articles: Vec<Article>
 }
