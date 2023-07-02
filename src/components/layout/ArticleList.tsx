@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 
-import useActiveArticle from '../hooks/useActiveArticle';
-import useActiveFeed from '../hooks/useActiveFeed';
+import useActiveArticle from '../../hooks/useActiveArticle';
+import useActiveFeed from '../../hooks/useActiveFeed';
 
 import Article from './Article';
 

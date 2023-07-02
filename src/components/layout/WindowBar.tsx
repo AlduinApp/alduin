@@ -9,14 +9,13 @@ import {
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import useView from '../hooks/useView';
-import useViewDispatch from '../hooks/useViewDispatch';
+import useView from '../../hooks/useView';
+import useViewDispatch from '../../hooks/useViewDispatch';
 import {
   SET_ACTIVE_ARTICLE,
   SET_ACTIVE_FEED,
-} from '../state/view/ViewActionType';
-
-import IconButton from './form/IconButton';
+} from '../../state/view/ViewActionType';
+import IconButton from '../form/IconButton';
 
 function WindowBar() {
   const navigate = useNavigate();

@@ -2,10 +2,10 @@ import { forwardRef, memo, useCallback, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useMedia } from 'react-use';
 
-import ArticleFull from './ArticleFull';
-import ArticleList from './ArticleList';
-import FeedList from './FeedList';
 import { PortalProvider } from './context/PortalContext';
+import ArticleFull from './layout/ArticleFull';
+import ArticleList from './layout/ArticleList';
+import FeedList from './layout/FeedList';
 
 function CenterPanel() {
   const [centerPanelRef, setCenterPanelRef] = useState<HTMLElement | null>(

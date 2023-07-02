@@ -6,10 +6,13 @@ import {
   OPEN_MODAL,
   SET_ACTIVE_ARTICLE,
   SET_ACTIVE_FEED,
+  SET_FETCHING,
   TOGGLE_EDIT_MODE,
 } from './ViewActionType';
 import * as EditActions from './actions/EditActions';
 import { ToggleEditModeAction } from './actions/EditActions';
+import * as FetchingActions from './actions/FetchingActions';
+import { SetFetchingAction } from './actions/FetchingActions';
 import * as ModalActions from './actions/ModalActions';
 import {
   CloseModalAction,
@@ -30,6 +33,7 @@ export interface ViewState {
   activeFeed: string | null;
   activeArticle: string | null;
   editMode: boolean;
+  fetching: boolean;
 }
 
 export const initialViewState: ViewState = {
@@ -42,6 +46,7 @@ export const initialViewState: ViewState = {
   activeFeed: null,
   activeArticle: null,
   editMode: false,
+  fetching: false,
 };
 
 export type ViewActions =
@@ -49,7 +54,8 @@ export type ViewActions =
   | CloseModalAction
   | SetActiveFeedAction
   | SetActiveArticleAction
-  | ToggleEditModeAction;
+  | ToggleEditModeAction
+  | SetFetchingAction;
 
 function innerViewReducer(draft: Draft<ViewState>, action: ViewActions) {
   switch (action.type) {
@@ -63,6 +69,8 @@ function innerViewReducer(draft: Draft<ViewState>, action: ViewActions) {
       return ModalActions.setActiveArticle(draft, action.payload);
     case TOGGLE_EDIT_MODE:
       return EditActions.toggleEditMode(draft);
+    case SET_FETCHING:
+      return FetchingActions.setFetching(draft, action.payload);
     default:
       break;
   }

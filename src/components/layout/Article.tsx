@@ -2,14 +2,13 @@ import clsx from 'clsx';
 import { memo, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import useActiveFeed from '../hooks/useActiveFeed';
-import useDataDispatch from '../hooks/useDataDispatch';
-import useViewDispatch from '../hooks/useViewDispatch';
-import { READ_ARTICLE } from '../state/data/DataActionType';
-import { SET_ACTIVE_ARTICLE } from '../state/view/ViewActionType';
-import ArticleType from '../types/Article';
-
-import SanitizeHTML from './utils/SanitizeHTML';
+import useActiveFeed from '../../hooks/useActiveFeed';
+import useDataDispatch from '../../hooks/useDataDispatch';
+import useViewDispatch from '../../hooks/useViewDispatch';
+import { READ_ARTICLE } from '../../state/data/DataActionType';
+import { SET_ACTIVE_ARTICLE } from '../../state/view/ViewActionType';
+import ArticleType from '../../types/Article';
+import SanitizeHTML from '../utils/SanitizeHTML';
 
 interface ArticleProps extends ArticleType {
   active: boolean;
@@ -57,7 +56,7 @@ function Article({
         read
           ? 'border-neutral-700 hover:border-neutral-600'
           : 'border-orange-400',
-        active && 'bg-neutral-600 border-neutral-600 pl-6',
+        active && 'bg-neutral-600 !border-neutral-600 pl-6',
       )}
       onClick={selectArticle}
     >

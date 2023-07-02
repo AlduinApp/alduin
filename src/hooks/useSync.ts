@@ -7,21 +7,29 @@ import {
   UPDATE_MULTIPLE_ARTICLES,
   UPDATE_MULTIPLE_FEED_TYPE,
 } from '../state/data/DataActionType';
+import { SET_FETCHING } from '../state/view/ViewActionType';
 import SyncRequest from '../types/SyncRequest';
 import SyncResponse from '../types/SyncResponse';
 import articleMapper from '../utils/articleMapper';
 
 import useData from './useData';
 import useDataDispatch from './useDataDispatch';
+import useViewDispatch from './useViewDispatch';
 
 export default function useSync() {
   const data = useData();
   const dataDispatch = useDataDispatch();
+  const viewDispatch = useViewDispatch();
 
   const sync = useCallback(
     (identifier: string) => {
       const feed = data.feeds.find((feed) => feed.identifier === identifier);
       if (!feed) return [];
+
+      viewDispatch({
+        type: SET_FETCHING,
+        payload: { fetching: true },
+      });
 
       invoke<SyncResponse>('sync', {
         syncRequest: {
@@ -47,9 +55,15 @@ export default function useSync() {
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          viewDispatch({
+            type: SET_FETCHING,
+            payload: { fetching: false },
+          });
         });
     },
-    [data.feeds, dataDispatch],
+    [data.feeds, dataDispatch, viewDispatch],
   );
 
   const syncAll = useCallback(() => {
@@ -59,6 +73,11 @@ export default function useSync() {
       feed_link: feed.link,
     }));
     /* eslint-enable camelcase */
+
+    viewDispatch({
+      type: SET_FETCHING,
+      payload: { fetching: true },
+    });
 
     invoke<SyncResponse[]>('sync_all', { syncRequest })
       .then((response) => {
@@ -80,8 +99,14 @@ export default function useSync() {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        viewDispatch({
+          type: SET_FETCHING,
+          payload: { fetching: false },
+        });
       });
-  }, [data.feeds, dataDispatch]);
+  }, [data.feeds, dataDispatch, viewDispatch]);
 
   return { sync, syncAll };
 }
