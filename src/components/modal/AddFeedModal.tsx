@@ -6,7 +6,11 @@ import { FaPlus } from 'react-icons/fa';
 import useDataDispatch from '../../hooks/useDataDispatch';
 import useModal from '../../hooks/useModal';
 import useViewDispatch from '../../hooks/useViewDispatch';
-import { ADD_FEED, REMOVE_FEED } from '../../state/data/DataActionType';
+import {
+  ADD_FEED,
+  REMOVE_FEED,
+  UPDATE_FEED,
+} from '../../state/data/DataActionType';
 import { CLOSE_MODAL, OPEN_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
 import Field from '../form/Field';
@@ -79,17 +83,35 @@ export function AddFeedModal() {
     (event: FormEvent) => {
       event.preventDefault();
 
-      dataDispatch({
-        type: ADD_FEED,
-        payload: {
-          displayName: form.displayName,
-          link: form.feedLink,
-        },
-      });
+      if (isEditing) {
+        dataDispatch({
+          type: UPDATE_FEED,
+          payload: {
+            identifier: form.identifier,
+            displayName: form.displayName,
+            link: form.feedLink,
+          },
+        });
+      } else {
+        dataDispatch({
+          type: ADD_FEED,
+          payload: {
+            displayName: form.displayName,
+            link: form.feedLink,
+          },
+        });
+      }
 
       closeModal();
     },
-    [closeModal, dataDispatch, form.displayName, form.feedLink],
+    [
+      closeModal,
+      dataDispatch,
+      form.displayName,
+      form.feedLink,
+      form.identifier,
+      isEditing,
+    ],
   );
 
   const handleDelete = useCallback(() => {

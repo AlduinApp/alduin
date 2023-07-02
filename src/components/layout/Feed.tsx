@@ -72,7 +72,7 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
 
         {type === 'rss' && <FaRss className="w-6 h-6" />}
         {type === 'atom' && <FaAtom className="w-6 h-6" />}
-        {type === 'atom' && <VscJson className="w-6 h-6" />}
+        {type === 'json' && <VscJson className="w-6 h-6" />}
         {type === null && <FaQuestion className="w-6 h-6" />}
 
         <div>{displayName}</div>

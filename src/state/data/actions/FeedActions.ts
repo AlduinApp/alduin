@@ -10,6 +10,7 @@ import {
   READ_ARTICLE,
   REMOVE_FEED,
   UPDATE_ARTICLES,
+  UPDATE_FEED,
   UPDATE_FEED_TYPE,
   UPDATE_MULTIPLE_ARTICLES,
   UPDATE_MULTIPLE_FEED_TYPE,
@@ -19,6 +20,11 @@ import { DataState } from '../DataReducer';
 export type AddFeedAction = DataActionType<
   typeof ADD_FEED,
   { displayName: string; link: string }
+>;
+
+export type UpdateFeedAction = DataActionType<
+  typeof UPDATE_FEED,
+  { identifier: string; displayName: string; link: string }
 >;
 
 export type UpdateArticlesAction = DataActionType<
@@ -62,6 +68,21 @@ export function addFeed(
     articles: [],
     type: null,
   });
+}
+
+export function updateFeed(
+  draft: Draft<DataState>,
+  {
+    identifier,
+    displayName,
+    link,
+  }: { identifier: string; displayName: string; link: string },
+) {
+  const feed = draft.feeds.find((feed) => feed.identifier === identifier);
+  if (!feed) return;
+
+  feed.displayName = displayName;
+  feed.link = link;
 }
 
 export function updateArticles(
