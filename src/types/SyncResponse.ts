@@ -1,6 +1,6 @@
 import FeedType from './FeedType';
 
-interface ArticleResponse {
+export interface ArticleResponse {
   id: string;
   title: string;
   content: string;
@@ -10,6 +10,6 @@ interface ArticleResponse {
 
 export default interface SyncResponse {
   identifier: string;
-  type: FeedType;
+  type: Exclude<FeedType, null>;
   articles: ArticleResponse[];
 }
