@@ -5,10 +5,13 @@ use crate::structs::article::Article;
 use reqwest::blocking::Client;
 use reqwest::redirect::Policy;
 use crate::enums::feed_type::FeedType;
+use crate::structs::sync_request::SyncRequest;
 use crate::structs::sync_response::SyncResponse;
 
 #[tauri::command]
-pub fn sync(feed_identifier: &str, feed_link: &str) -> Result<SyncResponse, String> {
+pub fn sync(sync_request: SyncRequest) -> Result<SyncResponse, String> {
+    let SyncRequest { feed_identifier, feed_link } = sync_request;
+
     let (content, content_type) = match fetch_feed(feed_link) {
         Ok((content, content_type)) => (content, content_type),
         Err(_) => return Err("Error fetching feed".to_string()),
@@ -17,7 +20,7 @@ pub fn sync(feed_identifier: &str, feed_link: &str) -> Result<SyncResponse, Stri
     return if content_type.contains("application/rss+xml") || content_type.contains("text/xml") {
         match parse_rss(content) {
             Ok(articles) => Ok(SyncResponse {
-                identifier: feed_identifier.to_string(),
+                identifier: feed_identifier,
                 feed_type: FeedType::RSS,
                 articles,
             }),
@@ -26,7 +29,7 @@ pub fn sync(feed_identifier: &str, feed_link: &str) -> Result<SyncResponse, Stri
     } else if content_type.contains("application/atom+xml") {
         match parse_atom(content) {
             Ok(articles) => Ok(SyncResponse {
-                identifier: feed_identifier.to_string(),
+                identifier: feed_identifier,
                 feed_type: FeedType::Atom,
                 articles,
             }),
@@ -37,7 +40,22 @@ pub fn sync(feed_identifier: &str, feed_link: &str) -> Result<SyncResponse, Stri
     }
 }
 
-fn fetch_feed(feed_link: &str) -> Result<(String, String), Box<dyn std::error::Error>> {
+#[tauri::command]
+pub fn sync_all(sync_request: Vec<SyncRequest>) -> Result<Vec<SyncResponse>, String> {
+    let mut responses = Vec::new();
+
+    for request in sync_request {
+        let response = match sync(request) {
+            Ok(response) => response,
+            Err(e) => return Err(e),
+        };
+        responses.push(response);
+    }
+
+    Ok(responses)
+}
+
+fn fetch_feed(feed_link: String) -> Result<(String, String), Box<dyn std::error::Error>> {
     let client = Client::builder()
         .user_agent("Alduin 3.0.0")
         .redirect(Policy::limited(2))

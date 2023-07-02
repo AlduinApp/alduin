@@ -1,39 +1,87 @@
 import { invoke } from '@tauri-apps/api';
-import { xxHash32 } from 'js-xxhash';
 import { useCallback } from 'react';
 
-import Article from '../types/Article';
+import {
+  UPDATE_ARTICLES,
+  UPDATE_FEED_TYPE,
+  UPDATE_MULTIPLE_ARTICLES,
+  UPDATE_MULTIPLE_FEED_TYPE,
+} from '../state/data/DataActionType';
+import SyncRequest from '../types/SyncRequest';
 import SyncResponse from '../types/SyncResponse';
+import articleMapper from '../utils/articleMapper';
 
 import useData from './useData';
+import useDataDispatch from './useDataDispatch';
 
 export default function useSync() {
   const data = useData();
-
-  const syncByLink = useCallback(async (link: string): Promise<Article[]> => {
-    const response = await invoke<SyncResponse>('sync', {
-      feedLink: link,
-    });
-
-    return response.articles.map(({ id, title, content, link, date }) => ({
-      identifier: xxHash32(id).toString(16),
-      title,
-      content,
-      link,
-      read: false,
-      date: new Date(date),
-    }));
-  }, []);
+  const dataDispatch = useDataDispatch();
 
   const sync = useCallback(
-    async (identifier: string): Promise<Article[]> => {
+    (identifier: string) => {
       const feed = data.feeds.find((feed) => feed.identifier === identifier);
       if (!feed) return [];
 
-      return syncByLink(feed.link);
+      invoke<SyncResponse>('sync', {
+        syncRequest: {
+          feedIdentifier: feed.identifier,
+          feedLink: feed.link,
+        },
+      })
+        .then((response) => {
+          dataDispatch({
+            type: UPDATE_FEED_TYPE,
+            payload: {
+              identifier: feed.identifier,
+              type: response.type,
+            },
+          });
+          dataDispatch({
+            type: UPDATE_ARTICLES,
+            payload: {
+              identifier: feed.identifier,
+              articles: response.articles.map(articleMapper),
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    [data.feeds, syncByLink],
+    [data.feeds, dataDispatch],
   );
 
-  return { sync, syncByLink };
+  const syncAll = useCallback(() => {
+    /* eslint-disable camelcase */
+    const syncRequest: SyncRequest[] = data.feeds.map((feed) => ({
+      feed_identifier: feed.identifier,
+      feed_link: feed.link,
+    }));
+    /* eslint-enable camelcase */
+
+    invoke<SyncResponse[]>('sync_all', { syncRequest })
+      .then((response) => {
+        dataDispatch({
+          type: UPDATE_MULTIPLE_FEED_TYPE,
+          payload: response.map(({ identifier, type }) => ({
+            identifier,
+            type,
+          })),
+        });
+
+        dataDispatch({
+          type: UPDATE_MULTIPLE_ARTICLES,
+          payload: response.map(({ identifier, articles }) => ({
+            identifier,
+            articles: articles.map(articleMapper),
+          })),
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [data.feeds, dataDispatch]);
+
+  return { sync, syncAll };
 }

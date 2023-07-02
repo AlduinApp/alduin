@@ -10,6 +10,9 @@ import {
   READ_ARTICLE,
   REMOVE_FEED,
   UPDATE_ARTICLES,
+  UPDATE_FEED_TYPE,
+  UPDATE_MULTIPLE_ARTICLES,
+  UPDATE_MULTIPLE_FEED_TYPE,
 } from '../DataActionType';
 import { DataState } from '../DataReducer';
 
@@ -23,9 +26,19 @@ export type UpdateArticlesAction = DataActionType<
   { identifier: string; articles: Article[] }
 >;
 
+export type UpdateMultipleArticlesAction = DataActionType<
+  typeof UPDATE_MULTIPLE_ARTICLES,
+  { identifier: string; articles: Article[] }[]
+>;
+
 export type UpdateFeedTypeAction = DataActionType<
-  typeof UPDATE_ARTICLES,
-  { identifier: string; type: FeedType }
+  typeof UPDATE_FEED_TYPE,
+  { identifier: string; type: Exclude<FeedType, null> }
+>;
+
+export type UpdateMultipleFeedTypeAction = DataActionType<
+  typeof UPDATE_MULTIPLE_FEED_TYPE,
+  { identifier: string; type: Exclude<FeedType, null> }[]
 >;
 
 export type ReadArticleAction = DataActionType<
@@ -74,6 +87,15 @@ export function updateArticles(
   }
 }
 
+export function updateMultipleArticles(
+  draft: Draft<DataState>,
+  payload: { identifier: string; articles: Article[] }[],
+) {
+  for (const { identifier, articles } of payload) {
+    updateArticles(draft, { identifier, articles });
+  }
+}
+
 export function updateFeedType(
   draft: Draft<DataState>,
   { identifier, type }: { identifier: string; type: Exclude<FeedType, null> },
@@ -82,6 +104,15 @@ export function updateFeedType(
   if (!feed) return;
 
   feed.type = type;
+}
+
+export function updateMultipleFeedType(
+  draft: Draft<DataState>,
+  payload: { identifier: string; type: Exclude<FeedType, null> }[],
+) {
+  for (const { identifier, type } of payload) {
+    updateFeedType(draft, { identifier, type });
+  }
 }
 
 export function readArticle(

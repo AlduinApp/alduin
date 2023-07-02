@@ -4,7 +4,6 @@ import { FaPlus } from 'react-icons/fa';
 
 import useDataDispatch from '../../hooks/useDataDispatch';
 import useModal from '../../hooks/useModal';
-import useSync from '../../hooks/useSync';
 import useViewDispatch from '../../hooks/useViewDispatch';
 import { ADD_FEED } from '../../state/data/DataActionType';
 import { CLOSE_MODAL, OPEN_MODAL } from '../../state/view/ViewActionType';
