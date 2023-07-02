@@ -6,7 +6,7 @@ import { FaPlus } from 'react-icons/fa';
 import useDataDispatch from '../../hooks/useDataDispatch';
 import useModal from '../../hooks/useModal';
 import useViewDispatch from '../../hooks/useViewDispatch';
-import { ADD_FEED } from '../../state/data/DataActionType';
+import { ADD_FEED, REMOVE_FEED } from '../../state/data/DataActionType';
 import { CLOSE_MODAL, OPEN_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
 import Field from '../form/Field';
@@ -14,7 +14,8 @@ import IconButton from '../form/IconButton';
 
 import Modal from './Modal';
 
-interface FormContent {
+export interface ModalFormContent {
+  identifier: string;
   displayName: string;
   feedLink: string;
 }
@@ -25,7 +26,8 @@ export function AddFeedModal() {
   const viewDispatch = useViewDispatch();
   const dataDispatch = useDataDispatch();
 
-  const { open, state, isStateEmpty } = useModal<FormContent>(modalIdentifier);
+  const { open, isOpen, state, isStateEmpty } =
+    useModal<ModalFormContent>(modalIdentifier);
 
   const isEditing = useMemo(() => !isStateEmpty, [isStateEmpty]);
 
@@ -36,11 +38,11 @@ export function AddFeedModal() {
         : ({
             displayName: '',
             feedLink: '',
-          } as FormContent),
+          } as ModalFormContent),
     [isEditing, state],
   );
 
-  const [form, setForm] = useState<FormContent>(defaultForm);
+  const [form, setForm] = useState<ModalFormContent>(defaultForm);
 
   useEffect(() => {
     setForm(defaultForm);
@@ -56,12 +58,22 @@ export function AddFeedModal() {
     [viewDispatch],
   );
 
-  const handleOpen = useCallback(() => {
+  const closeModal = useCallback(() => {
     viewDispatch({
-      type: OPEN_MODAL,
-      payload: { identifier: 'addFeed', state: null },
+      type: CLOSE_MODAL,
+      payload: { identifier: modalIdentifier },
+    });
+
+    setForm({
+      identifier: '',
+      displayName: '',
+      feedLink: '',
     });
   }, [viewDispatch]);
+
+  const handleOpen = useCallback(() => {
+    open();
+  }, [open]);
 
   const handleSubmit = useCallback(
     (event: FormEvent) => {
@@ -75,21 +87,24 @@ export function AddFeedModal() {
         },
       });
 
-      viewDispatch({
-        type: CLOSE_MODAL,
-        payload: { identifier: modalIdentifier },
-      });
-
-      setForm({
-        displayName: '',
-        feedLink: '',
-      });
+      closeModal();
     },
-    [dataDispatch, form.displayName, form.feedLink, viewDispatch],
+    [closeModal, dataDispatch, form.displayName, form.feedLink],
   );
 
+  const handleDelete = useCallback(() => {
+    dataDispatch({
+      type: REMOVE_FEED,
+      payload: {
+        identifier: form.identifier,
+      },
+    });
+
+    closeModal();
+  }, [closeModal, dataDispatch, form.identifier]);
+
   return (
-    <Modal open={open} onOpenChange={handleOpenChange}>
+    <Modal open={isOpen} onOpenChange={handleOpenChange}>
       <IconButton Icon={FaPlus} onClick={handleOpen} />
       {isEditing ? 'Edit feed' : 'Add feed'}
       <Form.Root onSubmit={handleSubmit}>
@@ -124,7 +139,17 @@ export function AddFeedModal() {
           }
           disabled={!isStateEmpty}
         />
-        <div className="mt-4 flex justify-end">
+        <div
+          className={clsx(
+            'mt-4 flex justify-between',
+            isEditing ? 'flex-row' : 'flex-row-reverse',
+          )}
+        >
+          {isEditing && (
+            <Button variant="danger" type="button" onClick={handleDelete}>
+              Delete feed
+            </Button>
+          )}
           <Form.Submit asChild>
             <Button variant="primary">
               {isEditing ? 'Edit feed' : 'Add feed'}

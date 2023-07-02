@@ -4,12 +4,13 @@ import { FaAtom, FaEdit, FaQuestion, FaRss } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import useEditMode from '../../hooks/useEditMode';
+import useModal from '../../hooks/useModal';
 import useView from '../../hooks/useView';
 import useViewDispatch from '../../hooks/useViewDispatch';
-import { OPEN_MODAL, SET_ACTIVE_FEED } from '../../state/view/ViewActionType';
+import { SET_ACTIVE_FEED } from '../../state/view/ViewActionType';
 import IFeed from '../../types/Feed';
-import FeedType from '../../types/FeedType';
 import Button from '../form/Button';
+import { ModalFormContent } from '../modal/AddFeedModal';
 
 interface FeedProps extends IFeed {}
 
@@ -26,21 +27,18 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
   }, [identifier, navigate, viewDispatch]);
   const { isEditing } = useEditMode();
 
+  const { open } = useModal<ModalFormContent>('addFeed');
+
   const editFeed = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      viewDispatch({
-        type: OPEN_MODAL,
-        payload: {
-          identifier: 'addFeed',
-          state: {
-            displayName,
-            feedLink: link,
-          },
-        },
+      open({
+        identifier,
+        displayName,
+        feedLink: link,
       });
     },
-    [displayName, link, viewDispatch],
+    [displayName, identifier, link, open],
   );
 
   const unread = useMemo(
