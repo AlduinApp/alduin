@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import { FaCogs, FaDownload, FaEdit } from 'react-icons/fa';
 
-import useData from '../hooks/useData';
-import useEditMode from '../hooks/useEditMode';
-import useSync from '../hooks/useSync';
+import useData from '../../hooks/useData';
+import useEditMode from '../../hooks/useEditMode';
+import useSync from '../../hooks/useSync';
+import SyncAllButton from '../SyncAllButton';
+import IconButton from '../form/IconButton';
+import { AddFeedModal } from '../modal/AddFeedModal';
 
 import Feed from './Feed';
-import IconButton from './form/IconButton';
-import { AddFeedModal } from './modal/AddFeedModal';
 
 function FeedList() {
   const data = useData();
@@ -23,7 +24,7 @@ function FeedList() {
       </div>
       <div className="flex justify-around items-center h-12 shrink-0">
         <AddFeedModal />
-        <IconButton Icon={FaDownload} onClick={syncAll} />
+        <SyncAllButton />
         <IconButton Icon={FaEdit} onClick={toggleEditMode} />
         <IconButton Icon={FaCogs} onClick={() => {}} />
       </div>

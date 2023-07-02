@@ -3,14 +3,13 @@ import { memo, useCallback, useMemo, MouseEvent } from 'react';
 import { FaAtom, FaEdit, FaQuestion, FaRss } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-import useEditMode from '../hooks/useEditMode';
-import useView from '../hooks/useView';
-import useViewDispatch from '../hooks/useViewDispatch';
-import { OPEN_MODAL, SET_ACTIVE_FEED } from '../state/view/ViewActionType';
-import IFeed from '../types/Feed';
-import FeedType from '../types/FeedType';
-
-import Button from './form/Button';
+import useEditMode from '../../hooks/useEditMode';
+import useView from '../../hooks/useView';
+import useViewDispatch from '../../hooks/useViewDispatch';
+import { OPEN_MODAL, SET_ACTIVE_FEED } from '../../state/view/ViewActionType';
+import IFeed from '../../types/Feed';
+import FeedType from '../../types/FeedType';
+import Button from '../form/Button';
 
 interface FeedProps extends IFeed {}
 

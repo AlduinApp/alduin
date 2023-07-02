@@ -1,8 +1,7 @@
 import { memo } from 'react';
 
-import useActiveArticle from '../hooks/useActiveArticle';
-
-import SanitizeHTML from './utils/SanitizeHTML';
+import useActiveArticle from '../../hooks/useActiveArticle';
+import SanitizeHTML from '../utils/SanitizeHTML';
 
 const NoArticle = () => (
   <div className="flex justify-center items-center h-full">

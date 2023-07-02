@@ -2,11 +2,11 @@ import { useMemo, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import CenterPanel from './components/CenterPanel';
-import FooterBar from './components/FooterBar';
-import WindowBar from './components/WindowBar';
 import { DataProvider } from './components/context/DataContext';
 import { DispatchProvider } from './components/context/DispatchContext';
 import { ViewProvider } from './components/context/ViewContext';
+import FooterBar from './components/layout/FooterBar';
+import WindowBar from './components/layout/WindowBar';
 import { dataReducer, initialDataState } from './state/data/DataReducer';
 import { initialViewState, viewReducer } from './state/view/ViewReducer';
 
