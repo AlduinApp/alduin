@@ -3,6 +3,5 @@ export default interface Article {
   title: string;
   content: string;
   date: Date;
-  link: string;
   read: boolean;
 }

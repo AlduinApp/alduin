@@ -5,7 +5,7 @@ export interface ArticleResponse {
   title: string;
   content: string;
   date: string;
-  link: string;
+  read: boolean;
 }
 
 export default interface SyncResponse {
