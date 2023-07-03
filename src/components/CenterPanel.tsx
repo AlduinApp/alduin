@@ -21,7 +21,10 @@ function CenterPanel() {
   const isWide = useMedia('(min-width: 1024px)');
 
   return (
-    <div ref={ref} className="bg-neutral-700 overflow-auto h-full relative">
+    <div
+      ref={ref}
+      className="bg-neutral-50 dark:bg-neutral-700 overflow-auto h-full relative"
+    >
       <PortalProvider innerRef={centerPanelRef}>
         {isWide ? (
           <div className="hidden flex-1 max-h-full h-full lg:flex">

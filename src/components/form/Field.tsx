@@ -32,7 +32,7 @@ function Field({
         {Object.keys(messages).map((key) => (
           <Form.Message
             key={key}
-            className="text-xs text-zinc-400"
+            className="text-xs text-neutral-800 dark:text-zinc-400"
             match={key as ValidityMatcher}
           >
             {messages[key as ValidityMatcher]}
@@ -45,7 +45,7 @@ function Field({
         pattern={pattern}
         value={value}
         onChange={onChange}
-        className="bg-zinc-600 rounded px-4 py-2 focus:outline-none disabled:text-zinc-400"
+        className="bg-neutral-200 dark:bg-zinc-600 rounded px-4 py-2 focus:outline-none disabled:text-neutral-400 dark:disabled:text-zinc-400"
         autoComplete="off"
         disabled={disabled}
       />

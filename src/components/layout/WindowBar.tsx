@@ -44,7 +44,7 @@ function WindowBar() {
   return (
     <div
       data-tauri-drag-region
-      className="bg-zinc-600 text-zinc-400 flex flex-row justify-end h-12 min-h-[3rem] items-center shadow-custom-big z-10"
+      className="bg-neutral-200 dark:bg-zinc-600 text-neutral-800 dark:text-zinc-400 flex flex-row justify-end h-12 min-h-[3rem] items-center shadow-custom-big z-10"
     >
       <div
         className="flex flex-1 items-center justify-start lg:hidden"

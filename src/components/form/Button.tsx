@@ -12,8 +12,9 @@ function Button({ children, variant, className, ...props }: ButtonProps) {
       {...props}
       className={clsx(
         className,
-        'px-4 py-2 rounded',
-        variant === 'primary' && 'bg-zinc-400 hover:bg-zinc-500',
+        'px-4 py-2 rounded text-white',
+        variant === 'primary' &&
+          'bg-blue-400 hover:bg-blue-500 dark:bg-zinc-400 dark:hover:bg-zinc-500',
         variant === 'danger' && 'bg-red-500 hover:bg-red-600',
       )}
     >

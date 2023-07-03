@@ -17,9 +17,9 @@ function ArticleFull() {
       {article === null ? (
         <NoArticle />
       ) : (
-        <div className="w-full h-full p-8 text-white overflow-y-auto max-h-full">
+        <div className="w-full h-full p-8 text-black dark:text-white overflow-y-auto max-h-full">
           <div className="flex text-2xl justify-between items-center font-bold">
-            <div className="text-white">{article.title}</div>
+            <div className="text-black dark:text-white">{article.title}</div>
             <div className="text-orange-400 text-xl">
               {article.date.toLocaleDateString()}
             </div>

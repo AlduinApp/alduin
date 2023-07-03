@@ -11,7 +11,7 @@ import {
   REMOVE_FEED,
   UPDATE_FEED,
 } from '../../state/data/DataActionType';
-import { CLOSE_MODAL, OPEN_MODAL } from '../../state/view/ViewActionType';
+import { CLOSE_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
 import Field from '../form/Field';
 import IconButton from '../form/IconButton';
@@ -51,16 +51,6 @@ export function AddFeedModal() {
   useEffect(() => {
     setForm(defaultForm);
   }, [defaultForm]);
-
-  const handleOpenChange = useCallback(
-    (newState: boolean) => {
-      viewDispatch({
-        type: newState ? OPEN_MODAL : CLOSE_MODAL,
-        payload: { identifier: modalIdentifier },
-      });
-    },
-    [viewDispatch],
-  );
 
   const closeModal = useCallback(() => {
     viewDispatch({
@@ -126,7 +116,7 @@ export function AddFeedModal() {
   }, [closeModal, dataDispatch, form.identifier]);
 
   return (
-    <Modal open={isOpen} onOpenChange={handleOpenChange}>
+    <Modal open={isOpen} identifier={modalIdentifier}>
       <IconButton Icon={FaPlus} onClick={handleOpen} />
       {isEditing ? 'Edit feed' : 'Add feed'}
       <Form.Root onSubmit={handleSubmit}>
@@ -161,6 +151,7 @@ export function AddFeedModal() {
           }
           disabled={!isStateEmpty}
         />
+
         <div
           className={clsx(
             'mt-4 flex justify-between',
