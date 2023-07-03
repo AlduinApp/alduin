@@ -12,6 +12,5 @@ export function setPreferences(
   draft: Draft<PreferenceState>,
   payload: SetPreferencesAction['payload'],
 ) {
-  console.log('setPreferences', payload);
   draft.darkMode = payload.darkMode;
 }

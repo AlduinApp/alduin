@@ -19,6 +19,7 @@ import { PreferenceState } from '../../state/preference/PreferenceReducer';
 import { CLOSE_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
 import IconButton from '../form/IconButton';
+import Select from '../form/Select';
 import Switch from '../form/Switch';
 
 import Modal from './Modal';

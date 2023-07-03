@@ -15,13 +15,26 @@ import { CLOSE_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
 import Field from '../form/Field';
 import IconButton from '../form/IconButton';
+import Select from '../form/Select';
 
 import Modal from './Modal';
+
+const intervalOptions = [
+  { label: '1 minute', value: '1' },
+  { label: '5 minutes', value: '5' },
+  { label: '15 minutes', value: '15' },
+  { label: '30 minutes', value: '30' },
+  { label: '1 hour', value: '60' },
+  { label: '2 hours', value: '120' },
+  { label: '4 hours', value: '240' },
+  { label: '8 hours', value: '480' },
+];
 
 export interface ModalFormContent {
   identifier: string;
   displayName: string;
   feedLink: string;
+  interval: string;
 }
 
 const modalIdentifier = 'addFeed';
@@ -32,7 +45,6 @@ export function AddFeedModal() {
 
   const { open, isOpen, state, isStateEmpty } =
     useModal<ModalFormContent>(modalIdentifier);
-
   const isEditing = useMemo(() => !isStateEmpty, [isStateEmpty]);
 
   const defaultForm = useMemo(
@@ -42,6 +54,7 @@ export function AddFeedModal() {
         : ({
             displayName: '',
             feedLink: '',
+            interval: intervalOptions[1].value,
           } as ModalFormContent),
     [isEditing, state],
   );
@@ -62,6 +75,7 @@ export function AddFeedModal() {
       identifier: '',
       displayName: '',
       feedLink: '',
+      interval: intervalOptions[1].value,
     });
   }, [viewDispatch]);
 
@@ -80,6 +94,7 @@ export function AddFeedModal() {
             identifier: form.identifier,
             displayName: form.displayName,
             link: form.feedLink,
+            interval: form.interval,
           },
         });
       } else {
@@ -88,6 +103,7 @@ export function AddFeedModal() {
           payload: {
             displayName: form.displayName,
             link: form.feedLink,
+            interval: form.interval,
           },
         });
       }
@@ -100,6 +116,7 @@ export function AddFeedModal() {
       form.displayName,
       form.feedLink,
       form.identifier,
+      form.interval,
       isEditing,
     ],
   );
@@ -150,6 +167,17 @@ export function AddFeedModal() {
             setForm({ ...form, feedLink: event.target.value })
           }
           disabled={!isStateEmpty}
+        />
+
+        <Select
+          name="interval"
+          label="Interval"
+          placeholder="Select an interval"
+          options={intervalOptions}
+          value={form.interval}
+          onChange={(interval) => {
+            setForm({ ...form, interval });
+          }}
         />
 
         <div

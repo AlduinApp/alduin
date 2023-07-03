@@ -19,12 +19,12 @@ import { DataState } from '../DataReducer';
 
 export type AddFeedAction = DataActionType<
   typeof ADD_FEED,
-  { displayName: string; link: string }
+  { displayName: string; link: string; interval: string }
 >;
 
 export type UpdateFeedAction = DataActionType<
   typeof UPDATE_FEED,
-  { identifier: string; displayName: string; link: string }
+  { identifier: string; displayName: string; link: string; interval: string }
 >;
 
 export type UpdateArticlesAction = DataActionType<
@@ -59,7 +59,11 @@ export type RemoveFeedAction = DataActionType<
 
 export function addFeed(
   draft: Draft<DataState>,
-  { displayName, link }: { displayName: string; link: string },
+  {
+    displayName,
+    link,
+    interval,
+  }: { displayName: string; link: string; interval: string },
 ) {
   draft.feeds.push({
     identifier: uuid(),
@@ -67,6 +71,7 @@ export function addFeed(
     link,
     articles: [],
     type: null,
+    interval: Number.parseInt(interval, 10),
   });
 }
 
@@ -76,13 +81,20 @@ export function updateFeed(
     identifier,
     displayName,
     link,
-  }: { identifier: string; displayName: string; link: string },
+    interval,
+  }: {
+    identifier: string;
+    displayName: string;
+    link: string;
+    interval: string;
+  },
 ) {
   const feed = draft.feeds.find((feed) => feed.identifier === identifier);
   if (!feed) return;
 
   feed.displayName = displayName;
   feed.link = link;
+  feed.interval = Number.parseInt(interval, 10);
 }
 
 export function updateArticles(
