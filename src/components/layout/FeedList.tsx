@@ -7,6 +7,7 @@ import useEditMode from '../../hooks/useEditMode';
 import SyncAllButton from '../SyncAllButton';
 import IconButton from '../form/IconButton';
 import { AddFeedModal } from '../modal/AddFeedModal';
+import PreferenceModal from '../modal/PreferenceModal';
 
 import Feed from './Feed';
 
@@ -15,7 +16,7 @@ function FeedList() {
   const { toggleEditMode, isEditing } = useEditMode();
 
   return (
-    <div className="flex-[3_3_0%] bg-zinc-600 flex flex-col shadow-custom-big">
+    <div className="flex-[3_3_0%] bg-neutral-200 dark:bg-zinc-600 flex flex-col shadow-custom-big">
       <div className="overflow-y-auto flex-1">
         {data.feeds.map((feed) => (
           <Feed key={feed.identifier} {...feed} />
@@ -27,9 +28,9 @@ function FeedList() {
         <IconButton
           Icon={FaEdit}
           onClick={toggleEditMode}
-          className={clsx(isEditing && 'text-white')}
+          className={clsx(isEditing && 'text-black dark:text-white')}
         />
-        <IconButton Icon={FaCogs} onClick={() => {}} />
+        <PreferenceModal />
       </div>
     </div>
   );

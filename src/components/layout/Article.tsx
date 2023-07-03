@@ -52,15 +52,16 @@ function Article({
   return (
     <div
       className={clsx(
-        'flex justify-between items-center text-xl p-3 font-bold border-l-[3px] cursor-pointer transition-all duration-300 hover:pl-6 hover:bg-neutral-600',
+        'flex justify-between items-center text-xl p-3 font-bold border-l-[3px] cursor-pointer transition-all duration-300 hover:pl-6 hover:bg-neutral-100 hover:dark:bg-neutral-600',
         read
-          ? 'border-neutral-700 hover:border-neutral-600'
+          ? 'border-neutral-50 dark:border-neutral-700 hover:border-neutral-100 dark:hover:border-neutral-600'
           : 'border-orange-400',
-        active && 'bg-neutral-600 !border-neutral-600 pl-6',
+        active &&
+          'bg-neutral-100 dark:bg-neutral-600 border-neutral-100 dark:border-neutral-600 pl-6',
       )}
       onClick={selectArticle}
     >
-      <div className="text-white">
+      <div className="text-black dark:text-white">
         {title.length > 40 ? `${title.slice(0, 40)}...` : title}
       </div>
       <div className="text-orange-400 text-xl">{date.toLocaleDateString()}</div>

@@ -54,8 +54,8 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
   return (
     <div
       className={clsx(
-        'flex justify-between align-middle px-3 py-3  hover:bg-zinc-700 cursor-pointer',
-        active && 'bg-zinc-700 text-white',
+        'flex justify-between align-middle px-3 py-3 hover:bg-slate-300 hover:dark:bg-zinc-700 cursor-pointer',
+        active && 'bg-slate-300 dark:bg-zinc-700 text-black dark:text-white',
       )}
       onClick={selectFeed}
     >
@@ -63,7 +63,7 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
         {isEditing && (
           <Button
             variant="primary"
-            className="text-white text-base leading-6"
+            className="dark:text-white text-base leading-6"
             onClick={editFeed}
           >
             <FaEdit />
@@ -78,7 +78,7 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
         <div>{displayName}</div>
       </div>
       {unread > 0 && (
-        <div className="flex justify-center items-center px-2 bg-orange-400 rounded-full text-white">
+        <div className="flex justify-center items-center px-2 bg-orange-400 rounded-full text-black dark:text-white">
           {unread}
         </div>
       )}

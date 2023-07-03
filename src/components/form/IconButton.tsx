@@ -15,7 +15,10 @@ function IconButton(
       type="button"
       {...props}
       ref={ref}
-      className={clsx(props.className, 'hover:text-white')}
+      className={clsx(
+        props.className,
+        'hover:text-black hover:dark:text-white',
+      )}
     >
       <Icon className="w-6 h-6" />
     </button>
