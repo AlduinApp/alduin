@@ -21,11 +21,15 @@ const StyledPreview = styled.div`
     max-width: 80%;
     margin: 2rem auto;
   }
+
+  pre {
+    margin: 0 1rem;
+  }
 `;
 
 const sanitizeOptions: sanitizeHtml.IOptions = {
   ...sanitizeHtml.defaults,
-  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
+  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img', 'video'],
   transformTags: {
     a: sanitizeHtml.simpleTransform('a', { target: '_blank' }),
   },
