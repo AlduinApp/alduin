@@ -1,10 +1,13 @@
 import * as RadixDialog from '@radix-ui/react-dialog';
+import clsx from 'clsx';
 import { ReactNode, useCallback } from 'react';
 
+import useDark from '../../hooks/useDark';
 import useViewDispatch from '../../hooks/useViewDispatch';
 import { CLOSE_MODAL } from '../../state/view/ViewActionType';
 import { ModalName } from '../../state/view/ViewReducer';
 import { Portal } from '../Portal';
+import { PortalProvider } from '../context/PortalContext';
 
 interface ModalProps {
   identifier: ModalName;
@@ -18,7 +21,6 @@ export default function Modal({
   children: [trigger, title, body],
 }: ModalProps) {
   const viewDispatch = useViewDispatch();
-
   const onOpenChange = useCallback(
     (openState: boolean) => {
       if (openState) return;

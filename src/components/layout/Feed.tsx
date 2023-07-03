@@ -15,7 +15,14 @@ import { ModalFormContent } from '../modal/AddFeedModal';
 
 interface FeedProps extends IFeed {}
 
-function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
+function Feed({
+  identifier,
+  displayName,
+  link,
+  articles,
+  type,
+  interval,
+}: FeedProps) {
   const view = useView();
   const viewDispatch = useViewDispatch();
   const navigate = useNavigate();
@@ -37,9 +44,10 @@ function Feed({ identifier, displayName, link, articles, type }: FeedProps) {
         identifier,
         displayName,
         feedLink: link,
+        interval: interval.toString(),
       });
     },
-    [displayName, identifier, link, open],
+    [displayName, identifier, interval, link, open],
   );
 
   const unread = useMemo(

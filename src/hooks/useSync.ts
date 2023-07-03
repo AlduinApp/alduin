@@ -18,7 +18,6 @@ import useViewDispatch from './useViewDispatch';
 
 export default function useSync() {
   const data = useData();
-  console.log(data);
   const dataDispatch = useDataDispatch();
   const viewDispatch = useViewDispatch();
 

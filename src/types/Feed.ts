@@ -7,4 +7,5 @@ export default interface Feed {
   link: string;
   type: FeedType;
   articles: Article[];
+  interval: number;
 }
