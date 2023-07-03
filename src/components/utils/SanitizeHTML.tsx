@@ -8,18 +8,24 @@ interface SanitizeHTMLProps {
 }
 
 const StyledPreview = styled.div`
+  p {
+    margin: 0.5rem 0;
+  }
+
   a {
     color: #fb923c;
     text-decoration: none;
   }
 
   img {
-    max-width: 100%;
+    max-width: 80%;
+    margin: 2rem auto;
   }
 `;
 
 const sanitizeOptions: sanitizeHtml.IOptions = {
   ...sanitizeHtml.defaults,
+  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
   transformTags: {
     a: sanitizeHtml.simpleTransform('a', { target: '_blank' }),
   },
@@ -27,12 +33,11 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
 
 export default function SanitizeHTML({ html, limit = 0 }: SanitizeHTMLProps) {
   const sanitized = useMemo(() => {
-    const treated =
-      limit === 0
-        ? html
-        : `${html.slice(0, limit).replaceAll('\n', ' ').trim()}...`;
+    const treated = sanitizeHtml(html, sanitizeOptions);
 
-    return sanitizeHtml(treated, sanitizeOptions);
+    return limit === 0
+      ? treated
+      : `${treated.slice(0, limit).replaceAll('\n', ' ').trim()}...`;
   }, [html, limit]);
 
   return (
