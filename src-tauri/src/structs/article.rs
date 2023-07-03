@@ -13,7 +13,10 @@ pub struct Article {
 impl From<Entry> for Article {
     fn from(entry: Entry) -> Self {
         let id = entry.id;
-        let title = entry.title.unwrap().content;
+        let title = match entry.title {
+            Some(t) => t.content,
+            None => String::from("No title found, please report this issue."),
+        };
         let content = match entry.content {
             Some(c) => c.body.unwrap(),
             None => match entry.summary {
