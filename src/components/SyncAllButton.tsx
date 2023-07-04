@@ -10,7 +10,7 @@ export default function SyncAllButton() {
   const { syncAll } = useSync();
   const view = useView();
 
-  const isSyncing = useMemo(() => view.fetching, [view.fetching]);
+  const isSyncing = useMemo(() => view.fetching > 0, [view.fetching]);
 
   if (isSyncing) {
     return <IconButton Icon={FaSpinner} className="animate-spin" />;

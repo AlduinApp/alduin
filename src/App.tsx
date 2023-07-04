@@ -3,6 +3,7 @@ import { useMemo, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import CenterPanel from './components/CenterPanel';
+import Clock from './components/Clock';
 import ThemeManager from './components/ThemeManager';
 import { DataProvider } from './components/context/DataContext';
 import { DispatchProvider } from './components/context/DispatchContext';
@@ -41,6 +42,7 @@ function App() {
         <PreferenceProvider value={preferenceState}>
           <ViewProvider value={viewState}>
             <DispatchProvider value={dispatchers}>
+              <Clock />
               <ThemeManager>
                 <div className="flex flex-col h-screen text-neutral-800 dark:text-zinc-400 overflow-hidden">
                   <WindowBar />

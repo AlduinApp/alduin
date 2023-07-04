@@ -7,7 +7,10 @@ import {
   UPDATE_MULTIPLE_ARTICLES,
   UPDATE_MULTIPLE_FEED_TYPE,
 } from '../state/data/DataActionType';
-import { SET_FETCHING } from '../state/view/ViewActionType';
+import {
+  DECREMENT_FETCHING,
+  INCREMENT_FETCHING,
+} from '../state/view/ViewActionType';
 import SyncRequest from '../types/SyncRequest';
 import SyncResponse from '../types/SyncResponse';
 import articleMapper from '../utils/articleMapper';
@@ -27,8 +30,7 @@ export default function useSync() {
       if (!feed) return [];
 
       viewDispatch({
-        type: SET_FETCHING,
-        payload: { fetching: true },
+        type: INCREMENT_FETCHING,
       });
 
       invoke<SyncResponse>('sync', {
@@ -58,8 +60,7 @@ export default function useSync() {
         })
         .finally(() => {
           viewDispatch({
-            type: SET_FETCHING,
-            payload: { fetching: false },
+            type: DECREMENT_FETCHING,
           });
         });
     },
@@ -75,8 +76,7 @@ export default function useSync() {
     /* eslint-enable camelcase */
 
     viewDispatch({
-      type: SET_FETCHING,
-      payload: { fetching: true },
+      type: INCREMENT_FETCHING,
     });
 
     invoke<SyncResponse[]>('sync_all', { syncRequest })
@@ -102,8 +102,7 @@ export default function useSync() {
       })
       .finally(() => {
         viewDispatch({
-          type: SET_FETCHING,
-          payload: { fetching: false },
+          type: DECREMENT_FETCHING,
         });
       });
   }, [data.feeds, dataDispatch, viewDispatch]);
