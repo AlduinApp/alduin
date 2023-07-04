@@ -72,6 +72,7 @@ export function addFeed(
     articles: [],
     type: null,
     interval: Number.parseInt(interval, 10),
+    lastUpdated: 0,
   });
 }
 
@@ -103,6 +104,8 @@ export function updateArticles(
 ) {
   const feed = draft.feeds.find((feed) => feed.identifier === identifier);
   if (!feed) return;
+
+  feed.lastUpdated = Date.now();
 
   for (const article of articles) {
     const alreadyExistingIndex = feed.articles.findIndex(

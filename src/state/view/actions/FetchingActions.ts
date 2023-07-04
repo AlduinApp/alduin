@@ -1,16 +1,20 @@
 import { Draft } from 'immer';
 
-import { SET_FETCHING, ViewActionType } from '../ViewActionType';
+import {
+  INCREMENT_FETCHING,
+  DECREMENT_FETCHING,
+  ViewActionType,
+} from '../ViewActionType';
 import { ViewState } from '../ViewReducer';
 
-export type SetFetchingAction = ViewActionType<
-  typeof SET_FETCHING,
-  { fetching: boolean }
->;
+export type IncrementFetchingAction = ViewActionType<typeof INCREMENT_FETCHING>;
 
-export function setFetching(
-  draft: Draft<ViewState>,
-  { fetching }: { fetching: boolean },
-) {
-  draft.fetching = fetching;
+export type DecrementFetchingAction = ViewActionType<typeof DECREMENT_FETCHING>;
+
+export function incrementFetching(draft: Draft<ViewState>) {
+  draft.fetching++;
+}
+
+export function decrementFetching(draft: Draft<ViewState>) {
+  draft.fetching--;
 }

@@ -8,4 +8,5 @@ export default interface Feed {
   type: FeedType;
   articles: Article[];
   interval: number;
+  lastUpdated: number;
 }

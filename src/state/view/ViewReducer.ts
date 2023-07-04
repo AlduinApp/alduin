@@ -3,16 +3,20 @@ import { Reducer } from 'react';
 
 import {
   CLOSE_MODAL,
+  DECREMENT_FETCHING,
+  INCREMENT_FETCHING,
   OPEN_MODAL,
   SET_ACTIVE_ARTICLE,
   SET_ACTIVE_FEED,
-  SET_FETCHING,
   TOGGLE_EDIT_MODE,
 } from './ViewActionType';
 import * as EditActions from './actions/EditActions';
 import { ToggleEditModeAction } from './actions/EditActions';
 import * as FetchingActions from './actions/FetchingActions';
-import { SetFetchingAction } from './actions/FetchingActions';
+import {
+  DecrementFetchingAction,
+  IncrementFetchingAction,
+} from './actions/FetchingActions';
 import * as ModalActions from './actions/ModalActions';
 import {
   CloseModalAction,
@@ -33,7 +37,7 @@ export interface ViewState {
   activeFeed: string | null;
   activeArticle: string | null;
   editMode: boolean;
-  fetching: boolean;
+  fetching: number;
 }
 
 export const initialViewState: ViewState = {
@@ -50,7 +54,7 @@ export const initialViewState: ViewState = {
   activeFeed: null,
   activeArticle: null,
   editMode: false,
-  fetching: false,
+  fetching: 0,
 };
 
 export type ViewActions =
@@ -59,7 +63,8 @@ export type ViewActions =
   | SetActiveFeedAction
   | SetActiveArticleAction
   | ToggleEditModeAction
-  | SetFetchingAction;
+  | IncrementFetchingAction
+  | DecrementFetchingAction;
 
 function innerViewReducer(draft: Draft<ViewState>, action: ViewActions) {
   switch (action.type) {
@@ -73,8 +78,10 @@ function innerViewReducer(draft: Draft<ViewState>, action: ViewActions) {
       return ModalActions.setActiveArticle(draft, action.payload);
     case TOGGLE_EDIT_MODE:
       return EditActions.toggleEditMode(draft);
-    case SET_FETCHING:
-      return FetchingActions.setFetching(draft, action.payload);
+    case INCREMENT_FETCHING:
+      return FetchingActions.incrementFetching(draft);
+    case DECREMENT_FETCHING:
+      return FetchingActions.decrementFetching(draft);
     default:
       break;
   }
