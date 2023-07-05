@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import { useMemo, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
+import BackupManager from './components/BackupManager';
 import CenterPanel from './components/CenterPanel';
 import Clock from './components/Clock';
 import ThemeManager from './components/ThemeManager';
@@ -11,19 +11,21 @@ import { PreferenceProvider } from './components/context/PreferenceContext';
 import { ViewProvider } from './components/context/ViewContext';
 import FooterBar from './components/layout/FooterBar';
 import WindowBar from './components/layout/WindowBar';
-import useDark from './hooks/useDark';
-import { dataReducer, initialDataState } from './state/data/DataReducer';
 import {
-  initialPreferenceState,
+  dataReducer,
+  initialDataState as defaultDataState,
+} from './state/data/DataReducer';
+import {
+  initialPreferenceState as defaultPreferenceState,
   preferenceReducer,
 } from './state/preference/PreferenceReducer';
 import { initialViewState, viewReducer } from './state/view/ViewReducer';
 
 function App() {
-  const [dataState, dispatchData] = useReducer(dataReducer, initialDataState);
+  const [dataState, dispatchData] = useReducer(dataReducer, defaultDataState);
   const [preferenceState, dispatchPreference] = useReducer(
     preferenceReducer,
-    initialPreferenceState,
+    defaultPreferenceState,
   );
   const [viewState, dispatchView] = useReducer(viewReducer, initialViewState);
 
@@ -43,6 +45,7 @@ function App() {
           <ViewProvider value={viewState}>
             <DispatchProvider value={dispatchers}>
               <Clock />
+              <BackupManager />
               <ThemeManager>
                 <div className="flex flex-col h-screen text-neutral-800 dark:text-zinc-400 overflow-hidden">
                   <WindowBar />
