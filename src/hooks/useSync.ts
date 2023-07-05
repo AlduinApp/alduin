@@ -68,10 +68,9 @@ export default function useSync() {
   );
 
   const syncAll = useCallback(() => {
-    /* eslint-disable camelcase */
     const syncRequest: SyncRequest[] = data.feeds.map((feed) => ({
-      feed_identifier: feed.identifier,
-      feed_link: feed.link,
+      feedIdentifier: feed.identifier,
+      feedLink: feed.link,
     }));
     /* eslint-enable camelcase */
 

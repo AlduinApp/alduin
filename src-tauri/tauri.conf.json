@@ -27,6 +27,17 @@
         "unmaximize": true,
         "unminimize": true,
         "startDragging": true
+      },
+      "fs": {
+        "all": true,
+        "scope": [
+          "$APPDATA",
+          "$APPDATA/*",
+          "$APPCONFIG/*"
+        ]
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {

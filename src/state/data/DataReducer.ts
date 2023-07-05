@@ -5,6 +5,7 @@ import Feed from '../../types/Feed';
 
 import {
   ADD_FEED,
+  LOAD,
   READ_ARTICLE,
   REMOVE_FEED,
   UPDATE_ARTICLES,
@@ -24,6 +25,8 @@ import {
   UpdateMultipleArticlesAction,
   UpdateMultipleFeedTypeAction,
 } from './actions/FeedActions';
+import * as LoadActions from './actions/LoadActions';
+import { LoadAction } from './actions/LoadActions';
 
 export interface DataState {
   feeds: Feed[];
@@ -41,10 +44,13 @@ export type DataActions =
   | UpdateFeedTypeAction
   | UpdateMultipleFeedTypeAction
   | ReadArticleAction
-  | RemoveFeedAction;
+  | RemoveFeedAction
+  | LoadAction;
 
 function innerDataReducer(draft: Draft<DataState>, action: DataActions) {
   switch (action.type) {
+    case LOAD:
+      return LoadActions.load(draft, action.payload);
     case ADD_FEED:
       return FeedActions.addFeed(draft, action.payload);
     case UPDATE_FEED:
