@@ -1,3 +1,4 @@
+import { invoke } from '@tauri-apps/api';
 import {
   BaseDirectory,
   createDir,
@@ -80,8 +81,6 @@ function BackupManager() {
   useEffect(() => {
     if (!loaded) return;
 
-    console.log('backup data');
-
     const backupStructure: DataBackup = {
       type: 'data',
       version: 1,
@@ -95,8 +94,6 @@ function BackupManager() {
   // save preference state
   useEffect(() => {
     if (!loaded) return;
-
-    console.log('backup preference');
 
     const backupStructure: PreferenceBackup = {
       type: 'preference',
@@ -132,6 +129,7 @@ function BackupManager() {
       .then(() => {
         toggleLoaded(true);
       })
+      .then(() => invoke('close_spashscreen'))
       .catch((error) => {
         // TODO : error on loading backup, explode to not corrupt data
         console.error(error);

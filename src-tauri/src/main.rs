@@ -6,10 +6,13 @@ pub mod structs;
 pub mod enums;
 
 use commands::fetcher::{sync, sync_all};
+use commands::splashscreen::close_spashscreen;
+use tauri::{generate_handler, generate_context, Builder};
 
 fn main() {
-    tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![sync, sync_all])
-        .run(tauri::generate_context!())
+    Builder::default()
+        .plugin(tauri_plugin_window_state::Builder::default().build())
+        .invoke_handler(generate_handler![sync, sync_all, close_spashscreen])
+        .run(generate_context!())
         .expect("error while running tauri application");
 }
