@@ -62,7 +62,17 @@
         "title": "Alduin",
         "width": 800,
         "height": 600,
-        "decorations": false
+        "decorations": false,
+        "visible": false
+      },
+      {
+        "width": 800,
+        "height": 800,
+        "decorations": false,
+        "url": "splashscreen.html",
+        "label": "splashscreen",
+        "center": true,
+        "transparent": true
       }
     ]
   }
