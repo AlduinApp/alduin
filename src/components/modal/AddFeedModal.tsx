@@ -50,7 +50,7 @@ function AddFeedModal() {
   const viewDispatch = useViewDispatch();
   const dataDispatch = useDataDispatch();
 
-  const { open, isOpen, state, isStateEmpty } =
+  const { isOpen, state, isStateEmpty } =
     useModal<ModalFormContent>(modalIdentifier);
   const isEditing = useMemo(() => !isStateEmpty, [isStateEmpty]);
 
@@ -85,10 +85,6 @@ function AddFeedModal() {
       interval: intervalOptions[1].value,
     });
   }, [viewDispatch]);
-
-  const handleOpen = useCallback(() => {
-    open();
-  }, [open]);
 
   const handleSubmit = useCallback(
     (event: FormEvent) => {
@@ -139,10 +135,13 @@ function AddFeedModal() {
     closeModal();
   }, [closeModal, dataDispatch, form.identifier]);
 
+  const title = useMemo(
+    () => (isEditing ? 'Edit feed' : 'Add feed'),
+    [isEditing],
+  );
+
   return (
-    <Modal open={isOpen} identifier={modalIdentifier}>
-      <IconButton Icon={FaPlus} onClick={handleOpen} />
-      {isEditing ? 'Edit feed' : 'Add feed'}
+    <Modal open={isOpen} identifier={modalIdentifier} title={title}>
       <Form.Root onSubmit={handleSubmit}>
         <Field
           type="text"
@@ -205,7 +204,6 @@ function AddFeedModal() {
           </Form.Submit>
         </div>
       </Form.Root>
-      <p>Footer</p>
     </Modal>
   );
 }

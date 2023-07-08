@@ -6,6 +6,7 @@ import { PortalProvider } from './context/PortalContext';
 import ArticleFull from './layout/ArticleFull';
 import ArticleList from './layout/ArticleList';
 import FeedList from './layout/FeedList';
+import ModalContainer from './modal/ModalContainer';
 
 function CenterPanel() {
   const [centerPanelRef, setCenterPanelRef] = useState<HTMLElement | null>(
@@ -26,25 +27,28 @@ function CenterPanel() {
       className="bg-neutral-50 dark:bg-neutral-700 overflow-auto h-full relative"
     >
       <PortalProvider innerRef={centerPanelRef}>
-        {isWide ? (
-          <div className="hidden flex-1 max-h-full h-full lg:flex">
-            <FeedList />
-            <ArticleList />
-            <ArticleFull />
-          </div>
-        ) : (
-          <div className="flex flex-1 max-h-full lg:hidden h-full">
-            <Routes>
-              <Route index path="/feeds" element={<FeedList />} />
-              <Route path="/feeds/:feedId" element={<ArticleList />} />
-              <Route
-                path="/feeds/:feedId/:articleId"
-                element={<ArticleFull />}
-              />
-              <Route path="*" element={<Navigate to="/feeds" replace />} />
-            </Routes>
-          </div>
-        )}
+        <>
+          <ModalContainer />
+          {isWide ? (
+            <div className="hidden flex-1 max-h-full h-full lg:flex">
+              <FeedList />
+              <ArticleList />
+              <ArticleFull />
+            </div>
+          ) : (
+            <div className="flex flex-1 max-h-full lg:hidden h-full">
+              <Routes>
+                <Route index path="/feeds" element={<FeedList />} />
+                <Route path="/feeds/:feedId" element={<ArticleList />} />
+                <Route
+                  path="/feeds/:feedId/:articleId"
+                  element={<ArticleFull />}
+                />
+                <Route path="*" element={<Navigate to="/feeds" replace />} />
+              </Routes>
+            </div>
+          )}
+        </>
       </PortalProvider>
     </div>
   );
