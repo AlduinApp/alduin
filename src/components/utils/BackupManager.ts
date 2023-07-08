@@ -2,18 +2,20 @@ import { invoke } from '@tauri-apps/api';
 import { memo, useEffect } from 'react';
 import { useBoolean } from 'react-use';
 
-import { DataBackup, PreferenceBackup } from '../data/Backup';
-import { loadData, loadPreference } from '../data/load';
-import save from '../data/save';
-import useData from '../hooks/useData';
-import useDataDispatch from '../hooks/useDataDispatch';
-import usePreference from '../hooks/usePreference';
-import usePreferenceDispatch from '../hooks/usePreferenceDispatch';
-import useThrottle from '../hooks/useThrottle';
-import { LOAD } from '../state/data/DataActionType';
-import { SET_PREFERENCES } from '../state/preference/PreferenceActionType';
+import { DataBackup, PreferenceBackup } from '../../data/Backup';
+import { loadData, loadPreference } from '../../data/load';
+import save from '../../data/save';
+import useData from '../../hooks/useData';
+import useDataDispatch from '../../hooks/useDataDispatch';
+import usePreference from '../../hooks/usePreference';
+import usePreferenceDispatch from '../../hooks/usePreferenceDispatch';
+import useThrottle from '../../hooks/useThrottle';
+import { LOAD } from '../../state/data/DataActionType';
+import { SET_PREFERENCES } from '../../state/preference/PreferenceActionType';
 
 const throttleTime = 2000;
+
+let loaded = false;
 
 function BackupManager() {
   const rawDataState = useData();
@@ -23,7 +25,6 @@ function BackupManager() {
 
   const dataState = useThrottle(rawDataState, throttleTime);
   const preferenceState = useThrottle(rawPreferenceState, throttleTime);
-  const [loaded, toggleLoaded] = useBoolean(false);
 
   // save data state
   useEffect(() => {
@@ -34,8 +35,9 @@ function BackupManager() {
       version: 1,
       state: dataState,
     };
+    console.log('save data use effect', JSON.stringify(backupStructure));
     save(backupStructure).catch((error) => console.error(error));
-  }, [dataState, loaded]);
+  }, [dataState]);
 
   // save preference state
   useEffect(() => {
@@ -46,10 +48,12 @@ function BackupManager() {
       version: 1,
       state: preferenceState,
     };
+    console.log('save preference use effect', JSON.stringify(backupStructure));
     save(backupStructure).catch((error) => console.error(error));
-  }, [preferenceState, loaded]);
+  }, [preferenceState]);
 
   useEffect(() => {
+    console.log('load use effect');
     Promise.all([
       loadData().then((backup) => {
         if (backup !== null) {
@@ -68,13 +72,15 @@ function BackupManager() {
         }
       }),
     ])
-      .then(() => toggleLoaded(true))
+      .then(() => {
+        loaded = true;
+      })
       .then(() => invoke('close_spashscreen'))
       .catch((error) => {
         // TODO : error on loading backup, explode to not corrupt data
         console.error(error);
       });
-  }, [dataDispatch, preferenceDispatch, toggleLoaded]);
+  }, [dataDispatch, preferenceDispatch]);
 
   return null;
 }

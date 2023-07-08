@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { useInterval } from 'react-use';
 
-import useData from '../hooks/useData';
-import useSync from '../hooks/useSync';
+import useData from '../../hooks/useData';
+import useSync from '../../hooks/useSync';
 
 const clockTick = 1000 * 30;
 
