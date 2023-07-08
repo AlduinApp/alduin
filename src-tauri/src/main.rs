@@ -12,6 +12,7 @@ use tauri::{generate_handler, generate_context, Builder};
 fn main() {
     Builder::default()
         .plugin(tauri_plugin_window_state::Builder::default().build())
+        .plugin(tauri_plugin_sql::Builder::default().build())
         .invoke_handler(generate_handler![sync, sync_all, close_spashscreen])
         .run(generate_context!())
         .expect("error while running tauri application");

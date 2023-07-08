@@ -24,8 +24,9 @@ impl From<Entry> for Article {
                 None => String::from("No content found, please report this issue."),
             },
         };
-        let date = entry.updated
-            .unwrap_or_else(|| entry.published.unwrap_or_else(|| Utc::now()))
+
+        let date = entry.published
+            .unwrap_or_else(|| entry.updated.unwrap_or_else(|| Utc::now()))
             .to_rfc3339();
 
         Article {

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { memo } from 'react';
-import { FaCogs, FaDownload, FaEdit } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 
 import useData from '../../hooks/useData';
 import useEditMode from '../../hooks/useEditMode';
 import SyncAllButton from '../SyncAllButton';
 import IconButton from '../form/IconButton';
-import { AddFeedModal } from '../modal/AddFeedModal';
+import AddFeedModal from '../modal/AddFeedModal';
 import PreferenceModal from '../modal/PreferenceModal';
 
 import Feed from './Feed';
