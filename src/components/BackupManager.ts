@@ -68,9 +68,7 @@ function BackupManager() {
         }
       }),
     ])
-      .then(() => {
-        toggleLoaded(true);
-      })
+      .then(() => toggleLoaded(true))
       .then(() => invoke('close_spashscreen'))
       .catch((error) => {
         // TODO : error on loading backup, explode to not corrupt data

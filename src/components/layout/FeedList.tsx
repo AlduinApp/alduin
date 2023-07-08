@@ -5,6 +5,8 @@ import { FaCogs, FaEdit, FaPlus } from 'react-icons/fa';
 import useData from '../../hooks/useData';
 import useEditMode from '../../hooks/useEditMode';
 import useModal from '../../hooks/useModal';
+import usePreference from '../../hooks/usePreference';
+import { PreferenceState } from '../../state/preference/PreferenceReducer';
 import SyncAllButton from '../SyncAllButton';
 import IconButton from '../form/IconButton';
 import { ModalFormContent } from '../modal/AddFeedModal';
@@ -13,17 +15,18 @@ import Feed from './Feed';
 
 function FeedList() {
   const data = useData();
+  const preference = usePreference();
   const { toggleEditMode, isEditing } = useEditMode();
 
   const { open: openAddFeed } = useModal<ModalFormContent>('addFeed');
-  const { open: openPreference } = useModal<ModalFormContent>('preference');
+  const { open: openPreference } = useModal<PreferenceState>('preference');
 
   const handleOpenAddFeed = useCallback(() => {
     openAddFeed();
   }, [openAddFeed]);
   const handleOpenPreference = useCallback(() => {
-    openPreference();
-  }, [openPreference]);
+    openPreference(preference);
+  }, [openPreference, preference]);
 
   return (
     <div className="flex-[3_3_0%] bg-neutral-200 dark:bg-zinc-600 flex flex-col shadow-custom-big">

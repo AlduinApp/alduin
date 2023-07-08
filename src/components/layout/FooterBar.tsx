@@ -17,7 +17,7 @@ function FooterBar() {
         onClick={handleOpenAbout}
       >
         <IconButton Icon={FaQuestionCircle} />
-        About
+        <span className="hover:underline">About</span>
       </div>
     </div>
   );
