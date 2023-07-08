@@ -10,8 +10,11 @@
     "tauri": "tauri",
     "tauri:build": "tauri build",
     "tauri:dev": "tauri dev",
+    "eslint": "eslint --ext .ts,.tsx src",
     "eslint:fix": "eslint --fix --ext .ts,.tsx src",
-    "prettier:write": "prettier --write \"src/**/*.{ts,tsx}\""
+    "prettier": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",
