@@ -17,7 +17,8 @@ const StyledPreview = styled.div`
     text-decoration: none;
   }
 
-  img {
+  img,
+  video {
     max-width: 80%;
     margin: 2rem auto;
   }
@@ -29,9 +30,13 @@ const StyledPreview = styled.div`
 
 const sanitizeOptions: sanitizeHtml.IOptions = {
   ...sanitizeHtml.defaults,
-  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img', 'video'],
+  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img', 'video', 'figure'],
   transformTags: {
     a: sanitizeHtml.simpleTransform('a', { target: '_blank' }),
+  },
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    video: ['controls', 'src'],
   },
 };
 
