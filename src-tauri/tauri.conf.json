@@ -62,6 +62,8 @@
         "title": "Alduin",
         "width": 800,
         "height": 600,
+        "minWidth": 200,
+        "minHeight": 200,
         "decorations": false,
         "visible": false
       },
