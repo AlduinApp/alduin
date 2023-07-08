@@ -27,5 +27,6 @@ rules:
     - error
     - ignore:
         - 'css'
+  'no-console': off
 parserOptions:
   sourceType: module

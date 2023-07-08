@@ -14,7 +14,8 @@
     "eslint:fix": "eslint --fix --ext .ts,.tsx src",
     "prettier": "prettier --check \"src/**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "npm run eslint && npm run prettier && npm run check-types"
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",

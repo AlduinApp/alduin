@@ -8,20 +8,12 @@ import useViewDispatch from '../../hooks/useViewDispatch';
 import { READ_ARTICLE } from '../../state/data/DataActionType';
 import { SET_ACTIVE_ARTICLE } from '../../state/view/ViewActionType';
 import ArticleType from '../../types/Article';
-import SanitizeHTML from '../utils/SanitizeHTML';
 
 interface ArticleProps extends ArticleType {
   active: boolean;
 }
 
-function Article({
-  identifier,
-  title,
-  content,
-  date,
-  read,
-  active,
-}: ArticleProps) {
+function Article({ identifier, title, date, read, active }: ArticleProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const viewDispatch = useViewDispatch();

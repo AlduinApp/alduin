@@ -1,12 +1,6 @@
 import JSZip from 'jszip';
 
-import {
-  AnyBackup,
-  Backup,
-  BackupType,
-  DataBackup,
-  PreferenceBackup,
-} from './Backup';
+import { BackupType, DataBackup, PreferenceBackup } from './Backup';
 import init from './init';
 
 async function load<T>(type: BackupType) {
