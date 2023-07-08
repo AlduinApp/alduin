@@ -12,13 +12,15 @@ import { PortalProvider } from '../context/PortalContext';
 interface ModalProps {
   identifier: ModalName;
   open: boolean;
-  children: [ReactNode, ReactNode, ReactNode, ReactNode];
+  title?: ReactNode;
+  children: ReactNode[] | ReactNode;
 }
 
 export default function Modal({
   identifier,
   open,
-  children: [trigger, title, body],
+  title,
+  children,
 }: ModalProps) {
   const viewDispatch = useViewDispatch();
   const onOpenChange = useCallback(
@@ -34,18 +36,19 @@ export default function Modal({
 
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
-      <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
       <Portal>
         {open && (
           <>
             <RadixDialog.Overlay className="bg-black opacity-40 absolute z-30 w-full h-full top-0" />
             <RadixDialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-neutral-50 dark:bg-neutral-700 z-40 flex flex-col text-black dark:text-white focus:outline-none">
-              <div className="flex justify-center border-b-2 border-dashed border-zinc-400">
-                <RadixDialog.Title className="text-2xl p-4">
-                  {title}
-                </RadixDialog.Title>
-              </div>
-              <div className="p-4">{body}</div>
+              {title === undefined ? null : (
+                <div className="flex justify-center border-b-2 border-dashed border-zinc-400">
+                  <RadixDialog.Title className="text-2xl p-4">
+                    {title}
+                  </RadixDialog.Title>
+                </div>
+              )}
+              <div className="p-4">{children}</div>
             </RadixDialog.Content>
           </>
         )}

@@ -8,7 +8,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { FaCogs } from 'react-icons/fa';
 
 import useModal from '../../hooks/useModal';
 import usePreference from '../../hooks/usePreference';
@@ -18,8 +17,6 @@ import { SET_PREFERENCES } from '../../state/preference/PreferenceActionType';
 import { PreferenceState } from '../../state/preference/PreferenceReducer';
 import { CLOSE_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
-import IconButton from '../form/IconButton';
-import Select from '../form/Select';
 import Switch from '../form/Switch';
 
 import Modal from './Modal';
@@ -30,7 +27,7 @@ function PreferenceModal() {
   const preference = usePreference();
   const preferenceDispatch = usePreferenceDispatch();
   const viewDispatch = useViewDispatch();
-  const { open, isOpen, state, isStateEmpty } =
+  const { isOpen, state, isStateEmpty } =
     useModal<PreferenceState>(modalIdentifier);
 
   const defaultForm = useMemo(
@@ -52,10 +49,6 @@ function PreferenceModal() {
     setForm(preference);
   }, [preference, viewDispatch]);
 
-  const handleOpen = useCallback(() => {
-    open(preference);
-  }, [open, preference]);
-
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
@@ -71,9 +64,7 @@ function PreferenceModal() {
   );
 
   return (
-    <Modal open={isOpen} identifier={modalIdentifier}>
-      <IconButton Icon={FaCogs} onClick={handleOpen} />
-      Edit preferences
+    <Modal open={isOpen} identifier={modalIdentifier} title="Edit preferences">
       <Form.Root onSubmit={handleSubmit}>
         <Switch
           label="Dark mode"
@@ -88,7 +79,6 @@ function PreferenceModal() {
           </Form.Submit>
         </div>
       </Form.Root>
-      <p>Footer</p>
     </Modal>
   );
 }
