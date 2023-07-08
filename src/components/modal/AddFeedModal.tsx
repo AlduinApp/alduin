@@ -1,6 +1,13 @@
 import * as Form from '@radix-ui/react-form';
 import clsx from 'clsx';
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  FormEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { FaPlus } from 'react-icons/fa';
 
 import useDataDispatch from '../../hooks/useDataDispatch';
@@ -39,7 +46,7 @@ export interface ModalFormContent {
 
 const modalIdentifier = 'addFeed';
 
-export function AddFeedModal() {
+function AddFeedModal() {
   const viewDispatch = useViewDispatch();
   const dataDispatch = useDataDispatch();
 
@@ -202,3 +209,5 @@ export function AddFeedModal() {
     </Modal>
   );
 }
+
+export default memo(AddFeedModal);

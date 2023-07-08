@@ -25,7 +25,7 @@ import {
   SetActiveFeedAction,
 } from './actions/ModalActions';
 
-export type ModalName = 'addFeed' | 'preference';
+export type ModalName = 'addFeed' | 'preference' | 'about';
 
 interface ModalState {
   open: boolean;
@@ -47,6 +47,10 @@ export const initialViewState: ViewState = {
       state: null,
     },
     preference: {
+      open: false,
+      state: null,
+    },
+    about: {
       open: false,
       state: null,
     },

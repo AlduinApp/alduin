@@ -39,7 +39,7 @@ function Feed({
 
   const editFeed = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
+      event.stopPropagation();
       open({
         identifier,
         displayName,
@@ -65,6 +65,7 @@ function Feed({
         'flex justify-between align-middle px-3 py-3 hover:bg-slate-300 hover:dark:bg-zinc-700 cursor-pointer',
         active && 'bg-slate-300 dark:bg-zinc-700 text-black dark:text-white',
       )}
+      role="button"
       onClick={selectFeed}
     >
       <div className="flex flex-row gap-4 items-center text-xl leading-8">

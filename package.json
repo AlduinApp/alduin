@@ -30,7 +30,8 @@
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.13.0",
     "react-use": "^17.4.0",
-    "sanitize-html": "^2.11.0"
+    "sanitize-html": "^2.11.0",
+    "tauri-plugin-sql-api": "github:tauri-apps/tauri-plugin-sql#v1"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.4.0",
