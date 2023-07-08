@@ -8,7 +8,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { FaPlus } from 'react-icons/fa';
 
 import useDataDispatch from '../../hooks/useDataDispatch';
 import useModal from '../../hooks/useModal';
@@ -21,7 +20,6 @@ import {
 import { CLOSE_MODAL } from '../../state/view/ViewActionType';
 import Button from '../form/Button';
 import Field from '../form/Field';
-import IconButton from '../form/IconButton';
 import Select from '../form/Select';
 
 import Modal from './Modal';

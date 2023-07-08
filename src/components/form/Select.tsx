@@ -1,10 +1,8 @@
 import * as Form from '@radix-ui/react-form';
 import * as RadixSelect from '@radix-ui/react-select';
 import clsx from 'clsx';
-import { ForwardedRef, forwardRef, memo, ReactNode } from 'react';
-import { FaCheck, FaChevronDown, FaChevronUp } from 'react-icons/fa';
-
-import { Portal } from '../Portal';
+import { ForwardedRef, forwardRef, memo } from 'react';
+import { FaCheck, FaChevronDown } from 'react-icons/fa';
 
 interface SelectOption {
   label: string;
