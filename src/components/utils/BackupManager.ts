@@ -1,6 +1,5 @@
 import { invoke } from '@tauri-apps/api';
 import { memo, useEffect } from 'react';
-import { useBoolean } from 'react-use';
 
 import { DataBackup, PreferenceBackup } from '../../data/Backup';
 import { loadData, loadPreference } from '../../data/load';
