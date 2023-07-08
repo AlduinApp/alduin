@@ -1,9 +1,7 @@
 import { useMemo, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import BackupManager from './components/BackupManager';
 import CenterPanel from './components/CenterPanel';
-import Clock from './components/Clock';
 import ThemeManager from './components/ThemeManager';
 import { DataProvider } from './components/context/DataContext';
 import { DispatchProvider } from './components/context/DispatchContext';
@@ -11,6 +9,8 @@ import { PreferenceProvider } from './components/context/PreferenceContext';
 import { ViewProvider } from './components/context/ViewContext';
 import FooterBar from './components/layout/FooterBar';
 import WindowBar from './components/layout/WindowBar';
+import BackupManager from './components/utils/BackupManager';
+import Clock from './components/utils/Clock';
 import {
   dataReducer,
   initialDataState as defaultDataState,

@@ -4,7 +4,6 @@ import { AnyBackup, Backup } from './Backup';
 import init from './init';
 
 export default async function save(backup: AnyBackup) {
-  console.log('saving', backup);
   const backupContent = JSON.stringify(backup);
   const zip = new JSZip();
   zip.file('content.json', backupContent);
