@@ -1,4 +1,4 @@
-import { appWindow } from '@tauri-apps/api/window';
+import { appWindow, UserAttentionType } from '@tauri-apps/api/window';
 import clsx from 'clsx';
 import { memo, useCallback } from 'react';
 import {
@@ -71,7 +71,7 @@ function WindowBar() {
           className="mr-2"
         />
         <IconButton
-          onClick={() => appWindow.close()}
+          onClick={() => appWindow.hide()}
           Icon={FaWindowClose}
           className="mr-2"
         />
