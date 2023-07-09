@@ -1,3 +1,4 @@
+import { appWindow } from '@tauri-apps/api/window';
 import clsx from 'clsx';
 import { memo, useCallback } from 'react';
 import {
