@@ -42,7 +42,7 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
+      "targets": ["appimage", "deb", "msi"],
       "identifier": "io.stouder.alduin",
       "icon": [
         "icons/32x32.png",
