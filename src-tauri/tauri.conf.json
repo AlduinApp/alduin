@@ -82,7 +82,7 @@
       "iconAsTemplate": true
     },
     "updater": {
-      "active": false,
+      "active": true,
       "endpoints": [
         "https://alduin.stouder.io/update/{{target}}/{{arch}}/{{version}}"
       ],
