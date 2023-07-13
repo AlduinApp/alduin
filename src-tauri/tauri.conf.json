@@ -42,7 +42,7 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
+      "targets": ["deb", "appimage", "msi", "updater"],
       "identifier": "io.stouder.alduin",
       "publisher": "StouderIO",
       "icon": [
