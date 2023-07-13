@@ -44,13 +44,18 @@
       "active": true,
       "targets": "all",
       "identifier": "io.stouder.alduin",
+      "publisher": "StouderIO",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "copyright": "© 2023 Xavier Stouder",
+      "category": "News",
+      "shortDescription": "Alduin is a feed reader.",
+      "longDescription": "Alduin is a feed reader supporting RSS, Atom and JSON feeds."
     },
     "security": {
       "csp": null
