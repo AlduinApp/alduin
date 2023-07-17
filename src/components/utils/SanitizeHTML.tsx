@@ -32,7 +32,17 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
   ...sanitizeHtml.defaults,
   allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img', 'video', 'figure'],
   transformTags: {
-    a: sanitizeHtml.simpleTransform('a', { target: '_blank' }),
+    a: (tagName, attribs) => {
+      return {
+        tagName,
+        attribs: {
+          ...attribs,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: attribs.href?.startsWith('/') ? '' : attribs.href,
+        },
+      };
+    },
   },
   allowedAttributes: {
     ...sanitizeHtml.defaults.allowedAttributes,
