@@ -9,11 +9,13 @@ function ArticleList() {
   const activeFeed = useActiveFeed();
   const activeArticle = useActiveArticle();
 
-  const articles = useMemo(() => {
-    if (activeFeed === null) return [];
-
-    return activeFeed.articles;
-  }, [activeFeed]);
+  const articles = useMemo(
+    () =>
+      [...(activeFeed?.articles ?? [])].sort(
+        ({ date: dateA }, { date: dateB }) => dateB.getTime() - dateA.getTime(),
+      ),
+    [activeFeed],
+  );
 
   return (
     <div className="flex-[5_5_0%] flex flex-col max-w-full min-h-full overflow-y-scroll shadow-custom lg:w-[35rem]">
