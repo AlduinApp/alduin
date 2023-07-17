@@ -4,6 +4,10 @@ export type DataActionType<Action, Payload = void> = Payload extends void
 export const LOAD = 'LOAD';
 export const ADD_FEED = 'ADD_FEED';
 export const UPDATE_FEED = 'UPDATE_FEED';
+
+export const UPDATE_CONTENT = 'UPDATE_CONTENT';
+export const UPDATE_MULTIPLE_CONTENT = 'UPDATE_MULTIPLE_CONTENT';
+
 export const UPDATE_ARTICLES = 'UPDATE_ARTICLES';
 export const UPDATE_MULTIPLE_ARTICLES = 'UPDATE_MULTIPLE_ARTICLES';
 export const UPDATE_FEED_TYPE = 'UPDATE_FEED_TYPE';

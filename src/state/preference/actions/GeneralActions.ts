@@ -13,4 +13,5 @@ export function setPreferences(
   payload: SetPreferencesAction['payload'],
 ) {
   draft.darkMode = payload.darkMode;
+  draft.showFeedIcons = payload.showFeedIcons;
 }

@@ -1,5 +1,6 @@
 import Article from './Article';
 import FeedType from './FeedType';
+import ImageStructure from './ImageStructure';
 
 export default interface Feed {
   identifier: string;
@@ -9,4 +10,5 @@ export default interface Feed {
   articles: Article[];
   interval: number;
   lastUpdated: number;
+  image: ImageStructure | null;
 }

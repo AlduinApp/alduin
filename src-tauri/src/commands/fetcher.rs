@@ -5,6 +5,7 @@ use crate::structs::sync_response::SyncResponse;
 use feed_rs::parser;
 use crate::enums::feed_type::FeedType;
 use crate::structs::article::Article;
+use crate::structs::image::Image;
 
 #[tauri::command]
 pub fn sync(sync_request: SyncRequest) -> Result<SyncResponse, String> {
@@ -20,6 +21,14 @@ pub fn sync(sync_request: SyncRequest) -> Result<SyncResponse, String> {
             identifier,
             feed_type: FeedType::from(feed.feed_type),
             articles: feed.entries.into_iter().map(Article::from).collect(),
+            // image is either feed.logo, feed.icon, or None
+            image: match feed.logo {
+                Some(l) => Some(Image::from(l)),
+                None => match feed.icon {
+                    Some(i) => Some(Image::from(i)),
+                    None => None,
+                }
+            }
         }),
         Err(e) => Err(format!("Error parsing feed: {}", e)),
     }

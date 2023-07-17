@@ -1,4 +1,5 @@
 import FeedType from './FeedType';
+import ImageStructure from './ImageStructure';
 
 export interface ArticleResponse {
   id: string;
@@ -12,4 +13,5 @@ export default interface SyncResponse {
   identifier: string;
   type: Exclude<FeedType, null>;
   articles: ArticleResponse[];
+  image: ImageStructure | null;
 }

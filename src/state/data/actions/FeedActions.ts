@@ -2,7 +2,10 @@ import { v4 as uuid } from '@lukeed/uuid';
 import { Draft } from 'immer';
 
 import Article from '../../../types/Article';
+import Feed from '../../../types/Feed';
 import FeedType from '../../../types/FeedType';
+import SyncResponse, { ArticleResponse } from '../../../types/SyncResponse';
+import articleMapper from '../../../utils/articleMapper';
 import reconciliate from '../../../utils/reconciliate';
 import {
   ADD_FEED,
@@ -14,6 +17,8 @@ import {
   UPDATE_FEED_TYPE,
   UPDATE_MULTIPLE_ARTICLES,
   UPDATE_MULTIPLE_FEED_TYPE,
+  UPDATE_CONTENT,
+  UPDATE_MULTIPLE_CONTENT,
 } from '../DataActionType';
 import { DataState } from '../DataReducer';
 
@@ -57,6 +62,16 @@ export type RemoveFeedAction = DataActionType<
   { identifier: string }
 >;
 
+export type UpdateContentAction = DataActionType<
+  typeof UPDATE_CONTENT,
+  SyncResponse
+>;
+
+export type UpdateMultipleContentAction = DataActionType<
+  typeof UPDATE_MULTIPLE_CONTENT,
+  SyncResponse[]
+>;
+
 export function addFeed(
   draft: Draft<DataState>,
   {
@@ -73,6 +88,7 @@ export function addFeed(
     type: null,
     interval: Number.parseInt(interval, 10),
     lastUpdated: 0,
+    image: null,
   });
 }
 
@@ -96,59 +112,6 @@ export function updateFeed(
   feed.displayName = displayName;
   feed.link = link;
   feed.interval = Number.parseInt(interval, 10);
-}
-
-export function updateArticles(
-  draft: Draft<DataState>,
-  { identifier, articles }: { identifier: string; articles: Article[] },
-) {
-  const feed = draft.feeds.find((feed) => feed.identifier === identifier);
-  if (!feed) return;
-
-  feed.lastUpdated = Date.now();
-
-  for (const article of articles) {
-    const alreadyExistingIndex = feed.articles.findIndex(
-      (scanArticle) => scanArticle.identifier === article.identifier,
-    );
-
-    if (alreadyExistingIndex === -1) {
-      feed.articles.push(article);
-    } else {
-      feed.articles[alreadyExistingIndex] = reconciliate(
-        feed.articles[alreadyExistingIndex],
-        article,
-      );
-    }
-  }
-}
-
-export function updateMultipleArticles(
-  draft: Draft<DataState>,
-  payload: { identifier: string; articles: Article[] }[],
-) {
-  for (const { identifier, articles } of payload) {
-    updateArticles(draft, { identifier, articles });
-  }
-}
-
-export function updateFeedType(
-  draft: Draft<DataState>,
-  { identifier, type }: { identifier: string; type: Exclude<FeedType, null> },
-) {
-  const feed = draft.feeds.find((feed) => feed.identifier === identifier);
-  if (!feed) return;
-
-  feed.type = type;
-}
-
-export function updateMultipleFeedType(
-  draft: Draft<DataState>,
-  payload: { identifier: string; type: Exclude<FeedType, null> }[],
-) {
-  for (const { identifier, type } of payload) {
-    updateFeedType(draft, { identifier, type });
-  }
 }
 
 export function readArticle(
@@ -179,4 +142,47 @@ export function removeFeed(
   if (feedIndex === -1) return;
 
   draft.feeds.splice(feedIndex, 1);
+}
+
+function updateArticles(
+  draft: Draft<DataState>,
+  { feed, articles }: { feed: Feed; articles: ArticleResponse[] },
+) {
+  for (const article of articles.map(articleMapper)) {
+    const alreadyExistingIndex = feed.articles.findIndex(
+      (scanArticle) => scanArticle.identifier === article.identifier,
+    );
+
+    if (alreadyExistingIndex === -1) {
+      feed.articles.push(article);
+    } else {
+      feed.articles[alreadyExistingIndex] = reconciliate(
+        feed.articles[alreadyExistingIndex],
+        article,
+      );
+    }
+  }
+}
+
+export function updateContent(
+  draft: Draft<DataState>,
+  { identifier, articles, type, image }: SyncResponse,
+) {
+  const feed = draft.feeds.find((feed) => feed.identifier === identifier);
+  if (!feed) return;
+
+  feed.type = type;
+  updateArticles(draft, { feed, articles });
+  feed.image = image;
+
+  feed.lastUpdated = Date.now();
+}
+
+export function updateMultipleContent(
+  draft: Draft<DataState>,
+  payload: SyncResponse[],
+) {
+  for (const syncResponse of payload) {
+    updateContent(draft, syncResponse);
+  }
 }

@@ -8,11 +8,9 @@ import {
   LOAD,
   READ_ARTICLE,
   REMOVE_FEED,
-  UPDATE_ARTICLES,
+  UPDATE_CONTENT,
   UPDATE_FEED,
-  UPDATE_FEED_TYPE,
-  UPDATE_MULTIPLE_ARTICLES,
-  UPDATE_MULTIPLE_FEED_TYPE,
+  UPDATE_MULTIPLE_CONTENT,
 } from './DataActionType';
 import * as FeedActions from './actions/FeedActions';
 import {
@@ -20,9 +18,11 @@ import {
   ReadArticleAction,
   RemoveFeedAction,
   UpdateArticlesAction,
+  UpdateContentAction,
   UpdateFeedAction,
   UpdateFeedTypeAction,
   UpdateMultipleArticlesAction,
+  UpdateMultipleContentAction,
   UpdateMultipleFeedTypeAction,
 } from './actions/FeedActions';
 import * as LoadActions from './actions/LoadActions';
@@ -45,7 +45,9 @@ export type DataActions =
   | UpdateMultipleFeedTypeAction
   | ReadArticleAction
   | RemoveFeedAction
-  | LoadAction;
+  | LoadAction
+  | UpdateContentAction
+  | UpdateMultipleContentAction;
 
 function innerDataReducer(draft: Draft<DataState>, action: DataActions) {
   switch (action.type) {
@@ -55,18 +57,14 @@ function innerDataReducer(draft: Draft<DataState>, action: DataActions) {
       return FeedActions.addFeed(draft, action.payload);
     case UPDATE_FEED:
       return FeedActions.updateFeed(draft, action.payload);
-    case UPDATE_ARTICLES:
-      return FeedActions.updateArticles(draft, action.payload);
-    case UPDATE_MULTIPLE_ARTICLES:
-      return FeedActions.updateMultipleArticles(draft, action.payload);
-    case UPDATE_FEED_TYPE:
-      return FeedActions.updateFeedType(draft, action.payload);
-    case UPDATE_MULTIPLE_FEED_TYPE:
-      return FeedActions.updateMultipleFeedType(draft, action.payload);
     case READ_ARTICLE:
       return FeedActions.readArticle(draft, action.payload);
     case REMOVE_FEED:
       return FeedActions.removeFeed(draft, action.payload);
+    case UPDATE_CONTENT:
+      return FeedActions.updateContent(draft, action.payload);
+    case UPDATE_MULTIPLE_CONTENT:
+      return FeedActions.updateMultipleContent(draft, action.payload);
     default:
       break;
   }

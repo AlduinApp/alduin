@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { memo, useCallback, useMemo, MouseEvent } from 'react';
-import { FaAtom, FaEdit, FaQuestion, FaRss } from 'react-icons/fa';
-import { VscJson } from 'react-icons/vsc';
+import { FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import useEditMode from '../../hooks/useEditMode';
@@ -13,16 +12,13 @@ import IFeed from '../../types/Feed';
 import Button from '../form/Button';
 import { ModalFormContent } from '../modal/AddFeedModal';
 
+import FeedIcon from './FeedIcon';
+
 interface FeedProps extends IFeed {}
 
-function Feed({
-  identifier,
-  displayName,
-  link,
-  articles,
-  type,
-  interval,
-}: FeedProps) {
+function Feed(props: FeedProps) {
+  const { identifier, displayName, link, articles, interval } = props;
+
   const view = useView();
   const viewDispatch = useViewDispatch();
   const navigate = useNavigate();
@@ -79,10 +75,7 @@ function Feed({
           </Button>
         )}
 
-        {type === 'rss' && <FaRss className="w-6 h-6" />}
-        {type === 'atom' && <FaAtom className="w-6 h-6" />}
-        {type === 'json' && <VscJson className="w-6 h-6" />}
-        {type === null && <FaQuestion className="w-6 h-6" />}
+        <FeedIcon feed={props} />
 
         <div>{displayName}</div>
       </div>

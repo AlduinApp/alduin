@@ -7,10 +7,12 @@ import { SetPreferencesAction } from './actions/GeneralActions';
 
 export interface PreferenceState {
   darkMode: boolean;
+  showFeedIcons: boolean;
 }
 
 export const initialPreferenceState: PreferenceState = {
   darkMode: true,
+  showFeedIcons: true,
 };
 
 export type PreferenceActions = SetPreferencesAction;

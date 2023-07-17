@@ -1,7 +1,8 @@
 use chrono::Utc;
 use feed_rs::model::Entry;
+use serde::Serialize;
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, Serialize)]
 pub struct Article {
     pub id: String,
     pub title: String,

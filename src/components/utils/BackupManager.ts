@@ -2,6 +2,7 @@ import { invoke } from '@tauri-apps/api';
 import { memo, useEffect } from 'react';
 
 import { DataBackup, PreferenceBackup } from '../../data/Backup';
+import * as Backup from '../../data/Backup';
 import { loadData, loadPreference } from '../../data/load';
 import save from '../../data/save';
 import useData from '../../hooks/useData';
@@ -31,10 +32,9 @@ function BackupManager() {
 
     const backupStructure: DataBackup = {
       type: 'data',
-      version: 1,
+      version: Backup.VERSION,
       state: dataState,
     };
-    console.log('save data use effect', JSON.stringify(backupStructure));
     save(backupStructure).catch((error) => console.error(error));
   }, [dataState]);
 
@@ -44,15 +44,13 @@ function BackupManager() {
 
     const backupStructure: PreferenceBackup = {
       type: 'preference',
-      version: 1,
+      version: Backup.VERSION,
       state: preferenceState,
     };
-    console.log('save preference use effect', JSON.stringify(backupStructure));
     save(backupStructure).catch((error) => console.error(error));
   }, [preferenceState]);
 
   useEffect(() => {
-    console.log('load use effect');
     Promise.all([
       loadData().then((backup) => {
         if (backup !== null) {

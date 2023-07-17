@@ -2,6 +2,8 @@ import JSZip from 'jszip';
 
 import { BackupType, DataBackup, PreferenceBackup } from './Backup';
 import init from './init';
+import save from './save';
+import transform from './transformers/transform';
 
 async function load<T>(type: BackupType) {
   const db = await init();
@@ -23,11 +25,18 @@ async function load<T>(type: BackupType) {
 export async function loadData() {
   const data = await load<DataBackup>('data');
   if (data === null) return null;
-  return parseDataBackup(data);
+  const parsedData = parseDataBackup(data);
+  const transformed = transform<DataBackup>(parsedData);
+  await save(transformed);
+  return transformed;
 }
 
 export async function loadPreference() {
-  return load<PreferenceBackup>('preference');
+  const preference = await load<PreferenceBackup>('preference');
+  if (preference === null) return null;
+  const transformed = transform<PreferenceBackup>(preference);
+  await save(transformed);
+  return transformed;
 }
 
 function parseDataBackup(backup: DataBackup) {

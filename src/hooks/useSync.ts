@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 
 import {
   UPDATE_ARTICLES,
+  UPDATE_CONTENT,
   UPDATE_FEED_TYPE,
   UPDATE_MULTIPLE_ARTICLES,
   UPDATE_MULTIPLE_FEED_TYPE,
@@ -41,18 +42,8 @@ export default function useSync() {
       })
         .then((response) => {
           dataDispatch({
-            type: UPDATE_FEED_TYPE,
-            payload: {
-              identifier: feed.identifier,
-              type: response.type,
-            },
-          });
-          dataDispatch({
-            type: UPDATE_ARTICLES,
-            payload: {
-              identifier: feed.identifier,
-              articles: response.articles.map(articleMapper),
-            },
+            type: UPDATE_CONTENT,
+            payload: response,
           });
         })
         .catch((error) => {
@@ -87,7 +78,6 @@ export default function useSync() {
             type,
           })),
         });
-
         dataDispatch({
           type: UPDATE_MULTIPLE_ARTICLES,
           payload: response.map(({ identifier, articles }) => ({

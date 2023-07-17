@@ -13,3 +13,5 @@ export type DataBackup = Backup<'data', DataState>;
 export type PreferenceBackup = Backup<'preference', PreferenceState>;
 
 export type AnyBackup = DataBackup | PreferenceBackup;
+
+export const VERSION = 2;

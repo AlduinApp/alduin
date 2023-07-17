@@ -31,7 +31,7 @@ function PreferenceModal() {
     useModal<PreferenceState>(modalIdentifier);
 
   const defaultForm = useMemo(
-    () => (isStateEmpty ? { darkMode: false } : state),
+    () => (isStateEmpty ? { darkMode: false, showFeedIcons: false } : state),
     [isStateEmpty, state],
   );
 
@@ -71,6 +71,12 @@ function PreferenceModal() {
           name="dark"
           value={form.darkMode}
           onChange={(darkMode) => setForm({ ...form, darkMode })}
+        />
+        <Switch
+          label="Show feed icons"
+          name="showFeedIcons"
+          value={form.showFeedIcons}
+          onChange={(showFeedIcons) => setForm({ ...form, showFeedIcons })}
         />
 
         <div className={clsx('mt-4 flex justify-between flex-row-reverse')}>
