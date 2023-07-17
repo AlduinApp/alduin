@@ -1,4 +1,4 @@
 export default interface SyncRequest {
-  feedIdentifier: string;
-  feedLink: string;
+  identifier: string;
+  link: string;
 }

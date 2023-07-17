@@ -8,16 +8,16 @@ use crate::structs::article::Article;
 
 #[tauri::command]
 pub fn sync(sync_request: SyncRequest) -> Result<SyncResponse, String> {
-    let SyncRequest { feed_identifier, feed_link } = sync_request;
+    let SyncRequest { identifier, link } = sync_request;
 
-    let content = match fetch_feed(feed_link) {
+    let content = match fetch_feed(link) {
         Ok(content) => content,
         Err(_) => return Err("Error fetching feed".to_string()),
     };
 
     match parser::parse(content.as_bytes()) {
         Ok(feed) => Ok(SyncResponse {
-            identifier: feed_identifier,
+            identifier,
             feed_type: FeedType::from(feed.feed_type),
             articles: feed.entries.into_iter().map(Article::from).collect(),
         }),

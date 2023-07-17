@@ -35,8 +35,8 @@ export default function useSync() {
 
       invoke<SyncResponse>('sync', {
         syncRequest: {
-          feedIdentifier: feed.identifier,
-          feedLink: feed.link,
+          identifier: feed.identifier,
+          link: feed.link,
         },
       })
         .then((response) => {
@@ -69,8 +69,8 @@ export default function useSync() {
 
   const syncAll = useCallback(() => {
     const syncRequest: SyncRequest[] = data.feeds.map((feed) => ({
-      feedIdentifier: feed.identifier,
-      feedLink: feed.link,
+      identifier: feed.identifier,
+      link: feed.link,
     }));
     /* eslint-enable camelcase */
 
