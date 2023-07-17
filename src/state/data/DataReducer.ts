@@ -17,13 +17,9 @@ import {
   AddFeedAction,
   ReadArticleAction,
   RemoveFeedAction,
-  UpdateArticlesAction,
   UpdateContentAction,
   UpdateFeedAction,
-  UpdateFeedTypeAction,
-  UpdateMultipleArticlesAction,
   UpdateMultipleContentAction,
-  UpdateMultipleFeedTypeAction,
 } from './actions/FeedActions';
 import * as LoadActions from './actions/LoadActions';
 import { LoadAction } from './actions/LoadActions';
@@ -39,10 +35,6 @@ export const initialDataState: DataState = {
 export type DataActions =
   | AddFeedAction
   | UpdateFeedAction
-  | UpdateArticlesAction
-  | UpdateMultipleArticlesAction
-  | UpdateFeedTypeAction
-  | UpdateMultipleFeedTypeAction
   | ReadArticleAction
   | RemoveFeedAction
   | LoadAction

@@ -2,11 +2,8 @@ import { invoke } from '@tauri-apps/api';
 import { useCallback } from 'react';
 
 import {
-  UPDATE_ARTICLES,
   UPDATE_CONTENT,
-  UPDATE_FEED_TYPE,
-  UPDATE_MULTIPLE_ARTICLES,
-  UPDATE_MULTIPLE_FEED_TYPE,
+  UPDATE_MULTIPLE_CONTENT,
 } from '../state/data/DataActionType';
 import {
   DECREMENT_FETCHING,
@@ -14,7 +11,6 @@ import {
 } from '../state/view/ViewActionType';
 import SyncRequest from '../types/SyncRequest';
 import SyncResponse from '../types/SyncResponse';
-import articleMapper from '../utils/articleMapper';
 
 import useData from './useData';
 import useDataDispatch from './useDataDispatch';
@@ -63,8 +59,6 @@ export default function useSync() {
       identifier: feed.identifier,
       link: feed.link,
     }));
-    /* eslint-enable camelcase */
-
     viewDispatch({
       type: INCREMENT_FETCHING,
     });
@@ -72,18 +66,8 @@ export default function useSync() {
     invoke<SyncResponse[]>('sync_all', { syncRequest })
       .then((response) => {
         dataDispatch({
-          type: UPDATE_MULTIPLE_FEED_TYPE,
-          payload: response.map(({ identifier, type }) => ({
-            identifier,
-            type,
-          })),
-        });
-        dataDispatch({
-          type: UPDATE_MULTIPLE_ARTICLES,
-          payload: response.map(({ identifier, articles }) => ({
-            identifier,
-            articles: articles.map(articleMapper),
-          })),
+          type: UPDATE_MULTIPLE_CONTENT,
+          payload: response,
         });
       })
       .catch((error) => {

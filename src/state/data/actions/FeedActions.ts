@@ -1,9 +1,7 @@
 import { v4 as uuid } from '@lukeed/uuid';
 import { Draft } from 'immer';
 
-import Article from '../../../types/Article';
 import Feed from '../../../types/Feed';
-import FeedType from '../../../types/FeedType';
 import SyncResponse, { ArticleResponse } from '../../../types/SyncResponse';
 import articleMapper from '../../../utils/articleMapper';
 import reconciliate from '../../../utils/reconciliate';
@@ -12,11 +10,7 @@ import {
   DataActionType,
   READ_ARTICLE,
   REMOVE_FEED,
-  UPDATE_ARTICLES,
   UPDATE_FEED,
-  UPDATE_FEED_TYPE,
-  UPDATE_MULTIPLE_ARTICLES,
-  UPDATE_MULTIPLE_FEED_TYPE,
   UPDATE_CONTENT,
   UPDATE_MULTIPLE_CONTENT,
 } from '../DataActionType';
@@ -30,26 +24,6 @@ export type AddFeedAction = DataActionType<
 export type UpdateFeedAction = DataActionType<
   typeof UPDATE_FEED,
   { identifier: string; displayName: string; link: string; interval: string }
->;
-
-export type UpdateArticlesAction = DataActionType<
-  typeof UPDATE_ARTICLES,
-  { identifier: string; articles: Article[] }
->;
-
-export type UpdateMultipleArticlesAction = DataActionType<
-  typeof UPDATE_MULTIPLE_ARTICLES,
-  { identifier: string; articles: Article[] }[]
->;
-
-export type UpdateFeedTypeAction = DataActionType<
-  typeof UPDATE_FEED_TYPE,
-  { identifier: string; type: Exclude<FeedType, null> }
->;
-
-export type UpdateMultipleFeedTypeAction = DataActionType<
-  typeof UPDATE_MULTIPLE_FEED_TYPE,
-  { identifier: string; type: Exclude<FeedType, null> }[]
 >;
 
 export type ReadArticleAction = DataActionType<
