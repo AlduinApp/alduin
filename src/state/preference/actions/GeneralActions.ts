@@ -14,4 +14,5 @@ export function setPreferences(
 ) {
   draft.darkMode = payload.darkMode;
   draft.showFeedIcons = payload.showFeedIcons;
+  draft.showArticleThumbnails = payload.showArticleThumbnails;
 }

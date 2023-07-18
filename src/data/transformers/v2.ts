@@ -9,6 +9,10 @@ export default {
         feeds: backup.state.feeds.map((feed) => ({
           ...feed,
           image: null,
+          articles: feed.articles.map((article) => ({
+            ...article,
+            image: null,
+          })),
         })),
       },
     };

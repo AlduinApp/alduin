@@ -7,6 +7,7 @@ export interface ArticleResponse {
   content: string;
   date: string;
   read: boolean;
+  image: ImageStructure | null;
 }
 
 export default interface SyncResponse {

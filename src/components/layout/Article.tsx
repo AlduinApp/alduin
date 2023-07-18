@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import useActiveFeed from '../../hooks/useActiveFeed';
 import useDataDispatch from '../../hooks/useDataDispatch';
+import usePreference from '../../hooks/usePreference';
 import useViewDispatch from '../../hooks/useViewDispatch';
 import { READ_ARTICLE } from '../../state/data/DataActionType';
 import { SET_ACTIVE_ARTICLE } from '../../state/view/ViewActionType';
@@ -13,9 +14,17 @@ interface ArticleProps extends ArticleType {
   active: boolean;
 }
 
-function Article({ identifier, title, date, read, active }: ArticleProps) {
+function Article({
+  identifier,
+  title,
+  date,
+  read,
+  image,
+  active,
+}: ArticleProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { showArticleThumbnails } = usePreference();
   const viewDispatch = useViewDispatch();
   const dataDispatch = useDataDispatch();
   const feed = useActiveFeed();
@@ -40,11 +49,12 @@ function Article({ identifier, title, date, read, active }: ArticleProps) {
     navigate,
     viewDispatch,
   ]);
+  console.log(image);
 
   return (
     <div
       className={clsx(
-        'flex justify-between items-center text-xl p-3 font-bold border-l-[3px] cursor-pointer transition-all duration-300 hover:pl-6 hover:bg-neutral-100 hover:dark:bg-neutral-600',
+        'flex justify-between items-center gap-2 text-lg p-3 font-bold border-l-[3px] cursor-pointer hover:bg-neutral-100 hover:dark:bg-neutral-600',
         read
           ? 'border-neutral-50 dark:border-neutral-700 hover:border-neutral-100 dark:hover:border-neutral-600'
           : 'border-orange-400',
@@ -53,10 +63,21 @@ function Article({ identifier, title, date, read, active }: ArticleProps) {
       )}
       onClick={selectArticle}
     >
-      <div className="text-black dark:text-white">
-        {title.length > 40 ? `${title.slice(0, 40)}...` : title}
+      <div className="flex items-center text-black dark:text-white transition-all duration-300 hover:pl-6 h-12">
+        {/* Hacky way to preserve emojis */}
+        {title.length > 35 ? `${[...title].slice(0, 35).join('')}...` : title}
       </div>
-      <div className="text-orange-400 text-xl">{date.toLocaleDateString()}</div>
+
+      <div className="flex items-center text-orange-400 text-xl flex gap-4 flex-nowrap">
+        {showArticleThumbnails && image !== null && (
+          <img
+            src={image.uri}
+            alt={image.description ?? ''}
+            className="w-12 h-12 object-cover rounded-full"
+          />
+        )}
+        {date.toLocaleDateString()}
+      </div>
     </div>
   );
 }

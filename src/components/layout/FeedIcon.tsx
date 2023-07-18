@@ -13,7 +13,7 @@ interface FeedIconProps {
 const ImageIcon = styled.img`
   width: 2rem;
   height: 2rem;
-  border-radius: 50%;
+  border-radius: 9999px;
   object-fit: cover;
   object-position: center;
 `;
