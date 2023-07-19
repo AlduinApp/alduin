@@ -37,6 +37,7 @@ function PreferenceModal() {
             darkMode: false,
             showFeedIcons: false,
             showArticleThumbnails: false,
+            autoStart: false,
           }
         : state,
     [isStateEmpty, state],
@@ -92,6 +93,12 @@ function PreferenceModal() {
           onChange={(showArticleThumbnails) =>
             setForm({ ...form, showArticleThumbnails })
           }
+        />
+        <Switch
+          label="Launch at startup"
+          name="autoStart"
+          value={form.autoStart}
+          onChange={(autoStart) => setForm({ ...form, autoStart })}
         />
 
         <div className={clsx('mt-4 flex justify-between flex-row-reverse')}>

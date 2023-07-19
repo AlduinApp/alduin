@@ -9,12 +9,14 @@ export interface PreferenceState {
   darkMode: boolean;
   showFeedIcons: boolean;
   showArticleThumbnails: boolean;
+  autoStart: boolean;
 }
 
 export const initialPreferenceState: PreferenceState = {
   darkMode: true,
   showFeedIcons: true,
   showArticleThumbnails: true,
+  autoStart: true,
 };
 
 export type PreferenceActions = SetPreferencesAction;

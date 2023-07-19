@@ -37,11 +37,13 @@
     "react-router-dom": "^6.13.0",
     "react-use": "^17.4.0",
     "sanitize-html": "^2.11.0",
+    "tauri-plugin-autostart-api": "github:tauri-apps/tauri-plugin-autostart#v1",
     "tauri-plugin-sql-api": "github:tauri-apps/tauri-plugin-sql#v1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
+    "@simbathesailor/use-what-changed": "^2.0.0",
     "@tauri-apps/cli": "^1.4.0",
     "@types/node": "^18.7.10",
     "@types/react": "^18.0.15",

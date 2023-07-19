@@ -1,7 +1,7 @@
 use tauri::{Manager, Window};
 
 #[tauri::command]
-pub async fn close_spashscreen(window: Window) {
+pub async fn close_splashscreen(window: Window) {
     if let Some(splashscreen) = window.get_window("splashscreen") {
         splashscreen.close().unwrap();
     }

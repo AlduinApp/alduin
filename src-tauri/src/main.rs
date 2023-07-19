@@ -6,8 +6,9 @@ pub mod structs;
 pub mod enums;
 
 use commands::fetcher::{sync, sync_all};
-use commands::splashscreen::close_spashscreen;
+use commands::splashscreen::close_splashscreen;
 use tauri::{generate_handler, generate_context, Manager, Builder, SystemTray, SystemTrayEvent, SystemTrayMenu, CustomMenuItem, AppHandle, Wry};
+use tauri_plugin_autostart::MacosLauncher;
 
 fn show_main_window(app: &AppHandle<Wry>) {
     let window = app.get_window("main").unwrap();
@@ -32,7 +33,8 @@ fn main() {
     Builder::default()
         .plugin(tauri_plugin_window_state::Builder::default().build())
         .plugin(tauri_plugin_sql::Builder::default().build())
-        .invoke_handler(generate_handler![sync, sync_all, close_spashscreen])
+        .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
+        .invoke_handler(generate_handler![sync, sync_all, close_splashscreen])
         .system_tray(system_tray)
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::DoubleClick {

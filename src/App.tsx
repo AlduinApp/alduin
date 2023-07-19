@@ -9,8 +9,8 @@ import { PreferenceProvider } from './components/context/PreferenceContext';
 import { ViewProvider } from './components/context/ViewContext';
 import FooterBar from './components/layout/FooterBar';
 import WindowBar from './components/layout/WindowBar';
-import BackupManager from './components/utils/BackupManager';
 import Clock from './components/utils/Clock';
+import LoadManager from './components/utils/LoadManager';
 import {
   dataReducer,
   initialDataState as defaultDataState,
@@ -45,7 +45,7 @@ function App() {
           <ViewProvider value={viewState}>
             <DispatchProvider value={dispatchers}>
               <Clock />
-              <BackupManager />
+              <LoadManager />
               <ThemeManager>
                 <div className="flex flex-col h-screen text-neutral-800 dark:text-zinc-400 overflow-hidden">
                   <WindowBar />

@@ -1,5 +1,4 @@
-import { invoke } from '@tauri-apps/api';
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useMemo } from 'react';
 
 import { DataBackup, PreferenceBackup } from '../../data/Backup';
 import * as Backup from '../../data/Backup';
@@ -9,15 +8,19 @@ import useData from '../../hooks/useData';
 import useDataDispatch from '../../hooks/useDataDispatch';
 import usePreference from '../../hooks/usePreference';
 import usePreferenceDispatch from '../../hooks/usePreferenceDispatch';
+import usePromise from '../../hooks/usePromise';
 import useThrottle from '../../hooks/useThrottle';
 import { LOAD } from '../../state/data/DataActionType';
 import { SET_PREFERENCES } from '../../state/preference/PreferenceActionType';
 
 const throttleTime = 2000;
 
-let loaded = false;
+interface BackupManagerProps {
+  loaded: boolean;
+  triggerLoaded: (state?: boolean) => void;
+}
 
-function BackupManager() {
+function BackupManager({ loaded, triggerLoaded }: BackupManagerProps) {
   const rawDataState = useData();
   const dataDispatch = useDataDispatch();
   const rawPreferenceState = usePreference();
@@ -36,7 +39,7 @@ function BackupManager() {
       state: dataState,
     };
     save(backupStructure).catch((error) => console.error(error));
-  }, [dataState]);
+  }, [dataState, loaded]);
 
   // save preference state
   useEffect(() => {
@@ -48,10 +51,10 @@ function BackupManager() {
       state: preferenceState,
     };
     save(backupStructure).catch((error) => console.error(error));
-  }, [preferenceState]);
+  }, [loaded, preferenceState]);
 
-  useEffect(() => {
-    Promise.all([
+  const dataPromise = useMemo(
+    () =>
       loadData().then((backup) => {
         if (backup !== null) {
           dataDispatch({
@@ -59,7 +62,13 @@ function BackupManager() {
             payload: backup.state,
           });
         }
+        return backup;
       }),
+    [dataDispatch],
+  );
+
+  const preferencePromise = useMemo(
+    () =>
       loadPreference().then((backup) => {
         if (backup !== null) {
           preferenceDispatch({
@@ -67,17 +76,35 @@ function BackupManager() {
             payload: backup.state,
           });
         }
+        return backup;
       }),
-    ])
-      .then(() => {
-        loaded = true;
-      })
-      .then(() => invoke('close_spashscreen'))
-      .catch((error) => {
-        // TODO : error on loading backup, explode to not corrupt data
-        console.error(error);
-      });
-  }, [dataDispatch, preferenceDispatch]);
+    [preferenceDispatch],
+  );
+
+  const { loading: dataLoading, error: dataError } = usePromise(dataPromise);
+
+  const { loading: preferenceLoading, error: preferenceError } =
+    usePromise(preferencePromise);
+
+  useEffect(() => {
+    if (dataLoading || preferenceLoading) return;
+
+    if (dataError || preferenceError) {
+      // TODO : error on loading backup, explode to not corrupt data
+      console.error(dataError);
+      console.error(preferenceError);
+      return;
+    }
+
+    triggerLoaded(true);
+  }, [
+    dataError,
+    dataLoading,
+    loaded,
+    preferenceError,
+    preferenceLoading,
+    triggerLoaded,
+  ]);
 
   return null;
 }
