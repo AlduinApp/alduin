@@ -7,9 +7,16 @@ interface SwitchProps {
   label: string;
   value: boolean;
   onChange: (value: boolean) => void;
+  disabled?: boolean;
 }
 
-function Switch({ name, label, value, onChange }: SwitchProps) {
+function Switch({
+  name,
+  label,
+  value,
+  onChange,
+  disabled = false,
+}: SwitchProps) {
   return (
     <Form.Field name={name} className="grid mb-2">
       <div className="flex items-baseline justify-between">
@@ -19,6 +26,7 @@ function Switch({ name, label, value, onChange }: SwitchProps) {
         className="w-[42px] h-[25px] bg-black rounded-full relative outline-none cursor-pointer"
         checked={value}
         onCheckedChange={onChange}
+        disabled={disabled}
       >
         <RadixSwitch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
       </RadixSwitch.Root>

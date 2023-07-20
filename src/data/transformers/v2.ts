@@ -25,6 +25,7 @@ export default {
         showFeedIcons: true,
         showArticleThumbnails: true,
         autoStart: true,
+        startMinimized: false,
       },
     };
   },

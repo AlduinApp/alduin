@@ -38,6 +38,7 @@ function PreferenceModal() {
             showFeedIcons: false,
             showArticleThumbnails: false,
             autoStart: false,
+            startMinimized: false,
           }
         : state,
     [isStateEmpty, state],
@@ -94,12 +95,30 @@ function PreferenceModal() {
             setForm({ ...form, showArticleThumbnails })
           }
         />
-        <Switch
-          label="Launch at startup"
-          name="autoStart"
-          value={form.autoStart}
-          onChange={(autoStart) => setForm({ ...form, autoStart })}
-        />
+        <div className="flex flex-row gap-8">
+          <Switch
+            label="Launch at startup"
+            name="autoStart"
+            value={form.autoStart}
+            onChange={(autoStart) =>
+              setForm({
+                ...form,
+                autoStart,
+                startMinimized: !autoStart ? false : form.startMinimized,
+              })
+            }
+          />
+          {form.autoStart && (
+            <Switch
+              label="Start minimized"
+              name="startMinimized"
+              value={form.startMinimized}
+              onChange={(startMinimized) =>
+                setForm({ ...form, startMinimized })
+              }
+            />
+          )}
+        </div>
 
         <div className={clsx('mt-4 flex justify-between flex-row-reverse')}>
           <Form.Submit asChild>

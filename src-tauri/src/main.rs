@@ -6,9 +6,10 @@ pub mod structs;
 pub mod enums;
 
 use commands::fetcher::{sync, sync_all};
-use commands::splashscreen::close_splashscreen;
+use commands::splashscreen::{close_splashscreen, open_main_window};
 use tauri::{generate_handler, generate_context, Manager, Builder, SystemTray, SystemTrayEvent, SystemTrayMenu, CustomMenuItem, AppHandle, Wry};
 use tauri_plugin_autostart::MacosLauncher;
+use tauri_plugin_window_state::StateFlags;
 
 fn show_main_window(app: &AppHandle<Wry>) {
     let window = app.get_window("main").unwrap();
@@ -30,11 +31,16 @@ fn main() {
     let system_tray = SystemTray::new()
         .with_menu(tray_menu);
 
+    let mut flags = StateFlags::all();
+    flags.remove(StateFlags::VISIBLE);
+
     Builder::default()
-        .plugin(tauri_plugin_window_state::Builder::default().build())
+        .plugin(tauri_plugin_window_state::Builder::default()
+            .with_state_flags(flags)
+            .build())
         .plugin(tauri_plugin_sql::Builder::default().build())
-        .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
-        .invoke_handler(generate_handler![sync, sync_all, close_splashscreen])
+        .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, Some(vec!["--autostart"])))
+        .invoke_handler(generate_handler![sync, sync_all, close_splashscreen, open_main_window])
         .system_tray(system_tray)
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::DoubleClick {

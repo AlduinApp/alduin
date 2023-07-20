@@ -10,6 +10,7 @@ export interface PreferenceState {
   showFeedIcons: boolean;
   showArticleThumbnails: boolean;
   autoStart: boolean;
+  startMinimized: boolean;
 }
 
 export const initialPreferenceState: PreferenceState = {
@@ -17,6 +18,7 @@ export const initialPreferenceState: PreferenceState = {
   showFeedIcons: true,
   showArticleThumbnails: true,
   autoStart: true,
+  startMinimized: false,
 };
 
 export type PreferenceActions = SetPreferencesAction;

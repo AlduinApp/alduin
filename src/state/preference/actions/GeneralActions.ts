@@ -16,4 +16,5 @@ export function setPreferences(
   draft.showFeedIcons = payload.showFeedIcons;
   draft.showArticleThumbnails = payload.showArticleThumbnails;
   draft.autoStart = payload.autoStart;
+  draft.startMinimized = payload.startMinimized;
 }
