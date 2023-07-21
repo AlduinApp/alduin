@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Alduin",
-    "version": "3.1.0"
+    "version": "3.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -89,7 +89,7 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://alduin.stouder.io/update/{{target}}/{{arch}}/{{version}}"
+        "https://alduin.stouder.io/update/{{target}}/{{arch}}/{{current_version}}"
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNEQUQ2MTY4NERDRTc0QUIKUldTcmRNNU5hR0d0UFphQ0Y0ZXBhVG9IRWsxcFNwUTlMWjBoKytkUld1ZFpFcnBOZFNWRHh5bmUK"
