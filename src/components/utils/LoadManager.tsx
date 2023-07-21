@@ -21,8 +21,6 @@ function LoadManager() {
       await invoke('close_splashscreen');
 
       const autostarting = (matches.args?.autostart?.occurrences ?? 0) > 0;
-      console.log(matches, autostarting, startMinimized);
-
       if (autostarting && startMinimized) {
         return;
       }

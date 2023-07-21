@@ -49,7 +49,6 @@ function Article({
     navigate,
     viewDispatch,
   ]);
-  console.log(image);
 
   return (
     <div

@@ -42,9 +42,7 @@ export default function useSync() {
             payload: response,
           });
         })
-        .catch((error) => {
-          console.log(error);
-        })
+        .catch(console.error)
         .finally(() => {
           viewDispatch({
             type: DECREMENT_FETCHING,
@@ -70,9 +68,7 @@ export default function useSync() {
           payload: response,
         });
       })
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch(console.error)
       .finally(() => {
         viewDispatch({
           type: DECREMENT_FETCHING,
