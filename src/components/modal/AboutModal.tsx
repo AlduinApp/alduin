@@ -2,6 +2,7 @@ import { getVersion } from '@tauri-apps/api/app';
 import { memo } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 
+import icon from '../../assets/icon.png';
 import useModal from '../../hooks/useModal';
 import usePromise from '../../hooks/usePromise';
 
@@ -19,7 +20,7 @@ function AboutModal() {
     <Modal identifier={modalIdentifier} open={isOpen}>
       <div className="flex flex-col gap-4">
         <div className="flex justify-center items-center gap-8">
-          <img src="/icon.png" className="w-20 h-20" />
+          <img src={icon} className="w-20 h-20" />
           <div className="flex flex-col">
             <div className="flex items-end gap-2">
               <h2 className="text-2xl font-bold">Alduin</h2>
