@@ -1,5 +1,3 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import clsx from 'clsx';
 import { memo, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
