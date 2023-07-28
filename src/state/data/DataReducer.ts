@@ -8,6 +8,7 @@ import {
   LOAD,
   READ_ARTICLE,
   REMOVE_FEED,
+  REORDER_FEED,
   UPDATE_CONTENT,
   UPDATE_FEED,
   UPDATE_MULTIPLE_CONTENT,
@@ -17,6 +18,7 @@ import {
   AddFeedAction,
   ReadArticleAction,
   RemoveFeedAction,
+  ReorderFeedAction,
   UpdateContentAction,
   UpdateFeedAction,
   UpdateMultipleContentAction,
@@ -35,6 +37,7 @@ export const initialDataState: DataState = {
 export type DataActions =
   | AddFeedAction
   | UpdateFeedAction
+  | ReorderFeedAction
   | ReadArticleAction
   | RemoveFeedAction
   | LoadAction
@@ -49,6 +52,8 @@ function innerDataReducer(draft: Draft<DataState>, action: DataActions) {
       return FeedActions.addFeed(draft, action.payload);
     case UPDATE_FEED:
       return FeedActions.updateFeed(draft, action.payload);
+    case REORDER_FEED:
+      return FeedActions.reorderFeed(draft, action.payload);
     case READ_ARTICLE:
       return FeedActions.readArticle(draft, action.payload);
     case REMOVE_FEED:

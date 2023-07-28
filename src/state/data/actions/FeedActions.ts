@@ -13,6 +13,7 @@ import {
   UPDATE_FEED,
   UPDATE_CONTENT,
   UPDATE_MULTIPLE_CONTENT,
+  REORDER_FEED,
 } from '../DataActionType';
 import { DataState } from '../DataReducer';
 
@@ -24,6 +25,11 @@ export type AddFeedAction = DataActionType<
 export type UpdateFeedAction = DataActionType<
   typeof UPDATE_FEED,
   { identifier: string; displayName: string; link: string; interval: string }
+>;
+
+export type ReorderFeedAction = DataActionType<
+  typeof REORDER_FEED,
+  { fromIdentifier: string; toIdentifier: string }
 >;
 
 export type ReadArticleAction = DataActionType<
@@ -86,6 +92,26 @@ export function updateFeed(
   feed.displayName = displayName;
   feed.link = link;
   feed.interval = Number.parseInt(interval, 10);
+}
+
+export function reorderFeed(
+  draft: Draft<DataState>,
+  {
+    fromIdentifier,
+    toIdentifier,
+  }: { fromIdentifier: string; toIdentifier: string },
+) {
+  const fromIndex = draft.feeds.findIndex(
+    (feed) => feed.identifier === fromIdentifier,
+  );
+  const toIndex = draft.feeds.findIndex(
+    (feed) => feed.identifier === toIdentifier,
+  );
+
+  if (fromIndex === -1 || toIndex === -1) return;
+
+  const [feed] = draft.feeds.splice(fromIndex, 1);
+  draft.feeds.splice(toIndex, 0, feed);
 }
 
 export function readArticle(
