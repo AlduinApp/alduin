@@ -25,6 +25,10 @@ const StyledPreview = styled.div`
 
   pre {
     margin: 0 1rem;
+
+    code {
+      white-space: pre-wrap;
+    }
   }
 `;
 
