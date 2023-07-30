@@ -7,6 +7,7 @@ pub mod enums;
 
 use commands::fetcher::{sync, sync_all};
 use commands::splashscreen::{close_splashscreen, open_main_window};
+use structs::single_instance_payload::SingleInstancePayload;
 use tauri::{generate_handler, generate_context, Manager, Builder, SystemTray, SystemTrayEvent, SystemTrayMenu, CustomMenuItem, AppHandle, Wry};
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_window_state::StateFlags;
@@ -40,6 +41,9 @@ fn main() {
             .build())
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, Some(vec!["--autostart"])))
+        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+            app.emit_all("single-instance", SingleInstancePayload { args: argv, cwd }).unwrap();
+        }))
         .invoke_handler(generate_handler![sync, sync_all, close_splashscreen, open_main_window])
         .system_tray(system_tray)
         .on_system_tray_event(|app, event| match event {
