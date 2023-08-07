@@ -1,7 +1,0 @@
-import { useContext } from 'react';
-
-import { DispatchContext } from '../components/context/DispatchContext';
-
-export default function usePreferenceDispatch() {
-  return useContext(DispatchContext).preference;
-}

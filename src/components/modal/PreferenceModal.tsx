@@ -1,4 +1,5 @@
 import * as Form from '@radix-ui/react-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import {
   FormEvent,
@@ -10,12 +11,13 @@ import {
 } from 'react';
 
 import useModal from '../../hooks/useModal';
-import usePreference from '../../hooks/usePreference';
-import usePreferenceDispatch from '../../hooks/usePreferenceDispatch';
+import usePreferences from '../../hooks/usePreferences';
 import useViewDispatch from '../../hooks/useViewDispatch';
-import { SET_PREFERENCES } from '../../state/preference/PreferenceActionType';
-import { PreferenceState } from '../../state/preference/PreferenceReducer';
+import PreferencesService, {
+  IPreferences,
+} from '../../services/PreferencesService';
 import { CLOSE_MODAL } from '../../state/view/ViewActionType';
+import QueryKey from '../../utils/QueryKey';
 import Button from '../form/Button';
 import Switch from '../form/Switch';
 
@@ -24,27 +26,17 @@ import Modal from './Modal';
 const modalIdentifier = 'preference';
 
 function PreferenceModal() {
-  const preference = usePreference();
-  const preferenceDispatch = usePreferenceDispatch();
+  const preference = usePreferences();
   const viewDispatch = useViewDispatch();
   const { isOpen, state, isStateEmpty } =
-    useModal<PreferenceState>(modalIdentifier);
+    useModal<IPreferences>(modalIdentifier);
 
   const defaultForm = useMemo(
-    () =>
-      isStateEmpty
-        ? {
-            darkMode: false,
-            showFeedIcons: false,
-            showArticleThumbnails: false,
-            autoStart: false,
-            startMinimized: false,
-          }
-        : state,
+    () => (isStateEmpty ? PreferencesService.defaultPreferences : state),
     [isStateEmpty, state],
   );
 
-  const [form, setForm] = useState<PreferenceState>(defaultForm);
+  const [form, setForm] = useState<IPreferences>(defaultForm);
   useEffect(() => {
     setForm(defaultForm);
   }, [defaultForm]);
@@ -58,18 +50,20 @@ function PreferenceModal() {
     setForm(preference);
   }, [preference, viewDispatch]);
 
+  const queryClient = useQueryClient();
+  const preferencesMutation = useMutation(PreferencesService.setPreferences, {
+    onSuccess: () => queryClient.invalidateQueries(QueryKey.preferences()),
+  });
+
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
 
-      preferenceDispatch({
-        type: SET_PREFERENCES,
-        payload: form,
-      });
+      preferencesMutation.mutate(form);
 
       closeModal();
     },
-    [closeModal, form, preferenceDispatch],
+    [closeModal, form, preferencesMutation],
   );
 
   return (

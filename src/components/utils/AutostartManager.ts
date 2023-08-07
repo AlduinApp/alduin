@@ -5,7 +5,7 @@ import {
   disable,
 } from 'tauri-plugin-autostart-api';
 
-import usePreference from '../../hooks/usePreference';
+import usePreferences from '../../hooks/usePreferences';
 
 interface AutostartManagerProps {
   loaded: boolean;
@@ -13,7 +13,7 @@ interface AutostartManagerProps {
 }
 
 function AutostartManager({ loaded, triggerLoaded }: AutostartManagerProps) {
-  const preferenceState = usePreference();
+  const preferenceState = usePreferences();
 
   useEffect(() => {
     async function handleAutostart() {

@@ -102,5 +102,10 @@
         }
       ]
     }
+  },
+  "plugins": {
+    "sql": {
+      "preload": ["sqlite:alduin.db"]
+    }
   }
 }

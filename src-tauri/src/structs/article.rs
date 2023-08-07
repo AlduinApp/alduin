@@ -8,7 +8,7 @@ pub struct Article {
     pub id: String,
     pub title: String,
     pub content: String,
-    pub date: String,
+    pub date: i64,
     pub read: bool,
     pub image: Option<Image>
 }
@@ -28,11 +28,10 @@ impl From<Entry> for Article {
             },
         };
 
+
         let date = entry.published
             .unwrap_or_else(|| entry.updated.unwrap_or_else(|| Utc::now()))
-            .to_rfc3339();
-
-
+            .timestamp_millis();
 
         let image = if entry.media.is_empty() {
             None

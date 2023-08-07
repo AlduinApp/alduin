@@ -1,33 +1,41 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { memo, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import useActiveFeed from '../../hooks/useActiveFeed';
-import useDataDispatch from '../../hooks/useDataDispatch';
-import usePreference from '../../hooks/usePreference';
+import usePreferences from '../../hooks/usePreferences';
 import useViewDispatch from '../../hooks/useViewDispatch';
-import { READ_ARTICLE } from '../../state/data/DataActionType';
+import ArticleService, { IArticle } from '../../services/ArticleService';
 import { SET_ACTIVE_ARTICLE } from '../../state/view/ViewActionType';
-import ArticleType from '../../types/Article';
+import QueryKey from '../../utils/QueryKey';
 
-interface ArticleProps extends ArticleType {
+interface ArticleProps extends IArticle {
   active: boolean;
 }
 
 function Article({
   identifier,
+  feedIdentifier,
   title,
   date,
   read,
-  image,
+  imageUrl,
   active,
 }: ArticleProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { showArticleThumbnails } = usePreference();
+  const { showArticleThumbnails } = usePreferences();
   const viewDispatch = useViewDispatch();
-  const dataDispatch = useDataDispatch();
-  const feed = useActiveFeed();
+
+  const queryClient = useQueryClient();
+
+  const readMutation = useMutation(ArticleService.readArticle, {
+    onSuccess: () =>
+      Promise.allSettled([
+        queryClient.invalidateQueries(QueryKey.articles(feedIdentifier)),
+        queryClient.invalidateQueries(QueryKey.feeds()),
+      ]),
+  });
 
   const selectArticle = useCallback(() => {
     navigate(`${location.pathname}/${identifier}`, { replace: false });
@@ -36,19 +44,8 @@ function Article({
       payload: { identifier },
     });
 
-    if (feed === null) return;
-    dataDispatch({
-      type: READ_ARTICLE,
-      payload: { identifier: feed.identifier, articleIdentifier: identifier },
-    });
-  }, [
-    dataDispatch,
-    feed,
-    identifier,
-    location.pathname,
-    navigate,
-    viewDispatch,
-  ]);
+    readMutation.mutate(identifier);
+  }, [identifier, location.pathname, navigate, readMutation, viewDispatch]);
 
   return (
     <div
@@ -68,14 +65,10 @@ function Article({
       </div>
 
       <div className="flex items-center text-orange-400 text-xl flex gap-4 flex-nowrap">
-        {showArticleThumbnails && image !== null && (
-          <img
-            src={image.uri}
-            alt={image.description ?? ''}
-            className="w-12 h-12 object-cover rounded-full"
-          />
+        {showArticleThumbnails && imageUrl !== null && (
+          <img src={imageUrl} className="w-12 h-12 object-cover rounded-full" />
         )}
-        {date.toLocaleDateString()}
+        {new Date(date).toLocaleDateString()}
       </div>
     </div>
   );

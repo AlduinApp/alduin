@@ -1,21 +1,14 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 
 import useActiveArticle from '../../hooks/useActiveArticle';
-import useActiveFeed from '../../hooks/useActiveFeed';
+import useArticles from '../../hooks/useArticles';
 
 import Article from './Article';
 
 function ArticleList() {
-  const activeFeed = useActiveFeed();
   const activeArticle = useActiveArticle();
 
-  const articles = useMemo(
-    () =>
-      [...(activeFeed?.articles ?? [])].sort(
-        ({ date: dateA }, { date: dateB }) => dateB.getTime() - dateA.getTime(),
-      ),
-    [activeFeed],
-  );
+  const { articles } = useArticles();
 
   return (
     <div className="flex-[5_5_0%] flex flex-col max-w-full min-h-full overflow-y-scroll shadow-custom lg:w-[35rem]">

@@ -12,17 +12,18 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { memo, useCallback, useMemo } from 'react';
 import { FaCogs, FaEdit, FaPlus } from 'react-icons/fa';
 
-import useData from '../../hooks/useData';
-import useDataDispatch from '../../hooks/useDataDispatch';
 import useEditMode from '../../hooks/useEditMode';
+import useFeeds from '../../hooks/useFeeds';
 import useModal from '../../hooks/useModal';
-import usePreference from '../../hooks/usePreference';
-import { REORDER_FEED } from '../../state/data/DataActionType';
-import { PreferenceState } from '../../state/preference/PreferenceReducer';
+import usePreferences from '../../hooks/usePreferences';
+import FeedService from '../../services/FeedService';
+import { IPreferences } from '../../services/PreferencesService';
+import QueryKey from '../../utils/QueryKey';
 import SyncAllButton from '../SyncAllButton';
 import IconButton from '../form/IconButton';
 import { ModalFormContent } from '../modal/AddFeedModal';
@@ -30,13 +31,11 @@ import { ModalFormContent } from '../modal/AddFeedModal';
 import Feed from './Feed';
 
 function FeedList() {
-  const data = useData();
-  const dataDispatch = useDataDispatch();
-  const preference = usePreference();
+  const preference = usePreferences();
   const { toggleEditMode, isEditing } = useEditMode();
 
   const { open: openAddFeed } = useModal<ModalFormContent>('addFeed');
-  const { open: openPreference } = useModal<PreferenceState>('preference');
+  const { open: openPreference } = useModal<IPreferences>('preference');
 
   const handleOpenAddFeed = useCallback(() => {
     openAddFeed();
@@ -45,29 +44,46 @@ function FeedList() {
     openPreference(preference);
   }, [openPreference, preference]);
 
-  const identifiers: UniqueIdentifier[] = useMemo(
-    () => data.feeds.map(({ identifier }) => identifier),
-    [data.feeds],
-  );
+  const { feeds, isLoading, isError } = useFeeds();
 
   const sensors = useSensors(useSensor(PointerSensor));
   const modifiers = useMemo(() => [restrictToVerticalAxis], []);
 
+  const queryClient = useQueryClient();
+  const reorderMutation = useMutation(FeedService.reorderFeed, {
+    onSuccess: async () => queryClient.invalidateQueries(QueryKey.feeds()),
+  });
+
+  const identifiers: UniqueIdentifier[] = useMemo(
+    () => feeds.map(({ rowid }) => rowid),
+    [feeds],
+  );
+
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
-      if (over === null) {
-        return;
-      }
-      dataDispatch({
-        type: REORDER_FEED,
-        payload: {
-          fromIdentifier: active.id as string,
-          toIdentifier: over.id as string,
+      if (over === null) return;
+
+      reorderMutation.mutate(
+        {
+          from: active.id as number,
+          to: over.id as number,
         },
-      });
+        {
+          onSuccess: async () =>
+            queryClient.invalidateQueries(QueryKey.feeds()),
+        },
+      );
     },
-    [dataDispatch],
+    [queryClient, reorderMutation],
   );
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error</p>;
+  }
 
   return (
     <DndContext
@@ -82,7 +98,7 @@ function FeedList() {
       >
         <div className="flex-[3_3_0%] bg-neutral-200 dark:bg-zinc-600 flex flex-col shadow-custom-big">
           <div className="overflow-y-auto flex-1">
-            {data.feeds.map((feed) => (
+            {feeds.map((feed) => (
               <Feed key={feed.identifier} {...feed} />
             ))}
           </div>

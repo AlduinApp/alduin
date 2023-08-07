@@ -1,9 +1,6 @@
-import { useMemo } from 'react';
-
-import usePreference from './usePreference';
+import usePreferences from './usePreferences';
 
 export default function useDark() {
-  const preference = usePreference();
-  const isDark = useMemo(() => preference.darkMode, [preference]);
-  return isDark;
+  const { darkMode } = usePreferences();
+  return darkMode;
 }

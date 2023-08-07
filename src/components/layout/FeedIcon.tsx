@@ -3,11 +3,11 @@ import { memo } from 'react';
 import { FaAtom, FaQuestion, FaRss } from 'react-icons/fa';
 import { VscJson } from 'react-icons/vsc';
 
-import usePreference from '../../hooks/usePreference';
-import Feed from '../../types/Feed';
+import usePreferences from '../../hooks/usePreferences';
+import { IFeed } from '../../services/FeedService';
 
 interface FeedIconProps {
-  feed: Feed;
+  feed: IFeed;
 }
 
 const ImageIcon = styled.img`
@@ -19,11 +19,11 @@ const ImageIcon = styled.img`
 `;
 
 function FeedIcon({ feed }: FeedIconProps) {
-  const { type, image } = feed;
-  const { showFeedIcons } = usePreference();
+  const { type, imageUrl } = feed;
+  const { showFeedIcons } = usePreferences();
 
-  if (showFeedIcons && image !== null) {
-    return <ImageIcon src={image.uri} alt={image.description || ''} />;
+  if (showFeedIcons && imageUrl !== null) {
+    return <ImageIcon src={imageUrl} />;
   }
 
   return (

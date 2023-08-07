@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 
 import useActiveArticle from '../../hooks/useActiveArticle';
 import SanitizeHTML from '../utils/SanitizeHTML';
@@ -12,8 +12,14 @@ const NoArticle = () => (
 function ArticleFull() {
   const article = useActiveArticle();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [article]);
+
   return (
-    <div className="flex-[12_12_0%] max-h-full">
+    <div className="flex-[12_12_0%] max-h-full" ref={containerRef}>
       {article === null ? (
         <NoArticle />
       ) : (
@@ -21,7 +27,7 @@ function ArticleFull() {
           <div className="flex text-2xl justify-between items-center font-bold">
             <div className="text-black dark:text-white">{article.title}</div>
             <div className="text-orange-400 text-xl">
-              {article.date.toLocaleDateString()}
+              {new Date(article.date).toLocaleDateString()}
             </div>
           </div>
           <div className="text-justify py-3 overflow-y-auto">

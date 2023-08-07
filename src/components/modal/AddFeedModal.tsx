@@ -1,4 +1,5 @@
 import * as Form from '@radix-ui/react-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import {
   FormEvent,
@@ -9,15 +10,14 @@ import {
   useState,
 } from 'react';
 
-import useDataDispatch from '../../hooks/useDataDispatch';
 import useModal from '../../hooks/useModal';
 import useViewDispatch from '../../hooks/useViewDispatch';
+import FeedService from '../../services/FeedService';
 import {
-  ADD_FEED,
-  REMOVE_FEED,
-  UPDATE_FEED,
-} from '../../state/data/DataActionType';
-import { CLOSE_MODAL } from '../../state/view/ViewActionType';
+  CLOSE_MODAL,
+  SET_ACTIVE_ARTICLE,
+} from '../../state/view/ViewActionType';
+import QueryKey from '../../utils/QueryKey';
 import Button from '../form/Button';
 import Field from '../form/Field';
 import Select from '../form/Select';
@@ -38,15 +38,14 @@ const intervalOptions = [
 export interface ModalFormContent {
   identifier: string;
   displayName: string;
-  feedLink: string;
-  interval: string;
+  url: string;
+  interval: number;
 }
 
 const modalIdentifier = 'addFeed';
 
 function AddFeedModal() {
   const viewDispatch = useViewDispatch();
-  const dataDispatch = useDataDispatch();
 
   const { isOpen, state, isStateEmpty } =
     useModal<ModalFormContent>(modalIdentifier);
@@ -58,8 +57,8 @@ function AddFeedModal() {
         ? state
         : ({
             displayName: '',
-            feedLink: '',
-            interval: intervalOptions[1].value,
+            url: '',
+            interval: Number.parseInt(intervalOptions[1].value, 10),
           } as ModalFormContent),
     [isEditing, state],
   );
@@ -70,6 +69,24 @@ function AddFeedModal() {
     setForm(defaultForm);
   }, [defaultForm]);
 
+  const queryClient = useQueryClient();
+
+  const addMutation = useMutation(FeedService.addFeed, {
+    onSuccess: () => queryClient.invalidateQueries(QueryKey.feeds()),
+  });
+  const updateMutation = useMutation(FeedService.updateFeed, {
+    onSuccess: () => queryClient.invalidateQueries(QueryKey.feeds()),
+  });
+  const deleteMutation = useMutation(FeedService.deleteFeed, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(QueryKey.feeds());
+      viewDispatch({
+        type: SET_ACTIVE_ARTICLE,
+        payload: { identifier: null },
+      });
+    },
+  });
+
   const closeModal = useCallback(() => {
     viewDispatch({
       type: CLOSE_MODAL,
@@ -79,59 +96,24 @@ function AddFeedModal() {
     setForm({
       identifier: '',
       displayName: '',
-      feedLink: '',
-      interval: intervalOptions[1].value,
+      url: '',
+      interval: Number.parseInt(intervalOptions[1].value, 10),
     });
   }, [viewDispatch]);
 
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-
-      if (isEditing) {
-        dataDispatch({
-          type: UPDATE_FEED,
-          payload: {
-            identifier: form.identifier,
-            displayName: form.displayName,
-            link: form.feedLink,
-            interval: form.interval,
-          },
-        });
-      } else {
-        dataDispatch({
-          type: ADD_FEED,
-          payload: {
-            displayName: form.displayName,
-            link: form.feedLink,
-            interval: form.interval,
-          },
-        });
-      }
-
+      (isEditing ? updateMutation : addMutation).mutate(form);
       closeModal();
     },
-    [
-      closeModal,
-      dataDispatch,
-      form.displayName,
-      form.feedLink,
-      form.identifier,
-      form.interval,
-      isEditing,
-    ],
+    [addMutation, closeModal, form, isEditing, updateMutation],
   );
 
   const handleDelete = useCallback(() => {
-    dataDispatch({
-      type: REMOVE_FEED,
-      payload: {
-        identifier: form.identifier,
-      },
-    });
-
+    deleteMutation.mutate(form.identifier);
     closeModal();
-  }, [closeModal, dataDispatch, form.identifier]);
+  }, [closeModal, deleteMutation, form.identifier]);
 
   const title = useMemo(
     () => (isEditing ? 'Edit feed' : 'Add feed'),
@@ -166,10 +148,8 @@ function AddFeedModal() {
             valueMissing: 'Missing value',
             typeMismatch: 'Invalid URL',
           }}
-          value={form.feedLink}
-          onChange={(event) =>
-            setForm({ ...form, feedLink: event.target.value })
-          }
+          value={form.url}
+          onChange={(event) => setForm({ ...form, url: event.target.value })}
           disabled={!isStateEmpty}
         />
 
@@ -178,9 +158,9 @@ function AddFeedModal() {
           label="Interval"
           placeholder="Select an interval"
           options={intervalOptions}
-          value={form.interval}
+          value={`${form.interval}`}
           onChange={(interval) => {
-            setForm({ ...form, interval });
+            setForm({ ...form, interval: Number.parseInt(interval, 10) });
           }}
         />
 

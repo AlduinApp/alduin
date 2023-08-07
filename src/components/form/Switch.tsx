@@ -23,7 +23,7 @@ function Switch({
         <Form.Label className="font-medium leading-8">{label}</Form.Label>
       </div>
       <RadixSwitch.Root
-        className="w-[42px] h-[25px] bg-black rounded-full relative outline-none cursor-pointer"
+        className="w-[42px] h-[25px] bg-neutral-200 dark:bg-zinc-600 disabled:text-neutral-400 dark:disabled:text-zinc-400 shadow-inner shadow-md rounded-full relative outline-none cursor-pointer"
         checked={value}
         onCheckedChange={onChange}
         disabled={disabled}

@@ -44,15 +44,21 @@ version = "0.0.0"
 dependencies = [
  "chrono",
  "feed-rs",
+ "include_dir",
+ "itertools 0.11.0",
  "reqwest",
  "serde",
  "serde_json",
+ "sqlx",
  "tauri",
  "tauri-build",
  "tauri-plugin-autostart",
  "tauri-plugin-single-instance",
  "tauri-plugin-sql",
+ "tauri-plugin-store",
  "tauri-plugin-window-state",
+ "tokio",
+ "xxhash-rust",
 ]
 
 [[package]]
@@ -1840,6 +1846,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "include_dir"
+version = "0.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "18762faeff7122e89e0857b02f7ce6fcc0d101d5e9ad2ad7846cc01d61b7f19e"
+dependencies = [
+ "glob",
+ "include_dir_macros",
+]
+
+[[package]]
+name = "include_dir_macros"
+version = "0.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b139284b5cf57ecfa712bcc66950bb635b31aff41c188e8a4cfc758eca374a3f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+]
+
+[[package]]
 name = "indexmap"
 version = "1.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1900,6 +1926,15 @@ name = "itertools"
 version = "0.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473"
+dependencies = [
+ "either",
+]
+
+[[package]]
+name = "itertools"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b1c173a5686ce8bfa551b3563d0c2170bf24ca44da99c7ca4bfdab5418c3fe57"
 dependencies = [
  "either",
 ]
@@ -3628,7 +3663,7 @@ version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c12bc9199d1db8234678b7051747c07f517cdcf019262d1847b94ec8b1aee3e"
 dependencies = [
- "itertools",
+ "itertools 0.10.5",
  "nom",
  "unicode_categories",
 ]
@@ -4144,7 +4179,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-autostart"
 version = "0.0.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#919616d7d3448c56a6967ff3a35e89523bb39d43"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#700549ab0265f3699dce4a154332564f4b09117f"
 dependencies = [
  "auto-launch",
  "log",
@@ -4157,7 +4192,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-single-instance"
 version = "0.0.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#919616d7d3448c56a6967ff3a35e89523bb39d43"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#700549ab0265f3699dce4a154332564f4b09117f"
 dependencies = [
  "log",
  "serde",
@@ -4171,7 +4206,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-sql"
 version = "0.0.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#919616d7d3448c56a6967ff3a35e89523bb39d43"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#700549ab0265f3699dce4a154332564f4b09117f"
 dependencies = [
  "futures-core",
  "log",
@@ -4185,9 +4220,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "tauri-plugin-store"
+version = "0.0.0"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#700549ab0265f3699dce4a154332564f4b09117f"
+dependencies = [
+ "log",
+ "serde",
+ "serde_json",
+ "tauri",
+ "thiserror",
+]
+
+[[package]]
 name = "tauri-plugin-window-state"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#919616d7d3448c56a6967ff3a35e89523bb39d43"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v1#700549ab0265f3699dce4a154332564f4b09117f"
 dependencies = [
  "bincode",
  "bitflags 2.3.3",
@@ -5336,6 +5383,12 @@ dependencies = [
  "nix",
  "winapi",
 ]
+
+[[package]]
+name = "xxhash-rust"
+version = "0.8.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "735a71d46c4d68d71d4b24d03fdc2b98e38cea81730595801db779c04fe80d70"
 
 [[package]]
 name = "zbus"

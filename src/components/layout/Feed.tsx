@@ -10,8 +10,8 @@ import useEditMode from '../../hooks/useEditMode';
 import useModal from '../../hooks/useModal';
 import useView from '../../hooks/useView';
 import useViewDispatch from '../../hooks/useViewDispatch';
+import { IFeed } from '../../services/FeedService';
 import { SET_ACTIVE_FEED } from '../../state/view/ViewActionType';
-import IFeed from '../../types/Feed';
 import Button from '../form/Button';
 import { ModalFormContent } from '../modal/AddFeedModal';
 
@@ -20,7 +20,7 @@ import FeedIcon from './FeedIcon';
 interface FeedProps extends IFeed {}
 
 function Feed(props: FeedProps) {
-  const { identifier, displayName, link, articles, interval } = props;
+  const { identifier, displayName, url, interval, unread, rowid } = props;
 
   const view = useView();
   const viewDispatch = useViewDispatch();
@@ -42,17 +42,13 @@ function Feed(props: FeedProps) {
       open({
         identifier,
         displayName,
-        feedLink: link,
-        interval: interval.toString(),
+        url,
+        interval,
       });
     },
-    [displayName, identifier, interval, link, open],
+    [displayName, identifier, interval, url, open],
   );
 
-  const unread = useMemo(
-    () => articles.filter((article) => !article.read).length,
-    [articles],
-  );
   const active = useMemo(
     () => view.activeFeed === identifier,
     [identifier, view.activeFeed],
@@ -65,7 +61,7 @@ function Feed(props: FeedProps) {
     transition,
     transform,
     setActivatorNodeRef,
-  } = useSortable({ id: identifier });
+  } = useSortable({ id: rowid });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,

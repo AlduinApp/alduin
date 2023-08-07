@@ -3,18 +3,16 @@ import { getMatches } from '@tauri-apps/api/cli';
 import { memo, useEffect } from 'react';
 import { useToggle } from 'react-use';
 
-import usePreference from '../../hooks/usePreference';
+import usePreferences from '../../hooks/usePreferences';
 
 import AutostartManager from './AutostartManager';
-import BackupManager from './BackupManager';
 
 function LoadManager() {
-  const [backupLoaded, toggleBackupLoaded] = useToggle(false);
   const [autostartLoaded, toggleAutostartLoaded] = useToggle(false);
-  const { startMinimized } = usePreference();
+  const { startMinimized } = usePreferences();
 
   useEffect(() => {
-    if (!backupLoaded || !autostartLoaded) return;
+    if (!autostartLoaded) return;
     async function bootedRoutine() {
       const matches = await getMatches();
 
@@ -29,18 +27,13 @@ function LoadManager() {
     }
 
     bootedRoutine().catch(console.error);
-  }, [autostartLoaded, backupLoaded, startMinimized]);
+  }, [autostartLoaded, startMinimized]);
 
   return (
-    <>
-      <BackupManager loaded={backupLoaded} triggerLoaded={toggleBackupLoaded} />
-      {backupLoaded && (
-        <AutostartManager
-          loaded={autostartLoaded}
-          triggerLoaded={toggleAutostartLoaded}
-        />
-      )}
-    </>
+    <AutostartManager
+      loaded={autostartLoaded}
+      triggerLoaded={toggleAutostartLoaded}
+    />
   );
 }
 
