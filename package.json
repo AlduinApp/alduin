@@ -15,7 +15,8 @@
     "prettier": "prettier --check \"src/**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"src/**/*.{ts,tsx}\"",
     "check-types": "tsc --noEmit",
-    "test": "npm run eslint && npm run prettier && npm run check-types"
+    "test": "npm run eslint && npm run prettier && npm run check-types",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
@@ -62,17 +63,11 @@
     "eslint": "^8.43.0",
     "eslint-config-zakodium": "^7.2.0",
     "execa": "^7.1.1",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "postcss": "^8.4.24",
     "prettier": "2.8.8",
     "tailwindcss": "^3.3.2",
     "typescript": "^4.9.5",
     "vite": "^4.2.1"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "npx commitlint --edit $1",
-      "pre-commit": "npm run test"
-    }
   }
 }
