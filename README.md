@@ -9,13 +9,13 @@
 Alduin is an RSS, Atom and JSON feed aggregator available on Windows and Linux.
 Open source and free, Alduin has an ergonomic, complete and easy to use interface, which will be suitable for all types of user.
 
-![Screenshot](https://i.imgur.com/ei9GHDK.png)
+![Screenshot](https://alduin.stouder.io/screenshot-dark.png)
 
 ## Current state
 Alduin was dead for a long time, but it's back! I rewrote it with technologies I use today, it can still be improved, but it's already usable.
 
 ## Download
-To download Alduin, just go [on the release page](https://github.com/AlduinApp/alduin/releases) and download the archive or executable corresponding to your OS.
+Download links are available here: [https://alduin.stouder.io/)(https://alduin.stouder.io/)
 
 ## Technical specifications
 Alduin is built on powefull and modern technologies, notably like:
